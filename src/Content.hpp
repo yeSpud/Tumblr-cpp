@@ -6,6 +6,7 @@
 #define TUMBLRAPI_CONTENT_HPP
 
 #include <string>
+#include "rapidjson/document.h"
 
 class Content {
 
@@ -37,7 +38,7 @@ public:
 		unsigned int width;
 
 		/**
-		 * TODO Documentaiton
+		 * TODO Documentation
 		 */
 		unsigned int height;
 
@@ -65,7 +66,24 @@ public:
 		// TODO
 	};
 
-};
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @param value
+	 * @param buffer
+	 * @return
+	 */
+	static bool entryHasString(const rapidjson::Value &entry, const char *value, std::string &buffer);
 
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @param value
+	 * @param buffer
+	 * @return
+	 */
+	static bool entryHasInt(const rapidjson::Value &entry, const char *value, unsigned int &buffer);
+
+};
 
 #endif //TUMBLRAPI_CONTENT_HPP
