@@ -42,6 +42,7 @@ add_subdirectory(src)
 add_dependencies(TumblrAPI rapidjson)
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
 
-if ((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)# OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+    message("Running tests")
     add_subdirectory(tests)
 endif()
