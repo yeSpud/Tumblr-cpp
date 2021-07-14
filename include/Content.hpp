@@ -19,6 +19,21 @@ class Content {
 public:
 
 	/**
+	 * TODO Documentation
+	 */
+	enum subtype { heading1, heading2, quirky, quote, indented, chat, ordered_list_item, unordered_list_item };
+
+	/**
+	 * TODO Documentation
+	 */
+	enum attributionType { link, blog, post, app };
+
+	/**
+	 * TODO Documentation
+	 */
+	struct Attribution;
+
+	/**
 	 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
 	 * Used by blog info.
 	 */
@@ -130,12 +145,12 @@ public:
 		/**
 		 * The subtype of text block
 		 */
-		std::string subtype; // TODO Make this into an enum
+		Content::subtype subtype;
 
 		/**
 		 * TODO Documentation
 		 */
-		int indent_level; // TODO Concert to u_int64?
+		uint64_t indent_level;
 
 		// TODO
 		// auto formatting;
@@ -224,127 +239,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Audio {
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string type;
-
-		/**
-		 * The URL to use for the audio content, if no media is present.
-		 */
-		std::string url;
-
-		// TODO
-		// auto media;
-
-		/**
-		 * The provider of the audio source, whether it's tumblr for native audio or a trusted third party.
-		 */
-		std::string provider;
-
-		/**
-		 * The title of the audio asset.
-		 */
-		std::string title;
-
-		/**
-		 * The artist of the audio asset.
-		 */
-		std::string artist;
-
-		/**
-		 * The album from which the audio asset originated.
-		 */
-		std::string album;
-
-		/**
-		 * An image to use as a "poster" for the audio track, usually album art.
-		 */
-		Content::Image poster;
-
-		/**
-		 * HTML code that could be used to embed this audio track into a webpage.
-		 */
-		std::string embed_html;
-
-		/**
-		 * A URL to the embeddable content to use as an iframe.
-		 */
-		std::string embed_url;
-
-		// TODO
-		// auto metadata;
-
-		// TODO
-		// auto attribution;
-	};
+	struct Audio;
 
 	/**
 	 * TODO Documentation
 	 */
-	struct Video {
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string type;
-
-		/**
-		 * The URL to use for the video content, if no media is present.
-		 */
-		std::string url;
-
-		// TODO
-		// auto media;
-
-		/**
-		 * The provider of the video, whether it's tumblr for native video or a trusted third party.
-		 */
-		std::string provider;
-
-		/**
-		 * HTML code that could be used to embed this video into a webpage.
-		 */
-		std::string embed_html;
-
-		// TODO
-		// auto embed_iframe;
-
-		/**
-		 * A URL to the embeddable content to use as an iframe.
-		 */
-		std::string embed_url;
-
-		/**
-		 * An image to use as a "poster" for the video, usually a single frame.
-		 */
-		Content::Image poster;
-
-		// TODO
-		// auto metadata;
-
-		// TODO
-		// auto attribution;
-
-		/**
-		 * TODO Documentation
-		 * Undocumented?
-		 */
-		std::vector<Content::Image> filmstrip;
-
-		/**
-		 * Whether this video can be played on a cellular connection.
-		 */
-		bool can_autoplay_on_cellular;
-
-	};
-
-	/**
-	 * TODO Documentation
-	 */
-	struct Attribution;
+	struct Video;
 
 	/**
 	 * TODO Documentation
@@ -378,9 +278,49 @@ public:
 	 * @param entry
 	 * @return
 	 */
+	static Content::Theme generateTheme(const rapidjson::Value &entry);
+
+	/**
+	 * TODO Documentaiton
+	 * @param entry
+	 * @return
+	 */
+	static Content::Text generateText(const rapidjson::Value &entry);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
 	static Content::Image generateImage(const rapidjson::Value &entry);
 
-	// TODO Parse the different types of content
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Link generateLink(const rapidjson::Value &entry);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Audio generateAudio(const rapidjson::Value &entry);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Video generateVideo(const rapidjson::Value &entry);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Attribution generateAttribution(const rapidjson::Value &entry);
 
 };
 

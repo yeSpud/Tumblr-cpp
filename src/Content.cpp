@@ -2,7 +2,7 @@
 // Created by Spud on 7/13/21.
 //
 
-#include "../include/Content.hpp"
+#include "Content.hpp"
 #include "TumblrAPI.hpp"
 
 struct Content::Attribution {
@@ -11,7 +11,7 @@ struct Content::Attribution {
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */
-	std::string type; // TODO Make this into an enum
+	Content::attributionType type;
 
 	/**
 	 * The URL to be attributed.
@@ -40,6 +40,124 @@ struct Content::Attribution {
 
 	// TODO
 	// auto logo;
+
+};
+
+struct Content::Audio {
+
+	/**
+	 * TODO Documentation
+	 */
+	std::string type;
+
+	/**
+	 * The URL to use for the audio content, if no media is present.
+	 */
+	std::string url;
+
+	// TODO
+	// auto media;
+
+	/**
+	 * The provider of the audio source, whether it's tumblr for native audio or a trusted third party.
+	 */
+	std::string provider;
+
+	/**
+	 * The title of the audio asset.
+	 */
+	std::string title;
+
+	/**
+	 * The artist of the audio asset.
+	 */
+	std::string artist;
+
+	/**
+	 * The album from which the audio asset originated.
+	 */
+	std::string album;
+
+	/**
+	 * An image to use as a "poster" for the audio track, usually album art.
+	 */
+	Content::Image poster;
+
+	/**
+	 * HTML code that could be used to embed this audio track into a webpage.
+	 */
+	std::string embed_html;
+
+	/**
+	 * A URL to the embeddable content to use as an iframe.
+	 */
+	std::string embed_url;
+
+	// TODO
+	// auto metadata;
+
+	/**
+	 * TODO Documentation
+	 */
+	Content::Attribution attribution;
+};
+
+struct Video {
+
+	/**
+	 * TODO Documentation
+	 */
+	std::string type;
+
+	/**
+	 * The URL to use for the video content, if no media is present.
+	 */
+	std::string url;
+
+	// TODO
+	// auto media;
+
+	/**
+	 * The provider of the video, whether it's tumblr for native video or a trusted third party.
+	 */
+	std::string provider;
+
+	/**
+	 * HTML code that could be used to embed this video into a webpage.
+	 */
+	std::string embed_html;
+
+	// TODO
+	// auto embed_iframe;
+
+	/**
+	 * A URL to the embeddable content to use as an iframe.
+	 */
+	std::string embed_url;
+
+	/**
+	 * An image to use as a "poster" for the video, usually a single frame.
+	 */
+	Content::Image poster;
+
+	// TODO
+	// auto metadata;
+
+	/**
+	 * TODO Documentation
+	 */
+	Content::Attribution attribution;
+
+	/**
+	 * TODO Documentation
+	 * Undocumented?
+	 */
+	std::vector<Content::Image> filmstrip;
+
+	/**
+	 * Whether this video can be played on a cellular connection.
+	 */
+	bool can_autoplay_on_cellular;
 
 };
 

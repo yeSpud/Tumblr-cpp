@@ -5,7 +5,7 @@
 #include "../include/TumblrAPI.hpp"
 
 cpr::Response
-TumblrAPI::sendRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) { // TODO Comments
+TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) { // TODO Comments
 
 	// Format the URL to go to for retrieving data.
 	std::string url = "api.tumblr.com/v2/" + endpoint;

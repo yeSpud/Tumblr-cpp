@@ -31,7 +31,7 @@ private:
 	 * @param optionalParams
 	 * @return
 	 */
-	cpr::Response sendRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "");
+	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "");
 
 public:
 
@@ -288,14 +288,15 @@ public:
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getBlogInfoJson(const std::string& blogURL) { return sendRequest("blog/" + blogURL + "/info", true); };
+	cpr::Response getBlogInfoJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/info", true); };
 
 	/**
 	 * You can get a blog's avatar in 9 different sizes. The default size is 64x64.
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getBlogAvatarJson(const std::string& blogURL) { return sendRequest("blog/" + blogURL + "/avatar", false); };
+	cpr::Response getBlogAvatarJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/avatar",
+	                                                                                    false); };
 
 	// TODO Blog blocks (both get, post, and delete)
 
@@ -304,7 +305,8 @@ public:
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getBlogLikesJson(const std::string& blogURL) { return sendRequest("blog/" + blogURL + "/likes", true); };
+	cpr::Response getBlogLikesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/likes",
+	                                                                                   true); };
 
 	// TODO Blog following
 
@@ -318,7 +320,8 @@ public:
 	 * @param number
 	 * @return
 	 */
-	cpr::Response getPostsJson(const std::string& blogURL, const unsigned int number) {return sendRequest("blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));};
+	cpr::Response getPostsJson(const std::string& blogURL, const unsigned int number) {return sendGetRequest(
+				"blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));};
 
 	// TODO Post queue
 
@@ -343,7 +346,7 @@ public:
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getNotesJson(const std::string& blogURL) { return sendRequest("blog/" + blogURL + "/notes", true); };
+	cpr::Response getNotesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/notes", true); };
 
 	// TODO User info
 
