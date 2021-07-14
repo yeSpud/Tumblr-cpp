@@ -1,7 +1,20 @@
 cmake_minimum_required(VERSION 3.19)
-project(TumblrAPI)
 
-set(CMAKE_CXX_STANDARD 20)
+project(
+        TumblrAPI
+        VERSION 2021.07.1
+        DESCRIPTION "Tumblr API client written in C++"
+        LANGUAGES CXX)
+
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+
+    set(CMAKE_CXX_STANDARD 20)
+
+    set(CMAKE_CXX_EXTENSIONS OFF)
+
+    set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+endif ()
 
 # ease of use stuff
 include(ExternalProject)
@@ -12,24 +25,27 @@ include("${CMAKE_SOURCE_DIR}/vendor/rapidjson.cmake")
 include_directories(${RAPIDJSON_INCLUDE_DIR})
 
 # cpr
-if(WIN32)
+if (WIN32)
     set(DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
     set(CPR_FORCE_WINSSL_BACKEND ON)
     set(DCPR_BUILD_TESTS_SSL ON)
-endif(WIN32)
+endif (WIN32)
 set(CPR_BUILD_TESTS OFF)
 set(CPR_BUILD_TESTS_SSL OFF)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/whoshuu/cpr.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(cpr)
 
-# catch
-FetchContent_Declare(Catch2 GIT_REPOSITORY https://github.com/catchorg/Catch2.git GIT_TAG origin/devel)
-FetchContent_MakeAvailable(Catch2)
+# include the src directory
+add_subdirectory(src)
 
-add_library(TumblrAPI src/Content.cpp src/Content.hpp src/TumblrAPI.cpp src/TumblrAPI.hpp)
+# add external libary dependencies
 add_dependencies(TumblrAPI rapidjson)
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
 
-# tests
-#add_executable(TumblrAPI test.cpp)
-#target_link_libraries(TumblrAPI PRIVATE Catch2::Catch2)
+message("Checking if we need to run tests")
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)# OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+    message("Running tests")
+    add_subdirectory(tests)
+else ()
+    message("Skipping tests")
+endif ()

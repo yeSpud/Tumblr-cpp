@@ -1,0 +1,13 @@
+FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG 5c88067bd339465513af4aec606bd2292f1b594a)
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(testlib testlib.cpp)
+
+#target_compile_features()
+
+target_link_libraries(testlib PRIVATE TumblrAPI cpr::cpr Catch2::Catch2)
+
+add_test(NAME testlibtest COMMAND testlib)

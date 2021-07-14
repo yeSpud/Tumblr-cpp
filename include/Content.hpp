@@ -5,9 +5,10 @@
 #ifndef TUMBLRAPI_CONTENT_HPP
 #define TUMBLRAPI_CONTENT_HPP
 
-#include <string>
 #include <vector>
+#include <string>
 #include "rapidjson/document.h"
+
 
 /**
  * Neue Post Format stuff
@@ -92,7 +93,7 @@ public:
 		/**
 		 * Whether or not the blog's title should be displayed, even if it's given in the API payload.
 		 */
-		bool show_title;
+		bool show_title = false;
 
 		/**
 		 * The intended hex color of the blog's title.
@@ -159,12 +160,12 @@ public:
 		/**
 		 * The width of the image asset
 		 */
-		unsigned int width;
+		uint64_t width;
 
 		/**
 		 * The height of the media asset
 		 */
-		unsigned int height;
+		uint64_t height;
 
 		/**
 		 * The canonical URL of the image asset
@@ -231,7 +232,7 @@ public:
 		std::string type;
 
 		/**
-		 * TODO Documentation
+		 * The URL to use for the audio content, if no media is present.
 		 */
 		std::string url;
 
@@ -239,37 +240,37 @@ public:
 		// auto media;
 
 		/**
-		 * TODO Documentation
+		 * The provider of the audio source, whether it's tumblr for native audio or a trusted third party.
 		 */
 		std::string provider;
 
 		/**
-		 * TODO Documentation
+		 * The title of the audio asset.
 		 */
 		std::string title;
 
 		/**
-		 * TODO Documentation
+		 * The artist of the audio asset.
 		 */
 		std::string artist;
 
 		/**
-		 * TODO Documentation
+		 * The album from which the audio asset originated.
 		 */
 		std::string album;
 
 		/**
-		 * TODO Documentation
+		 * An image to use as a "poster" for the audio track, usually album art.
 		 */
 		Content::Image poster;
 
 		/**
-		 * TODO Documentation
+		 * HTML code that could be used to embed this audio track into a webpage.
 		 */
 		std::string embed_html;
 
 		/**
-		 * TODO Documentation
+		 * A URL to the embeddable content to use as an iframe.
 		 */
 		std::string embed_url;
 
@@ -288,18 +289,23 @@ public:
 		/**
 		 * TODO Documentation
 		 */
+		std::string type;
+
+		/**
+		 * The URL to use for the video content, if no media is present.
+		 */
 		std::string url;
 
 		// TODO
 		// auto media;
 
 		/**
-		 * TODO Documentation
+		 * The provider of the video, whether it's tumblr for native video or a trusted third party.
 		 */
 		std::string provider;
 
 		/**
-		 * TODO Documentation
+		 * HTML code that could be used to embed this video into a webpage.
 		 */
 		std::string embed_html;
 
@@ -307,12 +313,12 @@ public:
 		// auto embed_iframe;
 
 		/**
-		 * TODO Documentation
+		 * A URL to the embeddable content to use as an iframe.
 		 */
 		std::string embed_url;
 
 		/**
-		 * TODO Documentation
+		 * An image to use as a "poster" for the video, usually a single frame.
 		 */
 		Content::Image poster;
 
@@ -329,34 +335,16 @@ public:
 		std::vector<Content::Image> filmstrip;
 
 		/**
-		 * TODO Documentation
+		 * Whether this video can be played on a cellular connection.
 		 */
 		bool can_autoplay_on_cellular;
 
 	};
 
 	/**
-	 * TODO Docuementation
+	 * TODO Documentation
 	 */
-	struct Attribution {
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string type;
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string url;
-
-		// TODO
-		// auto post;
-
-		// TODO
-		// auto blog;
-
-	};
+	struct Attribution;
 
 	/**
 	 * TODO Documentation
@@ -374,7 +362,25 @@ public:
 	 * @param buffer
 	 * @return
 	 */
-	static bool entryHasInt(const rapidjson::Value &entry, const char *value, unsigned int &buffer);
+	static bool entryHasNumber(const rapidjson::Value &entry, const char *value, uint64_t &buffer);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @param value
+	 * @param buffer
+	 * @return
+	 */
+	static bool entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Image generateImage(const rapidjson::Value &entry);
+
+	// TODO Parse the different types of content
 
 };
 
