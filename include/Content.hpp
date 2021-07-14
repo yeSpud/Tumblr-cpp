@@ -240,11 +240,6 @@ public:
 
 	/**
 	 * TODO Documentation
-	 */
-	struct Video;
-
-	/**
-	 * TODO Documentation
 	 * @param entry
 	 * @param value
 	 * @param buffer
@@ -292,13 +287,6 @@ public:
 	 * @return
 	 */
 	static Content::Link generateLink(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Content::Video generateVideo(const rapidjson::Value &entry);
 
 };
 
