@@ -7,8 +7,14 @@
 
 #include <string>
 #include <utility>
+#include "Content.hpp"
 #include "cpr/cpr.h"
 
+class Content;
+
+/**
+ * TODO Documentation
+ */
 class TumblrAPI {
 
 private:
@@ -34,7 +40,105 @@ public:
 	 */
 	struct Blog {
 
-		// TODO
+		/**
+		 * Indicates whether the blog allows questions.
+		 */
+		bool ask;
+
+		/**
+		 * Indicates whether the blog allows anonymous questions.
+		 */
+		bool ask_anon;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string ask_page_title;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool asks_allow_media;
+
+		/**
+		 * An array of avatar images, each a different size, which should each have a width, height, and URL.
+		 */
+		std::vector<Content::Image> avatar;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_chat;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_subscribe;
+
+		/**
+		 * The blog's description
+		 */
+		std::string description;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool is_nsfw;
+
+		/**
+		 * The short blog name that appears before tumblr.com in a standard blog hostname
+		 */
+		std::string name;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t posts;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool shared_likes;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool subscribed;
+
+		/**
+		 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
+		 */
+		Content::Theme theme;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string title;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t total_posts;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t updated;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string url;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string uuid;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool is_optout_ads;
 
 	};
 
@@ -43,7 +147,118 @@ public:
 	 */
 	struct Post {
 
-		// TODO
+		/**
+		 * TODO Documentation
+		 */
+		std::string type;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string original_type;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string blog_name;
+
+		// const auto blog;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t id = 0;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string id_string;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string post_url;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string slug;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string date;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t timestamp = 0;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string state;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string reblog_key;
+
+		// const auto tags;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string short_url;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string summary;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool should_open_in_legacy;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t note_count = 0;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::vector<Content::Image> content;
+
+		// const auto layout;
+
+		// const auto trail;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_like;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_reblog;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_send_in_message;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_reply;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool display_avatar;
 
 	};
 
@@ -147,7 +362,7 @@ public:
 	// TODO Filtered content
 
 	// TODO Tagged method
-	
+
 };
 
 

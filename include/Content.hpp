@@ -6,8 +6,9 @@
 #define TUMBLRAPI_CONTENT_HPP
 
 #include <vector>
+#include <string>
 #include "rapidjson/document.h"
-#include "TumblrAPI.hpp"
+
 
 /**
  * Neue Post Format stuff
@@ -343,43 +344,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Attribution {
-
-		/**
-		 * The type of the attribution.
-		 * Current valid values are "link", "blog", "post", or "app".
-		 */
-		std::string type; // TODO Make this into an enum
-
-		/**
-		 * The URL to be attributed.
-		 */
-		std::string url;
-
-		/**
-		 * A Post with at least the id field.
-		 */
-		TumblrAPI::Post post;
-
-		/**
-		 * A Blog with at least the uuid field.
-		 */
-		TumblrAPI::Blog blog;
-
-		/**
-		 * The name of the application to be attributed.
-		 */
-		std::string app_name;
-
-		/**
-		 * Any display text that the client should use with the attribution.
-		 */
-		std::string display_text;
-
-		// TODO
-		// auto logo;
-
-	};
+	struct Attribution;
 
 	/**
 	 * TODO Documentation
