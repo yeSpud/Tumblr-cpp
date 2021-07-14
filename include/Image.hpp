@@ -58,7 +58,7 @@ public:
 	 * @param entry
 	 * @return
 	 */
-	Image generateImage(const rapidjson::Value &entry) { // TODO Comments & move to cpp class?
+	static Image generateImage(const rapidjson::Value &entry) { // TODO Comments & move to cpp class?
 
 		Content::Image image;
 

@@ -67,50 +67,6 @@ public:
 	};
 
 	/**
-	 * Media objects are used for image blocks, all kinds of posters (GIF, video, etc), native audio, native video,
-	 * and some trusted third-party content. All media objects returned from the API should contain type and url,
-	 * and any video and image media objects should always contain a width and height.
-	 */
-	struct MediaObject {
-
-		/**
-		 * The canonical URL of the media asset.
-		 */
-		std::string url;
-
-		/**
-		 * The MIME type of the media asset, or a best approximation will be made based on the given URL.
-		 */
-		std::string type;
-
-		/**
-		 * The width of the media asset, if that makes sense (for images and videos, but not for audio).
-		 */
-		int width;
-
-		/**
-		 * The height of the media asset, if that makes sense (for images and videos, but not for audio).
-		 */
-		int height;
-
-		/**
-		 * For display purposes, this indicates whether the dimensions are defaults.
-		 */
-		bool original_dimensions_missing;
-
-		/**
-		 * This indicates whether this media object is a cropped version of the original media.
-		 */
-		bool cropped;
-
-		/**
-		 * This indicates whether this media object has the same dimensions as the original media.
-		 */
-		bool has_original_dimensions;
-
-	};
-
-	/**
 	 * TODO Documentation
 	 */
 	struct iFrameObject {
@@ -243,11 +199,6 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Image;
-
-	/**
-	 * TODO Documentation
-	 */
 	struct Link {
 
 		/**
@@ -290,11 +241,6 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Audio;
-
-	/**
-	 * TODO Documentation
-	 */
 	struct Video;
 
 	/**
@@ -324,8 +270,6 @@ public:
 	 */
 	static bool entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer);
 
-	// TODO Media generation
-
 	// TODO iFrame generation
 
 	/**
@@ -347,21 +291,7 @@ public:
 	 * @param entry
 	 * @return
 	 */
-	static Content::Image generateImage(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
 	static Content::Link generateLink(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Content::Audio generateAudio(const rapidjson::Value &entry);
 
 	/**
 	 * TODO Documentation
