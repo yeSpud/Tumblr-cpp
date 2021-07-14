@@ -52,11 +52,48 @@ bool Content::entryHasString(const rapidjson::Value &entry, const char *value, s
 	}
 }
 
-bool Content::entryHasInt(const rapidjson::Value &entry, const char *value, unsigned &buffer) { // TODO Comments
+bool Content::entryHasNumber(const rapidjson::Value &entry, const char *value, uint64_t &buffer) { // TODO Comments
 	if (entry.HasMember(value)) {
 		buffer = entry[value].GetUint();
 		return true;
 	} else {
 		return false;
 	}
+}
+
+bool Content::entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer) { // TODO Comments
+	if (entry.HasMember(value)) {
+		buffer = entry[value].GetBool();
+		return true;
+	} else {
+		return false;
+	}
+}
+
+Content::Image Content::generateImage(const rapidjson::Value &entry) { // TODO Comments
+
+	Content::Image image;
+
+	if (entry.IsObject()) {
+		std::string url;
+		uint64_t width, height;
+
+		if (!Content::entryHasString(entry, "url", url)) {
+			return image;
+		}
+
+		if (!Content::entryHasNumber(entry, "width", width)) {
+			return image;
+		}
+
+		if (!Content::entryHasNumber(entry, "height", height)) {
+			return image;
+		}
+
+		image.width = width;
+		image.height = height;
+		image.url = url;
+	}
+
+	return image;
 }

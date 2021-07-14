@@ -160,12 +160,12 @@ public:
 		/**
 		 * The width of the image asset
 		 */
-		unsigned int width;
+		uint64_t width;
 
 		/**
 		 * The height of the media asset
 		 */
-		unsigned int height;
+		uint64_t height;
 
 		/**
 		 * The canonical URL of the image asset
@@ -362,7 +362,23 @@ public:
 	 * @param buffer
 	 * @return
 	 */
-	static bool entryHasInt(const rapidjson::Value &entry, const char *value, unsigned int &buffer);
+	static bool entryHasNumber(const rapidjson::Value &entry, const char *value, uint64_t &buffer);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @param value
+	 * @param buffer
+	 * @return
+	 */
+	static bool entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer);
+
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 * @return
+	 */
+	static Content::Image generateImage(const rapidjson::Value &entry);
 
 	// TODO Parse the different types of content
 
