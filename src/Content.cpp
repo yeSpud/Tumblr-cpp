@@ -38,8 +38,10 @@ struct Content::Attribution {
 	 */
 	std::string display_text;
 
-	// TODO
-	// auto logo;
+	/**
+	 * A specific logo that the client should use with the third-party app attribution.
+	 */
+	Content::Image logo;
 
 };
 

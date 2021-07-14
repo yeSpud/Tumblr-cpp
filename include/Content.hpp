@@ -9,7 +9,6 @@
 #include <string>
 #include "rapidjson/document.h"
 
-
 /**
  * Neue Post Format stuff
  * TODO Documentation
@@ -19,14 +18,60 @@ class Content {
 public:
 
 	/**
-	 * TODO Documentation
+	 * Text blocks can also have a subtype field that specifies a semantic meaning to the text block,
+	 * which can also be used by the clients to render the entire block of text differently.
 	 */
-	enum subtype { heading1, heading2, quirky, quote, indented, chat, ordered_list_item, unordered_list_item };
+	enum subtype {
+
+		/**
+		 * Intended for Post headings.
+		 */
+		heading1,
+
+		/**
+		 * Intended for section subheadings.
+		 */
+		heading2,
+
+		/**
+		 * Tumblr Official clients display this with a large cursive font.
+		 */
+		quirky,
+
+		/**
+		 * Intended for short quotations, official Tumblr clients display this with a large serif font.
+		 */
+		quote,
+
+		/**
+		 * Intended for longer quotations or photo captions, official Tumblr clients indent this text block.
+		 */
+		indented,
+
+		/**
+		 * Intended to mimic the behavior of the Chat Post type,
+		 * official Tumblr clients display this with a monospace font.
+		 */
+		chat,
+
+		/**
+		 * Intended to be an ordered list item prefixed by a number, see next section.
+		 */
+		ordered_list_item,
+
+		/**
+		 * Intended to be an unordered list item prefixed with a bullet, see next section.
+		 */
+		unordered_list_item
+
+	};
 
 	/**
 	 * TODO Documentation
 	 */
-	enum attributionType { link, blog, post, app };
+	enum attributionType {
+		link, blog, post, app
+	};
 
 	/**
 	 * TODO Documentation
