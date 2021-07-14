@@ -26,7 +26,7 @@ FetchContent_MakeAvailable(cpr)
 FetchContent_Declare(Catch2 GIT_REPOSITORY https://github.com/catchorg/Catch2.git GIT_TAG origin/devel)
 FetchContent_MakeAvailable(Catch2)
 
-add_library(TumblrAPI src/Content.cpp src/Content.hpp)
+add_library(TumblrAPI src/Content.cpp src/Content.hpp src/TumblrAPI.cpp src/TumblrAPI.hpp)
 add_dependencies(TumblrAPI rapidjson)
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
 

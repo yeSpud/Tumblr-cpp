@@ -5,7 +5,8 @@
 #ifndef TUMBLRAPI_TUMBLRAPI_HPP
 #define TUMBLRAPI_TUMBLRAPI_HPP
 
-#inclide "cpr/cpr.h"
+#include <string>
+#include "cpr/cpr.h"
 
 class TumblrAPI {
 
@@ -44,6 +45,34 @@ public:
 		// TODO
 
 	};
+
+	/**
+	 * TODO Documentaton
+	 * @param json
+	 * @return
+	 */
+	static Blog generateBlog(const char *json);
+
+	/**
+	 * TODO Documentation
+	 * @param json
+	 * @return
+	 */
+	static std::vector<Post> generatePosts(const char *json);
+
+	/**
+	 * TODO TODO Documentation
+	 * @param token
+	 */
+	TumblrAPI(const std::string token):token(token){};
+
+	cpr::Response getPostsJson(const unsigned int number) {
+		return sendRequest("blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));
+	};
+
+	cpr::Response getBlogInfoJson() { return sendRequest("blog/" + blogURL + "/info", true); };
+
+	cpr::Response getBlogAvatarJson() { return sendRequest("blog/" + blogURL + "/avatar", false); };
 
 };
 

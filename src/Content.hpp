@@ -6,11 +6,12 @@
 #define TUMBLRAPI_CONTENT_HPP
 
 #include <string>
+#include <vector>
 #include "rapidjson/document.h"
 
 /**
  * Neue Post Format stuff
- * TODO DOcumentation
+ * TODO Documentation
  */
 class Content {
 
