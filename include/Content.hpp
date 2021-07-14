@@ -376,6 +376,8 @@ public:
 	 */
 	static bool entryHasInt(const rapidjson::Value &entry, const char *value, unsigned int &buffer);
 
+	// TODO Parse the different types of content
+
 };
 
 #endif //TUMBLRAPI_CONTENT_HPP

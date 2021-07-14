@@ -2,7 +2,7 @@
 // Created by Spud on 7/13/21.
 //
 
-#include "Content.hpp"
+#include "../include/Content.hpp"
 
 bool Content::entryHasString(const rapidjson::Value &entry, const char *value, std::string &buffer) { // TODO Comments
 	if (entry.HasMember(value)) {
