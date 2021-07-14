@@ -21,7 +21,7 @@ include(ExternalProject)
 include(FetchContent)
 
 # rapidjson
-include("${CMAKE_SOURCE_DIR}/vendor/rapidjson.cmake")
+include("${PROJECT_SOURCE_DIR}/vendor/rapidjson.cmake")
 include_directories(${RAPIDJSON_INCLUDE_DIR})
 
 # cpr
