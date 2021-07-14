@@ -5,9 +5,9 @@
 #ifndef TUMBLRAPI_CONTENT_HPP
 #define TUMBLRAPI_CONTENT_HPP
 
-#include <string>
 #include <vector>
 #include "rapidjson/document.h"
+#include "TumblrAPI.hpp"
 
 /**
  * Neue Post Format stuff
@@ -231,7 +231,7 @@ public:
 		std::string type;
 
 		/**
-		 * TODO Documentation
+		 * The URL to use for the audio content, if no media is present.
 		 */
 		std::string url;
 
@@ -239,37 +239,37 @@ public:
 		// auto media;
 
 		/**
-		 * TODO Documentation
+		 * The provider of the audio source, whether it's tumblr for native audio or a trusted third party.
 		 */
 		std::string provider;
 
 		/**
-		 * TODO Documentation
+		 * The title of the audio asset.
 		 */
 		std::string title;
 
 		/**
-		 * TODO Documentation
+		 * The artist of the audio asset.
 		 */
 		std::string artist;
 
 		/**
-		 * TODO Documentation
+		 * The album from which the audio asset originated.
 		 */
 		std::string album;
 
 		/**
-		 * TODO Documentation
+		 * An image to use as a "poster" for the audio track, usually album art.
 		 */
 		Content::Image poster;
 
 		/**
-		 * TODO Documentation
+		 * HTML code that could be used to embed this audio track into a webpage.
 		 */
 		std::string embed_html;
 
 		/**
-		 * TODO Documentation
+		 * A URL to the embeddable content to use as an iframe.
 		 */
 		std::string embed_url;
 
@@ -288,18 +288,23 @@ public:
 		/**
 		 * TODO Documentation
 		 */
+		std::string type;
+
+		/**
+		 * The URL to use for the video content, if no media is present.
+		 */
 		std::string url;
 
 		// TODO
 		// auto media;
 
 		/**
-		 * TODO Documentation
+		 * The provider of the video, whether it's tumblr for native video or a trusted third party.
 		 */
 		std::string provider;
 
 		/**
-		 * TODO Documentation
+		 * HTML code that could be used to embed this video into a webpage.
 		 */
 		std::string embed_html;
 
@@ -307,12 +312,12 @@ public:
 		// auto embed_iframe;
 
 		/**
-		 * TODO Documentation
+		 * A URL to the embeddable content to use as an iframe.
 		 */
 		std::string embed_url;
 
 		/**
-		 * TODO Documentation
+		 * An image to use as a "poster" for the video, usually a single frame.
 		 */
 		Content::Image poster;
 
@@ -329,7 +334,7 @@ public:
 		std::vector<Content::Image> filmstrip;
 
 		/**
-		 * TODO Documentation
+		 * Whether this video can be played on a cellular connection.
 		 */
 		bool can_autoplay_on_cellular;
 
@@ -350,11 +355,15 @@ public:
 		 */
 		std::string url;
 
-		// TODO
-		// auto post;
+		/**
+		 * TODO Documentation
+		 */
+		TumblrAPI::Post post;
 
-		// TODO
-		// auto blog;
+		/**
+		 * TODO Documentation
+		 */
+		TumblrAPI::Blog blog;
 
 	};
 

@@ -66,13 +66,13 @@ public:
 	 */
 	TumblrAPI(const std::string token):token(token){};
 
-	cpr::Response getPostsJson(const unsigned int number) {
+	cpr::Response getPostsJson(const std::string blogURL, const unsigned int number) {
 		return sendRequest("blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));
 	};
 
-	cpr::Response getBlogInfoJson() { return sendRequest("blog/" + blogURL + "/info", true); };
+	cpr::Response getBlogInfoJson(const std::string blogURL) { return sendRequest("blog/" + blogURL + "/info", true); };
 
-	cpr::Response getBlogAvatarJson() { return sendRequest("blog/" + blogURL + "/avatar", false); };
+	cpr::Response getBlogAvatarJson(const std::string blogURL) { return sendRequest("blog/" + blogURL + "/avatar", false); };
 
 };
 
