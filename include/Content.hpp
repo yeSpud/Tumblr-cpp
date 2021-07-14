@@ -92,7 +92,7 @@ public:
 		/**
 		 * Whether or not the blog's title should be displayed, even if it's given in the API payload.
 		 */
-		bool show_title;
+		bool show_title = false;
 
 		/**
 		 * The intended hex color of the blog's title.
