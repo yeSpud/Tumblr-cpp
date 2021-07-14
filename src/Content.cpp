@@ -5,43 +5,46 @@
 #include "Content.hpp"
 #include "TumblrAPI.hpp"
 
-struct Content::Attribution {
+struct Image {
 
 	/**
-	 * The type of the attribution.
-	 * Current valid values are "link", "blog", "post", or "app".
+	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
 	 */
-	Content::attributionType type;
+	std::string type;
 
 	/**
-	 * The URL to be attributed.
+	 * TODO Documentation
+	 * Undocumented?
 	 */
-	std::string url;
+	std::string media_key;
 
 	/**
-	 * A Post with at least the id field.
+	 * TODO Documentation
 	 */
-	TumblrAPI::Post post;
+	std::vector<Content::MediaObject> media;
+
+	// TODO
+	// auto colors;
 
 	/**
-	 * A Blog with at least the uuid field.
+	 * TODO Documentation
 	 */
-	TumblrAPI::Blog blog;
+	std::string feedback_token;
 
 	/**
-	 * The name of the application to be attributed.
+	 * TODO Documentation
 	 */
-	std::string app_name;
+	Content::MediaObject poster;
 
 	/**
-	 * Any display text that the client should use with the attribution.
+	 * TODO Documentation
 	 */
-	std::string display_text;
+	Content::Attribution attribution;
 
 	/**
-	 * A specific logo that the client should use with the third-party app attribution.
+	 * TODO Documentation
 	 */
-	Content::Image logo;
+	std::string alt_text;
 
 };
 
@@ -99,7 +102,7 @@ struct Content::Audio {
 	// auto metadata;
 
 	/**
-	 * TODO Documentation
+	 * Attribution information about where the audio track came from.
 	 */
 	Content::Attribution attribution;
 };
@@ -163,6 +166,7 @@ struct Video {
 
 };
 
+// TODO Convert the bottom 3 into 1 with templating?
 bool Content::entryHasString(const rapidjson::Value &entry, const char *value, std::string &buffer) { // TODO Comments
 	if (entry.HasMember(value)) {
 		buffer = entry[value].GetString();

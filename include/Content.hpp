@@ -67,16 +67,55 @@ public:
 	};
 
 	/**
-	 * TODO Documentation
+	 * Media objects are used for image blocks, all kinds of posters (GIF, video, etc), native audio, native video,
+	 * and some trusted third-party content. All media objects returned from the API should contain type and url,
+	 * and any video and image media objects should always contain a width and height.
 	 */
-	enum attributionType {
-		link, blog, post, app
+	struct MediaObject {
+
+		/**
+		 * The canonical URL of the media asset.
+		 */
+		std::string url;
+
+		/**
+		 * The MIME type of the media asset, or a best approximation will be made based on the given URL.
+		 */
+		std::string type;
+
+		/**
+		 * The width of the media asset, if that makes sense (for images and videos, but not for audio).
+		 */
+		int width;
+
+		/**
+		 * The height of the media asset, if that makes sense (for images and videos, but not for audio).
+		 */
+		int height;
+
+		/**
+		 * For display purposes, this indicates whether the dimensions are defaults.
+		 */
+		bool original_dimensions_missing;
+
+		/**
+		 * This indicates whether this media object is a cropped version of the original media.
+		 */
+		bool cropped;
+
+		/**
+		 * This indicates whether this media object has the same dimensions as the original media.
+		 */
+		bool has_original_dimensions;
+
 	};
 
 	/**
 	 * TODO Documentation
 	 */
-	struct Attribution;
+	struct iFrameObject {
+		// TODO
+	};
 
 	/**
 	 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
@@ -204,40 +243,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Image {
-
-		/**
-		 * The MIME type of the image asset, or a best approximation will be made based on the given URL
-		 */
-		std::string type;
-
-		/**
-		 * TODO Documentation
-		 * Undocumented?
-		 */
-		std::string media_key;
-
-		/**
-		 * The width of the image asset
-		 */
-		uint64_t width;
-
-		/**
-		 * The height of the media asset
-		 */
-		uint64_t height;
-
-		/**
-		 * The canonical URL of the image asset
-		 */
-		std::string url;
-
-		/**
-		 * This indicates whether this media object has the same dimensions as the original media
-		 */
-		bool has_original_dimensions = false;
-
-	};
+	struct Image;
 
 	/**
 	 * TODO Documentation
@@ -318,6 +324,10 @@ public:
 	 */
 	static bool entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer);
 
+	// TODO Media generation
+
+	// TODO iFrame generation
+
 	/**
 	 * TODO Documentation
 	 * @param entry
@@ -326,7 +336,7 @@ public:
 	static Content::Theme generateTheme(const rapidjson::Value &entry);
 
 	/**
-	 * TODO Documentaiton
+	 * TODO Documentation
 	 * @param entry
 	 * @return
 	 */
@@ -359,13 +369,6 @@ public:
 	 * @return
 	 */
 	static Content::Video generateVideo(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Content::Attribution generateAttribution(const rapidjson::Value &entry);
 
 };
 
