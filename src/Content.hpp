@@ -8,6 +8,10 @@
 #include <string>
 #include "rapidjson/document.h"
 
+/**
+ * Neue Post Format stuff
+ * TODO DOcumentation
+ */
 class Content {
 
 public:
@@ -215,12 +219,142 @@ public:
 
 	};
 
+	/**
+	 * TODO Documentation
+	 */
 	struct Audio {
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string type;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string url;
+
 		// TODO
+		// auto media;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string provider;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string title;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string artist;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string album;
+
+		/**
+		 * TODO Documentation
+		 */
+		Content::Image poster;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string embed_html;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string embed_url;
+
+		// TODO
+		// auto metadata;
+
+		// TODO
+		// auto attribution;
 	};
 
+	/**
+	 * TODO Documentation
+	 */
 	struct Video {
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string url;
+
 		// TODO
+		// auto media;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string provider;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string embed_html;
+
+		// TODO
+		// auto embed_iframe;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string embed_url;
+
+		/**
+		 * TODO Documentation
+		 */
+		Content::Image poster;
+
+		// TODO
+		// auto metadata;
+
+		// TODO
+		// auto attribution;
+
+		/**
+		 * TODO Documentation
+		 * Undocumented?
+		 */
+		std::vector<Content::Image> filmstrip;
+
+		/**
+		 * TODO Documentation
+		 */
+		bool can_autoplay_on_cellular;
+
+	};
+
+	/**
+	 * TODO Docuementation
+	 */
+	struct Attribution {
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string type;
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string url;
+
+		// TODO
+		// auto post;
+
+		// TODO
+		// auto blog;
+
 	};
 
 	/**

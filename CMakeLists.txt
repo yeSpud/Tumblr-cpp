@@ -3,13 +3,15 @@ project(TumblrAPI)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# rapidjson
+# ease of use stuff
 include(ExternalProject)
+include(FetchContent)
+
+# rapidjson
 include("${CMAKE_SOURCE_DIR}/vendor/rapidjson.cmake")
 include_directories(${RAPIDJSON_INCLUDE_DIR})
 
 # cpr
-include(FetchContent)
 if(WIN32)
     set(DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
     set(CPR_FORCE_WINSSL_BACKEND ON)
@@ -20,6 +22,14 @@ set(CPR_BUILD_TESTS_SSL OFF)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/whoshuu/cpr.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(cpr)
 
+# catch
+FetchContent_Declare(Catch2 GIT_REPOSITORY https://github.com/catchorg/Catch2.git GIT_TAG origin/devel)
+FetchContent_MakeAvailable(Catch2)
+
 add_library(TumblrAPI src/Content.cpp src/Content.hpp)
 add_dependencies(TumblrAPI rapidjson)
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
+
+# tests
+#add_executable(TumblrAPI test.cpp)
+#target_link_libraries(TumblrAPI PRIVATE Catch2::Catch2)
