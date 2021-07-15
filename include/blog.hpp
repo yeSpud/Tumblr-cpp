@@ -6,8 +6,8 @@
 #define TUMBLRAPI_BLOG_HPP
 
 #include <vector>
-#include "image.hpp"
 #include "theme.hpp"
+#include "image.hpp"
 
 /**
  * TODO Documentation

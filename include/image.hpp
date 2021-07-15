@@ -5,6 +5,7 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
+#include <vector>
 #include "attribution.hpp"
 
 /**

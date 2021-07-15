@@ -5,9 +5,9 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-#include "post.hpp"
-#include "blog.hpp"
 #include "media.hpp"
+#include "blog.hpp"
+#include "post.hpp"
 
 /**
  * TODO Documentation

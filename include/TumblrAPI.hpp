@@ -5,12 +5,7 @@
 #ifndef TUMBLRAPI_TUMBLRAPI_HPP
 #define TUMBLRAPI_TUMBLRAPI_HPP
 
-#include <string>
-#include <utility>
 #include "cpr/cpr.h"
-#include "Content.hpp"
-#include "theme.hpp"
-#include "image.hpp"
 
 class Content;
 

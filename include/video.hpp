@@ -12,6 +12,12 @@
  */
 class Video {
 
+private:
+
+	explicit Video(std::string url): url(std::move(url)){};
+
+	explicit Video(Media media): media(std::move(media)){};
+
 public:
 
 	//struct Video;
@@ -26,8 +32,10 @@ public:
 	 */
 	std::string url;
 
-	// TODO
-	// auto media;
+	/**
+	 * TODO Documentation
+	 */
+	Media media;
 
 	/**
 	 * The provider of the video, whether it's tumblr for native video or a trusted third party.

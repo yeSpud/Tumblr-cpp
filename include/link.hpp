@@ -12,6 +12,14 @@
  */
 class Link {
 
+private:
+
+	/**
+	 * TODO Documentation
+	 * @param url
+	 */
+	explicit Link(std::string url): url(std::move(url)){};
+
 public:
 
 	// struct Link;
