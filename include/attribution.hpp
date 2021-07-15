@@ -23,6 +23,12 @@ public:
 		link, blog, post, app
 	};
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 */
+	Attribution(const attributionType type) : type(type) {};
+
 	//struct Attribution;
 	/**
 	 * The type of the attribution.
@@ -69,17 +75,39 @@ public:
 
 private:
 
-	Attribution(const attributionType type) : type(type) {};
-
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param url
+	 * @param post
+	 * @param blog
+	 */
 	Attribution(const attributionType type, std::string url, post::Post *post, blog::Blog *blog) : type(type),
 	                                                                                               url(std::move(url)),
 	                                                                                               postObject(post),
 	                                                                                               blogObject(blog) {};
-
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param url
+	 */
 	Attribution(const attributionType type, std::string url) : type(type), url(std::move(url)) {};
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param blog
+	 */
 	Attribution(const attributionType type, blog::Blog *blog) : type(type), blogObject(blog) {};
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param url
+	 * @param app_name
+	 * @param display_text
+	 * @param logo
+	 */
 	Attribution(const attributionType type, std::string url, std::string app_name = "", std::string display_text = "",
 	            Media logo = Media()) : type(type), url(std::move(url)), app_name(std::move(app_name)),
 	                                    display_text(std::move(display_text)),
