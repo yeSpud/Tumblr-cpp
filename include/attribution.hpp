@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
+// This is where we run into circular dependencies issues. Especially with image.hpp.
+
 #include "npf.hpp"
 
 /**

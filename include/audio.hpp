@@ -7,6 +7,7 @@
 
 #include "content.hpp"
 #include "image.hpp"
+#include "attribution.hpp" // Circular dependency with image.hpp
 
 /**
  * TODO Documentation
