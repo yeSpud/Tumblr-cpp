@@ -7,6 +7,9 @@
 
 #include "image.hpp"
 
+/**
+ * TODO Documentation
+ */
 class Link {
 
 public:

@@ -6,7 +6,6 @@
 #define TUMBLRAPI_AUDIO_HPP
 
 #include "attribution.hpp"
-#include "image.hpp"
 
 /**
  * TODO Documentation

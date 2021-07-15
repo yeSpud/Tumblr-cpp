@@ -16,6 +16,10 @@ class Text {
 
 private:
 
+	/**
+	 * TODO Documentation
+	 * @param text
+	 */
 	explicit Text(std::string text):text(std::move(text)) {};
 
 public:

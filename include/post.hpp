@@ -7,6 +7,9 @@
 
 #include "image.hpp"
 
+/**
+ * TODO Documentation
+ */
 class Post {
 
 public:
@@ -28,8 +31,10 @@ public:
 	 */
 	std::string blog_name;
 
-	// TODO
-	// const auto blog;
+	/**
+	 * TODO Documentation
+	 */
+	Blog blog;
 
 	/**
 	 * TODO Documentation

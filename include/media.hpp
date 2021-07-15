@@ -39,12 +39,6 @@ public:
 	[[deprecated("Please use the `generateMedia` method instead - this is here as a placeholder")]]
 	Media(){};
 
-	/*
-	**
-	 * Media objects are used for image blocks, all kinds of posters (GIF, video, etc), native audio, native video,
-	 * and some trusted third-party content. All media objects returned from the API should contain type and url,
-	 * and any video and image media objects should always contain a width and height.
-	 */
 	//struct MediaObject {
 
 	/**

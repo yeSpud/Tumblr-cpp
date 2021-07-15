@@ -16,11 +16,6 @@ class Theme {
 
 public:
 
-	/*
-	**
-	* The blog's general theme options, which may not be useful if the blog uses a custom theme.
-	* Used by blog info.
-	*/
 	//struct Theme {
 
 	/**

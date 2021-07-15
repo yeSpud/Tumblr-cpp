@@ -39,7 +39,7 @@ public:
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 	 */
-	std::vector<Image::Image *> avatar;
+	std::vector<Image> avatar;
 
 	/**
 	 * TODO Documentation
