@@ -79,7 +79,7 @@ struct blog::Blog {
 	/**
 	 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
 	 */
-	theme::Theme theme;
+	Theme theme;
 
 	/**
 	 * TODO Documentation
