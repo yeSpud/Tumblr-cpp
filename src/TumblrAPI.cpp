@@ -42,7 +42,7 @@ TumblrAPI::Blog TumblrAPI::generateBlog(const char *json) {
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
 				for (const auto &avatarEntry : blogjson["avatar"].GetArray()) {
-					Content::Image avatar = Content::generateImage(avatarEntry);
+					Image avatar = Image::generateImage(avatarEntry);
 					if (!avatar.url.empty()) {
 						blog.avatar.push_back(avatar);
 					}
@@ -112,7 +112,7 @@ std::vector<TumblrAPI::Post> TumblrAPI::generatePosts(const char *json) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {
 								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
-									Content::Image image;
+									Image image;
 
 									if (!image.url.empty()) {
 										post.content.push_back(image);

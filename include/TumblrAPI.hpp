@@ -9,6 +9,7 @@
 #include <utility>
 #include "Content.hpp"
 #include "cpr/cpr.h"
+#include "Image.hpp"
 
 class Content;
 
@@ -63,7 +64,7 @@ public:
 		/**
 		 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 		 */
-		std::vector<Content::Image> avatar;
+		std::vector<Image> avatar;
 
 		/**
 		 * TODO Documentation
@@ -229,7 +230,7 @@ public:
 		/**
 		 * TODO Documentation
 		 */
-		std::vector<Content::Image> content;
+		std::vector<Image> content;
 
 		// const auto layout;
 

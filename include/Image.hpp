@@ -5,6 +5,11 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
+/**
+ * TODO Documentation
+ */
+class Image {
+
 public:
 
 	/**
@@ -26,7 +31,7 @@ public:
 		/**
 		 * TODO Documentation
 		 */
-		std::vector <Content::MediaObject> media;
+		std::vector <MediaObject> media;
 
 		// TODO
 		// auto colors;
@@ -98,5 +103,7 @@ public:
 
 		return image;
 	}
+
+};
 
 #endif //TUMBLRAPI_IMAGE_HPP
