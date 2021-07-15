@@ -6,9 +6,14 @@
 #define TUMBLRAPI_TEXT_HPP
 
 #include <string>
+#include <utility>
 #include "rapidjson/document.h"
 
-class text {
+class Text {
+
+private:
+
+	explicit Text(std::string text):text(std::move(text)) {};
 
 public:
 
@@ -64,31 +69,40 @@ public:
 	/**
 	 * TODO Documentation
 	 */
+	const std::string type;
+
+	/**
+	 * The text to use.
+	 */
+	std::string text;
+
+	/**
+	 * The subtype of text block.
+	 */
+	subtype subtype;
+
+	 /*
 	struct Text {
 
-		/**
-		 * TODO Documentation
-		 */
+
 		std::string type;
 
-		/**
+		**
 		 * The text to use
-		 */
+		 *
 		std::string text;
 
-		/**
+		**
 		 * The subtype of text block
-		 */
+		 *
 		subtype subtype;
 
-		/**
-		 * TODO Documentation
-		 */
 		uint64_t indent_level;
 
 		// TODO
 		// auto formatting;
 	};
+	*/
 
 	/**
 	 * TODO Documentation
