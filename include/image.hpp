@@ -5,6 +5,7 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
+#include <vector>
 #include "content.hpp"
 #include "media.hpp"
 
@@ -19,7 +20,13 @@ private:
 	 * TODO Documentation
 	 * @param media
 	 */
-	Image(Media media): Content("image"), media(media){};
+	Image(Media media): Content("image"), media{std::move(media)}{};
+
+	/**
+	 * TODO Documentation
+	 * @param media
+	 */
+	Image(std::vector<Media> media): Content("image"), media{std::move(media)}{};
 
 public:
 

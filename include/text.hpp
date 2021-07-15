@@ -18,7 +18,7 @@ private:
 	 * TODO Documentation
 	 * @param text
 	 */
-	explicit Text(std::string text):text(std::move(text)) {};
+	explicit Text(std::string text): Content("text"), text(std::move(text)) {};
 
 public:
 

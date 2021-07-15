@@ -6,6 +6,7 @@
 #define TUMBLRAPI_LINK_HPP
 
 #include "content.hpp"
+#include "image.hpp"
 
 /**
  * TODO Documentation
@@ -18,7 +19,7 @@ private:
 	 * TODO Documentation
 	 * @param url
 	 */
-	explicit Link(std::string url): url(std::move(url)){};
+	explicit Link(std::string url): Content("link"), url(std::move(url)){};
 
 public:
 

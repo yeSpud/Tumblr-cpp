@@ -6,6 +6,7 @@
 #define TUMBLRAPI_VIDEO_HPP
 
 #include "content.hpp"
+#include "image.hpp"
 
 /**
  * TODO Documentation
@@ -14,9 +15,9 @@ class Video: Content {
 
 private:
 
-	explicit Video(std::string url): url(std::move(url)){};
+	explicit Video(std::string url): Content("video"), url(std::move(url)){};
 
-	explicit Video(Media media): media(std::move(media)){};
+	explicit Video(Media media): Content("video"), media(std::move(media)){};
 
 public:
 

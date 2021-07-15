@@ -6,7 +6,7 @@
 #define TUMBLRAPI_AUDIO_HPP
 
 #include "content.hpp"
-#include "media.hpp"
+#include "image.hpp"
 
 /**
  * TODO Documentation
@@ -19,13 +19,13 @@ private:
 	 * TODO Documentation
 	 * @param url
 	 */
-	Audio(std::string url): url(std::move(url)){};
+	Audio(std::string url): Content("audio"),url(std::move(url)){};
 
 	/**
 	 * TODO Documentation
 	 * @param media
 	 */
-	Audio(Media media): media(std::move(media)){};
+	Audio(Media media): Content("audio"),media(std::move(media)){};
 
 public:
 

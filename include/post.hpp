@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_POST_HPP
 #define TUMBLRAPI_POST_HPP
 
-#include "image.hpp"
+#include "blog.hpp"
 
 /**
  * TODO Documentation
