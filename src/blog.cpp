@@ -89,7 +89,7 @@ Blog Blog::generateBlog(const char *json) {
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
 				for (const auto &avatarEntry : blogjson["avatar"].GetArray()) {
-					image::Image *avatar = *image::generateImage(avatarEntry);
+					Image::Image *avatar = *Image::generateImage(avatarEntry);
 					if (!avatar->url.empty()) {
 						blog.avatar.push_back(avatar);
 					}

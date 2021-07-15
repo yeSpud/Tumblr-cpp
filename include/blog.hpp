@@ -26,21 +26,39 @@ public:
 	*/
 	bool ask_anon;
 
+	/**
+	 * TODO Documentation
+	 */
 	std::string ask_page_title;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool asks_allow_media;
 
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 	 */
-	std::vector<image::Image *> avatar;
+	std::vector<Image::Image *> avatar;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool can_chat;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool can_subscribe;
 
+	/**
+	 * TODO Documentation
+	 */
 	std::string description;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool is_nsfw;
 
 	/**
@@ -48,10 +66,19 @@ public:
 	 */
 	std::string name;
 
+	/**
+	 * TODO Documentation
+	 */
 	uint64_t posts;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool shared_likes;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool subscribed;
 
 	/**
@@ -59,16 +86,34 @@ public:
 	 */
 	Theme theme;
 
+	/**
+	 * TODO Documentation
+	 */
 	std::string title;
 
+	/**
+	 * TODO Documentation
+	 */
 	uint64_t total_posts;
 
+	/**
+	 * TODO Documentation
+	 */
 	uint64_t updated;
 
+	/**
+	 * TODO Documentation
+	 */
 	std::string url;
 
+	/**
+	 * TODO Documentation
+	 */
 	std::string uuid;
 
+	/**
+	 * TODO Documentation
+	 */
 	bool is_optout_ads;
 
 	//struct Blog;

@@ -15,8 +15,16 @@ class Audio {
 
 private:
 
+	/**
+	 * TODO Documentation
+	 * @param url
+	 */
 	Audio(std::string url): url(std::move(url)){};
 
+	/**
+	 * TODO Documentation
+	 * @param media
+	 */
 	Audio(Media media): media(std::move(media)){};
 
 public:
@@ -59,9 +67,9 @@ public:
 	std::string album;
 
 	/**
-	 * An image pointer to use as a "poster" for the audio track, usually album art.
+	 * An image to use as a "poster" for the audio track, usually album art.
 	 */
-	image::Image *poster; // FIXME
+	Image poster;
 
 	/**
 	 * HTML code that could be used to embed this audio track into a webpage.

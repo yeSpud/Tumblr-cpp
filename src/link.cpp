@@ -41,6 +41,6 @@ struct link::Link {
 	/**
 	 * An image pointer to use as a "poster" for the link.
 	 */
-	image::Image *poster;
+	Image::Image *poster;
 
 };

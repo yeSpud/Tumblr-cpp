@@ -5,19 +5,63 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
-#include "rapidjson/document.h"
+#include "attribution.hpp"
 
 /**
  * TODO Documentation
  */
-class image {
+class Image {
+
+private:
+
+	/**
+	 * TODO Documentation
+	 * @param media
+	 */
+	Image(Media media): type("image"), media(media){};
 
 public:
 
 	/**
+	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
+	 */
+	std::string type;
+
+	/**
+	 * TODO Documentation
+	 * Undocumented?
+	 */
+	std::string media_key;
+
+	/**
 	 * TODO Documentation
 	 */
-	struct Image;
+	std::vector<Media> media;
+
+	// TODO
+	// auto colors;
+
+	/**
+	 * TODO Documentation
+	 */
+	std::string feedback_token;
+
+	/**
+	 * TODO Documentation
+	 */
+	Media poster;
+
+	/**
+	 * TODO Documentation
+	 */
+	Attribution attribution;
+
+	/**
+	 * TODO Documentation
+	 */
+	std::string alt_text;
+
+	//struct Image;
 
 	/**
 	 * TODO Documentation

@@ -167,7 +167,7 @@ std::vector<post::Post> post::generatePosts(const char *json) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {
 								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
-									image::Image *image;
+									Image::Image *image;
 
 									if (!image->url.empty()) {
 										//post.content.push_back(image); // FIXME

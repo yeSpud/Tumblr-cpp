@@ -43,7 +43,7 @@ struct video::Video {
 	/**
 	 * An image pointer to use as a "poster" for the video, usually a single frame.
 	 */
-	image::Image *poster;
+	Image::Image *poster;
 
 	// TODO
 	// auto metadata;
@@ -57,7 +57,7 @@ struct video::Video {
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	std::vector<image::Image*> filmstrip;
+	std::vector<Image::Image*> filmstrip;
 
 	/**
 	 * Whether this video can be played on a cellular connection.

@@ -27,6 +27,7 @@ public:
 	 * TODO Documentation
 	 * @param type
 	 */
+	 [[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
 	Attribution(const attributionType type) : type(type) {};
 
 	//struct Attribution;
