@@ -22,14 +22,14 @@ struct attribution::Attribution {
 	std::string url;
 
 	/**
-	 * A Post with at least the id field.
+	 * A Post pointer with at least the id field.
 	 */
-	post::Post post;
+	post::Post *post;
 
 	/**
-	 * A Blog with at least the uuid field.
+	 * A Blog pointer with at least the uuid field.
 	 */
-	blog::Blog blog;
+	blog::Blog *blog;
 
 	/**
 	 * The name of the application to be attributed.

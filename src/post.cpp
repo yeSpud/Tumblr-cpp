@@ -2,10 +2,9 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <string>
 #include <vector>
-#include "image.hpp"
 #include "Content.hpp"
+#include "image.hpp"
 #include "post.hpp"
 
 struct post::Post {
@@ -93,7 +92,7 @@ struct post::Post {
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<image::Image> content;
+	// std::vector<image::Image> content; // FIXME
 
 	// const auto layout;
 
@@ -168,10 +167,10 @@ std::vector<post::Post> post::generatePosts(const char *json) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {
 								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
-									image::Image image;
+									image::Image *image;
 
-									if (!image.url.empty()) {
-										post.content.push_back(image);
+									if (!image->url.empty()) {
+										//post.content.push_back(image); // FIXME
 									}
 								}
 							}

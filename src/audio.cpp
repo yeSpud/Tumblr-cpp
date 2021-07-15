@@ -43,9 +43,9 @@ struct audio::Audio {
 	std::string album;
 
 	/**
-	 * An image to use as a "poster" for the audio track, usually album art.
+	 * An image pointer to use as a "poster" for the audio track, usually album art.
 	 */
-	image::Image poster;
+	image::Image *poster;
 
 	/**
 	 * HTML code that could be used to embed this audio track into a webpage.
@@ -61,7 +61,7 @@ struct audio::Audio {
 	// auto metadata;
 
 	/**
-	 * Attribution information about where the audio track came from.
+	 * Attribution pointer about where the audio track came from.
 	 */
-	attribution::Attribution attribution;
+	attribution::Attribution *attribution;
 };

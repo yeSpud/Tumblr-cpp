@@ -4,12 +4,12 @@
 
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch.hpp"
-#include "Content.hpp"
+#include "theme.hpp"
 
 TEST_CASE("Theme test", "[Content]") {
 
 	// Test empty theme
-	Content::Theme theme;
+	theme::Theme theme;
 	REQUIRE(theme.avatar_shape.empty());
 	REQUIRE(theme.background_color.empty());
 	REQUIRE(theme.body_font.empty());

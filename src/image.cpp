@@ -2,7 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <string>
 #include <vector>
 #include "media.hpp"
 #include "attribution.hpp"
@@ -43,7 +42,7 @@ struct image::Image {
 	/**
 	 * TODO Documentation
 	 */
-	attribution::Attribution attribution;
+	attribution::Attribution *attribution;
 
 	/**
 	 * TODO Documentation

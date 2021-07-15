@@ -34,7 +34,7 @@ struct blog::Blog {
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 	 */
-	std::vector<image::Image> avatar;
+	std::vector<image::Image*> avatar;
 
 	/**
 	 * TODO Documentation
@@ -136,8 +136,8 @@ blog::Blog blog::generateBlog(const char *json) {
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
 				for (const auto &avatarEntry : blogjson["avatar"].GetArray()) {
-					image::Image avatar = image::generateImage(avatarEntry);
-					if (!avatar.url.empty()) {
+					image::Image *avatar = *image::generateImage(avatarEntry);
+					if (!avatar->url.empty()) {
 						blog.avatar.push_back(avatar);
 					}
 				}

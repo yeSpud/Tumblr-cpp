@@ -2,7 +2,7 @@
 // Created by Spud on 7/13/21.
 //
 
-#include "../include/TumblrAPI.hpp"
+#include "TumblrAPI.hpp"
 
 cpr::Response
 TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) { // TODO Comments

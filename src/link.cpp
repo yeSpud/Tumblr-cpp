@@ -39,8 +39,8 @@ struct link::Link {
 	std::string display_url;
 
 	/**
-	 * An image object to use as a "poster" for the link.
+	 * An image pointer to use as a "poster" for the link.
 	 */
-	image::Image poster;
+	image::Image *poster;
 
 };

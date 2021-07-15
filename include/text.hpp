@@ -5,6 +5,7 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
+#include <string>
 #include "rapidjson/document.h"
 
 class text {
@@ -63,7 +64,31 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	struct Text;
+	struct Text {
+
+		/**
+		 * TODO Documentation
+		 */
+		std::string type;
+
+		/**
+		 * The text to use
+		 */
+		std::string text;
+
+		/**
+		 * The subtype of text block
+		 */
+		subtype subtype;
+
+		/**
+		 * TODO Documentation
+		 */
+		uint64_t indent_level;
+
+		// TODO
+		// auto formatting;
+	};
 
 	/**
 	 * TODO Documentation
@@ -71,7 +96,6 @@ public:
 	 * @return
 	 */
 	static Text generateText(const rapidjson::Value &entry);
-
 
 };
 

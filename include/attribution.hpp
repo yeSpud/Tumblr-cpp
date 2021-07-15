@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
+#include "rapidjson/document.h"
+
 class attribution {
 
 public:

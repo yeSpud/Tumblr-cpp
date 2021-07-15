@@ -3,6 +3,7 @@
 //
 
 #include <string>
+#include <vector>
 #include "image.hpp"
 #include "attribution.hpp"
 #include "video.hpp"
@@ -41,9 +42,9 @@ struct video::Video {
 	std::string embed_url;
 
 	/**
-	 * An image to use as a "poster" for the video, usually a single frame.
+	 * An image pointer to use as a "poster" for the video, usually a single frame.
 	 */
-	image::Image poster;
+	image::Image *poster;
 
 	// TODO
 	// auto metadata;
@@ -51,13 +52,13 @@ struct video::Video {
 	/**
 	 * TODO Documentation
 	 */
-	attribution::Attribution attribution;
+	attribution::Attribution *attribution;
 
 	/**
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	std::vector<image::Image> filmstrip;
+	std::vector<image::Image*> filmstrip;
 
 	/**
 	 * Whether this video can be played on a cellular connection.
