@@ -3,6 +3,8 @@
 //
 
 #include <string>
+#include "post.hpp"
+#include "blog.hpp"
 #include "attribution.hpp"
 
 struct attribution::Attribution {

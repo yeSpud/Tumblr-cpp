@@ -5,9 +5,6 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-#include "post.hpp"
-#include "blog.hpp"
-
 class attribution {
 
 public:

@@ -4,6 +4,7 @@
 
 #include <string>
 #include "attribution.hpp"
+#include "image.hpp"
 #include "audio.hpp"
 
 struct Audio {
