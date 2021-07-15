@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_VIDEO_HPP
 #define TUMBLRAPI_VIDEO_HPP
 
+class video {
+
 public:
 
 	/**
@@ -76,5 +78,7 @@ public:
 	 * @return
 	 */
 	static Video generateVideo(const rapidjson::Value &entry);
+
+};
 
 #endif //TUMBLRAPI_VIDEO_HPP

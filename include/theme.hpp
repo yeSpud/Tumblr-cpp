@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_THEME_HPP
 #define TUMBLRAPI_THEME_HPP
 
+class theme {
+
 public:
 
 	/**
@@ -108,5 +110,6 @@ public:
 	 */
 	static Theme generateTheme(const rapidjson::Value &entry);
 
+};
 
 #endif //TUMBLRAPI_THEME_HPP

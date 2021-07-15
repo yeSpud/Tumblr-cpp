@@ -2,8 +2,10 @@
 // Created by Spud on 7/14/21.
 //
 
-#ifndef TUMBLRAPI_MEDIAOBJECT_HPP
-#define TUMBLRAPI_MEDIAOBJECT_HPP
+#ifndef TUMBLRAPI_MEDIA_HPP
+#define TUMBLRAPI_MEDIA_HPP
+
+class media {
 
 public:
 
@@ -54,4 +56,6 @@ public:
 	// TODO Media generation
 
 
-#endif //TUMBLRAPI_MEDIAOBJECT_HPP
+};
+
+#endif //TUMBLRAPI_MEDIA_HPP

@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_LINK_HPP
 #define TUMBLRAPI_LINK_HPP
 
+class link {
+
 public:
 
 	/**
@@ -55,5 +57,8 @@ public:
 	 * @return
 	 */
 	static Link generateLink(const rapidjson::Value &entry);
+
+
+};
 
 #endif //TUMBLRAPI_LINK_HPP

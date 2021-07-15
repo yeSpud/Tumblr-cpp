@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
+class text {
+
 public:
 
 	/**
@@ -92,5 +94,7 @@ public:
 	 */
 	static Text generateText(const rapidjson::Value &entry);
 
+
+};
 
 #endif //TUMBLRAPI_TEXT_HPP

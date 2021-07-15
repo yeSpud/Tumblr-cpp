@@ -5,10 +5,13 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
+#include "media.hpp"
+#include "attribution.hpp"
+
 /**
  * TODO Documentation
  */
-class Image {
+class image {
 
 public:
 
@@ -31,7 +34,7 @@ public:
 		/**
 		 * TODO Documentation
 		 */
-		std::vector <MediaObject> media;
+		std::vector<media::MediaObject> media;
 
 		// TODO
 		// auto colors;
@@ -44,12 +47,12 @@ public:
 		/**
 		 * TODO Documentation
 		 */
-		Content::MediaObject poster;
+		media::MediaObject poster;
 
 		/**
 		 * TODO Documentation
 		 */
-		Content::Attribution attribution;
+		attribution::Attribution attribution;
 
 		/**
 		 * TODO Documentation
@@ -65,7 +68,7 @@ public:
 	 */
 	static Image generateImage(const rapidjson::Value &entry) { // TODO Comments & move to cpp class?
 
-		Content::Image image;
+		Image image;
 
 		if (entry.IsObject()) {
 			std::string media_key, media_type, url;
@@ -95,10 +98,14 @@ public:
 
 			image.media_key = media_key;
 			image.type = media_type;
+
+			// FIXME
+			/*
 			image.width = width;
 			image.height = height;
 			image.url = url;
 			image.has_original_dimensions = has_original_dimensions;
+			 */
 		}
 
 		return image;
