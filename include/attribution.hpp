@@ -27,7 +27,7 @@ public:
 	 * TODO Documentation
 	 * @param type
 	 */
-	 [[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
+	[[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
 	Attribution(const attributionType type) : type(type) {};
 
 	//struct Attribution;
@@ -43,9 +43,9 @@ public:
 	std::string url;
 
 	/**
-	 * A Post pointer with at least the id field.
+	 * A post object with at least the id field.
 	 */
-	post::Post *postObject;
+	Post postObject;
 
 	/**
 	 * A Blog pointer with at least the uuid field.
@@ -83,10 +83,10 @@ private:
 	 * @param post
 	 * @param blog
 	 */
-	Attribution(const attributionType type, std::string url, post::Post *post, Blog blog) : type(type),
-	                                                                                               url(std::move(url)),
-	                                                                                               postObject(post),
-	                                                                                               blogObject(std::move(blog)) {};
+	Attribution(const attributionType type, std::string url, Post post, Blog blog) : type(type), url(std::move(url)),
+	                                                                                 postObject(post),
+	                                                                                 blogObject(std::move(blog)) {};
+
 	/**
 	 * TODO Documentation
 	 * @param type
