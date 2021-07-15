@@ -84,6 +84,14 @@ public:
 	 */
 	subtype subtype;
 
+	/**
+	 * TODO Documentation
+	 */
+	uint64_t indent_level;
+
+	// TODO
+	// auto formatting;
+
 	 /*
 	struct Text {
 
