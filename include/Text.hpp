@@ -80,7 +80,7 @@ public:
 		 * TODO Documentation
 		 */
 		uint64_t indent_level;
-	
+
 		// TODO
 		// auto formatting;
 	};
