@@ -18,55 +18,6 @@ class Content {
 public:
 
 	/**
-	 * Text blocks can also have a subtype field that specifies a semantic meaning to the text block,
-	 * which can also be used by the clients to render the entire block of text differently.
-	 */
-	enum subtype {
-
-		/**
-		 * Intended for Post headings.
-		 */
-		heading1,
-
-		/**
-		 * Intended for section subheadings.
-		 */
-		heading2,
-
-		/**
-		 * Tumblr Official clients display this with a large cursive font.
-		 */
-		quirky,
-
-		/**
-		 * Intended for short quotations, official Tumblr clients display this with a large serif font.
-		 */
-		quote,
-
-		/**
-		 * Intended for longer quotations or photo captions, official Tumblr clients indent this text block.
-		 */
-		indented,
-
-		/**
-		 * Intended to mimic the behavior of the Chat Post type,
-		 * official Tumblr clients display this with a monospace font.
-		 */
-		chat,
-
-		/**
-		 * Intended to be an ordered list item prefixed by a number, see next section.
-		 */
-		ordered_list_item,
-
-		/**
-		 * Intended to be an unordered list item prefixed with a bullet, see next section.
-		 */
-		unordered_list_item
-
-	};
-
-	/**
 	 * TODO Documentation
 	 */
 	struct iFrameObject {
@@ -169,77 +120,6 @@ public:
 
 	/**
 	 * TODO Documentation
-	 */
-	struct Text {
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string type;
-
-		/**
-		 * The text to use
-		 */
-		std::string text;
-
-		/**
-		 * The subtype of text block
-		 */
-		Content::subtype subtype;
-
-		/**
-		 * TODO Documentation
-		 */
-		uint64_t indent_level;
-
-		// TODO
-		// auto formatting;
-	};
-
-	/**
-	 * TODO Documentation
-	 */
-	struct Link {
-
-		/**
-		 * The URL to use
-		 */
-		std::string url;
-
-		/**
-		 * The title of where the link goes.
-		 */
-		std::string title;
-
-		/**
-		 * The description of where the link goes.
-		 */
-		std::string description;
-
-		/**
-		 * The author of the link's content.
-		 */
-		std::string author;
-
-		/**
-		 * The name of the site being linked to.
-		 */
-		std::string site_name;
-
-		/**
-		 * TODO Documentation
-		 */
-		std::string display_url;
-
-		/**
-		 * An image object to use as a "poster" for the link.
-		 */
-		Content::Image poster;
-
-	};
-
-	/**
-	 * TODO Documentation
 	 * @param entry
 	 * @param value
 	 * @param buffer
@@ -273,20 +153,6 @@ public:
 	 * @return
 	 */
 	static Content::Theme generateTheme(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Content::Text generateText(const rapidjson::Value &entry);
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Content::Link generateLink(const rapidjson::Value &entry);
 
 };
 

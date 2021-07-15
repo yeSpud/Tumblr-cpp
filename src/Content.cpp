@@ -3,9 +3,6 @@
 //
 
 #include "Content.hpp"
-#include "TumblrAPI.hpp"
-
-
 
 // TODO Convert the bottom 3 into 1 with templating?
 bool Content::entryHasString(const rapidjson::Value &entry, const char *value, std::string &buffer) { // TODO Comments
