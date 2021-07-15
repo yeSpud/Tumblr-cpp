@@ -5,6 +5,7 @@
 #include <string>
 #include "post.hpp"
 #include "blog.hpp"
+#include "media.hpp"
 #include "attribution.hpp"
 
 struct attribution::Attribution {

@@ -6,9 +6,10 @@
 #include "rapidjson/document.h"
 #include "image.hpp"
 #include "theme.hpp"
+#include "Content.hpp"
 #include "blog.hpp"
 
-struct Blog {
+struct blog::Blog {
 
 	/**
 	 * Indicates whether the blog allows questions.

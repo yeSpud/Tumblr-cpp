@@ -7,7 +7,7 @@
 #include "image.hpp"
 #include "audio.hpp"
 
-struct Audio {
+struct audio::Audio {
 
 	/**
 	 * TODO Documentation
