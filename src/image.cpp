@@ -24,7 +24,7 @@ struct image::Image {
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<media::MediaObject> media;
+	std::vector<Media> media;
 
 	// TODO
 	// auto colors;
@@ -37,7 +37,7 @@ struct image::Image {
 	/**
 	 * TODO Documentation
 	 */
-	media::MediaObject poster;
+	Media poster;
 
 	/**
 	 * TODO Documentation

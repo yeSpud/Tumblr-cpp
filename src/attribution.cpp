@@ -2,7 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <string>
 #include "post.hpp"
 #include "blog.hpp"
 #include "media.hpp"
@@ -44,6 +43,6 @@ struct attribution::Attribution {
 	/**
 	 * A specific logo that the client should use with the third-party app attribution.
 	 */
-	media::MediaObject logo;
+	Media logo;
 
 };

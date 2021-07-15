@@ -4,4 +4,7 @@
 
 #include "media.hpp"
 
-// TODO Media generation
+Media Media::generateMedia(const rapidjson::Value &entry) {
+	// TODO
+	return Media("", "", 0, 0);
+}

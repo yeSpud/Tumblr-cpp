@@ -9,6 +9,9 @@
 #include <utility>
 #include "rapidjson/document.h"
 
+/**
+ * TODO Documentation
+ */
 class Text {
 
 private:
