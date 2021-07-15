@@ -2,7 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "NPF.hpp"
+#include "npf.hpp"
 #include "blog.hpp"
 
 /*

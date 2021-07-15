@@ -6,7 +6,7 @@
 #define TUMBLRAPI_CONTENT_HPP
 
 #include <string>
-#include "NPF.hpp"
+#include "npf.hpp"
 
 /**
  * TODO Documentation
