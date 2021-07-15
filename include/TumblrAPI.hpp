@@ -7,8 +7,6 @@
 
 #include "cpr/cpr.h"
 
-class Content;
-
 /**
  * TODO Documentation
  */

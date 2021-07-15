@@ -12,14 +12,33 @@ class NPF {
 public:
 
 	/**
-	 * TODO Documentation
-	 * @tparam C
+	 * TODO Document
+	 * @tparam T
 	 * @param entry
 	 * @return
 	 */
-	template<class C>
-	static virtual C generateNPF(const rapidjson::Value &entry);
+	template<typename T>
+	virtual T generateNPF(const rapidjson::Value &entry);
 
 };
+
+/**
+ * TODO Documentation & comments
+ * @tparam T
+ * @param json
+ * @param value
+ * @param buffer
+ * @return
+ */
+template<typename T>
+static bool entryHasValue(const rapidjson::Value &json, const char *value, T &buffer) {
+	if (json.HasMember(value)) {
+		buffer = json[value].Get<T>();
+		//entry[value].GetString()
+		return true;
+	} else {
+		return false;
+	}
+}
 
 #endif //TUMBLRAPI_NPF_HPP

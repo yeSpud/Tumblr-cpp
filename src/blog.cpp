@@ -2,7 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "Content.hpp"
+#include "NPF.hpp"
 #include "blog.hpp"
 
 /*
@@ -81,10 +81,10 @@ Blog Blog::generateBlog(const char *json) {
 
 			auto blogjson = response["blog"].GetObj();
 
-			Content::entryHasBool(blogjson, "ask", blog.ask);
-			Content::entryHasBool(blogjson, "ask_anon", blog.ask_anon);
-			Content::entryHasString(blogjson, "ask_page_title", blog.ask_page_title);
-			Content::entryHasBool(blogjson, "asks_allow_media", blog.asks_allow_media);
+			entryHasValue(blogjson, "ask", blog.ask);
+			entryHasValue(blogjson, "ask_anon", blog.ask_anon);
+			entryHasValue(blogjson, "ask_page_title", blog.ask_page_title);
+			entryHasValue(blogjson, "asks_allow_media", blog.asks_allow_media);
 
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
@@ -96,21 +96,21 @@ Blog Blog::generateBlog(const char *json) {
 				}
 			}
 
-			Content::entryHasBool(blogjson, "can_chat", blog.can_chat);
-			Content::entryHasBool(blogjson, "can_subscribe", blog.can_subscribe);
-			Content::entryHasString(blogjson, "description", blog.description);
-			Content::entryHasBool(blogjson, "is_nsfw", blog.is_nsfw);
-			Content::entryHasString(blogjson, "name", blog.name);
-			Content::entryHasNumber(blogjson, "posts", blog.posts);
-			Content::entryHasBool(blogjson, "shared_likes", blog.shared_likes);
-			Content::entryHasBool(blogjson, "subscribed", blog.subscribed);
+			entryHasValue(blogjson, "can_chat", blog.can_chat);
+			entryHasValue(blogjson, "can_subscribe", blog.can_subscribe);
+			entryHasValue(blogjson, "description", blog.description);
+			entryHasValue(blogjson, "is_nsfw", blog.is_nsfw);
+			entryHasValue(blogjson, "name", blog.name);
+			entryHasValue(blogjson, "posts", blog.posts);
+			entryHasValue(blogjson, "shared_likes", blog.shared_likes);
+			entryHasValue(blogjson, "subscribed", blog.subscribed);
 
-			Content::entryHasString(blogjson, "title", blog.title);
-			Content::entryHasNumber(blogjson, "total_posts", blog.total_posts);
-			Content::entryHasNumber(blogjson, "updated", blog.updated);
-			Content::entryHasString(blogjson, "url", blog.url);
-			Content::entryHasString(blogjson, "uuid", blog.uuid);
-			Content::entryHasBool(blogjson, "is_optout_ads", blog.is_optout_ads);
+			entryHasValue(blogjson, "title", blog.title);
+			entryHasValue(blogjson, "total_posts", blog.total_posts);
+			entryHasValue(blogjson, "updated", blog.updated);
+			entryHasValue(blogjson, "url", blog.url);
+			entryHasValue(blogjson, "uuid", blog.uuid);
+			entryHasValue(blogjson, "is_optout_ads", blog.is_optout_ads);
 		}
 	}
 
