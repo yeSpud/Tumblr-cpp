@@ -5,16 +5,48 @@
 #ifndef TUMBLRAPI_LINK_HPP
 #define TUMBLRAPI_LINK_HPP
 
-#include "rapidjson/document.h"
+#include "image.hpp"
 
-class link {
+class Link {
 
 public:
+
+	// struct Link;
+
+	/**
+	 * The URL to use
+	 */
+	std::string url;
+
+	/**
+	 * The title of where the link goes.
+	 */
+	std::string title;
+
+	/**
+	 * The description of where the link goes.
+	 */
+	std::string description;
+
+	/**
+	 * The author of the link's content.
+	 */
+	std::string author;
+
+	/**
+	 * The name of the site being linked to.
+	 */
+	std::string site_name;
 
 	/**
 	 * TODO Documentation
 	 */
-	struct Link;
+	std::string display_url;
+
+	/**
+	 * An image to use as a "poster" for the link.
+	 */
+	Image poster;
 
 	/**
 	 * TODO Documentation
@@ -22,7 +54,6 @@ public:
 	 * @return
 	 */
 	static Link generateLink(const rapidjson::Value &entry);
-
 
 };
 
