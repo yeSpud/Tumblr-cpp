@@ -116,8 +116,6 @@ public:
 	 */
 	bool is_optout_ads;
 
-	//struct Blog;
-
 	/**
 	 * TODO Documentation
 	 * @param json

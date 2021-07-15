@@ -94,29 +94,6 @@ public:
 	// TODO
 	// auto formatting;
 
-	 /*
-	struct Text {
-
-
-		std::string type;
-
-		**
-		 * The text to use
-		 *
-		std::string text;
-
-		**
-		 * The subtype of text block
-		 *
-		subtype subtype;
-
-		uint64_t indent_level;
-
-		// TODO
-		// auto formatting;
-	};
-	*/
-
 	/**
 	 * TODO Documentation
 	 * @param entry

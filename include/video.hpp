@@ -20,13 +20,6 @@ private:
 
 public:
 
-	//struct Video;
-
-	/*
-	 * TODO Documentation
-	 */
-	//std::string type;
-
 	/**
 	 * The URL to use for the video content, if no media is present.
 	 */

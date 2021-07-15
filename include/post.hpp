@@ -14,8 +14,6 @@ class Post {
 
 public:
 
-	//struct Post;
-
 	/**
 	 * TODO Documentation
 	 */

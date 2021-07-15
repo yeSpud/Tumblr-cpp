@@ -29,13 +29,6 @@ private:
 
 public:
 
-	//struct Audio;
-
-	/*
-	 * TODO Documentation
-	 */
-	//std::string type;
-
 	/**
 	 * The URL to use for the audio content, if no media is present.
 	 */

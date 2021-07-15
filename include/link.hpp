@@ -22,8 +22,6 @@ private:
 
 public:
 
-	// struct Link;
-
 	/**
 	 * The URL to use
 	 */

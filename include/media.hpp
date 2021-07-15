@@ -14,8 +14,6 @@
  */
 class Media: Content {
 
-	//using Content::Content;
-
 private:
 
 	/**
@@ -39,17 +37,10 @@ public:
 	[[deprecated("Please use the `generateMedia` method instead - this is here as a placeholder")]]
 	Media(): Content("empty media - someone used the deprecated method..."){};
 
-	//struct MediaObject {
-
 	/**
 	 * The canonical URL of the media asset.
 	 */
 	const std::string url;
-
-	/*
-	 * The MIME type of the media asset, or a best approximation will be made based on the given URL.
-	 */
-	//const std::string type;
 
 	/**
 	 * The width of the media asset, if that makes sense (for images and videos, but not for audio).
@@ -75,8 +66,6 @@ public:
 	 * This indicates whether this media object has the same dimensions as the original media.
 	 */
 	bool has_original_dimensions;
-
-	//};
 
 	/**
 	 * TODO Documentation

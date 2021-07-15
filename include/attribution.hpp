@@ -28,7 +28,6 @@ public:
 	[[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
 	Attribution(const attributionType type) : type(type) {};
 
-	//struct Attribution;
 	/**
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".

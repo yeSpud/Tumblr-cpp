@@ -23,11 +23,6 @@ private:
 
 public:
 
-	/*
-	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
-	 */
-	//std::string type;
-
 	/**
 	 * TODO Documentation
 	 * Undocumented?
@@ -61,8 +56,6 @@ public:
 	 * TODO Documentation
 	 */
 	std::string alt_text;
-
-	//struct Image;
 
 	/**
 	 * TODO Documentation

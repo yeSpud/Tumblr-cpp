@@ -16,8 +16,6 @@ class Theme {
 
 public:
 
-	//struct Theme {
-
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
 	 */
@@ -105,8 +103,6 @@ public:
 	 * The intended font weight to use when displaying the blog's title.
 	 */
 	std::string title_font_weight;
-
-	//};
 
 	/**
 	 * TODO Documentation

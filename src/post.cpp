@@ -5,64 +5,7 @@
 #include "npf.hpp"
 #include "post.hpp"
 
-/*
-struct post::Post {
-
-	std::string type;
-
-	std::string original_type;
-
-	std::string blog_name;
-
-	// TODO
-	// const auto blog;
-
-	uint64_t id = 0;
-
-	std::string id_string;
-
-	std::string post_url;
-
-	std::string slug;
-
-	std::string date;
-
-	uint64_t timestamp = 0;
-
-	std::string state;
-
-	std::string reblog_key;
-
-	// const auto tags;
-
-	std::string short_url;
-
-	std::string summary;
-
-	bool should_open_in_legacy;
-
-	uint64_t note_count = 0;
-
-	// std::vector<image::Image> content;
-
-	// const auto layout;
-
-	// const auto trail;
-
-	bool can_like;
-
-	bool can_reblog;
-
-	bool can_send_in_message;
-
-	bool can_reply;
-
-	bool display_avatar;
-
-};
-*/
-
-std::vector<Post> Post::generatePosts(const char *json) {
+std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 	std::vector<Post> posts;
 	rapidjson::Document document;
 
