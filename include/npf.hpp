@@ -17,8 +17,8 @@ public:
 	 * @param entry
 	 * @return
 	 */
-	template<typename T>
-	virtual T generateNPF(const rapidjson::Value &entry);
+	//template<typename T>
+	//virtual T generateNPF(const rapidjson::Value &entry) const = 0;
 
 };
 
@@ -34,7 +34,6 @@ template<typename T>
 static bool entryHasValue(const rapidjson::Value &json, const char *value, T &buffer) {
 	if (json.HasMember(value)) {
 		buffer = json[value].Get<T>();
-		//entry[value].GetString()
 		return true;
 	} else {
 		return false;

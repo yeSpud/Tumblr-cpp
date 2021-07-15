@@ -5,16 +5,16 @@
 #ifndef TUMBLRAPI_MEDIA_HPP
 #define TUMBLRAPI_MEDIA_HPP
 
-#include <string>
-#include <utility>
-#include "rapidjson/document.h"
+#include "content.hpp"
 
 /**
  * Media objects are used for image blocks, all kinds of posters (GIF, video, etc), native audio, native video,
  * and some trusted third-party content. All media objects returned from the API should contain type and url,
  * and any video and image media objects should always contain a width and height.
  */
-class Media {
+class Media: Content {
+
+	//using Content::Content;
 
 private:
 
@@ -23,7 +23,7 @@ private:
 	 * @param type
 	 * @param url
 	 */
-	Media(std::string type, std::string url): type(std::move(type)), url(std::move(url)){};
+	Media(std::string type, std::string url): Content(std::move(type)), url(std::move(url)){};
 
 	/**
 	 * TODO Documentation
@@ -32,12 +32,12 @@ private:
 	 * @param width
 	 * @param height
 	 */
-	Media(std::string type, std::string url, int width, int height): type(std::move(type)), url(std::move(url)), width(width), height(height){};
+	Media(std::string type, std::string url, int width, int height): Content(std::move(type)), url(std::move(url)), width(width), height(height){};
 
 public:
 
 	[[deprecated("Please use the `generateMedia` method instead - this is here as a placeholder")]]
-	Media(){};
+	Media(): Content("empty media - someone used the deprecated method..."){};
 
 	//struct MediaObject {
 
@@ -46,10 +46,10 @@ public:
 	 */
 	const std::string url;
 
-	/**
+	/*
 	 * The MIME type of the media asset, or a best approximation will be made based on the given URL.
 	 */
-	const std::string type;
+	//const std::string type;
 
 	/**
 	 * The width of the media asset, if that makes sense (for images and videos, but not for audio).

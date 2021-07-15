@@ -5,10 +5,12 @@
 #ifndef TUMBLRAPI_IFRAME_HPP
 #define TUMBLRAPI_IFRAME_HPP
 
+#include "content.hpp"
+
 /**
  * TODO Documentation
  */
-class iFrame {
+class iFrame: Content {
 
 private:
 

@@ -5,13 +5,13 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
-#include <vector>
-#include "attribution.hpp"
+#include "content.hpp"
+#include "media.hpp"
 
 /**
  * TODO Documentation
  */
-class Image {
+class Image: Content {
 
 private:
 
@@ -19,14 +19,14 @@ private:
 	 * TODO Documentation
 	 * @param media
 	 */
-	Image(Media media): type("image"), media(media){};
+	Image(Media media): Content("image"), media(media){};
 
 public:
 
-	/**
+	/*
 	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
 	 */
-	std::string type;
+	//std::string type;
 
 	/**
 	 * TODO Documentation

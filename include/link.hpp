@@ -5,12 +5,12 @@
 #ifndef TUMBLRAPI_LINK_HPP
 #define TUMBLRAPI_LINK_HPP
 
-#include "image.hpp"
+#include "content.hpp"
 
 /**
  * TODO Documentation
  */
-class Link {
+class Link:Content {
 
 private:
 

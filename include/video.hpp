@@ -5,12 +5,12 @@
 #ifndef TUMBLRAPI_VIDEO_HPP
 #define TUMBLRAPI_VIDEO_HPP
 
-#include "image.hpp"
+#include "content.hpp"
 
 /**
  * TODO Documentation
  */
-class Video {
+class Video: Content {
 
 private:
 
@@ -22,10 +22,10 @@ public:
 
 	//struct Video;
 
-	/**
+	/*
 	 * TODO Documentation
 	 */
-	std::string type;
+	//std::string type;
 
 	/**
 	 * The URL to use for the video content, if no media is present.

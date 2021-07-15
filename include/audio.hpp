@@ -5,12 +5,13 @@
 #ifndef TUMBLRAPI_AUDIO_HPP
 #define TUMBLRAPI_AUDIO_HPP
 
-#include "attribution.hpp"
+#include "content.hpp"
+#include "media.hpp"
 
 /**
  * TODO Documentation
  */
-class Audio {
+class Audio: Content {
 
 private:
 
@@ -30,10 +31,10 @@ public:
 
 	//struct Audio;
 
-	/**
+	/*
 	 * TODO Documentation
 	 */
-	std::string type;
+	//std::string type;
 
 	/**
 	 * The URL to use for the audio content, if no media is present.

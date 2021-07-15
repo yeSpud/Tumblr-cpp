@@ -5,14 +5,12 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
-#include <string>
-#include <utility>
-#include "rapidjson/document.h"
+#include "content.hpp"
 
 /**
  * TODO Documentation
  */
-class Text {
+class Text: Content {
 
 private:
 

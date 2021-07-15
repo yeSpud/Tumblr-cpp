@@ -5,14 +5,12 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-#include "media.hpp"
-#include "blog.hpp"
-#include "post.hpp"
+#include "npf.hpp"
 
 /**
  * TODO Documentation
  */
-class Attribution {
+class Attribution: NPF {
 
 public:
 
