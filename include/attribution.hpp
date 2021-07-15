@@ -49,7 +49,7 @@ public:
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	blog::Blog *blogObject;
+	Blog blogObject;
 
 	/**
 	 * The name of the application to be attributed.
@@ -82,10 +82,10 @@ private:
 	 * @param post
 	 * @param blog
 	 */
-	Attribution(const attributionType type, std::string url, post::Post *post, blog::Blog *blog) : type(type),
+	Attribution(const attributionType type, std::string url, post::Post *post, Blog blog) : type(type),
 	                                                                                               url(std::move(url)),
 	                                                                                               postObject(post),
-	                                                                                               blogObject(blog) {};
+	                                                                                               blogObject(std::move(blog)) {};
 	/**
 	 * TODO Documentation
 	 * @param type
@@ -98,7 +98,7 @@ private:
 	 * @param type
 	 * @param blog
 	 */
-	Attribution(const attributionType type, blog::Blog *blog) : type(type), blogObject(blog) {};
+	Attribution(const attributionType type, Blog blog) : type(type), blogObject(std::move(blog)) {};
 
 	/**
 	 * TODO Documentation

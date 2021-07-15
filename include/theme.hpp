@@ -14,10 +14,6 @@
 */
 class Theme {
 
-private:
-
-	explicit Theme()= default;;
-
 public:
 
 	/*
