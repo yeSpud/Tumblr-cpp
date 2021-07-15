@@ -20,13 +20,6 @@ public:
 
 	/**
 	 * TODO Documentation
-	 */
-	struct iFrameObject {
-		// TODO
-	};
-
-	/**
-	 * TODO Documentation
 	 * @param entry
 	 * @param value
 	 * @param buffer
@@ -51,8 +44,6 @@ public:
 	 * @return
 	 */
 	static bool entryHasBool(const rapidjson::Value &entry, const char *value, bool &buffer);
-
-	// TODO iFrame generation
 
 };
 
