@@ -42,7 +42,7 @@ struct image::Image {
 	/**
 	 * TODO Documentation
 	 */
-	attribution::Attribution *attribution;
+	Attribution attribution;
 
 	/**
 	 * TODO Documentation

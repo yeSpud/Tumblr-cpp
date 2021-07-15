@@ -18,11 +18,26 @@ class Media {
 
 private:
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param url
+	 */
 	Media(std::string type, std::string url): type(std::move(type)), url(std::move(url)){};
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 * @param url
+	 * @param width
+	 * @param height
+	 */
 	Media(std::string type, std::string url, int width, int height): type(std::move(type)), url(std::move(url)), width(width), height(height){};
 
 public:
+
+	[[deprecated("Please use the `generateMedia` method instead - this is here as a placeholder")]]
+	Media(){};
 
 	/*
 	**

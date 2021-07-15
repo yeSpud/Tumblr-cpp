@@ -2,7 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <string>
 #include "attribution.hpp"
 #include "image.hpp"
 #include "audio.hpp"
@@ -61,7 +60,7 @@ struct audio::Audio {
 	// auto metadata;
 
 	/**
-	 * Attribution pointer about where the audio track came from.
+	 * Attribution about where the audio track came from.
 	 */
-	attribution::Attribution *attribution;
+	Attribution attribution;
 };

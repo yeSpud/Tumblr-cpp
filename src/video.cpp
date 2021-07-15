@@ -2,7 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <string>
 #include <vector>
 #include "image.hpp"
 #include "attribution.hpp"
@@ -52,7 +51,7 @@ struct video::Video {
 	/**
 	 * TODO Documentation
 	 */
-	attribution::Attribution *attribution;
+	Attribution attribution;
 
 	/**
 	 * TODO Documentation

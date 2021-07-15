@@ -5,9 +5,14 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-#include "rapidjson/document.h"
+#include "post.hpp"
+#include "blog.hpp"
+#include "media.hpp"
 
-class attribution {
+/**
+ * TODO Documentation
+ */
+class Attribution {
 
 public:
 
@@ -18,10 +23,42 @@ public:
 		link, blog, post, app
 	};
 
+	//struct Attribution;
 	/**
-	 * TODO Documentation
+	 * The type of the attribution.
+	 * Current valid values are "link", "blog", "post", or "app".
 	 */
-	struct Attribution;
+	const attributionType type;
+
+	/**
+	 * The URL to be attributed.
+	 */
+	std::string url;
+
+	/**
+	 * A Post pointer with at least the id field.
+	 */
+	post::Post *postObject;
+
+	/**
+	 * A Blog pointer with at least the uuid field.
+	 */
+	blog::Blog *blogObject;
+
+	/**
+	 * The name of the application to be attributed.
+	 */
+	std::string app_name;
+
+	/**
+	 * Any display text that the client should use with the attribution.
+	 */
+	std::string display_text;
+
+	/**
+	 * A specific logo that the client should use with the third-party app attribution.
+	 */
+	Media logo = Media();
 
 	/**
 	 * TODO Documentation
@@ -29,6 +66,24 @@ public:
 	 * @return
 	 */
 	static Attribution generateAttribution(const rapidjson::Value &entry);
+
+private:
+
+	Attribution(const attributionType type) : type(type) {};
+
+	Attribution(const attributionType type, std::string url, post::Post *post, blog::Blog *blog) : type(type),
+	                                                                                               url(std::move(url)),
+	                                                                                               postObject(post),
+	                                                                                               blogObject(blog) {};
+
+	Attribution(const attributionType type, std::string url) : type(type), url(std::move(url)) {};
+
+	Attribution(const attributionType type, blog::Blog *blog) : type(type), blogObject(blog) {};
+
+	Attribution(const attributionType type, std::string url, std::string app_name = "", std::string display_text = "",
+	            Media logo = Media()) : type(type), url(std::move(url)), app_name(std::move(app_name)),
+	                                    display_text(std::move(display_text)),
+	                                    logo(std::move(logo)) {};
 
 };
 
