@@ -28,17 +28,10 @@ public:
 	};
 
 	/**
-	 * TODO Documentation
-	 * @param type
-	 */
-	[[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
-	explicit Attribution(const attributionType type) : type(type) {};
-
-	/**
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */
-	const attributionType type;
+	attributionType type;
 
 	/**
 	 * The URL to be attributed.
@@ -68,53 +61,13 @@ public:
 	/**
 	 * A specific logo that the client should use with the third-party app attribution.
 	 */
-	Media logo = Media();
+	Media logo; // TODO Convert to image?
 
 	/**
 	 * TODO Documentation
 	 * @param entry
 	 */
 	void populateNPF(JSONOBJECT entry) override;
-
-private:
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param url
-	 * @param post
-	 * @param blog
-	 */
-	Attribution(const attributionType type, std::string url, Post *post, Blog *blog) : type(type), url(std::move(url)),
-	                                                                                 postObject(std::move(post)),
-	                                                                                 blogObject(std::move(blog)) {};
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param url
-	 */
-	Attribution(const attributionType type, std::string url) : type(type), url(std::move(url)) {};
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param blog
-	 */
-	Attribution(const attributionType type, Blog* blog) : type(type), blogObject(std::move(blog)) {};
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param url
-	 * @param app_name
-	 * @param display_text
-	 * @param logo
-	 */
-	Attribution(const attributionType type, std::string url, std::string app_name = "", std::string display_text = "",
-	            Media logo = Media()) : type(type), url(std::move(url)), app_name(std::move(app_name)),
-	                                    display_text(std::move(display_text)),
-	                                    logo(std::move(logo)) {};
 
 };
 

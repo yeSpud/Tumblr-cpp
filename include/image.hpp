@@ -58,6 +58,11 @@ public:
 	 */
 	std::string alt_text;
 
+	~Image() {
+		delete attribution;
+		attribution = NULL;
+	};
+
 	/**
 	 * TODO Documentation
 	 * @param entry

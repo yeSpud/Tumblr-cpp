@@ -45,5 +45,4 @@ void Link::populateNPF(JSONOBJECT entry) { // TODO Comments
 			poster = getPoster(entry["poster"].GetObj());
 		}
 	}
-
 }

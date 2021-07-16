@@ -61,7 +61,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution attribution = Attribution(Attribution::attributionType::post); // Default to post.
+	Attribution attribution;
 
 	/**
 	 * TODO Documentation

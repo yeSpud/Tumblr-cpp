@@ -22,7 +22,7 @@ void Image::populateNPF(JSONOBJECT entry) { // TODO Comments
 	// Iterate to get media.
 	if (entry.HasMember("media")) {
 		if (entry["media"].IsArray()) {
-			for (auto& mediaEntry : entry["media"].GetArray()) {
+			for (auto &mediaEntry : entry["media"].GetArray()) {
 				if (mediaEntry.IsObject()) {
 					Media mediaArray = getMediaFromObject(mediaEntry);
 					media.push_back(mediaArray);
@@ -45,7 +45,15 @@ void Image::populateNPF(JSONOBJECT entry) { // TODO Comments
 		}
 	}
 
-	// TODO Attribution.
+	// Get attribution.
+	if (entry.HasMember("attribution")) {
+		if (entry["attribution"].IsObject()) {
+			Attribution attr;
+			attr.populateNPF(entry["attribution"].GetObj());
+			attribution = new Attribution;
+			*attribution = attr;
+		}
+	}
 
 	objectHasValue(entry, "alt_text", alt_text);
 

@@ -42,7 +42,7 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					objectHasValue(postjson, "should_open_in_legacy", post.should_open_in_legacy);
 					objectHasValue(postjson, "note_count", post.note_count);
 
-					// Image
+					// Media
 					if (postjson.HasMember("content")) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {

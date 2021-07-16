@@ -85,7 +85,7 @@ public:
 	/**
 	 * Attribution about where the audio track came from.
 	 */
-	Attribution attribution = Attribution(Attribution::post);
+	Attribution attribution;
 
 	/**
 	 * TODO Documentation
