@@ -21,6 +21,9 @@ public:
 	 */
 	explicit Content(std::string type): type(std::move(type)) {};
 
+	/**
+	 * TODO Documentation
+	 */
 	const std::string type;
 
 };

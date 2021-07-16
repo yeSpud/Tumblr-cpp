@@ -10,7 +10,11 @@
 #include "attribution.hpp" // Circular dependency with image.hpp
 
 /**
- * TODO Documentation
+ * An audio block represents a playable track. At a minimum, the provider field must be present,
+ * and either the media field or url field must be present.
+ * The provider field will indicate which embed provider is being used,
+ * whether it's tumblr for Tumblr native audio content, or a trusted third party like spotify or bandcamp.
+ * Optionally, an audio block may include the track's title, artist, and/or album.
  */
 class Audio : Content {
 
@@ -18,15 +22,15 @@ private:
 
 	/**
 	 * TODO Documentation
-	 * @param url
+	 * @param url The URL to use for the video block, as there is no media present.
 	 */
-	Audio(std::string url) : Content("audio"), url(std::move(url)) {};
+	explicit Audio(std::string url) : Content("audio"), url(std::move(url)) {};
 
 	/**
 	 * TODO Documentation
-	 * @param media
+	 * @param media The Media object to use for the video block, as there is no url present.
 	 */
-	Audio(Media media) : Content("audio"), media(std::move(media)) {};
+	explicit Audio(Media media) : Content("audio"), media(std::move(media)) {};
 
 public:
 
@@ -36,7 +40,7 @@ public:
 	std::string url;
 
 	/**
-	 * TODO Documentation
+	 * The Media object to use for the audio content, if no url is present.
 	 */
 	Media media;
 
