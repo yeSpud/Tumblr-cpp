@@ -2,7 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "npf.hpp"
 #include "blog.hpp"
 
 Blog Blog::generateBlog(const char *json) {
@@ -28,9 +27,9 @@ Blog Blog::generateBlog(const char *json) {
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
 				for (const auto &avatarEntry : blogjson["avatar"].GetArray()) {
-					Image avatar = Image::generateImage(avatarEntry);
+					Image avatar = (Image::generateImage(avatarEntry));
 					if (!avatar.media[0].url.empty()) { // TODO Move me to media function
-						blog.avatar.push_back(avatar);
+						blog.avatar.push_back(&avatar);
 					}
 				}
 			}

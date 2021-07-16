@@ -35,6 +35,9 @@ private:
 
 public:
 
+	[[deprecated("Please use the `generateImage` method when possible - this is here as a placeholder / for debugging")]]
+	Image() :Content("Image"){};
+
 	/**
 	 * TODO Documentation
 	 * Undocumented?

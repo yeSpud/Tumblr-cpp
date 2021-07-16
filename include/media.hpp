@@ -34,7 +34,7 @@ private:
 
 public:
 
-	[[deprecated("Please use the `generateMedia` method instead - this is here as a placeholder")]]
+	[[deprecated("Please use the `generateMedia` method when possible - this is here as a placeholder / for debugging")]]
 	Media(): Content("empty media - someone used the deprecated method..."){};
 
 	/**

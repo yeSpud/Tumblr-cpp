@@ -12,7 +12,7 @@
 /**
  * TODO Documentation
  */
-class Audio: Content {
+class Audio : Content {
 
 private:
 
@@ -20,13 +20,13 @@ private:
 	 * TODO Documentation
 	 * @param url
 	 */
-	Audio(std::string url): Content("audio"),url(std::move(url)){};
+	Audio(std::string url) : Content("audio"), url(std::move(url)) {};
 
 	/**
 	 * TODO Documentation
 	 * @param media
 	 */
-	Audio(Media media): Content("audio"),media(std::move(media)){};
+	Audio(Media media) : Content("audio"), media(std::move(media)) {};
 
 public:
 
