@@ -9,7 +9,9 @@
 
 // This is where we run into circular dependencies issues. Especially with image.hpp, post.hpp, and blog.hpp.
 // Forward declaration to prevent major errors with image.hpp. Image is actually initialized in image.hpp and image.cpp.
-class Image;
+class Image; // Actual class is located in image.hpp.
+class Blog; // Actual class is located in blog.hpp.
+class Post; // Actual class is located in post.hpp.
 
 /**
  * TODO Documentation
@@ -44,9 +46,9 @@ public:
 	std::string url;
 
 	/**
-	 * A post object with at least the id field.
+	 * A post pointer with at least the id field.
 	 */
-	Post postObject;
+	Post* postObject; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * A Blog pointer with at least the uuid field.
@@ -84,7 +86,7 @@ private:
 	 * @param post
 	 * @param blog
 	 */
-	Attribution(const attributionType type, std::string url, Post post, Blog *blog) : type(type), url(std::move(url)),
+	Attribution(const attributionType type, std::string url, Post *post, Blog *blog) : type(type), url(std::move(url)),
 	                                                                                 postObject(std::move(post)),
 	                                                                                 blogObject(std::move(blog)) {};
 
