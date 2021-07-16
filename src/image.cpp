@@ -2,58 +2,12 @@
 // Created by Spud on 7/14/21.
 //
 
-#include <vector>
-#include "media.hpp"
-#include "attribution.hpp"
-#include "Content.hpp"
 #include "image.hpp"
 
-struct image::Image {
+Image Image::generateImage(const rapidjson::Value &entry) { // TODO Comments
 
-	/**
-	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
-	 */
-	std::string type;
-
-	/**
-	 * TODO Documentation
-	 * Undocumented?
-	 */
-	std::string media_key;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::vector<media::MediaObject> media;
-
-	// TODO
-	// auto colors;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::string feedback_token;
-
-	/**
-	 * TODO Documentation
-	 */
-	media::MediaObject poster;
-
-	/**
-	 * TODO Documentation
-	 */
-	attribution::Attribution *attribution;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::string alt_text;
-
-};
-
-image::Image image::generateImage(const rapidjson::Value &entry) { // TODO Comments
-
-	image::Image image;
+	/* FIXME
+	Image image;
 
 	if (entry.IsObject()) {
 		std::string media_key, media_type, url;
@@ -90,8 +44,9 @@ image::Image image::generateImage(const rapidjson::Value &entry) { // TODO Comme
 		image.height = height;
 		image.url = url;
 		image.has_original_dimensions = has_original_dimensions;
-		 */
+
 	}
 
 	return image;
+	 */
 }

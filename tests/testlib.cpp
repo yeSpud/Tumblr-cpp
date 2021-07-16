@@ -9,7 +9,7 @@
 TEST_CASE("Theme test", "[Content]") {
 
 	// Test empty theme
-	theme::Theme theme;
+	Theme theme;
 	REQUIRE(theme.avatar_shape.empty());
 	REQUIRE(theme.background_color.empty());
 	REQUIRE(theme.body_font.empty());
