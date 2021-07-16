@@ -4,7 +4,4 @@
 
 #include "attribution.hpp"
 
-Attribution Attribution::generateAttribution(const rapidjson::Value &entry) {
-	// TODO
-}
-
+// TODO

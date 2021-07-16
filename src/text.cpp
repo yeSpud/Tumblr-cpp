@@ -4,7 +4,4 @@
 
 #include "text.hpp"
 
-Text Text::generateText(const rapidjson::Value &entry) {
-	// TODO
-	return Text("This needs to be fixed - dammit spud");
-}
+// TODO

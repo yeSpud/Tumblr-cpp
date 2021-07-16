@@ -11,9 +11,13 @@
 /**
  * TODO Documentation
  */
-class Content: public NPF {
+class Content : public NPF {
 
 public:
+
+	Content() = default;;
+
+	explicit Content(std::string type) : type(std::move(type)) {};
 
 	/**
 	 * TODO Documentation

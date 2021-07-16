@@ -13,11 +13,11 @@ Blog Blog::generateBlog(const char *json) {
 	document.Parse(json);
 
 	if (document.HasMember("response")) {
-		rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> response = document["response"].GetObj();
+		JSONOBJECT response = document["response"].GetObj();
 
 		if (response.HasMember("blog")) {
 
-			rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> blogjson = response["blog"].GetObj();
+			JSONOBJECT blogjson = response["blog"].GetObj();
 
 			objectHasValue(blogjson, "ask", blog.ask);
 			objectHasValue(blogjson, "ask_anon", blog.ask_anon);
@@ -26,16 +26,13 @@ Blog Blog::generateBlog(const char *json) {
 
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
-
 				if (blogjson["avatar"].IsArray()) {
 					for (auto& avatarEntry : blogjson["avatar"].GetArray()) {
-
-						/* FIXME
-						Image avatar = Image::generateImage(avatarEntry);
-						if (!avatar.media[0].url.empty()) {
+						if (avatarEntry.IsObject()) {
+							Image avatar;
+							avatar.populateNPF(avatarEntry);
 							blog.avatar.push_back(&avatar);
 						}
-						 */
 					}
 				}
 			}

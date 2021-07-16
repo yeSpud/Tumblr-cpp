@@ -4,8 +4,4 @@
 
 #include "link.hpp"
 
-Link Link::generateLink(const rapidjson::Value &entry) {
-
-	// TODO
-
-}
+// TODO

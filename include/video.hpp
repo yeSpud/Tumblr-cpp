@@ -77,9 +77,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Video generateVideo(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 

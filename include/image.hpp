@@ -22,7 +22,7 @@ class Image : public Content {
 
 public:
 
-	Image() : Content("Image") {};
+	Image() : Content("image") {};
 
 	/**
 	 * TODO Documentation

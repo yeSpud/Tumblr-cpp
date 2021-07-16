@@ -61,9 +61,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Link generateLink(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 

@@ -4,8 +4,4 @@
 
 #include "audio.hpp"
 
-Audio Audio::generateAudio(const rapidjson::Value &entry) {
-
-	// TODO
-
-}
+// TODO

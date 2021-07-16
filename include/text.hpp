@@ -97,9 +97,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Text generateText(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 

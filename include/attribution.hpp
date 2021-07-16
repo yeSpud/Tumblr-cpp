@@ -73,9 +73,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Attribution generateAttribution(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 private:
 

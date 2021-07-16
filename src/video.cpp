@@ -4,8 +4,4 @@
 
 #include "video.hpp"
 
-Video Video::generateVideo(const rapidjson::Value &entry) {
-
-	// TODO
-
-}
+// TODO

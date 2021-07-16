@@ -90,9 +90,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Audio generateAudio(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 

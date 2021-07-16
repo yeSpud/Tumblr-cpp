@@ -24,6 +24,7 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					auto postjson = entry.GetObj();
 					Post post;
 
+					/* FIXME
 					objectHasValue(postjson, "type", post.type);
 					objectHasValue(postjson, "original_type", post.original_type);
 					objectHasValue(postjson, "blog_name", post.blog_name);
@@ -64,6 +65,7 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					objectHasValue(postjson, "display_avatar", post.display_avatar);
 
 					posts.push_back(post);
+					 */
 				}
 			}
 		}
