@@ -9,6 +9,11 @@
 #include "content.hpp"
 #include "media.hpp"
 
+// This is where we run into circular dependencies issues. Especially with attribution.hpp.
+#include "attribution.hpp" // Maybe use this as a pointer or reference instead?
+// Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+class Attribution; // Actual class is located in attribution.hpp.
+
 /**
  * TODO Documentation
  */
@@ -57,7 +62,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution attribution;
+	Attribution *attribution; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * TODO Documentation

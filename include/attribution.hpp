@@ -5,14 +5,16 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-// This is where we run into circular dependencies issues. Especially with image.hpp.
+#include "post.hpp"
 
-#include "npf.hpp"
+// This is where we run into circular dependencies issues. Especially with image.hpp, post.hpp, and blog.hpp.
+// Forward declaration to prevent major errors with image.hpp. Image is actually initialized in image.hpp and image.cpp.
+class Image;
 
 /**
  * TODO Documentation
  */
-class Attribution: NPF {
+class Attribution : NPF {
 
 public:
 
@@ -28,7 +30,7 @@ public:
 	 * @param type
 	 */
 	[[deprecated("Use the generateAttribution method as this is just here as a placeholder")]]
-	Attribution(const attributionType type) : type(type) {};
+	explicit Attribution(const attributionType type) : type(type) {};
 
 	/**
 	 * The type of the attribution.
@@ -49,7 +51,7 @@ public:
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	Blog blogObject;
+	Blog* blogObject; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * The name of the application to be attributed.
@@ -82,8 +84,8 @@ private:
 	 * @param post
 	 * @param blog
 	 */
-	Attribution(const attributionType type, std::string url, Post post, Blog blog) : type(type), url(std::move(url)),
-	                                                                                 postObject(post),
+	Attribution(const attributionType type, std::string url, Post post, Blog *blog) : type(type), url(std::move(url)),
+	                                                                                 postObject(std::move(post)),
 	                                                                                 blogObject(std::move(blog)) {};
 
 	/**
@@ -98,7 +100,7 @@ private:
 	 * @param type
 	 * @param blog
 	 */
-	Attribution(const attributionType type, Blog blog) : type(type), blogObject(std::move(blog)) {};
+	Attribution(const attributionType type, Blog* blog) : type(type), blogObject(std::move(blog)) {};
 
 	/**
 	 * TODO Documentation

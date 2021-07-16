@@ -9,6 +9,9 @@
 #include "theme.hpp"
 #include "image.hpp"
 
+// Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+class Image; // Actual image class is located in image.hpp.
+
 /**
  * TODO Documentation
  */
@@ -39,7 +42,7 @@ public:
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 	 */
-	std::vector<Image> avatar;
+	std::vector<Image*> avatar; // Pointer array to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * TODO Documentation
