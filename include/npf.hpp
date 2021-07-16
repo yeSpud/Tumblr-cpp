@@ -13,13 +13,10 @@ class NPF {
 public:
 
 	/**
-	 * TODO Document
-	 * @tparam T
+	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	//template<typename T>
-	//virtual T generateNPF(const rapidjson::Value &entry) const = 0;
+	virtual void populateNPF(rapidjson::Value entry) = 0;
 
 };
 
@@ -32,8 +29,8 @@ public:
  * @return
  */
 template<typename T>
-static bool entryHasValue(const rapidjson::Value &json, const char *value, T &buffer) {
-	if (json.HasMember(value)) {
+static bool objectHasValue(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &object, const char *value, T &buffer) {
+	if (object.HasMember(value)) {
 		//if (typeid(buffer) == typeid(std::string)) {
 		//	buffer = json[value].GetString();
 		//} else {

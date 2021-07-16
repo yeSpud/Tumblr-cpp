@@ -19,10 +19,10 @@ Blog Blog::generateBlog(const char *json) {
 
 			auto blogjson = response["blog"].GetObj();
 
-			entryHasValue(blogjson, "ask", blog.ask);
-			entryHasValue(blogjson, "ask_anon", blog.ask_anon);
-			entryHasValue(blogjson, "ask_page_title", blog.ask_page_title);
-			entryHasValue(blogjson, "asks_allow_media", blog.asks_allow_media);
+			objectHasValue(blogjson, "ask", blog.ask);
+			objectHasValue(blogjson, "ask_anon", blog.ask_anon);
+			objectHasValue(blogjson, "ask_page_title", blog.ask_page_title);
+			objectHasValue(blogjson, "asks_allow_media", blog.asks_allow_media);
 
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
@@ -34,21 +34,21 @@ Blog Blog::generateBlog(const char *json) {
 				}
 			}
 
-			entryHasValue(blogjson, "can_chat", blog.can_chat);
-			entryHasValue(blogjson, "can_subscribe", blog.can_subscribe);
-			entryHasValue(blogjson, "description", blog.description);
-			entryHasValue(blogjson, "is_nsfw", blog.is_nsfw);
-			entryHasValue(blogjson, "name", blog.name);
-			entryHasValue(blogjson, "posts", blog.posts);
-			entryHasValue(blogjson, "shared_likes", blog.shared_likes);
-			entryHasValue(blogjson, "subscribed", blog.subscribed);
+			objectHasValue(blogjson, "can_chat", blog.can_chat);
+			objectHasValue(blogjson, "can_subscribe", blog.can_subscribe);
+			objectHasValue(blogjson, "description", blog.description);
+			objectHasValue(blogjson, "is_nsfw", blog.is_nsfw);
+			objectHasValue(blogjson, "name", blog.name);
+			objectHasValue(blogjson, "posts", blog.posts);
+			objectHasValue(blogjson, "shared_likes", blog.shared_likes);
+			objectHasValue(blogjson, "subscribed", blog.subscribed);
 
-			entryHasValue(blogjson, "title", blog.title);
-			entryHasValue(blogjson, "total_posts", blog.total_posts);
-			entryHasValue(blogjson, "updated", blog.updated);
-			entryHasValue(blogjson, "url", blog.url);
-			entryHasValue(blogjson, "uuid", blog.uuid);
-			entryHasValue(blogjson, "is_optout_ads", blog.is_optout_ads);
+			objectHasValue(blogjson, "title", blog.title);
+			objectHasValue(blogjson, "total_posts", blog.total_posts);
+			objectHasValue(blogjson, "updated", blog.updated);
+			objectHasValue(blogjson, "url", blog.url);
+			objectHasValue(blogjson, "uuid", blog.uuid);
+			objectHasValue(blogjson, "is_optout_ads", blog.is_optout_ads);
 		}
 	}
 

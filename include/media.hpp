@@ -12,35 +12,14 @@
  * and some trusted third-party content. All media objects returned from the API should contain type and url,
  * and any video and image media objects should always contain a width and height.
  */
-class Media: Content {
-
-private:
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param url
-	 */
-	Media(std::string type, std::string url): Content(std::move(type)), url(std::move(url)){};
-
-	/**
-	 * TODO Documentation
-	 * @param type
-	 * @param url
-	 * @param width
-	 * @param height
-	 */
-	Media(std::string type, std::string url, int width, int height): Content(std::move(type)), url(std::move(url)), width(width), height(height){};
+class Media: public Content {
 
 public:
-
-	[[deprecated("Please use the `generateMedia` method when possible - this is here as a placeholder / for debugging")]]
-	Media(): Content("empty media - someone used the deprecated method..."){};
 
 	/**
 	 * The canonical URL of the media asset.
 	 */
-	const std::string url;
+	std::string url;
 
 	/**
 	 * The width of the media asset, if that makes sense (for images and videos, but not for audio).
@@ -70,9 +49,8 @@ public:
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Media generateMedia(const rapidjson::Value &entry);
+	void populateNPF(rapidjson::Value entry) override;
 
 };
 

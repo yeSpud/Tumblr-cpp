@@ -24,23 +24,23 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					auto postjson = entry.GetObj();
 					Post post;
 
-					entryHasValue(postjson, "type", post.type);
-					entryHasValue(postjson, "original_type", post.original_type);
-					entryHasValue(postjson, "blog_name", post.blog_name);
+					objectHasValue(postjson, "type", post.type);
+					objectHasValue(postjson, "original_type", post.original_type);
+					objectHasValue(postjson, "blog_name", post.blog_name);
 
-					entryHasValue(postjson, "id", post.id);
-					entryHasValue(postjson, "id_string", post.id_string);
-					entryHasValue(postjson, "post_url", post.post_url);
-					entryHasValue(postjson, "slug", post.slug);
-					entryHasValue(postjson, "date", post.date);
-					entryHasValue(postjson, "timestamp", post.timestamp);
-					entryHasValue(postjson, "state", post.state);
-					entryHasValue(postjson, "reblog_key", post.reblog_key);
+					objectHasValue(postjson, "id", post.id);
+					objectHasValue(postjson, "id_string", post.id_string);
+					objectHasValue(postjson, "post_url", post.post_url);
+					objectHasValue(postjson, "slug", post.slug);
+					objectHasValue(postjson, "date", post.date);
+					objectHasValue(postjson, "timestamp", post.timestamp);
+					objectHasValue(postjson, "state", post.state);
+					objectHasValue(postjson, "reblog_key", post.reblog_key);
 
-					entryHasValue(postjson, "short_url", post.short_url);
-					entryHasValue(postjson, "summary", post.summary);
-					entryHasValue(postjson, "should_open_in_legacy", post.should_open_in_legacy);
-					entryHasValue(postjson, "note_count", post.note_count);
+					objectHasValue(postjson, "short_url", post.short_url);
+					objectHasValue(postjson, "summary", post.summary);
+					objectHasValue(postjson, "should_open_in_legacy", post.should_open_in_legacy);
+					objectHasValue(postjson, "note_count", post.note_count);
 
 					// Image
 					if (postjson.HasMember("content")) {
@@ -57,11 +57,11 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 						}
 					}
 
-					entryHasValue(postjson, "can_like", post.can_like);
-					entryHasValue(postjson, "can_reblog", post.can_reblog);
-					entryHasValue(postjson, "can_send_in_message", post.can_send_in_message);
-					entryHasValue(postjson, "can_reply", post.can_reply);
-					entryHasValue(postjson, "display_avatar", post.display_avatar);
+					objectHasValue(postjson, "can_like", post.can_like);
+					objectHasValue(postjson, "can_reblog", post.can_reblog);
+					objectHasValue(postjson, "can_send_in_message", post.can_send_in_message);
+					objectHasValue(postjson, "can_reply", post.can_reply);
+					objectHasValue(postjson, "display_avatar", post.display_avatar);
 
 					posts.push_back(post);
 				}

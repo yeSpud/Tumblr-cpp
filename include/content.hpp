@@ -11,20 +11,14 @@
 /**
  * TODO Documentation
  */
-class Content: NPF {
+class Content: public NPF {
 
 public:
 
 	/**
 	 * TODO Documentation
-	 * @param type
 	 */
-	explicit Content(std::string type): type(std::move(type)) {};
-
-	/**
-	 * TODO Documentation
-	 */
-	const std::string type;
+	std::string type;
 
 };
 
