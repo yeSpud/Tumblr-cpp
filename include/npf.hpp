@@ -8,7 +8,7 @@
 #include "rapidjson/document.h"
 
 #define RAPIDJSON_HAS_STDSTRING 1 // Enable string support.
-#define JSONOBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> // Json Object shortcut
+#define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> // Json Object shortcut
 
 class NPF {
 
@@ -18,7 +18,7 @@ public:
 	 * TODO Documentation
 	 * @param entry
 	 */
-	virtual void populateNPF(JSONOBJECT entry) = 0;
+	virtual void populateNPF(JSON_OBJECT entry) = 0;
 
 };
 
@@ -31,7 +31,7 @@ public:
  * @return
  */
 template<typename T>
-static bool objectHasValue(const JSONOBJECT &object, const char *value, T &buffer) {
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buffer) {
 	if (object.HasMember(value)) {
 		//if (typeid(buffer) == typeid(std::string)) {
 		//	buffer = json[value].GetString();
@@ -42,6 +42,15 @@ static bool objectHasValue(const JSONOBJECT &object, const char *value, T &buffe
 	} else {
 		return false;
 	}
+}
+
+/**
+ * TOOD Documentation
+ * @param constObject
+ * @return
+ */
+static JSON_OBJECT unConstlifyJsonObject(const rapidjson::GenericObject<true, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &constObject) {
+	// TODO
 }
 
 #endif //TUMBLRAPI_NPF_HPP

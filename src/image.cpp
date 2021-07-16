@@ -9,13 +9,13 @@
  * @param entry
  * @return
  */
-Media getMediaFromObject(const JSONOBJECT &entry) {
+Media getMediaFromObject(const JSON_OBJECT &entry) {
 	Media returnedMedia;
 	returnedMedia.populateNPF(entry);
 	return returnedMedia;
 }
 
-void Image::populateNPF(JSONOBJECT entry) { // TODO Comments
+void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	objectHasValue(entry, "media_key", media_key);
 
@@ -24,12 +24,12 @@ void Image::populateNPF(JSONOBJECT entry) { // TODO Comments
 		if (entry["media"].IsArray()) {
 			for (auto &mediaEntry : entry["media"].GetArray()) {
 				if (mediaEntry.IsObject()) {
-					Media mediaArray = getMediaFromObject(mediaEntry);
+					Media mediaArray = getMediaFromObject(mediaEntry.GetObj());
 					media.push_back(mediaArray);
 				}
 			}
 		} else if (entry["media"].IsObject()) {
-			Media mediaEntry = getMediaFromObject(entry["media"]);
+			Media mediaEntry = getMediaFromObject(entry["media"].GetObj());
 			media.push_back(mediaEntry);
 		}
 	}

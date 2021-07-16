@@ -19,7 +19,7 @@
 }
  */
 
-void Attribution::populateNPF(JSONOBJECT entry) { // TODO Comments
+void Attribution::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	// TODO Determine type
 
@@ -36,7 +36,7 @@ void Attribution::populateNPF(JSONOBJECT entry) { // TODO Comments
 	if (entry.HasMember("logo")) {
 		if (entry["logo"].IsObject()) {
 			Media media;
-			media.populateNPF(entry["logo"]);
+			media.populateNPF(entry["logo"].GetObj());
 			logo = media;
 		}
 	}

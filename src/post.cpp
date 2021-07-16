@@ -21,7 +21,7 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 			for (auto &entry : response["posts"].GetArray()) {
 				if (entry.IsObject()) {
 
-					JSONOBJECT postjson = entry.GetObj();
+					JSON_OBJECT postjson = entry.GetObj();
 					Post post;
 
 					objectHasValue(postjson, "type", post.type);
@@ -44,15 +44,18 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 
 					// Media
 					if (postjson.HasMember("content")) {
-						for (const auto &contentEntry : postjson["content"].GetArray()) {
-							if (contentEntry.HasMember("media")) {
-								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
-
-									if (mediaEntry.IsObject()) {
-
-										Media media;
-										media.populateNPF(mediaEntry.Get<JSONOBJECT>());
-										post.content.push_back(media);
+						if (postjson["content"].IsArray()){
+							for (const auto &contentEntry : postjson["content"].GetArray()) {
+								if (contentEntry.HasMember("media")) {
+									if (contentEntry["media"].IsArray()) {
+										for (auto& mediaEntry : contentEntry["media"].GetArray()) {
+											if (mediaEntry.IsObject()) {
+												Media media;
+												JSON_OBJECT mediaJson = unConstlifyJsonObject(mediaEntry.GetObj());
+												media.populateNPF(mediaJson);
+												post.content.push_back(media);
+											}
+										}
 									}
 								}
 							}

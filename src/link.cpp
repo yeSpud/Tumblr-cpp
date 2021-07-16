@@ -22,13 +22,13 @@
 }
  */
 
-Image getPoster(const JSONOBJECT &entry) { // TODO Documentation
+Image getPoster(const JSON_OBJECT &entry) { // TODO Documentation
 	Image image;
 	image.populateNPF(entry);
 	return image;
 }
 
-void Link::populateNPF(JSONOBJECT entry) { // TODO Comments
+void Link::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	objectHasValue(entry, "url", url);
 	objectHasValue(entry, "title", title);
@@ -40,7 +40,7 @@ void Link::populateNPF(JSONOBJECT entry) { // TODO Comments
 	// Poster
 	if (entry.HasMember("poster")) {
 		if (entry["poster"].IsArray()) {
-			poster = getPoster(entry["poster"].GetArray()[0]);
+			poster = getPoster(entry["poster"].GetArray()[0].GetObj());
 		} else if (entry["poster"].IsObject()) {
 			poster = getPoster(entry["poster"].GetObj());
 		}

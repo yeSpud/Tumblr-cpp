@@ -91,7 +91,7 @@ public:
 	 * TODO Documentation
 	 * @param entry
 	 */
-	void populateNPF(JSONOBJECT entry) override;
+	void populateNPF(JSON_OBJECT entry) override;
 
 };
 

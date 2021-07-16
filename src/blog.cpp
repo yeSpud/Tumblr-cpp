@@ -13,11 +13,11 @@ Blog Blog::generateBlog(const char *json) {
 	document.Parse(json);
 
 	if (document.HasMember("response")) {
-		JSONOBJECT response = document["response"].GetObj();
+		JSON_OBJECT response = document["response"].GetObj();
 
 		if (response.HasMember("blog")) {
 
-			JSONOBJECT blogjson = response["blog"].GetObj();
+			JSON_OBJECT blogjson = response["blog"].GetObj();
 
 			objectHasValue(blogjson, "ask", blog.ask);
 			objectHasValue(blogjson, "ask_anon", blog.ask_anon);
@@ -30,7 +30,7 @@ Blog Blog::generateBlog(const char *json) {
 					for (auto& avatarEntry : blogjson["avatar"].GetArray()) {
 						if (avatarEntry.IsObject()) {
 							Image avatar;
-							avatar.populateNPF(avatarEntry);
+							avatar.populateNPF(avatarEntry.GetObj());
 							blog.avatar.push_back(&avatar);
 						}
 					}

@@ -28,7 +28,7 @@
 }
  */
 
-void Media::populateNPF(JSONOBJECT entry) { // TODO Comments
+void Media::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	objectHasValue(entry, "type", type);
 	objectHasValue(entry, "url", url);
