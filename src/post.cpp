@@ -46,15 +46,14 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					if (postjson.HasMember("content")) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {
-								for (auto &mediaEntry : contentEntry["media"].GetArray()) {
+								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
 
-									// TODO Determine media type
+									if (mediaEntry.IsObject()) {
 
-									//Image image; // FIXME
-
-									//if (!image.media[0].url.empty()) {
-										//post.content.push_back(image); // FIXME
-									//}
+										Media media;
+										media.populateNPF(mediaEntry.Get<JSONOBJECT>());
+										post.content.push_back(media);
+									}
 								}
 							}
 						}

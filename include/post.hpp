@@ -9,7 +9,6 @@
 
 // Forward declarations to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Blog; // Actual class is located in blog.hpp.
-class Image; // Actual class is located in image.hpp.
 
 /**
  * TODO Documentation
@@ -78,7 +77,10 @@ public:
 	 */
 	std::string reblog_key;
 
-	// const auto tags;
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<std::string> tags;
 
 	/**
 	 * TODO Documentation
@@ -103,11 +105,13 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Image*> content; // Image pointer array to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	std::vector<Media> content;
 
-	// const auto layout;
+	// TODO
+	// std::vector<Layout> layout;
 
-	// const auto trail;
+	// TODO
+	// std::vector<Trail> trail;
 
 	/**
 	 * TODO Documentation

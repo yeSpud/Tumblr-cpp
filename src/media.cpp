@@ -30,7 +30,6 @@
 
 void Media::populateNPF(JSONOBJECT entry) { // TODO Comments
 
-	//rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> object = entry.GetObj();
 	objectHasValue(entry, "type", type);
 	objectHasValue(entry, "url", url);
 	objectHasValue(entry, "width", width);
