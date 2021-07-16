@@ -18,13 +18,12 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 		// Gets the posts array from the response.
 		if (response.HasMember("posts")) {
 
-			for (const auto &entry : response["posts"].GetArray()) {
+			for (auto &entry : response["posts"].GetArray()) {
 				if (entry.IsObject()) {
 
-					auto postjson = entry.GetObj();
+					JSONOBJECT postjson = entry.GetObj();
 					Post post;
 
-					/* FIXME
 					objectHasValue(postjson, "type", post.type);
 					objectHasValue(postjson, "original_type", post.original_type);
 					objectHasValue(postjson, "blog_name", post.blog_name);
@@ -47,7 +46,10 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					if (postjson.HasMember("content")) {
 						for (const auto &contentEntry : postjson["content"].GetArray()) {
 							if (contentEntry.HasMember("media")) {
-								for (const auto &mediaEntry : contentEntry["media"].GetArray()) {
+								for (auto &mediaEntry : contentEntry["media"].GetArray()) {
+
+									// TODO Determine media type
+
 									//Image image; // FIXME
 
 									//if (!image.media[0].url.empty()) {
@@ -65,7 +67,6 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 					objectHasValue(postjson, "display_avatar", post.display_avatar);
 
 					posts.push_back(post);
-					 */
 				}
 			}
 		}

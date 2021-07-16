@@ -11,20 +11,17 @@
 /**
  * TODO Documentation
  */
-class Link:Content {
-
-private:
-
-	/**
-	 * TODO Documentation
-	 * @param url
-	 */
-	explicit Link(std::string url): Content("link"), url(std::move(url)){};
+class Link : Content {
 
 public:
 
 	/**
-	 * The URL to use
+	 * TODO Documentation
+	 */
+	Link() : Content("link") {};
+
+	/**
+	 * The URL to use for the link content.
 	 */
 	std::string url;
 
@@ -49,7 +46,7 @@ public:
 	std::string site_name;
 
 	/**
-	 * TODO Documentation
+	 * Supplied on NPF Post consumption, ignored during NPF Post creation.
 	 */
 	std::string display_url;
 

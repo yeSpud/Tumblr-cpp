@@ -31,7 +31,7 @@ public:
  * @return
  */
 template<typename T>
-static bool objectHasValue(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &object, const char *value, T &buffer) {
+static bool objectHasValue(const JSONOBJECT &object, const char *value, T &buffer) {
 	if (object.HasMember(value)) {
 		//if (typeid(buffer) == typeid(std::string)) {
 		//	buffer = json[value].GetString();
