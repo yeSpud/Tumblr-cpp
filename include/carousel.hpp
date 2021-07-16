@@ -1,0 +1,8 @@
+//
+// Created by Spud on 7/16/21.
+//
+
+#ifndef TUMBLRAPI_CAROUSEL_HPP
+#define TUMBLRAPI_CAROUSEL_HPP
+
+#endif //TUMBLRAPI_CAROUSEL_HPP

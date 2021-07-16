@@ -1,0 +1,8 @@
+//
+// Created by Spud on 7/16/21.
+//
+
+#ifndef TUMBLRAPI_CONDENSED_HPP
+#define TUMBLRAPI_CONDENSED_HPP
+
+#endif //TUMBLRAPI_CONDENSED_HPP
