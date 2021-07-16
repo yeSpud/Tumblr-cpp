@@ -13,11 +13,11 @@ Blog Blog::generateBlog(const char *json) {
 	document.Parse(json);
 
 	if (document.HasMember("response")) {
-		auto response = document["response"].GetObj();
+		rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> response = document["response"].GetObj();
 
 		if (response.HasMember("blog")) {
 
-			auto blogjson = response["blog"].GetObj();
+			rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> blogjson = response["blog"].GetObj();
 
 			objectHasValue(blogjson, "ask", blog.ask);
 			objectHasValue(blogjson, "ask_anon", blog.ask_anon);
@@ -26,10 +26,16 @@ Blog Blog::generateBlog(const char *json) {
 
 			// Avatars
 			if (blogjson.HasMember("avatar")) {
-				for (const auto &avatarEntry : blogjson["avatar"].GetArray()) {
-					Image avatar = (Image::generateImage(avatarEntry));
-					if (!avatar.media[0].url.empty()) { // TODO Move me to media function
-						blog.avatar.push_back(&avatar);
+
+				if (blogjson["avatar"].IsArray()) {
+					for (auto& avatarEntry : blogjson["avatar"].GetArray()) {
+
+						/* FIXME
+						Image avatar = Image::generateImage(avatarEntry);
+						if (!avatar.media[0].url.empty()) {
+							blog.avatar.push_back(&avatar);
+						}
+						 */
 					}
 				}
 			}

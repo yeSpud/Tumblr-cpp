@@ -5,8 +5,10 @@
 #ifndef TUMBLRAPI_NPF_HPP
 #define TUMBLRAPI_NPF_HPP
 
-#define RAPIDJSON_HAS_STDSTRING 1 // Enable string support.
 #include "rapidjson/document.h"
+
+#define RAPIDJSON_HAS_STDSTRING 1 // Enable string support.
+#define JSONOBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> // Json Object shortcut
 
 class NPF {
 
@@ -16,7 +18,7 @@ public:
 	 * TODO Documentation
 	 * @param entry
 	 */
-	virtual void populateNPF(rapidjson::Value entry) = 0;
+	virtual void populateNPF(JSONOBJECT entry) = 0;
 
 };
 

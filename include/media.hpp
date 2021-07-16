@@ -12,7 +12,7 @@
  * and some trusted third-party content. All media objects returned from the API should contain type and url,
  * and any video and image media objects should always contain a width and height.
  */
-class Media: public Content {
+class Media : public Content {
 
 public:
 
@@ -50,7 +50,7 @@ public:
 	 * TODO Documentation
 	 * @param entry
 	 */
-	void populateNPF(rapidjson::Value entry) override;
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 

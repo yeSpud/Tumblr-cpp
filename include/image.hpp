@@ -11,32 +11,18 @@
 
 // This is where we run into circular dependencies issues. Especially with attribution.hpp.
 #include "attribution.hpp" // Maybe use this as a pointer or reference instead?
+
 // Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Attribution; // Actual class is located in attribution.hpp.
 
 /**
  * TODO Documentation
  */
-class Image: Content {
-
-private:
-
-	/**
-	 * TODO Documentation
-	 * @param media
-	 */
-	Image(Media media): Content("image"), media{std::move(media)}{};
-
-	/**
-	 * TODO Documentation
-	 * @param media
-	 */
-	Image(std::vector<Media> media): Content("image"), media{std::move(media)}{};
+class Image : public Content {
 
 public:
 
-	[[deprecated("Please use the `generateImage` method when possible - this is here as a placeholder / for debugging")]]
-	Image() :Content("Image"){};
+	Image() : Content("Image") {};
 
 	/**
 	 * TODO Documentation
@@ -45,7 +31,7 @@ public:
 	std::string media_key;
 
 	/**
-	 * TODO Documentation
+	 * An array of Media objects which represent different available sizes of this image asset.
 	 */
 	std::vector<Media> media;
 
@@ -53,12 +39,12 @@ public:
 	// auto colors;
 
 	/**
-	 * TODO Documentation
+	 * A feedback token to use when this image is a GIF search result.
 	 */
 	std::string feedback_token;
 
 	/**
-	 * TODO Documentation
+	 * For GIFs, this is a single-frame "poster".
 	 */
 	Media poster;
 
@@ -68,16 +54,15 @@ public:
 	Attribution *attribution; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
-	 * TODO Documentation
+	 * Text used to describe the image, for screen readers. 200 character maximum.
 	 */
 	std::string alt_text;
 
 	/**
 	 * TODO Documentation
 	 * @param entry
-	 * @return
 	 */
-	static Image generateImage(const rapidjson::Value &entry);
+	void populateNPF(JSONOBJECT entry) override;
 
 };
 
