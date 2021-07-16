@@ -5,12 +5,14 @@
 #ifndef TUMBLRAPI_AUDIO_HPP
 #define TUMBLRAPI_AUDIO_HPP
 
-#include "attribution.hpp"
+#include "content.hpp"
+#include "image.hpp"
+#include "attribution.hpp" // Circular dependency with image.hpp
 
 /**
  * TODO Documentation
  */
-class Audio {
+class Audio : Content {
 
 private:
 
@@ -18,22 +20,15 @@ private:
 	 * TODO Documentation
 	 * @param url
 	 */
-	Audio(std::string url): url(std::move(url)){};
+	Audio(std::string url) : Content("audio"), url(std::move(url)) {};
 
 	/**
 	 * TODO Documentation
 	 * @param media
 	 */
-	Audio(Media media): media(std::move(media)){};
+	Audio(Media media) : Content("audio"), media(std::move(media)) {};
 
 public:
-
-	//struct Audio;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::string type;
 
 	/**
 	 * The URL to use for the audio content, if no media is present.

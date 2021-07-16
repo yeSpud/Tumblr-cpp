@@ -5,14 +5,12 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
-#include <string>
-#include <utility>
-#include "rapidjson/document.h"
+#include "content.hpp"
 
 /**
  * TODO Documentation
  */
-class Text {
+class Text: Content {
 
 private:
 
@@ -20,7 +18,7 @@ private:
 	 * TODO Documentation
 	 * @param text
 	 */
-	explicit Text(std::string text):text(std::move(text)) {};
+	explicit Text(std::string text): Content("text"), text(std::move(text)) {};
 
 public:
 
@@ -95,29 +93,6 @@ public:
 
 	// TODO
 	// auto formatting;
-
-	 /*
-	struct Text {
-
-
-		std::string type;
-
-		**
-		 * The text to use
-		 *
-		std::string text;
-
-		**
-		 * The subtype of text block
-		 *
-		subtype subtype;
-
-		uint64_t indent_level;
-
-		// TODO
-		// auto formatting;
-	};
-	*/
 
 	/**
 	 * TODO Documentation

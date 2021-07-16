@@ -6,12 +6,18 @@
 #define TUMBLRAPI_IMAGE_HPP
 
 #include <vector>
-#include "attribution.hpp"
+#include "content.hpp"
+#include "media.hpp"
+
+// This is where we run into circular dependencies issues. Especially with attribution.hpp.
+#include "attribution.hpp" // Maybe use this as a pointer or reference instead?
+// Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+class Attribution; // Actual class is located in attribution.hpp.
 
 /**
  * TODO Documentation
  */
-class Image {
+class Image: Content {
 
 private:
 
@@ -19,14 +25,18 @@ private:
 	 * TODO Documentation
 	 * @param media
 	 */
-	Image(Media media): type("image"), media(media){};
+	Image(Media media): Content("image"), media{std::move(media)}{};
+
+	/**
+	 * TODO Documentation
+	 * @param media
+	 */
+	Image(std::vector<Media> media): Content("image"), media{std::move(media)}{};
 
 public:
 
-	/**
-	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
-	 */
-	std::string type;
+	[[deprecated("Please use the `generateImage` method when possible - this is here as a placeholder / for debugging")]]
+	Image() :Content("Image"){};
 
 	/**
 	 * TODO Documentation
@@ -55,14 +65,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution attribution;
+	Attribution *attribution; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * TODO Documentation
 	 */
 	std::string alt_text;
-
-	//struct Image;
 
 	/**
 	 * TODO Documentation

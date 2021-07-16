@@ -4,51 +4,6 @@
 
 #include "image.hpp"
 
-/*
-struct image::Image {
-
-	**
-	 * The MIME type of the image asset, or a best approximation will be made based on the given URL
-	 *
-	std::string type;
-
-	**
-	 * TODO Documentation
-	 * Undocumented?
-	 *
-	std::string media_key;
-
-	**
-	 * TODO Documentation
-	 *
-	std::vector<Media> media;
-
-	// TODO
-	// auto colors;
-
-	**
-	 * TODO Documentation
-	 *
-	std::string feedback_token;
-
-	**
-	 * TODO Documentation
-	 *
-	Media poster;
-
-	**
-	 * TODO Documentation
-	 *
-	Attribution attribution;
-
-	**
-	 * TODO Documentation
-	 *
-	std::string alt_text;
-
-};
- */
-
 Image Image::generateImage(const rapidjson::Value &entry) { // TODO Comments
 
 	/* FIXME

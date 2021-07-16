@@ -5,7 +5,11 @@
 #ifndef TUMBLRAPI_POST_HPP
 #define TUMBLRAPI_POST_HPP
 
-#include "image.hpp"
+#include "blog.hpp"
+
+// Forward declarations to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+class Blog; // Actual class is located in blog.hpp.
+class Image; // Actual class is located in image.hpp.
 
 /**
  * TODO Documentation
@@ -13,8 +17,6 @@
 class Post {
 
 public:
-
-	//struct Post;
 
 	/**
 	 * TODO Documentation
@@ -34,7 +36,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Blog blog;
+	Blog* blog; // Blog pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * TODO Documentation
@@ -101,7 +103,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Image> content;
+	std::vector<Image*> content; // Image pointer array to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	// const auto layout;
 

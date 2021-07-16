@@ -5,27 +5,22 @@
 #ifndef TUMBLRAPI_VIDEO_HPP
 #define TUMBLRAPI_VIDEO_HPP
 
+#include "content.hpp"
 #include "image.hpp"
+#include "attribution.hpp" // Circular dependency with image.hpp
 
 /**
  * TODO Documentation
  */
-class Video {
+class Video: Content {
 
 private:
 
-	explicit Video(std::string url): url(std::move(url)){};
+	explicit Video(std::string url): Content("video"), url(std::move(url)){};
 
-	explicit Video(Media media): media(std::move(media)){};
+	explicit Video(Media media): Content("video"), media(std::move(media)){};
 
 public:
-
-	//struct Video;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::string type;
 
 	/**
 	 * The URL to use for the video content, if no media is present.
@@ -66,7 +61,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution attribution;
+	Attribution attribution = Attribution(Attribution::attributionType::post); // Default to post.
 
 	/**
 	 * TODO Documentation

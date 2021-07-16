@@ -5,12 +5,13 @@
 #ifndef TUMBLRAPI_LINK_HPP
 #define TUMBLRAPI_LINK_HPP
 
+#include "content.hpp"
 #include "image.hpp"
 
 /**
  * TODO Documentation
  */
-class Link {
+class Link:Content {
 
 private:
 
@@ -18,11 +19,9 @@ private:
 	 * TODO Documentation
 	 * @param url
 	 */
-	explicit Link(std::string url): url(std::move(url)){};
+	explicit Link(std::string url): Content("link"), url(std::move(url)){};
 
 public:
-
-	// struct Link;
 
 	/**
 	 * The URL to use
