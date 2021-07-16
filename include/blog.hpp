@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "theme.hpp"
-#include "image.hpp"
+#include "npf/content/image.hpp"
 
 // Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Image; // Actual image class is located in image.hpp.

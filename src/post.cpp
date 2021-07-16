@@ -2,7 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "npf.hpp"
+#include "npf/npf.hpp"
 #include "post.hpp"
 
 std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments

@@ -6,11 +6,11 @@
 #define TUMBLRAPI_IMAGE_HPP
 
 #include <vector>
-#include "content.hpp"
+#include "npf/content/content.hpp"
 #include "media.hpp"
 
 // This is where we run into circular dependencies issues. Especially with attribution.hpp.
-#include "attribution.hpp" // Maybe use this as a pointer or reference instead?
+#include "npf/attribution.hpp" // Maybe use this as a pointer or reference instead?
 
 // Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Attribution; // Actual class is located in attribution.hpp.

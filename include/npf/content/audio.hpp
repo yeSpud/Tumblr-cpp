@@ -7,7 +7,7 @@
 
 #include "content.hpp"
 #include "image.hpp"
-#include "attribution.hpp" // Circular dependency with image.hpp
+#include "npf/attribution.hpp" // Circular dependency with image.hpp
 
 /**
  * An audio block represents a playable track. At a minimum, the provider field must be present,
@@ -18,21 +18,12 @@
  */
 class Audio : Content {
 
-private:
-
-	/**
-	 * TODO Documentation
-	 * @param url The URL to use for the video block, as there is no media present.
-	 */
-	explicit Audio(std::string url) : Content("audio"), url(std::move(url)) {};
-
-	/**
-	 * TODO Documentation
-	 * @param media The Media object to use for the video block, as there is no url present.
-	 */
-	explicit Audio(Media media) : Content("audio"), media(std::move(media)) {};
-
 public:
+
+	/**
+	 * TODO Documentation
+	 */
+	Audio(): Content("audio") {};
 
 	/**
 	 * The URL to use for the audio content, if no media is present.

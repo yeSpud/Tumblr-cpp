@@ -13,6 +13,15 @@
  */
 #define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
 
+// TODO Turn into function
+#define POPULATE_SUBGROUP(entry, value, code) if (entry.HasMember(value)) {\
+if (entry[value].IsObject()) {\
+code\
+}} //else if (entry[value].IsArray()) {\
+//POPULATE_SUBGROUP(entry[value].GetArray()[0], value, code)\
+//}\
+//}
+
 class NPF {
 
 public:

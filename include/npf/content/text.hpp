@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
-#include "content.hpp"
+#include "npf/content/content.hpp"
 
 /**
  * TODO Documentation
