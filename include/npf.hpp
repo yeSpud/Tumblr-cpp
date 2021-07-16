@@ -5,10 +5,13 @@
 #ifndef TUMBLRAPI_NPF_HPP
 #define TUMBLRAPI_NPF_HPP
 
+#include <string>
 #include "rapidjson/document.h"
 
-#define RAPIDJSON_HAS_STDSTRING 1 // Enable string support.
-#define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> // Json Object shortcut
+/**
+ * Json Object shortcut because I'm lazy
+ */
+#define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
 
 class NPF {
 
@@ -33,11 +36,24 @@ public:
 template<typename T>
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buffer) {
 	if (object.HasMember(value)) {
-		//if (typeid(buffer) == typeid(std::string)) {
-		//	buffer = json[value].GetString();
-		//} else {
-		//buffer = json[value].Get<T>(); // FIXME
-		//}
+		buffer = object[value].Get<T>();
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * TODO Documentation
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::string &buffer) {
+	if (object.HasMember(value)) {
+		const char* tempstr = object[value].GetString();
+		buffer = std::string(tempstr);
 		return true;
 	} else {
 		return false;
