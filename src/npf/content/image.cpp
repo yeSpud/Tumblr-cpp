@@ -2,7 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "image.hpp"
+#include "npf/content/image.hpp"
 
 /**
  * TODO Documentation & comments

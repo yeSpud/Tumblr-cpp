@@ -2,6 +2,6 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "text.hpp"
+#include "npf/content/text.hpp"
 
 // TODO
