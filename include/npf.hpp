@@ -44,7 +44,7 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buff
 }
 
 /**
- * TODO Documentation
+ * TODO Documentation & comments
  * @param object
  * @param value
  * @param buffer
@@ -52,21 +52,12 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buff
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::string &buffer) {
 	if (object.HasMember(value)) {
-		const char* tempstr = object[value].GetString();
-		buffer = std::string(tempstr);
+		const char* str = object[value].GetString();
+		buffer = std::string(str);
 		return true;
 	} else {
 		return false;
 	}
-}
-
-/**
- * TOOD Documentation
- * @param constObject
- * @return
- */
-static JSON_OBJECT unConstlifyJsonObject(const rapidjson::GenericObject<true, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &constObject) {
-	// TODO
 }
 
 #endif //TUMBLRAPI_NPF_HPP

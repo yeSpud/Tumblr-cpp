@@ -50,9 +50,10 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 									if (contentEntry["media"].IsArray()) {
 										for (auto& mediaEntry : contentEntry["media"].GetArray()) {
 											if (mediaEntry.IsObject()) {
+												rapidjson::Document objectDocument(rapidjson::kObjectType);
+												objectDocument.CopyFrom(mediaEntry, objectDocument.GetAllocator());
 												Media media;
-												JSON_OBJECT mediaJson = unConstlifyJsonObject(mediaEntry.GetObj());
-												media.populateNPF(mediaJson);
+												media.populateNPF(objectDocument.GetObj());
 												post.content.push_back(media);
 											}
 										}

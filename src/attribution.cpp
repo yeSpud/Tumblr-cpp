@@ -21,7 +21,18 @@
 
 void Attribution::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	// TODO Determine type
+	// Determine type.
+	std::string typeString;
+	objectHasValue(entry, "type", typeString);
+	if (typeString == "link") {
+		type = link;
+	} else if (typeString == "blog") {
+		type = blog;
+	} else if (typeString == "post") {
+		type = post;
+	} else if (typeString == "app") {
+		type = app;
+	}
 
 	objectHasValue(entry, "url", url);
 
