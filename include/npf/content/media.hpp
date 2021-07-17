@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_MEDIA_HPP
 #define TUMBLRAPI_MEDIA_HPP
 
-#include "npf/content/content.hpp"
+#include "content.hpp"
 
 /**
  * Media objects are used for image blocks, all kinds of posters (GIF, video, etc), native audio, native video,
