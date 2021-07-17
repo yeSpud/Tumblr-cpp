@@ -34,6 +34,23 @@ public:
 
 };
 
+/* Experimenting with lambdas to help populate objects with json array or nested objects
+static void populateSubgroup(JSON_OBJECT entry, const char *value, std::function<void()> function) {
+
+	if (entry.HasMember(value)) {
+		if (entry[value].IsArray()) {
+			for (auto& arrayEntry : entry[value].GetArray()) {
+				if (arrayEntry.IsObject()) {
+					function;
+				}
+			}
+		} else if (entry[value].IsObject()) {
+			function;
+		}
+	}
+}
+ */
+
 /**
  * TODO Documentation & comments
  * @tparam T

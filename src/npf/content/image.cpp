@@ -34,6 +34,12 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 		}
 	}
 
+	/*
+	populateSubgroup(entry, "media", []() {
+		Media mediaEntry = getMediaFromObject(entry)
+	});
+	 */
+
 	objectHasValue(entry, "feedback_token", feedback_token);
 
 	// Get poster.

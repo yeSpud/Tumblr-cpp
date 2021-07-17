@@ -12,15 +12,12 @@
  */
 class Text: Content {
 
-private:
+public:
 
 	/**
 	 * TODO Documentation
-	 * @param text
 	 */
-	explicit Text(std::string text): Content("text"), text(std::move(text)) {};
-
-public:
+	explicit Text(): Content("text"){};
 
 	/**
 	 * Text blocks can also have a subtype field that specifies a semantic meaning to the text block,
@@ -72,11 +69,6 @@ public:
 	};
 
 	/**
-	 * TODO Documentation
-	 */
-	const std::string type;
-
-	/**
 	 * The text to use.
 	 */
 	std::string text;
@@ -92,7 +84,7 @@ public:
 	uint64_t indent_level;
 
 	// TODO
-	// auto formatting;
+	//std::vector<Formatting> formatting;
 
 	/**
 	 * TODO Documentation
