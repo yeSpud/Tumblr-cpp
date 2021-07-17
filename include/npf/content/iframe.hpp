@@ -31,6 +31,10 @@ public:
 	 */
 	int height = 405;
 
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 */
 	void populateNPF(JSON_OBJECT entry) override;
 
 };

@@ -4,4 +4,8 @@
 
 #include "npf/content/video.hpp"
 
-// TODO
+void Video::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

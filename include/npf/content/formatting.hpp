@@ -17,12 +17,12 @@ public:
 	Formatting()= default;;
 
 	/**
-	 * The starting index of the formatting range (inclusive)
+	 * The starting index of the formatting range (inclusive).
 	 */
 	int start;
 
 	/**
-	 * The ending index of the formatting range (exclusive)
+	 * The ending index of the formatting range (exclusive).
 	 */
 	int end;
 

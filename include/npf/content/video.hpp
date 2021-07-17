@@ -23,7 +23,7 @@ public:
 	std::string url;
 
 	/**
-	 * TODO Documentation
+	 * The Media Object to use for the video content, if no url is present.
 	 */
 	Media media;
 
@@ -56,7 +56,7 @@ public:
 	// auto metadata;
 
 	/**
-	 * TODO Documentation
+	 * Optional attribution information about where the video came from.
 	 */
 	Attribution attribution;
 

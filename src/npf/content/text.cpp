@@ -4,4 +4,8 @@
 
 #include "npf/content/text.hpp"
 
-// TODO
+void Text::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

@@ -4,4 +4,8 @@
 
 #include "npf/content/iframe.hpp"
 
-// TODO
+void iFrame::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

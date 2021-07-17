@@ -4,4 +4,8 @@
 
 #include "npf/content/formatting.hpp"
 
-// TODO
+void Formatting::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}
