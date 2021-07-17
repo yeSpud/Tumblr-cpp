@@ -16,16 +16,16 @@ class Post; // Actual class is located in post.hpp.
 /**
  * TODO Documentation
  */
+enum attributionType {
+	link, blog, post, app
+};
+
+/**
+ * TODO Documentation
+ */
 class Attribution : NPF {
 
 public:
-
-	/**
-	 * TODO Documentation
-	 */
-	enum attributionType {
-		link, blog, post, app
-	};
 
 	/**
 	 * The type of the attribution.
@@ -41,12 +41,12 @@ public:
 	/**
 	 * A post pointer with at least the id field.
 	 */
-	Post* postObject; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Post *postObject; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	Blog* blogObject; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Blog *blogObject; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * The name of the application to be attributed.

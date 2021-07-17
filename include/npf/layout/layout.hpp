@@ -5,6 +5,16 @@
 #ifndef TUMBLRAPI_LAYOUT_HPP
 #define TUMBLRAPI_LAYOUT_HPP
 
+#include <vector>
+#include "npf/npf.hpp"
+
+/**
+ * TODO Documentation
+ */
+enum layoutType {
+	rows, ask, condensed
+};
+
 /**
  * TODO Documentation
  */
@@ -16,14 +26,7 @@ public:
 	 * TODO Documentation
 	 * @param type
 	 */
-	Layout(layoutType type) : type(type) {};
-
-	/**
-	 * TODO Documentation
-	 */
-	enum layoutType {
-		rows, ask, condensed
-	};
+	explicit Layout(layoutType type) : type(type) {};
 
 	/**
 	 * TODO Documentation
