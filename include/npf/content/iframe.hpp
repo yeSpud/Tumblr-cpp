@@ -12,13 +12,26 @@
  */
 class iFrame: Content {
 
-private:
-
-	// TODO
-
 public:
 
-	// TODO
+	iFrame() = default;;
+
+	/**
+	 * A URL used for constructing and embeddable video iframe.
+	 */
+	std::string url;
+
+	/**
+	 * The width of the video iframe. Default is 540.
+	 */
+	int width = 540;
+
+	/**
+	 * The height of the video iframe. Default is 405.
+	 */
+	int height = 405;
+
+	void populateNPF(JSON_OBJECT entry) override;
 
 };
 
