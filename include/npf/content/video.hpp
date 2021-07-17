@@ -5,22 +5,17 @@
 #ifndef TUMBLRAPI_VIDEO_HPP
 #define TUMBLRAPI_VIDEO_HPP
 
-#include "npf/content/content.hpp"
-#include "npf/content/image.hpp"
-#include "npf/attribution.hpp" // Circular dependency with image.hpp
+#include "image.hpp"
+#include "iframe.hpp"
 
 /**
  * TODO Documentation
  */
 class Video: Content {
 
-private:
-
-	explicit Video(std::string url): Content("video"), url(std::move(url)){};
-
-	explicit Video(Media media): Content("video"), media(std::move(media)){};
-
 public:
+
+	Video(): Content("video") {};
 
 	/**
 	 * The URL to use for the video content, if no media is present.
@@ -42,8 +37,10 @@ public:
 	 */
 	std::string embed_html;
 
-	// TODO
-	// auto embed_iframe;
+	/**
+	 * An embed iframe object used for constructing video iframes.
+	 */
+	iFrame embed_iframe;
 
 	/**
 	 * A URL to the embeddable content to use as an iframe.

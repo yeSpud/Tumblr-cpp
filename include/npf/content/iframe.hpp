@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_IFRAME_HPP
 #define TUMBLRAPI_IFRAME_HPP
 
-#include "npf/content/content.hpp"
+#include "content.hpp"
 
 /**
  * TODO Documentation

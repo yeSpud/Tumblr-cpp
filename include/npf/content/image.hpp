@@ -6,7 +6,7 @@
 #define TUMBLRAPI_IMAGE_HPP
 
 #include <vector>
-#include "npf/content/content.hpp"
+#include "content.hpp"
 #include "media.hpp"
 
 // This is where we run into circular dependencies issues. Especially with attribution.hpp.

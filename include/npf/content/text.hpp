@@ -5,7 +5,8 @@
 #ifndef TUMBLRAPI_TEXT_HPP
 #define TUMBLRAPI_TEXT_HPP
 
-#include "npf/content/content.hpp"
+#include "content.hpp"
+#include "formatting.hpp"
 
 /**
  * TODO Documentation
@@ -83,8 +84,10 @@ public:
 	 */
 	uint64_t indent_level;
 
-	// TODO
-	//std::vector<Formatting> formatting;
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<Formatting> formatting;
 
 	/**
 	 * TODO Documentation

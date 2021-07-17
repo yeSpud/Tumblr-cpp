@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_LINK_HPP
 #define TUMBLRAPI_LINK_HPP
 
-#include "npf/content/content.hpp"
+#include "content.hpp"
 #include "image.hpp"
 
 /**
