@@ -16,7 +16,7 @@
  * whether it's tumblr for Tumblr native audio content, or a trusted third party like spotify or bandcamp.
  * Optionally, an audio block may include the track's title, artist, and/or album.
  */
-class Audio : Content {
+class Audio : public Content {
 
 public:
 

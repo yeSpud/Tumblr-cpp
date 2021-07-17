@@ -11,7 +11,7 @@
 /**
  * TODO Documentation
  */
-class Video: Content {
+class Video: public Content {
 
 public:
 

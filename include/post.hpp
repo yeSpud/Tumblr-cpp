@@ -6,6 +6,7 @@
 #define TUMBLRAPI_POST_HPP
 
 #include "blog.hpp"
+#include "npf/layout/layout.hpp"
 
 // Forward declarations to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Blog; // Actual class is located in blog.hpp.
@@ -107,8 +108,10 @@ public:
 	 */
 	std::vector<Media> content;
 
-	// TODO
-	// std::vector<Layout> layout;
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<Layout> layout;
 
 	// TODO
 	// std::vector<Trail> trail;

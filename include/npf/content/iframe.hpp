@@ -10,11 +10,14 @@
 /**
  * TODO Documentation
  */
-class iFrame: Content {
+class iFrame: public Content {
 
 public:
 
-	iFrame() = default;;
+	/**
+	 * TODO Documentation
+	 */
+	iFrame(): Content(){};
 
 	/**
 	 * A URL used for constructing and embeddable video iframe.

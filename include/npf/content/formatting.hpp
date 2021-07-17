@@ -14,7 +14,10 @@ class Formatting: public Content {
 
 public:
 
-	Formatting()= default;;
+	/**
+	 * TODO Documentation
+	 */
+	Formatting(): Content(){};
 
 	/**
 	 * The starting index of the formatting range (inclusive).

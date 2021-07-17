@@ -11,7 +11,7 @@
 /**
  * TODO Documentation
  */
-class Link : Content {
+class Link : public Content {
 
 public:
 

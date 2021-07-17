@@ -11,14 +11,30 @@
 /**
  * TODO Documentation
  */
-enum layoutType {
-	rows, ask, condensed
-};
-
-/**
- * TODO Documentation
- */
 class Layout : public NPF {
+
+protected:
+
+	/**
+	 * TODO Documentation
+	 */
+	enum layoutType {
+
+		/**
+		 * TODO Documentation
+		 */
+		rows,
+
+		/**
+		 * TODO Documentation
+		 */
+		ask,
+
+		/**
+		 * The condensed layout is deprecated. Please use the rows layout to get or set a recommended truncation index.
+		 */
+		condensed
+	};
 
 public:
 
@@ -31,12 +47,15 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	layoutType type;
+	const layoutType type;
 
 	/**
 	 * TODO Documentation
 	 */
 	std::vector<int> blocks;
+
+	// TODO Remove
+	void populateNPF(JSON_OBJECT entry) override{};
 
 };
 

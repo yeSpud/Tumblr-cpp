@@ -15,8 +15,13 @@ class Content : public NPF {
 
 public:
 
+	[[deprecated("Use the constructor with the type name.")]]
 	Content() = default;;
 
+	/**
+	 * TODO Documentation
+	 * @param type
+	 */
 	explicit Content(std::string type) : type(std::move(type)) {};
 
 	/**

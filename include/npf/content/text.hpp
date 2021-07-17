@@ -11,7 +11,7 @@
 /**
  * TODO Documentation
  */
-class Text: Content {
+class Text: public Content {
 
 public:
 
