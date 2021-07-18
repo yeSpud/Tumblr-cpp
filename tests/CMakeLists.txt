@@ -4,9 +4,9 @@ FetchContent_Declare(
         GIT_TAG 5c88067bd339465513af4aec606bd2292f1b594a)
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(testlib testlib.cpp)
+add_executable(testlib themeTest.cpp)
 
-#target_compile_features()
+target_compile_features(testlib PRIVATE cxx_std_11)
 
 target_link_libraries(testlib PRIVATE TumblrAPI cpr::cpr Catch2::Catch2)
 
