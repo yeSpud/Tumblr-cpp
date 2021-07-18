@@ -7,6 +7,8 @@
 
 #include "post.hpp"
 
+class Post; // Forward declaration to mitigate circular dependencies.
+class Blog; // Forward declaration to mitigate circular dependencies.
 
 /**
  * TODO Documentation
@@ -23,12 +25,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Post post;
+	Post* post;
 
 	/**
 	 * TODO Documentation
 	 */
-	Blog blog;
+	Blog* blog;
 
 	/**
 	 * TODO Documentation

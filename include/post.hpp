@@ -7,9 +7,12 @@
 
 #include "blog.hpp"
 #include "npf/layout/layout.hpp"
+#include "npf/trail.hpp"
 
 // Forward declarations to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 class Blog; // Actual class is located in blog.hpp.
+class Trail; // Forward declaration to mitigate circular dependencies.
+
 
 /**
  * TODO Documentation
@@ -113,8 +116,10 @@ public:
 	 */
 	std::vector<Layout*> layout;
 
-	// TODO
-	// std::vector<Trail> trail;
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<Trail> trail;
 
 	/**
 	 * TODO Documentation
