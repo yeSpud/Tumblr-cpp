@@ -14,6 +14,8 @@ target_include_directories(TumblrAPI PUBLIC ../include)
 
 #target_link_libraries()
 
+target_compile_features(TumblrAPI PUBLIC cxx_std_11)
+
 source_group(
         TREE "${PROJECT_SOURCE_DIR}/include"
         PREFIX "Header Files"
