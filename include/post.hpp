@@ -111,7 +111,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Layout> layout;
+	std::vector<Layout*> layout;
 
 	// TODO
 	// std::vector<Trail> trail;

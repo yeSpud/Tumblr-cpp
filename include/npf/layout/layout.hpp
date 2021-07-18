@@ -42,7 +42,7 @@ public:
 	 * TODO Documentation
 	 * @param type
 	 */
-	explicit Layout(layoutType type) : type(type) {};
+	explicit Layout(layoutType type) : type(type), NPF() {};
 
 	/**
 	 * TODO Documentation
@@ -53,9 +53,6 @@ public:
 	 * TODO Documentation
 	 */
 	std::vector<int> blocks;
-
-	// TODO Remove
-	void populateNPF(JSON_OBJECT entry) override{};
 
 };
 
