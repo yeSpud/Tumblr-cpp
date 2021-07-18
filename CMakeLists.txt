@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.15)
+message("CMake version: ${CMAKE_VERSION} (should be at least 3.5)")
+cmake_minimum_required(VERSION 3.5)
 
 project(
         TumblrAPI
@@ -8,7 +9,7 @@ project(
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
-    set(CMAKE_CXX_STANDARD 11)
+    set(CMAKE_CXX_STANDARD 17)
 
     set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -27,6 +28,7 @@ include("${PROJECT_SOURCE_DIR}/vendor/rapidjson.cmake")
 include_directories(${RAPIDJSON_INCLUDE_DIR})
 
 # cpr
+cmake_policy(SET CMP0079 NEW)
 if (WIN32)
     set(DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
     set(CPR_FORCE_WINSSL_BACKEND ON)
@@ -42,6 +44,9 @@ add_subdirectory(src)
 
 # add external libary dependencies
 add_dependencies(TumblrAPI rapidjson)
+
+# Attempt to add link library "cpr::cpr" to target "TumblrAPI" which is not built in this directory.
+# This is allowed only when policy CMP0079 is set to NEW.
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
 
 message("Checking tests need to be included")
