@@ -50,7 +50,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	void populateNPF(JSON_OBJECT) override;
+	void populateNPF(JSON_OBJECT entry) override;
 
 };
 

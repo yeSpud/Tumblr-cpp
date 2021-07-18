@@ -4,4 +4,8 @@
 
 #include "npf/trail.hpp"
 
-// TODO
+void Trail::populateNPF(JSON_OBJECT entry) { // TODO Documentation
+
+	// TODO
+
+}

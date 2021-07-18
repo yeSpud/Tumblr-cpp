@@ -7,15 +7,25 @@
 
 #include "layout.hpp"
 
+/**
+ * TODO Documentation
+ */
 class Rows : public Layout {
 
 public:
 
-	Rows(): Layout(rows) {};
+	/**
+	 * TODO Documentation
+	 */
+	Rows() : Layout(rows) {};
 
 	// TODO
 	// auto mode;
 
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 */
 	void populateNPF(JSON_OBJECT entry) override;
 
 };

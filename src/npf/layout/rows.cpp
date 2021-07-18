@@ -4,4 +4,8 @@
 
 #include "npf/layout/rows.hpp"
 
-// TODO
+void Rows::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

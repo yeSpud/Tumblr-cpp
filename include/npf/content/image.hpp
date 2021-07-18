@@ -57,6 +57,9 @@ public:
 	 */
 	std::string alt_text;
 
+	/**
+	 * TODO Documentation
+	 */
 	~Image() {
 		delete attribution;
 		attribution = nullptr;

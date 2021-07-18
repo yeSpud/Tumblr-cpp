@@ -8,10 +8,16 @@
 #include "layout.hpp"
 #include "npf/attribution.hpp"
 
+/**
+ * TODO Documentation
+ */
 class Ask : public Layout {
 
 public:
 
+	/**
+	 * TODO Documentation
+	 */
 	Ask() : Layout(layoutType::ask) {};
 
 	/**

@@ -16,14 +16,14 @@
  *
  */
 class [[deprecated("The condensed layout is deprecated and replaced by the truncate_after property in the rows layout. "
-				   "Please use the rows layout to get or set a recommended truncation index.")]] Condensed : public Layout {
+"Please use the rows layout to get or set a recommended truncation index.")]] Condensed : public Layout {
 
 public:
 
 	/**
 	 * TODO Documentation
 	 */
-	Condensed(): Layout(condensed){};
+	Condensed() : Layout(condensed) {};
 
 	/**
 	 * The last block to display before the Read More signifier. Required if blocks is not supplied.

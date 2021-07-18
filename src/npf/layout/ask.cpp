@@ -4,4 +4,8 @@
 
 #include "npf/layout/ask.hpp"
 
-// TODO
+void Ask::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

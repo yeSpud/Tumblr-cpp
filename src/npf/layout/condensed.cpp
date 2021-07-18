@@ -4,4 +4,8 @@
 
 #include "npf/layout/condensed.hpp"
 
-// TODO
+void Condensed::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

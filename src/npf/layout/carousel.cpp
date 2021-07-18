@@ -4,4 +4,8 @@
 
 #include "npf/layout/carousel.hpp"
 
-// TODO
+void Carousel::populateNPF(JSON_OBJECT entry) { // TODO Comments
+
+	// TODO
+
+}

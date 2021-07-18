@@ -7,17 +7,27 @@
 
 #include "rows.hpp"
 
+/**
+ * TODO Documentation
+ */
 class Carousel : public Rows {
 
 public:
 
-	Carousel()= default;;
+	/**
+	 * TODO Documentation
+	 */
+	Carousel() : Rows() {};
 
 	/**
 	 * The last block to display before the Read More signifier. Required if blocks is not supplied.
 	 */
 	int truncate_after;
 
+	/**
+	 * TODO Documentation
+	 * @param entry
+	 */
 	void populateNPF(JSON_OBJECT entry) override;
 
 };
