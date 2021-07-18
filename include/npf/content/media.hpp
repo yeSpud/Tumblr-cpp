@@ -19,7 +19,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Media(): Content(){};
+	Media() : Content() {};
 
 	/**
 	 * The canonical URL of the media asset.

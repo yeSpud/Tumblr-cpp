@@ -11,14 +11,9 @@
 /**
  * TODO Documentation
  */
-class Text: public Content {
+class Text : public Content {
 
-public:
-
-	/**
-	 * TODO Documentation
-	 */
-	explicit Text(): Content("text"){};
+protected:
 
 	/**
 	 * Text blocks can also have a subtype field that specifies a semantic meaning to the text block,
@@ -68,6 +63,13 @@ public:
 		unordered_list_item
 
 	};
+
+public:
+
+	/**
+	 * TODO Documentation
+	 */
+	explicit Text() : Content("text") {};
 
 	/**
 	 * The text to use.

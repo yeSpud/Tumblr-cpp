@@ -15,6 +15,9 @@ class Video: public Content {
 
 public:
 
+	/**
+	 * TODO Documentation
+	 */
 	Video(): Content("video") {};
 
 	/**

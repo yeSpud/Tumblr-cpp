@@ -23,7 +23,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Audio(): Content("audio") {};
+	Audio() : Content("audio") {};
 
 	/**
 	 * The URL to use for the audio content, if no media is present.

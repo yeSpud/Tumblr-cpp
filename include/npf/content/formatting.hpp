@@ -10,14 +10,14 @@
 /**
 * TODO Documentation
 */
-class Formatting: public Content {
+class Formatting : public Content {
 
 public:
 
 	/**
 	 * TODO Documentation
 	 */
-	Formatting(): Content(){};
+	Formatting() : Content() {};
 
 	/**
 	 * The starting index of the formatting range (inclusive).

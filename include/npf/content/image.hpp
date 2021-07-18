@@ -59,7 +59,7 @@ public:
 
 	~Image() {
 		delete attribution;
-		attribution = NULL;
+		attribution = nullptr;
 	};
 
 	/**
