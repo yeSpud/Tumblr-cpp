@@ -43,6 +43,9 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	objectHasValue(entry, "feedback_token", feedback_token);
 
 	// Get poster.
+	POPULATE_SUBGROUP(entry, "poster",
+	                  Media posterMedia;posterMedia.populateNPF(entry["poster"].GetObj());poster = posterMedia;)
+	/*
 	if (entry.HasMember("poster")) {
 		if (entry["poster"].IsObject()) {
 			Media posterMedia;
@@ -50,8 +53,12 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 			poster = posterMedia;
 		}
 	}
+	 */
 
 	// Get attribution.
+	POPULATE_SUBGROUP(entry, "attribution", Attribution attr;attr.populateNPF(
+			entry["attribution"].GetObj());attribution = new Attribution;*attribution = attr;)
+	/*
 	if (entry.HasMember("attribution")) {
 		if (entry["attribution"].IsObject()) {
 			Attribution attr;
@@ -60,6 +67,7 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 			*attribution = attr;
 		}
 	}
+	 */
 
 	objectHasValue(entry, "alt_text", alt_text);
 
