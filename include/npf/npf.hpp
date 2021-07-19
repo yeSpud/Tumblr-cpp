@@ -7,6 +7,7 @@
 
 #include <string>
 #include "rapidjson/document.h"
+//#include "rapidjson/writer.h"
 
 /**
  * Json Object shortcut because I'm lazy
@@ -85,5 +86,19 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::st
 		return false;
 	}
 }
+
+/*
+ * TODO Documentation & comments
+ * @param json
+ * @return
+ */
+ /*
+static const char* jsonToString(const rapidjson::Document &json) {
+	rapidjson::StringBuffer stringBuffer;
+	rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+	json.Accept(writer);
+	return stringBuffer.GetString();
+}
+  */
 
 #endif //TUMBLRAPI_NPF_HPP

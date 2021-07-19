@@ -6,6 +6,13 @@
 
 void Formatting::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	// TODO
+	objectHasValue(entry, "type", type);
+	objectHasValue(entry, "start", start);
+	objectHasValue(entry, "end", end);
+	objectHasValue(entry, "url", url);
+
+	POPULATE_SUBGROUP(entry, "blog", const char* blogString = entry["blog"].GetString();blog = Blog::generateBlog(blogString);)
+
+	objectHasValue(entry, "hex", hex);
 
 }
