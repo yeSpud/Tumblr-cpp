@@ -79,12 +79,43 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buff
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::string &buffer) {
 	if (object.HasMember(value)) {
-		const char* str = object[value].GetString();
+		const char *str = object[value].GetString();
 		buffer = std::string(str);
 		return true;
-	} else {
-		return false;
 	}
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @tparam T
+ * @param object
+ * @param value
+ * @param bufferVector
+ * @return
+ */
+template<typename T>
+static bool populateVectorObject(const JSON_OBJECT &object, const char *value, std::vector<T> &bufferVector) {
+	if (object.HasMember(value)) {
+		if (object[value].IsArray()) {
+			for (auto &objectEntry : object[value].GetArray()) {
+				if (objectEntry.IsObject()) {
+					T entry;
+					entry.populateNPF(objectEntry.GetObj());
+					bufferVector.push_back(entry);
+				}
+			}
+			return true;
+		} else if (object[value].IsObject()) {
+			T entry;
+			entry.populateNPF(object[value].GetObj());
+			bufferVector.push_back(entry);
+			return true;
+		}
+	}
+
+	return false;
+
 }
 
 /*
@@ -92,13 +123,13 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::st
  * @param json
  * @return
  */
- /*
+/*
 static const char* jsonToString(const rapidjson::Document &json) {
-	rapidjson::StringBuffer stringBuffer;
-	rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
-	json.Accept(writer);
-	return stringBuffer.GetString();
+   rapidjson::StringBuffer stringBuffer;
+   rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+   json.Accept(writer);
+   return stringBuffer.GetString();
 }
-  */
+ */
 
 #endif //TUMBLRAPI_NPF_HPP
