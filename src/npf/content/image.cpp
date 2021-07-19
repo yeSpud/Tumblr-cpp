@@ -4,16 +4,18 @@
 
 #include "npf/content/image.hpp"
 
-/**
+/*
  * TODO Documentation & comments
  * @param entry
  * @return
  */
+ /*
 Media getMediaFromObject(const JSON_OBJECT &entry) {
 	Media returnedMedia;
 	returnedMedia.populateNPF(entry);
 	return returnedMedia;
 }
+*/
 
 void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
