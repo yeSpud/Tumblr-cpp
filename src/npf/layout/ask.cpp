@@ -15,11 +15,14 @@ void Ask::populateBlocks(const JSON_ARRAY &array) { // TODO Comments
 
 void Ask::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
+	/*
 	if (entry.HasMember("blocks")) {
 		if (entry["blocks"].IsArray()) {
 			populateBlocks(entry["blocks"].GetArray());
 		}
 	}
+	 */
+	POPULATE_ARRAY(entry, "blocks", populateBlocks(entry["blocks"].GetArray());)
 
 	POPULATE_OBJECT(entry, "attribution",
 	                Attribution attr; attr.populateNPF(entry["attribution"].GetObj()); attribution = attr;)

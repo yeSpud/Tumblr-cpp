@@ -11,7 +11,7 @@
 //#include "rapidjson/writer.h"
 
 /*
- * Json Object shortcuts because I'm lazy
+ * Json shortcuts because I'm lazy
  */
 #define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
 #define JSON_ARRAY rapidjson::GenericArray<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
