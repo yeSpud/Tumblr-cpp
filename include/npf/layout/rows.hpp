@@ -19,8 +19,16 @@ public:
 	 */
 	Rows() : Layout(rows) {};
 
+	std::vector<std::vector<int>> display;
+
 	// TODO
 	// auto mode;
+
+	/**
+	 * TODO Documentation
+	 * @param array
+	 */
+	void populateBlocks(const JSON_ARRAY &array) override;
 
 	/**
 	 * TODO Documentation

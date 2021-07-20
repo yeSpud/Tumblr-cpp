@@ -21,7 +21,7 @@ void Ask::populateNPF(JSON_OBJECT entry) { // TODO Comments
 		}
 	}
 
-	POPULATE_SUBGROUP(entry, "attribution",
-	                  Attribution attr; attr.populateNPF(entry["attribution"].GetObj()); attribution = attr;)
+	POPULATE_OBJECT(entry, "attribution",
+	                Attribution attr; attr.populateNPF(entry["attribution"].GetObj()); attribution = attr;)
 
 }

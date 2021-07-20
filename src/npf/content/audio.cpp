@@ -64,7 +64,7 @@ void Audio::populateNPF(JSON_OBJECT entry) {
 	objectHasValue(entry, "url", url);
 
 	// Media
-	POPULATE_SUBGROUP(entry, "media", Media audioMedia; audioMedia.populateNPF(entry["media"].GetObj()); media = audioMedia;)
+	POPULATE_OBJECT(entry, "media", Media audioMedia; audioMedia.populateNPF(entry["media"].GetObj()); media = audioMedia;)
 	/*
 	if (entry.HasMember("media")) {
 		if (entry["media"].IsObject()) {
@@ -81,7 +81,7 @@ void Audio::populateNPF(JSON_OBJECT entry) {
 	objectHasValue(entry, "album", album);
 
 	// Poster
-	POPULATE_SUBGROUP(entry, "poster",Image posterMedia; posterMedia.populateNPF(entry["poster"].GetObj()); poster = posterMedia;)
+	POPULATE_OBJECT(entry, "poster", Image posterMedia; posterMedia.populateNPF(entry["poster"].GetObj()); poster = posterMedia;)
 	/*
 	if (entry.HasMember("poster")) {
 		if (entry["poster"].IsObject()) {
@@ -98,7 +98,7 @@ void Audio::populateNPF(JSON_OBJECT entry) {
 	// TODO metadata (when implemented)
 
 	// TODO Attribution
-	POPULATE_SUBGROUP(entry, "attribution", Attribution attr; attr.populateNPF(entry["attribution"].GetObj()); attribution = attr;)
+	POPULATE_OBJECT(entry, "attribution", Attribution attr; attr.populateNPF(entry["attribution"].GetObj()); attribution = attr;)
 	/*
 	if (entry.HasMember("attribution")) {
 		if (entry["attribution"].IsObject()) {
