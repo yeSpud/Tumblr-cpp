@@ -5,7 +5,6 @@
 #ifndef TUMBLRAPI_LAYOUT_HPP
 #define TUMBLRAPI_LAYOUT_HPP
 
-#include <vector>
 #include "npf/npf.hpp"
 
 /**

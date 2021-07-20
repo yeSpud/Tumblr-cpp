@@ -5,7 +5,6 @@
 #ifndef TUMBLRAPI_CONTENT_HPP
 #define TUMBLRAPI_CONTENT_HPP
 
-#include <string>
 #include "npf/npf.hpp"
 
 /**

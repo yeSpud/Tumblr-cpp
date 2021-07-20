@@ -46,7 +46,7 @@ void Video::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	if (entry.HasMember("attribution")) {
 		if (entry["attribution"].IsObject()) {
 			Attribution attr;
-			attr.populateNPF(entry["attribution"]);
+			attr.populateNPF(entry["attribution"].GetObj());
 			attribution = attr;
 		}
 	}

@@ -6,6 +6,7 @@
 #define TUMBLRAPI_NPF_HPP
 
 #include <string>
+#include <vector>
 #include "rapidjson/document.h"
 //#include "rapidjson/writer.h"
 

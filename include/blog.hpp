@@ -5,7 +5,6 @@
 #ifndef TUMBLRAPI_BLOG_HPP
 #define TUMBLRAPI_BLOG_HPP
 
-#include <vector>
 #include "theme.hpp"
 #include "npf/content/image.hpp"
 
