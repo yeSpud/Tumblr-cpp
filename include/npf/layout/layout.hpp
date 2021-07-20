@@ -53,6 +53,12 @@ public:
 	 */
 	std::vector<int> blocks;
 
+	/**
+	 * TODO Documentation
+	 * @param array
+	 */
+	virtual void populateBlocks(const JSON_ARRAY &array) = 0;
+
 };
 
 #endif //TUMBLRAPI_LAYOUT_HPP

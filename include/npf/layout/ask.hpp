@@ -27,6 +27,12 @@ public:
 
 	/**
 	 * TODO Documentation
+	 * @param array
+	 */
+	void populateBlocks(const JSON_ARRAY &array) override;
+
+	/**
+	 * TODO Documentation
 	 * @param entry
 	 */
 	void populateNPF(JSON_OBJECT entry) override;

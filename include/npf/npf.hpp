@@ -10,10 +10,12 @@
 #include "rapidjson/document.h"
 //#include "rapidjson/writer.h"
 
-/**
- * Json Object shortcut because I'm lazy
+/*
+ * Json Object shortcuts because I'm lazy
  */
 #define JSON_OBJECT rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
+#define JSON_ARRAY rapidjson::GenericArray<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>>
+#define JSON_ARRAY_ENTRY rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>
 
 // TODO Turn into function
 #define POPULATE_SUBGROUP(entry, value, code) if (entry.HasMember(value)) {\
@@ -99,7 +101,7 @@ template<typename T>
 static bool populateVectorObject(const JSON_OBJECT &object, const char *value, std::vector<T> &bufferVector) {
 	if (object.HasMember(value)) {
 		if (object[value].IsArray()) {
-			for (auto &objectEntry : object[value].GetArray()) {
+			for (JSON_ARRAY_ENTRY &objectEntry : object[value].GetArray()) {
 				if (objectEntry.IsObject()) {
 					T entry;
 					entry.populateNPF(objectEntry.GetObj());
