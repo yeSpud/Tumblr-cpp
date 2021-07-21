@@ -10,6 +10,8 @@ file(GLOB LAYOUT_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/npf/layout
 
 add_library(TumblrAPI STATIC ${HEADERS} ${NPF_HEADERS} ${CONTENT_HEADERS} ${LAYOUT_HEADERS} ${SOURCES} ${NPF_SOURCES} ${CONTENT_SOURCES} ${LAYOUT_SOURCES})
 
+add_library(TumblrAPI::TumblrAPI ALIAS TumblrAPI)
+
 target_include_directories(TumblrAPI PUBLIC ../include)
 
 #target_link_libraries()
