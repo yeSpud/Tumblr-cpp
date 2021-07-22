@@ -26,15 +26,17 @@ public:
 	/**
 	* Indicates whether the blog allows anonymous questions.
 	*/
-	bool ask_anon;
+	bool ask_anon = false;
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	std::string ask_page_title;
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool asks_allow_media;
 
@@ -45,21 +47,24 @@ public:
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool can_chat;
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool can_subscribe;
 
 	/**
-	 * TODO Documentation
+	 * The blog's description.
 	 */
 	std::string description;
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool is_nsfw;
 
@@ -69,17 +74,24 @@ public:
 	std::string name;
 
 	/**
-	 * TODO Documentation
+	 * The total number of posts to this blog.
 	 */
 	uint64_t posts;
 
 	/**
+	 * Number of likes for this user.
+	 */
+	uint64_t likes = 0;
+
+	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool shared_likes;
 
 	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool subscribed;
 
@@ -89,19 +101,30 @@ public:
 	Theme theme;
 
 	/**
-	 * TODO Documentation
+	 * The display title of the blog.
 	 */
 	std::string title;
 
 	/**
-	 * TODO Documentation
+	 * The total number of post available for this request, useful for paginating through results.
 	 */
 	uint64_t total_posts;
 
 	/**
-	 * TODO Documentation
+	 * The time of the most recent post, in seconds since the epoch.
 	 */
 	uint64_t updated;
+
+	/**
+	 * The blog's configured timezone, such as "US/Eastern". Only viewable by blog member. Partial response field ONLY.
+	 */
+	std::string timezone;
+
+	/**
+	 * The blog's configured timezone as a GMT offset such as "GMT+0800". Only viewable by blog member.
+	 * Partial response field ONLY.
+	 */
+	std::string timezone_offset;
 
 	/**
 	 * TODO Documentation
@@ -114,7 +137,13 @@ public:
 	std::string uuid;
 
 	/**
+	 * Indicates whether this blog has been blocked by the calling user's primary blog
+	 */
+	bool is_blocked_from_primary = false;
+
+	/**
 	 * TODO Documentation
+	 * Undocumented?
 	 */
 	bool is_optout_ads;
 
