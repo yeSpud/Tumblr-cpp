@@ -44,7 +44,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	uint64_t id = 0;
+	unsigned long long id = 0;
 
 	/**
 	 * TODO Documentation
@@ -69,7 +69,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	uint64_t timestamp = 0;
+	unsigned long long timestamp = 0;
 
 	/**
 	 * TODO Documentation
@@ -104,7 +104,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	uint64_t note_count = 0;
+	unsigned long long note_count = 0;
 
 	/**
 	 * TODO Documentation
