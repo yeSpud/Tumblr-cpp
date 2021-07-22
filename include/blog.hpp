@@ -149,17 +149,17 @@ public:
 
 	/**
 	 * TODO Documentation
+	 * @param object
+	 * @return
+	 */
+	void populateBlog(const JSON_OBJECT &object);
+
+	/**
+	 * TODO Documentation
 	 * @param json
 	 * @return
 	 */
 	static Blog generateBlog(const char *json);
-
-	/**
-	 * TODO Documentation
-	 * @param object
-	 * @return
-	 */
-	Blog populateBlog(const JSON_OBJECT object);
 
 };
 

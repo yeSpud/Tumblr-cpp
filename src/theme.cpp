@@ -4,7 +4,7 @@
 
 #include "theme.hpp"
 
-Theme Theme::generateTheme(const rapidjson::Value &entry) {
+Theme Theme::generateTheme(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &entry) {
 	// TODO
 	return Theme();
 }
