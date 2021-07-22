@@ -20,9 +20,16 @@
 #define POPULATE_OBJECT(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsObject()) {code}}
 #define POPULATE_ARRAY(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsArray()) {code}}
 
+#define DELETE_NPF(NPF) if (NPF != nullptr) { delete NPF; NPF = nullptr; }
+
 class NPF {
 
 public:
+
+	/**
+	 * TODO Documentation
+	 */
+	virtual ~NPF() = default;
 
 	/**
 	 * TODO Documentation

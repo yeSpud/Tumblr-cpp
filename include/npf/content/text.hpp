@@ -69,7 +69,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	explicit Text() : Content("text") {};
+	Text() : Content("text") {};
 
 	/**
 	 * The text to use.

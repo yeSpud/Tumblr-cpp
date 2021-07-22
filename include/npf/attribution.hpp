@@ -31,15 +31,10 @@ public:
 	 * TODO Documentation & comments
 	 */
 	~Attribution() {
-		if (postObject != nullptr) {
-			delete postObject;
-			postObject = nullptr;
-		}
 
-		if (blogObject != nullptr) {
-			delete blogObject;
-			blogObject = nullptr;
-		}
+		DELETE_NPF(postObject)
+
+		DELETE_NPF(blogObject)
 	}
 
 	/**

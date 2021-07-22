@@ -17,6 +17,8 @@ class Trail : public NPF {
 
 public:
 
+	~Trail();
+
 	/**
 	 * TODO Documentation
 	 */

@@ -59,10 +59,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	~Image() {
-		delete attribution;
-		attribution = nullptr;
-	};
+	~Image() { DELETE_NPF(attribution)};
 
 	/**
 	 * TODO Documentation

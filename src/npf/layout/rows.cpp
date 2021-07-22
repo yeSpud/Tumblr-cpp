@@ -49,6 +49,8 @@ void Rows::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	 */
 	POPULATE_ARRAY(entry, "display", populateBlocks(entry["display"].GetArray());)
 
+	objectHasValue(entry, "truncate_after", truncate_after);
+
 	// TODO Mode (when implemented)
 
 }
