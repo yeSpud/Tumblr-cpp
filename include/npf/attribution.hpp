@@ -28,6 +28,21 @@ class Attribution : NPF {
 public:
 
 	/**
+	 * TODO Documentation & comments
+	 */
+	~Attribution() {
+		if (postObject != nullptr) {
+			delete postObject;
+			postObject = nullptr;
+		}
+
+		if (blogObject != nullptr) {
+			delete blogObject;
+			blogObject = nullptr;
+		}
+	}
+
+	/**
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */

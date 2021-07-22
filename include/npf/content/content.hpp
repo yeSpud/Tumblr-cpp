@@ -14,7 +14,7 @@ class Content : public NPF {
 
 public:
 
-	[[deprecated("Use the constructor with the type name.")]]
+	//[[deprecated("Use the constructor with the type name.")]]
 	Content() : NPF() {};
 
 	/**

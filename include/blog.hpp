@@ -125,6 +125,13 @@ public:
 	 */
 	static Blog generateBlog(const char *json);
 
+	/**
+	 * TODO Documentation
+	 * @param object
+	 * @return
+	 */
+	Blog populateBlog(const JSON_OBJECT object);
+
 };
 
 #endif //TUMBLRAPI_BLOG_HPP

@@ -153,6 +153,13 @@ public:
 	 */
 	static std::vector<Post> generatePosts(const char *json);
 
+	/**
+	 * TODO Documentation
+	 * @param object
+	 * @return
+	 */
+	Post populatePost(const JSON_OBJECT object);
+
 };
 
 #endif //TUMBLRAPI_POST_HPP

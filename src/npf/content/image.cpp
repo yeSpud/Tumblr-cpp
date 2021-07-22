@@ -61,6 +61,7 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	 */
 
 	// Get attribution.
+	// TODO Simplify
 	POPULATE_OBJECT(entry, "attribution", Attribution attr;attr.populateNPF(
 			entry["attribution"].GetObj());attribution = new Attribution;*attribution = attr;)
 	/*
