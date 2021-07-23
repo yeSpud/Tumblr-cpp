@@ -108,7 +108,7 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	unsigned long long total_posts;
+	unsigned long long total_posts; // TODO Only in posts?
 
 	/**
 	 * The time of the most recent post, in seconds since the epoch.
