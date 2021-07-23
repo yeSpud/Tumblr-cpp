@@ -49,7 +49,7 @@ public:
 	/**
 	 * The post's unique ID.
 	 */
-	unsigned long long id = 0;
+	uint64_t id = 0;
 
 	/**
 	 * The post's unique ID as a String (For clients that don't support 64-bit integers).
@@ -79,7 +79,7 @@ public:
 	/**
 	 * The time of the post, in seconds since the epoch.
 	 */
-	unsigned long long timestamp = 0;
+	uint64_t timestamp = 0;
 
 	/**
 	 * The post format: html or markdown
@@ -129,7 +129,7 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	unsigned long long total_posts;
+	uint64_t total_posts;
 
 	/**
 	 * Short url for the post.
@@ -169,7 +169,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	unsigned long long note_count = 0;
+	uint64_t note_count = 0;
 
 	/**
 	 * TODO Documentation

@@ -76,12 +76,12 @@ public:
 	/**
 	 * The total number of posts to this blog.
 	 */
-	unsigned long long posts;
+	uint64_t posts;
 
 	/**
 	 * Number of likes for this user.
 	 */
-	unsigned long long likes = 0;
+	uint64_t likes = 0;
 
 	/**
 	 * TODO Documentation
@@ -108,12 +108,12 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	unsigned long long total_posts; // TODO Only in posts?
+	uint64_t total_posts; // TODO Only in posts?
 
 	/**
 	 * The time of the most recent post, in seconds since the epoch.
 	 */
-	unsigned long long updated;
+	uint64_t updated;
 
 	/**
 	 * The blog's configured timezone, such as "US/Eastern". Only viewable by blog member. Partial response field ONLY.
