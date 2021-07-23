@@ -19,7 +19,7 @@ public:
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
 	 */
-	std::string avatar_shape;
+	std::string avatar_shape; // TODO Convert to enum
 
 	/**
 	 * The intended hex color used for the blog's background color.
