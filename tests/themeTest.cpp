@@ -30,6 +30,7 @@ TEST_CASE("Theme test", "[Content]") {
 
 	// Test populating theme
 	// TODO
+	//theme.generateTheme()
 
 	// Rerun tests on populated theme
 	// TODO
