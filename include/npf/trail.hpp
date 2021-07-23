@@ -20,32 +20,51 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Trail(): NPF(){};
+	~Trail();
 
 	/**
 	 * TODO Documentation
 	 */
-	Post* post;
+	Trail() : NPF() {};
 
 	/**
 	 * TODO Documentation
 	 */
-	Blog* blog;
+	Post *post;
 
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Content*> content;
+	Blog *blog;
 
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Layout*> layout;
+	std::vector<Content *> content;
+
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<Layout *> layout;
 
 	/**
 	 * TODO Documentation
 	 */
 	std::string broken_blog_name;
+
+	/**
+	 * TODO Documentation
+	 * @param object
+	 * @param vector
+	 */
+	static void populateContentPointerArray(const JSON_OBJECT &object, std::vector<Content *> &array);
+
+	/**
+	 * TODO Documentation
+	 * @param object
+	 * @param array
+	 */
+	static void populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<Layout *> &array);
 
 	/**
 	 * TODO Documentation

@@ -30,6 +30,8 @@ public:
 	 */
 	int truncate_after;
 
+	void populateBlocks(const JSON_ARRAY &array) override;
+
 	/**
 	 * TODO Documentation
 	 * @param entry

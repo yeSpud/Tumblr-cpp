@@ -6,6 +6,8 @@
 
 void iFrame::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	// TODO
+	objectHasValue(entry, "url", url);
+	objectHasValue(entry, "width", width);
+	objectHasValue(entry, "height", height);
 
 }

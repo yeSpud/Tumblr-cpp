@@ -11,14 +11,14 @@
 /**
  * TODO Documentation
  */
-class Video: public Content {
+class Video : public Content {
 
 public:
 
 	/**
 	 * TODO Documentation
 	 */
-	Video(): Content("video") {};
+	Video() : Content("video") {};
 
 	/**
 	 * The URL to use for the video content, if no media is present.

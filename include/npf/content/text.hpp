@@ -69,7 +69,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	explicit Text() : Content("text") {};
+	Text() : Content("text") {};
 
 	/**
 	 * The text to use.
@@ -83,8 +83,9 @@ public:
 
 	/**
 	 * TODO Documentation
+	 * 0 - 7
 	 */
-	uint64_t indent_level;
+	unsigned int indent_level = 0;
 
 	/**
 	 * TODO Documentation

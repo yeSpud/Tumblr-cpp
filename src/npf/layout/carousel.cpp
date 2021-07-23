@@ -6,6 +6,8 @@
 
 void Carousel::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	// TODO
+	Rows::populateNPF(entry);
+
+	objectHasValue(entry, "truncate_after", truncate_after);
 
 }

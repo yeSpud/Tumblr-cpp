@@ -20,11 +20,6 @@ public:
 	Carousel() : Rows() {};
 
 	/**
-	 * The last block to display before the Read More signifier. Required if blocks is not supplied.
-	 */
-	int truncate_after;
-
-	/**
 	 * TODO Documentation
 	 * @param entry
 	 */

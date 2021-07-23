@@ -24,7 +24,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::string type;
+	~Post();
+
+	/**
+	 * The type of post.
+	 */
+	std::string type; // TODO Convert this to an enum.
 
 	/**
 	 * TODO Documentation
@@ -32,64 +37,124 @@ public:
 	std::string original_type;
 
 	/**
-	 * TODO Documentation
+	 * The short name used to uniquely identify a blog.
 	 */
 	std::string blog_name;
 
 	/**
 	 * TODO Documentation
 	 */
-	Blog* blog; // Blog pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Blog *blog; // Blog pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
-	 * TODO Documentation
+	 * The post's unique ID.
 	 */
 	uint64_t id = 0;
 
 	/**
-	 * TODO Documentation
+	 * The post's unique ID as a String (For clients that don't support 64-bit integers).
 	 */
 	std::string id_string;
 
 	/**
-	 * TODO Documentation
+	 * The post's unique "genesis" ID as a string (only available to the post owner in certain circumstances).
+	 */
+	std::string genesis_post_id;
+
+	/**
+	 * The location of the post.
 	 */
 	std::string post_url;
 
 	/**
-	 * TODO Documentation
+	 * Short text summary to the end of the post URL.
 	 */
 	std::string slug;
 
 	/**
-	 * TODO Documentation
+	 * The GMT date and time of the post, as a string.
 	 */
 	std::string date;
 
 	/**
-	 * TODO Documentation
+	 * The time of the post, in seconds since the epoch.
 	 */
 	uint64_t timestamp = 0;
 
 	/**
-	 * TODO Documentation
+	 * The post format: html or markdown
 	 */
-	std::string state;
+	std::string format; // TODO Convert this to an enum.
 
 	/**
-	 * TODO Documentation
+	 * Indicates the current state of the post.
+	 */
+	std::string state; // TODO Convert this to an enum.
+
+	/**
+	 * The key used to reblog this post.
 	 */
 	std::string reblog_key;
 
 	/**
-	 * TODO Documentation
+	 * Tags applied to the post.
 	 */
 	std::vector<std::string> tags;
 
 	/**
-	 * TODO Documentation
+	 * Indicates whether the post was created via the Tumblr bookmarklet.
+	 */
+	bool bookmarklet = false;
+
+	/**
+	 * Indicates whether the post was created via mobile/email publishing.
+	 */
+	bool mobile = false;
+
+	/**
+	 * The URL for the source of the content (for quotes, reblogs, etc.).
+	 */
+	std::string source_url;
+
+	/**
+	 * The title of the source site.
+	 */
+	std::string source_title;
+
+	/**
+	 * Indicates if a user has already liked a post or not. Requires OAuth.
+	 */
+	bool liked;
+
+	/**
+	 * The total number of post available for this request, useful for paginating through results.
+	 */
+	uint64_t total_posts;
+
+	/**
+	 * Short url for the post.
 	 */
 	std::string short_url;
+
+	/**
+	 * Author of post, only available when submission is not anonymous.
+	 */
+	std::string post_author;
+
+	/**
+	 * Indicates post is a submission.
+	 */
+	bool is_submission;
+
+	/**
+	 * Name on an anonymous submission.
+	 */
+	std::string anonymous_name;
+
+	/**
+	 * Email on an anonymous submission.
+	 */
+	std::string anonymous_email;
 
 	/**
 	 * TODO Documentation
@@ -109,12 +174,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Media> content;
+	std::vector<Content *> content;
 
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Layout*> layout;
+	std::vector<Layout *> layout;
 
 	/**
 	 * TODO Documentation
@@ -145,6 +210,15 @@ public:
 	 * TODO Documentation
 	 */
 	bool display_avatar;
+
+	// TODO Add post comparison (== and !=)
+
+	/**
+	 * TODO Documentation
+	 * @param object
+	 * @return
+	 */
+	void populatePost(const JSON_OBJECT &object);
 
 	/**
 	 * TODO Documentation

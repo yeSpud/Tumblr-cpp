@@ -28,6 +28,16 @@ class Attribution : NPF {
 public:
 
 	/**
+	 * TODO Documentation & comments
+	 */
+	~Attribution() {
+
+		DELETE_NPF(postObject)
+
+		DELETE_NPF(blogObject)
+	}
+
+	/**
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */

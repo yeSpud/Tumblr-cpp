@@ -5,7 +5,6 @@
 #ifndef TUMBLRAPI_CONTENT_HPP
 #define TUMBLRAPI_CONTENT_HPP
 
-#include <string>
 #include "npf/npf.hpp"
 
 /**
@@ -15,7 +14,7 @@ class Content : public NPF {
 
 public:
 
-	[[deprecated("Use the constructor with the type name.")]]
+	//[[deprecated("Use the constructor with the type name.")]]
 	Content() : NPF() {};
 
 	/**

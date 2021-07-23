@@ -19,7 +19,7 @@ public:
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
 	 */
-	std::string avatar_shape;
+	std::string avatar_shape; // TODO Convert to enum
 
 	/**
 	 * The intended hex color used for the blog's background color.
@@ -109,7 +109,7 @@ public:
 	 * @param entry
 	 * @return
 	 */
-	static Theme generateTheme(const rapidjson::Value &entry);
+	static Theme generateTheme(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &entry);
 
 };
 

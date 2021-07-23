@@ -36,9 +36,19 @@ void Attribution::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	objectHasValue(entry, "url", url);
 
-	// TODO Post pointer
+	// Post pointer
+	POPULATE_OBJECT(entry, "post", postObject = new Post();postObject->populatePost(entry["post"].GetObj());)
+	/*
+	if (entry.HasMember("post")) {
+		if (entry["post"].IsObject()) {
+			postObject = new Post();
+			postObject->populatePost(entry["post"].GetObj());
+		}
+	}
+	 */
 
-	// TODO Blog pointer
+	// Blog pointer
+	POPULATE_OBJECT(entry, "blog", blogObject = new Blog();blogObject->populateBlog(entry["blog"].GetObj());)
 
 	objectHasValue(entry, "app_name", app_name);
 	objectHasValue(entry, "display_text", display_text);

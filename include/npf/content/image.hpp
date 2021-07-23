@@ -5,7 +5,6 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
-#include <vector>
 #include "media.hpp"
 
 // This is where we run into circular dependencies issues. Especially with attribution.hpp.
@@ -60,10 +59,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	~Image() {
-		delete attribution;
-		attribution = nullptr;
-	};
+	~Image() { DELETE_NPF(attribution)};
 
 	/**
 	 * TODO Documentation
