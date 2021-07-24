@@ -21,7 +21,7 @@ public:
 	/**
 	 * Indicates whether the blog allows questions.
 	 */
-	bool ask;
+	bool ask = false;
 
 	/**
 	* Indicates whether the blog allows anonymous questions.
@@ -38,7 +38,7 @@ public:
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool asks_allow_media;
+	bool asks_allow_media = false;
 
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
@@ -49,13 +49,13 @@ public:
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool can_chat;
+	bool can_chat = false;
 
 	/**
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool can_subscribe;
+	bool can_subscribe = false;
 
 	/**
 	 * The blog's description.
@@ -66,7 +66,7 @@ public:
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool is_nsfw;
+	bool is_nsfw = false;
 
 	/**
 	 * The short blog name that appears before tumblr.com in a standard blog hostname
@@ -76,7 +76,7 @@ public:
 	/**
 	 * The total number of posts to this blog.
 	 */
-	uint64_t posts;
+	uint64_t posts = 0;
 
 	/**
 	 * Number of likes for this user.
@@ -87,13 +87,13 @@ public:
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool shared_likes;
+	bool shared_likes = false;
 
 	/**
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool subscribed;
+	bool subscribed = false;
 
 	/**
 	 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
@@ -108,12 +108,12 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	uint64_t total_posts; // TODO Only in posts?
+	uint64_t total_posts = 0; // TODO Only in posts?
 
 	/**
 	 * The time of the most recent post, in seconds since the epoch.
 	 */
-	uint64_t updated;
+	uint64_t updated = 0;
 
 	/**
 	 * The blog's configured timezone, such as "US/Eastern". Only viewable by blog member. Partial response field ONLY.
@@ -145,7 +145,7 @@ public:
 	 * TODO Documentation
 	 * Undocumented?
 	 */
-	bool is_optout_ads;
+	bool is_optout_ads = false;
 
 	/**
 	 * TODO Documentation
