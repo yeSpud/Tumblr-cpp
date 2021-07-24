@@ -6,7 +6,7 @@
 #include "catch2/catch.hpp"
 #include "theme.hpp"
 
-TEST_CASE("Theme test", "[Content]") {
+TEST_CASE("Theme test") {
 
 	// Test empty theme
 	Theme theme;

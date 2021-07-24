@@ -17,7 +17,26 @@ class Post; // Actual class is located in post.hpp.
  * TODO Documentation
  */
 enum attributionType {
-	link, blog, post, app
+
+	/**
+	 * TODO Documentation
+	 */
+	link,
+
+	/**
+	 * TODO Documentation
+	 */
+	blog,
+
+	/**
+	 * TODO Documentation
+	 */
+	post,
+
+	/**
+	 * TODO Documentation
+	 */
+	app
 };
 
 /**
