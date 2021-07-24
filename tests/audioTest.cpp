@@ -139,6 +139,10 @@ TEST_CASE("Parsing Audio Test", "[Audio]") {
 	soundcloudAudio.populateNPF(soundcloudAudioObject);
 
 	// Test the objects.
+
+	/*
+	 * Tumblr Audio
+	 */
 	REQUIRE(tumblrAudio.type == "audio");
 	REQUIRE(tumblrAudio.url.empty());
 
@@ -155,7 +159,6 @@ TEST_CASE("Parsing Audio Test", "[Audio]") {
 	REQUIRE(tumblrAudio.artist == "Track Artist");
 	REQUIRE(tumblrAudio.album == "Track Album");
 
-
 	REQUIRE(tumblrAudio.poster.type == "image/jpeg");
 	REQUIRE(tumblrAudio.poster.url == "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
 	REQUIRE(tumblrAudio.poster.width == 500);
@@ -164,7 +167,7 @@ TEST_CASE("Parsing Audio Test", "[Audio]") {
 	REQUIRE_FALSE(tumblrAudio.poster.cropped);
 	REQUIRE_FALSE(tumblrAudio.poster.has_original_dimensions);
 
-	REQUIRE(tumblrAudio.embed_url.empty());
+	REQUIRE(tumblrAudio.embed_html.empty());
 	REQUIRE(tumblrAudio.embed_url.empty());
 
 	REQUIRE(tumblrAudio.attribution.type == post);
@@ -181,49 +184,50 @@ TEST_CASE("Parsing Audio Test", "[Audio]") {
 	REQUIRE(tumblrAudio.attribution.logo.original_dimensions_missing);
 	REQUIRE_FALSE(tumblrAudio.attribution.logo.cropped);
 	REQUIRE_FALSE(tumblrAudio.attribution.logo.has_original_dimensions);
-}
 
-void testAudio(const Audio &audioObject) {
+	/*
+	 * Soundcloud audio
+	 */
+	REQUIRE(soundcloudAudio.type == "audio");
+	REQUIRE(soundcloudAudio.url == "https://soundcloud.com/neilcic/mouth-sounds");
 
-	REQUIRE(audioObject.type == "audio");
-	REQUIRE(audioObject.url.empty());
+	REQUIRE(soundcloudAudio.media.type == "audio/mp3");
+	REQUIRE(soundcloudAudio.media.url == "https://soundcloud.com/neilcic/mouth-sounds.mp3");
+	REQUIRE(soundcloudAudio.media.width == 0);
+	REQUIRE(soundcloudAudio.media.height == 0);
+	REQUIRE(soundcloudAudio.media.original_dimensions_missing);
+	REQUIRE_FALSE(soundcloudAudio.media.cropped);
+	REQUIRE_FALSE(soundcloudAudio.media.has_original_dimensions);
 
-	REQUIRE(audioObject.media.type.empty());
-	REQUIRE(audioObject.media.url.empty());
-	REQUIRE(audioObject.media.width == 0);
-	REQUIRE(audioObject.media.height == 0);
-	REQUIRE(audioObject.media.original_dimensions_missing);
-	REQUIRE_FALSE(audioObject.media.cropped);
-	REQUIRE_FALSE(audioObject.media.has_original_dimensions);
+	REQUIRE(soundcloudAudio.provider == "soundcloud");
+	REQUIRE(soundcloudAudio.title == "Mouth Sounds");
+	REQUIRE(soundcloudAudio.artist == "neilcic");
+	REQUIRE(soundcloudAudio.album.empty());
 
-	REQUIRE(audioObject.provider.empty());
-	REQUIRE(audioObject.title.empty());
-	REQUIRE(audioObject.artist.empty());
-	REQUIRE(audioObject.album.empty());
+	REQUIRE(soundcloudAudio.poster.type == "image/jpeg");
+	REQUIRE(soundcloudAudio.poster.url == "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
+	REQUIRE(soundcloudAudio.poster.width == 500);
+	REQUIRE(soundcloudAudio.poster.height == 400);
+	REQUIRE(soundcloudAudio.poster.original_dimensions_missing);
+	REQUIRE_FALSE(soundcloudAudio.poster.cropped);
+	REQUIRE_FALSE(tumblrAudio.poster.has_original_dimensions);
 
-	REQUIRE(audioObject.poster.type.empty());
-	REQUIRE(audioObject.poster.url.empty());
-	REQUIRE(audioObject.poster.width == 0);
-	REQUIRE(audioObject.poster.height == 0);
-	REQUIRE(audioObject.poster.original_dimensions_missing);
-	REQUIRE_FALSE(audioObject.poster.cropped);
-	REQUIRE_FALSE(audioObject.poster.has_original_dimensions);
+	REQUIRE(soundcloudAudio.embed_html == "<iframe width=\"100%\" height=\"450\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\"></iframe>");
+	REQUIRE(soundcloudAudio.embed_url == "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true");
 
-	REQUIRE(audioObject.embed_url.empty());
-	REQUIRE(audioObject.embed_url.empty());
+	REQUIRE(soundcloudAudio.attribution.type == post);
+	REQUIRE(soundcloudAudio.attribution.url.empty());
+	REQUIRE(soundcloudAudio.attribution.postObject == nullptr);
+	REQUIRE(soundcloudAudio.attribution.blogObject == nullptr);
+	REQUIRE(soundcloudAudio.attribution.app_name.empty());
+	REQUIRE(soundcloudAudio.attribution.display_text.empty());
 
-	REQUIRE(audioObject.attribution.type == post);
-	REQUIRE(audioObject.attribution.url.empty());
-	REQUIRE(audioObject.attribution.postObject == nullptr);
-	REQUIRE(audioObject.attribution.blogObject == nullptr);
-	REQUIRE(audioObject.attribution.app_name.empty());
-	REQUIRE(audioObject.attribution.display_text.empty());
+	REQUIRE(soundcloudAudio.attribution.logo.type.empty());
+	REQUIRE(soundcloudAudio.attribution.logo.url.empty());
+	REQUIRE(soundcloudAudio.attribution.logo.width == 0);
+	REQUIRE(soundcloudAudio.attribution.logo.height == 0);
+	REQUIRE(soundcloudAudio.attribution.logo.original_dimensions_missing);
+	REQUIRE_FALSE(soundcloudAudio.attribution.logo.cropped);
+	REQUIRE_FALSE(soundcloudAudio.attribution.logo.has_original_dimensions);
 
-	REQUIRE(audioObject.attribution.logo.type.empty());
-	REQUIRE(audioObject.attribution.logo.url.empty());
-	REQUIRE(audioObject.attribution.logo.width == 0);
-	REQUIRE(audioObject.attribution.logo.height == 0);
-	REQUIRE(audioObject.attribution.logo.original_dimensions_missing);
-	REQUIRE_FALSE(audioObject.attribution.logo.cropped);
-	REQUIRE_FALSE(audioObject.attribution.logo.has_original_dimensions);
 }
