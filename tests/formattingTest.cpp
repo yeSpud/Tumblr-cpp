@@ -64,6 +64,107 @@ TEST_CASE("Blank Formatting Test", "[Formatting]") {
 
 TEST_CASE("Parsing Formatting Test", "[Formatting]") {
 
+	/*
+	{
+		"type": "text",
+		"text": "supercalifragilisticexpialidocious",
+		"formatting": [
+			{
+				"start": 0,
+				"end": 20,
+				"type": "bold"
+			},
+			{
+				"start": 9,
+				"end": 34,
+				"type": "italic"
+			}
+		]
+	}
+	 */
+
+	/*
+	{
+		"type": "text",
+		"text": "some bold and italic text",
+		"formatting": [
+			{
+				"start": 5,
+				"end": 9,
+				"type": "bold"
+			},
+			{
+				"start": 14,
+				"end": 20,
+				"type": "italic"
+			}
+		]
+	}
+	 */
+
+	/*
+	{
+		"type": "text",
+		"text": "some small text",
+		"formatting": [
+			{
+				"start": 5,
+				"end": 10,
+				"type": "small"
+			}
+		]
+	}
+	 */
+
+	/*
+	{
+		"type": "text",
+		"text": "Found this link for you",
+		"formatting": [
+			{
+				"start": 6,
+				"end": 10,
+				"type": "link",
+				"url": "https://www.nasa.gov"
+			}
+		]
+	}
+	 */
+
+	/*
+	{
+		"type": "text",
+		"text": "Shout out to @david",
+		"formatting": [
+			{
+				"start": 13,
+				"end": 19,
+				"type": "mention",
+				"blog": {
+					"uuid": "t:123456abcdf",
+					"name": "david",
+					"url": "https://davidslog.com/",
+				}
+			}
+		]
+	}
+	 */
+
+	/*
+	{
+		"type": "text",
+		"text": "Celebrate Pride Month",
+		"formatting": [
+			{
+				"start": 10,
+				"end": 15,
+				"type": "color",
+				"hex": "#ff492f"
+			}
+		]
+	}
+	 */
+
 	// TODO
 
 }
