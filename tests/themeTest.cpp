@@ -2,11 +2,10 @@
 // Created by Spud on 7/13/21.
 //
 
-#define CATCH_CONFIG_MAIN
-#include "catch2/catch.hpp"
+#include "test.hpp"
 #include "theme.hpp"
 
-TEST_CASE("Theme test") {
+TEST_CASE("Theme Test") {
 
 	// Test empty theme
 	Theme theme;

@@ -2,8 +2,9 @@
 // Created by Spud on 7/22/21.
 //
 
-#include "catch2/catch.hpp"
+#include "test.hpp"
 #include "npf/content/audio.hpp"
+#include "mediaTest.cpp"
 
 TEST_CASE("Blank Audio Test", "[Audio]") { // TODO Comments
 
@@ -26,6 +27,9 @@ TEST_CASE("Blank Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(audio.artist.empty());
 	REQUIRE(audio.album.empty());
 
+	// Test the poster.
+	testMedia(audio.poster, "", "", 0, 0, true, false, false);
+	/*
 	REQUIRE(audio.poster.type.empty());
 	REQUIRE(audio.poster.url.empty());
 	REQUIRE(audio.poster.width == 0);
@@ -33,11 +37,12 @@ TEST_CASE("Blank Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(audio.poster.original_dimensions_missing);
 	REQUIRE_FALSE(audio.poster.cropped);
 	REQUIRE_FALSE(audio.poster.has_original_dimensions);
+	*/
 
 	REQUIRE(audio.embed_url.empty());
 	REQUIRE(audio.embed_url.empty());
 
-	REQUIRE(audio.attribution.type == post);
+	REQUIRE(audio.attribution.type == attribution_post);
 	REQUIRE(audio.attribution.url.empty());
 	REQUIRE(audio.attribution.postObject == nullptr);
 	REQUIRE(audio.attribution.blogObject == nullptr);
@@ -147,7 +152,8 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(tumblrAudio.url.empty());
 
 	REQUIRE(tumblrAudio.media.type == "audio/mp3");
-	REQUIRE(tumblrAudio.media.url == "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1.mp3");
+	REQUIRE(tumblrAudio.media.url ==
+	        "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1.mp3");
 	REQUIRE(tumblrAudio.media.width == 0);
 	REQUIRE(tumblrAudio.media.height == 0);
 	REQUIRE(tumblrAudio.media.original_dimensions_missing);
@@ -160,7 +166,8 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(tumblrAudio.album == "Track Album");
 
 	REQUIRE(tumblrAudio.poster.type == "image/jpeg");
-	REQUIRE(tumblrAudio.poster.url == "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
+	REQUIRE(tumblrAudio.poster.url ==
+	        "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
 	REQUIRE(tumblrAudio.poster.width == 500);
 	REQUIRE(tumblrAudio.poster.height == 400);
 	REQUIRE(tumblrAudio.poster.original_dimensions_missing);
@@ -170,7 +177,7 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(tumblrAudio.embed_html.empty());
 	REQUIRE(tumblrAudio.embed_url.empty());
 
-	REQUIRE(tumblrAudio.attribution.type == post);
+	REQUIRE(tumblrAudio.attribution.type == attribution_post);
 	REQUIRE(tumblrAudio.attribution.url.empty());
 	REQUIRE(tumblrAudio.attribution.postObject == nullptr);
 	REQUIRE(tumblrAudio.attribution.blogObject == nullptr);
@@ -205,17 +212,20 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	REQUIRE(soundcloudAudio.album.empty());
 
 	REQUIRE(soundcloudAudio.poster.type == "image/jpeg");
-	REQUIRE(soundcloudAudio.poster.url == "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
+	REQUIRE(soundcloudAudio.poster.url ==
+	        "https://69.media.tumblr.com/b06fe71cc4ab47e93749df060ff54a90/tumblr_nshp8oVOnV1rg0s9xo1_500.jpg");
 	REQUIRE(soundcloudAudio.poster.width == 500);
 	REQUIRE(soundcloudAudio.poster.height == 400);
 	REQUIRE(soundcloudAudio.poster.original_dimensions_missing);
 	REQUIRE_FALSE(soundcloudAudio.poster.cropped);
 	REQUIRE_FALSE(tumblrAudio.poster.has_original_dimensions);
 
-	REQUIRE(soundcloudAudio.embed_html == "<iframe width=\"100%\" height=\"450\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\"></iframe>");
-	REQUIRE(soundcloudAudio.embed_url == "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true");
+	REQUIRE(soundcloudAudio.embed_html ==
+	        "<iframe width=\"100%\" height=\"450\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\"></iframe>");
+	REQUIRE(soundcloudAudio.embed_url ==
+	        "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/146805680&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true");
 
-	REQUIRE(soundcloudAudio.attribution.type == post);
+	REQUIRE(soundcloudAudio.attribution.type == attribution_post);
 	REQUIRE(soundcloudAudio.attribution.url.empty());
 	REQUIRE(soundcloudAudio.attribution.postObject == nullptr);
 	REQUIRE(soundcloudAudio.attribution.blogObject == nullptr);

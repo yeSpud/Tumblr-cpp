@@ -2,7 +2,7 @@
 // Created by Spud on 7/22/21.
 //
 
-#include "catch2/catch.hpp"
+#include "test.hpp"
 #include "npf/content/formatting.hpp"
 
 TEST_CASE("Blank Formatting Test", "[Formatting]") {

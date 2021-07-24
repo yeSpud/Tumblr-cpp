@@ -21,22 +21,22 @@ enum attributionType {
 	/**
 	 * TODO Documentation
 	 */
-	link,
+	attribution_link,
 
 	/**
 	 * TODO Documentation
 	 */
-	blog,
+	attribution_blog,
 
 	/**
 	 * TODO Documentation
 	 */
-	post,
+	attribution_post,
 
 	/**
 	 * TODO Documentation
 	 */
-	app
+	attribution_app
 };
 
 /**
@@ -60,7 +60,7 @@ public:
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */
-	attributionType type = post;
+	attributionType type = attribution_post;
 
 	/**
 	 * The URL to be attributed.
