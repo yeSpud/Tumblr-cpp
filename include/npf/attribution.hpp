@@ -60,7 +60,7 @@ public:
 	 * The type of the attribution.
 	 * Current valid values are "link", "blog", "post", or "app".
 	 */
-	attributionType type;
+	attributionType type = post;
 
 	/**
 	 * The URL to be attributed.
@@ -70,12 +70,12 @@ public:
 	/**
 	 * A post pointer with at least the id field.
 	 */
-	Post *postObject; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Post *postObject = nullptr; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	Blog *blogObject; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Blog *blogObject = nullptr; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * The name of the application to be attributed.
