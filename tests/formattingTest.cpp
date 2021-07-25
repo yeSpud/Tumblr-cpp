@@ -2,7 +2,7 @@
 // Created by Spud on 7/22/21.
 //
 
-#include "test.hpp"
+#include "catch2/catch.hpp"
 #include "npf/content/formatting.hpp"
 
 TEST_CASE("Blank Formatting Test", "[Formatting]") {
@@ -222,6 +222,6 @@ TEST_CASE("Parsing Formatting Test", "[Formatting]") {
 	mentionFormatting.populateNPF(mentionObject);
 	colorFormatting.populateNPF(colorObject);
 
-	// TODO Actial tests
+	// TODO Actual tests
 
 }

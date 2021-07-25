@@ -2,7 +2,7 @@
 // Created by Spud on 7/13/21.
 //
 
-#include "test.hpp"
+#include "catch2/catch.hpp"
 #include "theme.hpp"
 
 TEST_CASE("Theme Test") {

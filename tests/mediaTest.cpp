@@ -2,23 +2,15 @@
 // Created by Spud on 7/22/21.
 //
 
-#include "test.hpp"
-#include "npf/content/media.hpp"
+#include "catch2/catch.hpp"
+#include "mediaTest.hpp"
+#include <iostream>
 
-/**
- * TODO Documentation & comments
- * @param media
- * @param type
- * @param url
- * @param width
- * @param height
- * @param original_dimensions_missing
- * @param cropped
- * @param has_original_dimensions
- */
-void testMedia(const Media &media, const std::string &type, const std::string &url, const int &width, const int &height,
-               const bool &original_dimensions_missing, const bool &cropped,
-               const bool &has_original_dimensions) {
+void MediaTest::testMedia(const Media &media, const std::string &type, const std::string &url, const int &width,
+                          const int &height, const bool &original_dimensions_missing, const bool &cropped,
+                          const bool &has_original_dimensions) { // TODO Comments
+
+	std::cout << "\nTesting media..." << std::endl;
 
 	REQUIRE(media.type == type);
 	REQUIRE(media.url == url);
@@ -28,6 +20,8 @@ void testMedia(const Media &media, const std::string &type, const std::string &u
 	REQUIRE(media.cropped == cropped);
 	REQUIRE(media.has_original_dimensions == has_original_dimensions);
 
+	std::cout << "Media tested successfully!\n" << std::endl;
+
 }
 
-// TODO
+// TODO Rest of tests

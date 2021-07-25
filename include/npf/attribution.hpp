@@ -9,7 +9,7 @@
 
 // This is where we run into circular dependencies issues. Especially with image.hpp, post.hpp, and blog.hpp.
 // Forward declaration to prevent major errors with image.hpp. Image is actually initialized in image.hpp and image.cpp.
-class Image; // Actual class is located in image.hpp.
+class Image; // Actual class is located in image.hpp. // TODO Remove / Replace with Media?
 class Blog; // Actual class is located in blog.hpp.
 class Post; // Actual class is located in post.hpp.
 
