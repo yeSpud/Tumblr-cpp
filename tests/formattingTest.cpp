@@ -2,19 +2,32 @@
 // Created by Spud on 7/22/21.
 //
 
+#include "formattingTest.hpp"
 #include "catch2/catch.hpp"
-#include "npf/content/formatting.hpp"
+#include <iostream>
 #include "themeTest.hpp"
 #include "blogTest.hpp"
+
+void FormattingTest::testFormatting(const Formatting &formatting, const std::string &type, const int &start,
+                                    const int &end, const std::string &url, const std::string &hex) {
+
+	std::cout << "Testing formatting..." << std::endl;
+
+	REQUIRE(formatting.type == type);
+	REQUIRE(formatting.start == start);
+	REQUIRE(formatting.end == end);
+	REQUIRE(formatting.url == url);
+	REQUIRE(formatting.hex == hex);
+
+	std::cout << "Tested formatting successfully!" << std::endl;
+
+}
 
 TEST_CASE("Blank Formatting Test", "[Formatting]") {
 
 	Formatting formatting;
 
-	REQUIRE(formatting.type.empty());
-	REQUIRE(formatting.start == 0);
-	REQUIRE(formatting.end == 0);
-	REQUIRE(formatting.url.empty());
+	FormattingTest::testFormatting(formatting, "", 0, 0, "", "");
 
 	// Blog
 	BlogTest::testBlog(&formatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
@@ -23,11 +36,8 @@ TEST_CASE("Blank Formatting Test", "[Formatting]") {
 	REQUIRE(formatting.blog.avatar.empty());
 
 	// Blog Theme
-	ThemeTest::testTheme(formatting.blog.theme, "", "", "", "",
-	                     "", "", "", false, "",
-	                     false, false, false, false, "", "", "");
-
-	REQUIRE(formatting.hex.empty());
+	ThemeTest::testTheme(formatting.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false, false, "",
+	                     "", "");
 }
 
 TEST_CASE("Parsing Formatting Test", "[Formatting]") {
@@ -190,6 +200,69 @@ TEST_CASE("Parsing Formatting Test", "[Formatting]") {
 	mentionFormatting.populateNPF(mentionObject);
 	colorFormatting.populateNPF(colorObject);
 
-	// TODO Actual tests
+	// Test the formatting objects.
+	// Bold test 1.
+	FormattingTest::testFormatting(boldItalicFormatting_0, "bold", 0, 20, "", "");
+	BlogTest::testBlog(&boldItalicFormatting_0.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(boldItalicFormatting_0.blog.avatar.empty());
+	ThemeTest::testTheme(boldItalicFormatting_0.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Italic test 1.
+	FormattingTest::testFormatting(boldItalicFormatting_1, "italic", 9, 34, "", "");
+	BlogTest::testBlog(&boldItalicFormatting_1.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(boldItalicFormatting_1.blog.avatar.empty());
+	ThemeTest::testTheme(boldItalicFormatting_1.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Bold test 2.
+	FormattingTest::testFormatting(boldItalicFormatting2_0, "bold", 5, 9, "", "");
+	BlogTest::testBlog(&boldItalicFormatting2_0.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(boldItalicFormatting2_0.blog.avatar.empty());
+	ThemeTest::testTheme(boldItalicFormatting2_0.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Italic test 2.
+	FormattingTest::testFormatting(boldItalicFormatting2_1, "italic", 14, 20, "", "");
+	BlogTest::testBlog(&boldItalicFormatting2_1.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(boldItalicFormatting2_1.blog.avatar.empty());
+	ThemeTest::testTheme(boldItalicFormatting2_1.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Small test.
+	FormattingTest::testFormatting(smallFormatting, "small", 5, 10, "", "");
+	BlogTest::testBlog(&smallFormatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(smallFormatting.blog.avatar.empty());
+	ThemeTest::testTheme(smallFormatting.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Link test.
+	FormattingTest::testFormatting(linkFormatting, "link", 6, 10, "https://www.nasa.gov", "");
+	BlogTest::testBlog(&linkFormatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(linkFormatting.blog.avatar.empty());
+	ThemeTest::testTheme(linkFormatting.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Mention test.
+	FormattingTest::testFormatting(mentionFormatting, "mention", 13, 19, "", "");
+	BlogTest::testBlog(&mentionFormatting.blog, false, false, "", false, false, false, "", false, "david", 0, 0, false,
+	                   false, "", 0, 0, "", "", "https://davidslog.com/", "t:123456abcdf", false, false);
+	REQUIRE(mentionFormatting.blog.avatar.empty());
+	ThemeTest::testTheme(mentionFormatting.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
+
+	// Color test.
+	FormattingTest::testFormatting(colorFormatting, "color", 10, 15, "", "#ff492f");
+	BlogTest::testBlog(&colorFormatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	                   false, "", 0, 0, "", "", "", "", false, false);
+	REQUIRE(colorFormatting.blog.avatar.empty());
+	ThemeTest::testTheme(colorFormatting.blog.theme, "", "", "", "", "", "", "", false, "", false, false, false,
+	                     false, "", "", "");
 
 }

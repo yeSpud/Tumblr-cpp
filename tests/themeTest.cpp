@@ -43,9 +43,7 @@ TEST_CASE("Blank Theme Test", "[Theme]") {
 	// Test empty theme
 	Theme theme;
 
-	ThemeTest::testTheme(theme, "", "", "", "", "",
-						 "", "", false, "", false,
-						 false, false, false, "", "", "");
+	ThemeTest::testTheme(theme, "", "", "", "", "", "", "", false, "", false, false, false, false, "", "", "");
 
 }
 
