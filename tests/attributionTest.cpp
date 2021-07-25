@@ -21,4 +21,20 @@ AttributionTest::testAttribution(const Attribution &attribution, const attributi
 
 }
 
+/*
+{
+	"type": "app",
+	"url": "https://www.instagram.com/p/BVZyxTklQWX/",
+	"app_name": "Instagram",
+	"display_text": "tibbythecorgi - Very Cute", // or "Listen on Bandcamp" for audio
+	"logo": {
+		"url": "https://scontent.cdninstagram.com/path/to/logo.jpg",
+		"type": "image/jpeg",
+		"width": 64,
+		"height": 64
+	}
+}
+ */
+
+
 // TODO Rest of tests

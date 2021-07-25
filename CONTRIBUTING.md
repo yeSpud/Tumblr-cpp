@@ -5,20 +5,15 @@
 ### Headers
 
 * audio.hpp - metadata field
-* content.hpp - remove commented deprecation
-* image.hpp - initialize attribution, colors field, fix destructor 
-* text.hpp - initialize subtype
-* video.hpp - initialize autoplay, metadata field
-* condensed.hpp - initialize truncate_after
-* rows.hpp - mode field, initialize truncate_after
+* image.hpp - colors field
+* video.hpp - metadata field
+* rows.hpp - mode field
 * attribution.hpp - replace Image with media (?), convert logo to image(?)
-* npf.hpp - remove commented-out code & includes
-* trail.hpp - initialize post and blog, override destructor
 * blog.hpp - convert type to enum, convert format to enum, convert state to enum, add overloaded operators
 * theme.hpp - convert avatar_shape to enum, header_bounds field
 * TumblrAPI.hpp - see file
 
-13/25 (52%) done
+18/25 (72%) done
 
 ### Headers documentation / comments
 
@@ -47,17 +42,14 @@
 ### Source
 
 * audio.cpp - metadata field
-* image.cpp - remove commented-out code
-* text.cpp - remove commented-out code, cleanup massive elseif statements (?)
-* ask.cpp - remove commented-out code
-* rows.cpp - removed commented-out code
-* attribution.cpp - remove commented-out code
-* trail.cpp - remove commented-out code, check content & layout pointer array, figure out carousel type 
-* blog.cpp - remove commented out-code
-* post.cpp - remove commented out-code
+* text.cpp - cleanup massive elseif statements (?)
+* video.cpp - metadata field
+* rows.cpp - mode field
+* attribution.cpp - cleanup massive elseif statements(?)
+* trail.cpp - check content & layout pointer array, figure out carousel type, cleanup massive elseif statements(?)
 * theme.cpp - header_bounds field
 
-13/22 (59%) done
+16/22 (73%) done
 
 ### Source documentation / comments
 

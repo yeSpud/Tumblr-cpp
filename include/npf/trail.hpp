@@ -20,7 +20,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	~Trail();
+	~Trail() override;
 
 	/**
 	 * TODO Documentation
@@ -30,12 +30,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Post *post;
+	Post *post = nullptr;
 
 	/**
 	 * TODO Documentation
 	 */
-	Blog *blog;
+	Blog *blog = nullptr;
 
 	/**
 	 * TODO Documentation

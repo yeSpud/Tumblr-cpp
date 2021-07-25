@@ -33,16 +33,5 @@ void Text::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	// Formatting
 	populateVectorObject(entry, "formatting", formatting);
-	/*
-	if (entry.HasMember("formatting")) {
-		if (entry["formatting"].IsArray()) {
-			// Iterate array
-		} else if (entry["formatting"].IsObject()) {
-			Formatting format;
-			format.populateNPF(entry["formatting"].GetObj());
-			formatting.push_back(format);
-		}
-	}
-	 */
 
 }

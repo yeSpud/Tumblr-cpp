@@ -28,7 +28,7 @@ public:
 	/**
 	 * The last block to display before the Read More signifier. Required if blocks is not supplied.
 	 */
-	int truncate_after;
+	int truncate_after = 0;
 
 	void populateBlocks(const JSON_ARRAY &array) override;
 

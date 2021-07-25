@@ -63,28 +63,6 @@ void Post::populatePost(const JSON_OBJECT &object) {
 	// Content
 	Trail::populateContentPointerArray(object, content);
 
-	/*
-	if (object.HasMember("content")) {
-		if (object["content"].IsArray()){
-			for (const auto &contentEntry : object["content"].GetArray()) {
-				if (contentEntry.HasMember("media")) {
-					if (contentEntry["media"].IsArray()) {
-						for (auto& mediaEntry : contentEntry["media"].GetArray()) {
-							if (mediaEntry.IsObject()) {
-								rapidjson::Document objectDocument(rapidjson::kObjectType);
-								objectDocument.CopyFrom(mediaEntry, objectDocument.GetAllocator());
-								Media media;
-								media.populateNPF(objectDocument.GetObj());
-								content.push_back(media);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	 */
-
 	// Layout
 	Trail::populateLayoutPointerArray(object, layout);
 
