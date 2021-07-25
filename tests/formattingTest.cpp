@@ -17,7 +17,7 @@ TEST_CASE("Blank Formatting Test", "[Formatting]") {
 	REQUIRE(formatting.url.empty());
 
 	// Blog
-	BlogTest::testBlog(formatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
+	BlogTest::testBlog(&formatting.blog, false, false, "", false, false, false, "", false, "", 0, 0, false,
 	                   false, "", 0, 0, "", "", "", "", false, false);
 
 	REQUIRE(formatting.blog.avatar.empty());

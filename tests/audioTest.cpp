@@ -7,6 +7,7 @@
 #include <iostream>
 #include "mediaTest.hpp"
 #include "attributionTest.hpp"
+#include "blogTest.hpp"
 
 void
 AudioTest::testAudio(const Audio &audio, const std::string &url, const std::string &provider, const std::string &title,
@@ -150,10 +151,11 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	                     500, 400, true, false, false);
 	AttributionTest::testAttribution(tumblrAudio.attribution, attribution_post, "", "", "");
 
-	// TODO Move these to their own separate files.
+	// TODO Move this to its own separate file.
 	REQUIRE(tumblrAudio.attribution.postObject == nullptr);
-	REQUIRE(tumblrAudio.attribution.blogObject == nullptr);
 
+	BlogTest::testBlog(tumblrAudio.attribution.blogObject, false, false, "", false, false, false, "", false, "", 0, 0,
+	                   false, false, "", 0, 0, "", "", "", "", false, false);
 	MediaTest::testMedia(tumblrAudio.attribution.logo, "", "", 0, 0, true, false, false);
 
 	/*
@@ -170,9 +172,10 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	                     500, 400, true, false, false);
 	AttributionTest::testAttribution(soundcloudAudio.attribution, attribution_post, "", "", "");
 
-	// TODO Move these to their own separate files.
+	// TODO Move this to its own separate file.
 	REQUIRE(soundcloudAudio.attribution.postObject == nullptr);
-	REQUIRE(soundcloudAudio.attribution.blogObject == nullptr);
 
+	BlogTest::testBlog(soundcloudAudio.attribution.blogObject, false, false, "", false, false, false, "", false, "", 0,
+	                   0, false, false, "", 0, 0, "", "", "", "", false, false);
 	MediaTest::testMedia(soundcloudAudio.attribution.logo, "", "", 0, 0, true, false, false);
 }
