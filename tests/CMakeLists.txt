@@ -4,7 +4,10 @@ FetchContent_Declare(
         GIT_TAG 5c88067bd339465513af4aec606bd2292f1b594a)
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(testlib audioTest.cpp formattingTest.cpp iframeTest.cpp imageTest.cpp mediaTest.cpp textTest.cpp themeTest.cpp videoTest.cpp)
+file(GLOB TEST_HEADERS CONFIGURE_DEPENDS "./*.hpp")
+file(GLOB TEST_SOURCE CONFIGURE_DEPENDS "./*.cpp")
+
+add_executable(testlib ${TEST_HEADERS} ${TEST_SOURCE})
 
 target_compile_features(testlib PRIVATE cxx_std_17)
 
