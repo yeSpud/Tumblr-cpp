@@ -1,5 +1,5 @@
 # Tumblr-cpp
-Tumblr API library written in C++.
+Tumblr API static library written in C++.
 
 ## Requirements
 
@@ -8,7 +8,7 @@ Tumblr API library written in C++.
 
 Any version greater than these listed will suffice.
 
-### Dependencies
+### Dependencies used by the library
 
 * [RapidJSON](https://github.com/tencent/rapidjson)
 * [cpr](https://github.com/whoshuu/cpr)
@@ -16,11 +16,20 @@ Any version greater than these listed will suffice.
 
 ## Usage
 
-This library is still a major work in progress - 
-so for now use at your own discretion as there is very little documentation and testing is essentially non-existent.
+### Adding with CMake
 
-Once the first major release gets published this section will be updated to include how to implement and use in your own projects, 
-and include other examples.
+To add this library to your project using cmake add the following to your top level `CMakeLists.txt`:
+```cmake
+# TumblrAPI
+#include(FetchContent) # If FetchContent wasnt declared before do it now by uncommenting this line
+FetchContent_Declare(TumblrAPI GIT_REPOSITORY https://github.com/yeSpud/Tumblr-cpp.git GIT_TAG origin/main) # Pull from the main branch
+FetchContent_MakeAvailable(TumblrAPI)
+```
+
+After doing that be sure to add it to your project target by adding the following near or at the bottom of the file:
+```cmake
+target_link_libraries(YOUR_PROJECT PRIVATE TumblrAPI::TumblrAPI ANY_ADDITIONAL_LIBRARIES_HERE)
+```
 
 ## Contributing
 
