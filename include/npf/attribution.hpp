@@ -7,9 +7,7 @@
 
 #include "post.hpp"
 
-// This is where we run into circular dependencies issues. Especially with image.hpp, post.hpp, and blog.hpp.
-// Forward declaration to prevent major errors with image.hpp. Image is actually initialized in image.hpp and image.cpp.
-class Image; // Actual class is located in image.hpp. // TODO Remove / Replace with Media?
+// This is where we run into circular dependencies issues. Especially post.hpp, and blog.hpp.
 class Blog; // Actual class is located in blog.hpp.
 class Post; // Actual class is located in post.hpp.
 
@@ -70,12 +68,14 @@ public:
 	/**
 	 * A post pointer with at least the id field.
 	 */
+	//Post postObject;
 	Post *postObject = nullptr; // Post is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	Blog *blogObject = nullptr; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	 //Blog blogObject;
+	Blog *blogObject = nullptr; // Blog is a pointer to mitigate circular dependencies issues with attribution.hpp.
 
 	/**
 	 * The name of the application to be attributed.
@@ -90,7 +90,7 @@ public:
 	/**
 	 * A specific logo that the client should use with the third-party app attribution.
 	 */
-	Media logo; // TODO Convert to image?
+	Media logo;
 
 	/**
 	 * TODO Documentation

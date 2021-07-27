@@ -8,7 +8,7 @@
 * image.hpp - colors field
 * video.hpp - metadata field
 * rows.hpp - mode field
-* attribution.hpp - replace Image with media (?), convert logo to image(?)
+* attribution.hpp - Fix circular dependencies
 * blog.hpp - convert type to enum, convert format to enum, convert state to enum, add overloaded operators
 * theme.hpp - convert avatar_shape to enum, header_bounds field
 * TumblrAPI.hpp - see file

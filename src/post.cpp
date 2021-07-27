@@ -2,8 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "npf/npf.hpp"
-#include "npf/trail.hpp"
+#include "post.hpp"
 
 Post::~Post() { // TODO Comments
 
