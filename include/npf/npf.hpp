@@ -104,4 +104,21 @@ static bool populateVectorObject(const JSON_OBJECT &object, const char *value, s
 
 }
 
+/**
+ * TODO Documentation & comments
+ * @tparam E
+ * @param inputString
+ * @param strings
+ * @param enums
+ * @return
+ */
+template <typename E>
+static E stringToEnum(const std::string& inputString, const std::vector<std::string>& strings, const std::vector<E>& enums) {
+	for (int i = 0; i < strings.size(); i++) {
+		if (inputString == strings[i]) {
+			return enums[i];
+		}
+	}
+}
+
 #endif //TUMBLRAPI_NPF_HPP

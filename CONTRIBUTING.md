@@ -9,7 +9,7 @@
 * video.hpp - metadata field
 * rows.hpp - mode field
 * attribution.hpp - Fix circular dependencies
-* blog.hpp - convert type to enum, convert format to enum, convert state to enum, add overloaded operators
+* post.hpp - Fix circular dependencies, add overloaded operators
 * theme.hpp - convert avatar_shape to enum, header_bounds field
 * TumblrAPI.hpp - see file
 
