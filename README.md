@@ -11,7 +11,7 @@ Any version greater than these listed will suffice.
 ### Dependencies used by the library
 
 * [RapidJSON](https://github.com/tencent/rapidjson) (see license notice below)
-* [cpr](https://github.com/whoshuu/cpr)
+* [cpr](https://github.com/libcpr/cpr)
 * [Catch2](https://github.com/catchorg/Catch2/tree/v2.x) (Only for unit tests - not used in the actual library)
 
 ## Usage
@@ -28,12 +28,14 @@ FetchContent_MakeAvailable(TumblrAPI)
 
 After doing that be sure to add it to your project target by adding the following near or at the bottom of the file:
 ```cmake
-target_link_libraries(YOUR_PROJECT PRIVATE TumblrAPI::TumblrAPI ANY_ADDITIONAL_LIBRARIES_HERE)
+# Because cpr is used in the api and the api requests return a cpr response object be sure to add cpr::cpr to your linked libraries.
+# Remember: TumblrAPI is dependent on cpr (and thus cpr is included in TumblrAPI)
+target_link_libraries(YOUR_PROJECT PRIVATE TumblrAPI::TumblrAPI cpr::cpr ANY_ADDITIONAL_LIBRARIES_HERE)
 ```
 
 ## Contributing
 
-Don't (for now at least).
+Don't (for now at least, or unless there is a glaring issue such as license or dependency issues).
 
 ## Copyright and Licensing
 

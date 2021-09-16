@@ -4,40 +4,40 @@
 
 ### Headers
 
-* audio.hpp - metadata field
-* image.hpp - colors field
-* video.hpp - metadata field
-* rows.hpp - mode field
-* attribution.hpp - Fix circular dependencies
-* post.hpp - Fix circular dependencies, add overloaded operators
-* theme.hpp - convert avatar_shape to enum, header_bounds field
-* TumblrAPI.hpp - see file
+* [audio.hpp](/include/npf/content/audio.hpp) - metadata field
+* [image.hpp](/include/npf/content/image.hpp) - colors field
+* [video.hpp](/include/npf/content/video.hpp) - metadata field
+* [rows.hpp](/include/npf/layout/rows.hpp) - mode field
+* [attribution.hpp](/include/npf/attribution.hpp) - Fix circular dependencies
+* [post.hpp](/include/post.hpp) - Fix circular dependencies, add overloaded operators
+* [theme.hpp](/include/theme.hpp) - convert avatar_shape to enum, header_bounds field
+* [TumblrAPI.hpp](/include/TumblrAPI.hpp) - see file
 
 18/25 (72%) done
 
 ### Headers documentation / comments
 
-* audio.hpp
-* content.hpp
-* formatting.hpp
-* iframe.hpp
-* image.hpp
-* link.hpp
-* media.hpp
-* text.hpp
-* video.hpp
-* ask.hpp
-* carousel.hpp
-* condensed.hpp
-* layout.hpp
-* rows.hpp
-* attribution.hpp
-* npf.hpp
-* trail.hpp
-* blog.hpp
-* post.hpp
-* theme.hpp
-* TumblrAPI.hpp
+* [audio.hpp](/include/npf/content/audio.hpp)
+* [content.hpp](/include/npf/content/content.hpp)
+* [formatting.hpp](/include/npf/content/formatting.hpp)
+* [iframe.hpp](/include/npf/content/iframe.hpp)
+* [image.hpp](/include/npf/content/image.hpp)
+* [link.hpp](/include/npf/content/link.hpp)
+* [media.hpp](/include/npf/content/media.hpp)
+* [text.hpp](/include/npf/content/text.hpp)
+* [video.hpp](/include/npf/content/video.hpp)
+* [ask.hpp](/include/npf/layout/ask.hpp)
+* [carousel.hpp](/include/npf/layout/carousel.hpp)
+* [condensed.hpp](/include/npf/layout/condensed.hpp)
+* [layout.hpp](/include/npf/layout/layout.hpp)
+* [rows.hpp](/include/npf/layout/rows.hpp)
+* [attribution.hpp](/include/npf/attribution.hpp)
+* [npf.hpp](/include/npf/npf.hpp)
+* [trail.hpp](/include/npf/trail.hpp)
+* [blog.hpp](/include/blog.hpp)
+* [post.hpp](/include/post.hpp)
+* [theme.hpp](/include/theme.hpp)
+* [TumblrAPI.hpp](/include/TumblrAPI.hpp)
 
 ### Source
 
@@ -69,7 +69,6 @@
 * blog.cpp
 * post.cpp
 * theme.cpp
-* TumblrAPI.cpp
 
 ### Tests
 

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(
         TumblrAPI
-        VERSION 2021.07.1
+        VERSION 2021.09.15
         DESCRIPTION "Tumblr API client written in C++"
         LANGUAGES CXX)
 
@@ -28,7 +28,7 @@ if (WIN32)
 endif (WIN32)
 set(CPR_BUILD_TESTS OFF)
 set(CPR_BUILD_TESTS_SSL OFF)
-FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/whoshuu/cpr.git GIT_TAG origin/master)
+FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(cpr)
 
 # include the src directory
@@ -39,7 +39,7 @@ add_subdirectory(src)
 target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
 
 message("Checking tests need to be included")
-if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)# OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     message("Including tests")
     add_subdirectory(tests)
 else ()
