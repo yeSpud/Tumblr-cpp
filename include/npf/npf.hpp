@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include "rapidjson/document.h"
-//#include "rapidjson/writer.h"
 
 /*
  * Json shortcuts because I'm lazy
@@ -38,23 +37,6 @@ public:
 	virtual void populateNPF(JSON_OBJECT entry) = 0;
 
 };
-
-/* Experimenting with lambdas to help populate objects with json array or nested objects
-static void populateSubgroup(JSON_OBJECT entry, const char *value, std::function<void()> function) {
-
-	if (entry.HasMember(value)) {
-		if (entry[value].IsArray()) {
-			for (auto& arrayEntry : entry[value].GetArray()) {
-				if (arrayEntry.IsObject()) {
-					function;
-				}
-			}
-		} else if (entry[value].IsObject()) {
-			function;
-		}
-	}
-}
- */
 
 /**
  * TODO Documentation & comments
@@ -122,18 +104,21 @@ static bool populateVectorObject(const JSON_OBJECT &object, const char *value, s
 
 }
 
-/*
+/**
  * TODO Documentation & comments
- * @param json
+ * @tparam E
+ * @param inputString
+ * @param strings
+ * @param enums
  * @return
  */
-/*
-static const char* jsonToString(const rapidjson::Document &json) {
-   rapidjson::StringBuffer stringBuffer;
-   rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
-   json.Accept(writer);
-   return stringBuffer.GetString();
+template <typename E>
+static E stringToEnum(const std::string& inputString, const std::vector<std::string>& strings, const std::vector<E>& enums) {
+	for (int i = 0; i < strings.size(); i++) {
+		if (inputString == strings[i]) {
+			return enums[i];
+		}
+	}
 }
- */
 
 #endif //TUMBLRAPI_NPF_HPP

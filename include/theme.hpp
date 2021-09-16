@@ -62,7 +62,7 @@ public:
 	/**
 	 * Whether or not the blog's header is meant to be stretched to aspect-fill any given space where it's used.
 	 */
-	bool header_stretch;
+	bool header_stretch = false;
 
 	/**
 	 * The intended hex color of any links in the blog's description.
@@ -72,17 +72,17 @@ public:
 	/**
 	 * Whether or not the blog's avatar should be displayed, even if it's given in the API payload.
 	 */
-	bool show_avatar;
+	bool show_avatar = false;
 
 	/**
 	 * Whether or not the blog's description should be displayed, even if it's given in the API payload.
 	 */
-	bool show_description;
+	bool show_description = false;
 
 	/**
 	 * Whether or not the blog's header image should be displayed, even if it's given in the API payload.
 	 */
-	bool show_header_image;
+	bool show_header_image = false;
 
 	/**
 	 * Whether or not the blog's title should be displayed, even if it's given in the API payload.

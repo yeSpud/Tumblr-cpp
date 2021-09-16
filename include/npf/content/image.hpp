@@ -49,7 +49,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution *attribution; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	Attribution *attribution = nullptr; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
 
 	/**
 	 * Text used to describe the image, for screen readers. 200 character maximum.
@@ -59,7 +59,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	~Image() { DELETE_NPF(attribution)};
+	~Image() override { DELETE_NPF(attribution)};
 
 	/**
 	 * TODO Documentation

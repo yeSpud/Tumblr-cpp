@@ -6,8 +6,8 @@
 #define TUMBLRAPI_AUDIO_HPP
 
 #include "content.hpp"
-#include "image.hpp"
-#include "npf/attribution.hpp" // Circular dependency with image.hpp
+#include "media.hpp"
+#include "npf/attribution.hpp"
 
 /**
  * An audio block represents a playable track. At a minimum, the provider field must be present,
@@ -58,7 +58,7 @@ public:
 	/**
 	 * An image to use as a "poster" for the audio track, usually album art.
 	 */
-	Image poster;
+	Media poster;
 
 	/**
 	 * HTML code that could be used to embed this audio track into a webpage.

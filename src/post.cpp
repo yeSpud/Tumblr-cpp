@@ -2,8 +2,7 @@
 // Created by Spud on 7/14/21.
 //
 
-#include "npf/npf.hpp"
-#include "npf/trail.hpp"
+#include "post.hpp"
 
 Post::~Post() { // TODO Comments
 
@@ -19,9 +18,19 @@ Post::~Post() { // TODO Comments
 
 }
 
-void Post::populatePost(const JSON_OBJECT &object) {
+void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 
-	objectHasValue(object, "type", type);
+	// Post type
+	if (object.HasMember("type")) {
+		if (object["type"].IsString()) {
+			std::vector<std::string> strings{"text", "quote", "link", "answer", "video", "audio", "photo", "chat"};
+			std::vector<postType> types{text, quote, link, answer, video, audio, photo, chat};
+
+			type = stringToEnum(object["type"].GetString(), strings, types);
+		}
+	}
+
+
 	objectHasValue(object, "original_type", original_type);
 	objectHasValue(object, "blog_name", blog_name);
 
@@ -35,7 +44,29 @@ void Post::populatePost(const JSON_OBJECT &object) {
 	objectHasValue(object, "slug", slug);
 	objectHasValue(object, "date", date);
 	objectHasValue(object, "timestamp", timestamp);
-	objectHasValue(object, "state", state);
+
+	// Post format
+	if (object.HasMember("format")) {
+		if (object["format"].IsString()) {
+			std::vector<std::string> strings{"html", "markdown"};
+			std::vector<postFormat> formats{html, markdown};
+
+			format = stringToEnum(object["format"].GetString(), strings, formats);
+		}
+	}
+
+
+	// Post state
+	if (object.HasMember("state")) {
+		if (object["state"].IsString()) {
+			std::vector<std::string> strings{"published", "queued", "draft", "private"};
+			std::vector<postState> states{published, queued, draft, privat};
+
+			state = stringToEnum(object["state"].GetString(), strings, states);
+		}
+	}
+
+
 	objectHasValue(object, "reblog_key", reblog_key);
 
 	// Tags
@@ -62,28 +93,6 @@ void Post::populatePost(const JSON_OBJECT &object) {
 
 	// Content
 	Trail::populateContentPointerArray(object, content);
-
-	/*
-	if (object.HasMember("content")) {
-		if (object["content"].IsArray()){
-			for (const auto &contentEntry : object["content"].GetArray()) {
-				if (contentEntry.HasMember("media")) {
-					if (contentEntry["media"].IsArray()) {
-						for (auto& mediaEntry : contentEntry["media"].GetArray()) {
-							if (mediaEntry.IsObject()) {
-								rapidjson::Document objectDocument(rapidjson::kObjectType);
-								objectDocument.CopyFrom(mediaEntry, objectDocument.GetAllocator());
-								Media media;
-								media.populateNPF(objectDocument.GetObj());
-								content.push_back(media);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	 */
 
 	// Layout
 	Trail::populateLayoutPointerArray(object, layout);

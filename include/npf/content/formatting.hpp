@@ -22,12 +22,12 @@ public:
 	/**
 	 * The starting index of the formatting range (inclusive).
 	 */
-	int start;
+	int start = 0;
 
 	/**
 	 * The ending index of the formatting range (exclusive).
 	 */
-	int end;
+	int end = 0;
 
 	/**
 	 * The link's URL!

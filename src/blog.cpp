@@ -12,19 +12,6 @@ void Blog::populateBlog(const JSON_OBJECT &object) { // TODO Comments
 	objectHasValue(object, "asks_allow_media", asks_allow_media);
 
 	// Avatars
-	/*
-	if (blogjson.HasMember("avatar")) {
-		if (blogjson["avatar"].IsArray()) {
-			for (auto& avatarEntry : blogjson["avatar"].GetArray()) {
-				if (avatarEntry.IsObject()) {
-					Image avatar;
-					avatar.populateNPF(avatarEntry.GetObj());
-					blog.avatar.push_back(&avatar);
-				}
-			}
-		}
-	}
-	 */
 	POPULATE_ARRAY(object, "avatar", for (JSON_ARRAY_ENTRY &entry : object["avatar"].GetArray()) {
 		if (entry.IsObject()) {
 			Image image;

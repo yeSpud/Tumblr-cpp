@@ -29,27 +29,27 @@ public:
 	/**
 	 * The width of the media asset, if that makes sense (for images and videos, but not for audio).
 	 */
-	int width;
+	int width = 0;
 
 	/**
 	 * The height of the media asset, if that makes sense (for images and videos, but not for audio).
 	 */
-	int height;
+	int height = 0;
 
 	/**
 	 * For display purposes, this indicates whether the dimensions are defaults.
 	 */
-	bool original_dimensions_missing;
+	bool original_dimensions_missing = true;
 
 	/**
 	 * This indicates whether this media object is a cropped version of the original media.
 	 */
-	bool cropped;
+	bool cropped = false;
 
 	/**
 	 * This indicates whether this media object has the same dimensions as the original media.
 	 */
-	bool has_original_dimensions;
+	bool has_original_dimensions = false;
 
 	/**
 	 * TODO Documentation

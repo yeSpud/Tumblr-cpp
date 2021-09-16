@@ -72,7 +72,7 @@ public:
 	/**
 	 * Whether this video can be played on a cellular connection.
 	 */
-	bool can_autoplay_on_cellular;
+	bool can_autoplay_on_cellular = false;
 
 	/**
 	 * TODO Documentation

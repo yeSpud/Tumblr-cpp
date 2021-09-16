@@ -15,9 +15,9 @@ class TumblrAPI {
 private:
 
 	/**
-	 * TODO Documentation
+	 * Your OAuth Consumer Key.
 	 */
-	const std::string token;
+	const std::string APIKey;
 
 	/**
 	 * TODO Documentation
@@ -34,7 +34,7 @@ public:
 	 * TODO TODO Documentation
 	 * @param token
 	 */
-	TumblrAPI(std::string &token):token(std::move(token)){};
+	TumblrAPI(std::string &token): APIKey(std::move(token)){};
 
 	/**
 	 * This method returns general information about the blog, such as the title, number of posts,

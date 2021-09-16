@@ -77,9 +77,9 @@ public:
 	std::string text;
 
 	/**
-	 * The subtype of text block.
+	 * The subtype of text block. Default to chat.
 	 */
-	subtype subtype;
+	subtype subtype = chat;
 
 	/**
 	 * TODO Documentation

@@ -11,8 +11,7 @@ void Formatting::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	objectHasValue(entry, "end", end);
 	objectHasValue(entry, "url", url);
 
-	// FIXME
-	POPULATE_OBJECT(entry, "blog", const char* blogString = entry["blog"].GetString();blog = Blog::generateBlog(blogString);)
+	POPULATE_OBJECT(entry, "blog", Blog b; b.populateBlog(entry["blog"].GetObj()); blog = b;)
 
 	objectHasValue(entry, "hex", hex);
 

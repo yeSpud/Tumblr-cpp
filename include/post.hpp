@@ -9,7 +9,7 @@
 #include "npf/layout/layout.hpp"
 #include "npf/trail.hpp"
 
-// Forward declarations to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+// Forward declarations to mitigate circular dependencies issues with attribution.hpp.
 class Blog; // Actual class is located in blog.hpp.
 class Trail; // Forward declaration to mitigate circular dependencies.
 
@@ -18,6 +18,97 @@ class Trail; // Forward declaration to mitigate circular dependencies.
  * TODO Documentation
  */
 class Post {
+
+protected:
+
+	/**
+	 * TODO Documentation
+	 */
+	enum postType {
+
+		/**
+		 * TODO Documentation
+		 */
+		text,
+
+		/**
+		 * TODO Documentation
+		 */
+		quote,
+
+		/**
+		 * TODO Documentation
+		 */
+		link,
+
+		/**
+		 * TODO Documentation
+		 */
+		answer,
+
+		/**
+		 * TODO Documentation
+		 */
+		video,
+
+		/**
+		 * TODO Documentation
+		 */
+		audio,
+
+		/**
+		 * TODO Documentation
+		 */
+		photo,
+
+		/**
+		 * TODO Documentation
+		 */
+		chat
+	};
+
+	/**
+	 * TODO Documentation
+	 */
+	enum postFormat {
+
+		/**
+		 * TODO Documentation
+		 */
+		html,
+
+		/**
+		 * TODO Documentation
+		 */
+		markdown
+
+	};
+
+	/**
+	 * TODO Documentation
+	 */
+	enum postState {
+
+		/**
+		 * TODO Documentation
+		 */
+		published,
+
+		/**
+		 * TODO Documentation
+		 */
+		queued,
+
+		/**
+		 * TODO Documentation
+		 */
+		draft,
+
+		/**
+		 * TODO Documentation
+		 */
+		privat
+	};
 
 public:
 
@@ -29,7 +120,7 @@ public:
 	/**
 	 * The type of post.
 	 */
-	std::string type; // TODO Convert this to an enum.
+	postType type;
 
 	/**
 	 * TODO Documentation
@@ -84,12 +175,12 @@ public:
 	/**
 	 * The post format: html or markdown
 	 */
-	std::string format; // TODO Convert this to an enum.
+	postFormat format;
 
 	/**
 	 * Indicates the current state of the post.
 	 */
-	std::string state; // TODO Convert this to an enum.
+	postState state;
 
 	/**
 	 * The key used to reblog this post.

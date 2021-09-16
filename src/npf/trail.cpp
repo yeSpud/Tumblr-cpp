@@ -13,12 +13,6 @@
 
 Trail::~Trail() { // TODO Comments
 
-	/*
-	if (post != nullptr) {
-		delete post;
-		post = nullptr;
-	}
-	 */
 	DELETE_NPF(post)
 	DELETE_NPF(blog)
 
