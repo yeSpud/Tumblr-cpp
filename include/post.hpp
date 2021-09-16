@@ -316,7 +316,7 @@ public:
 	 * @param json
 	 * @return
 	 */
-	static std::vector<Post> generatePosts(const char *json);
+	static std::vector<Post *> generatePosts(const char *json);
 
 };
 

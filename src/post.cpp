@@ -8,11 +8,11 @@ Post::~Post() { // TODO Comments
 
 	DELETE_NPF(blog)
 
-	for (Content *c : content) {
+	for (Content *c: content) {
 		DELETE_NPF(c)
 	}
 
-	for (Layout *l : layout) {
+	for (Layout *l: layout) {
 		DELETE_NPF(l)
 	}
 
@@ -70,7 +70,7 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 	objectHasValue(object, "reblog_key", reblog_key);
 
 	// Tags
-	POPULATE_ARRAY(object, "tags", for (JSON_ARRAY_ENTRY &tag : object["tags"].GetArray()) {
+	POPULATE_ARRAY(object, "tags", for (JSON_ARRAY_ENTRY &tag: object["tags"].GetArray()) {
 		if (tag.IsString()) {
 			tags.emplace_back(tag.GetString());
 		}
@@ -98,7 +98,7 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 	Trail::populateLayoutPointerArray(object, layout);
 
 	// Trail
-	POPULATE_ARRAY(object, "trail", for (JSON_ARRAY_ENTRY &entry : object["trail"].GetArray()) {
+	POPULATE_ARRAY(object, "trail", for (JSON_ARRAY_ENTRY &entry: object["trail"].GetArray()) {
 		if (entry.IsObject()) {
 			Trail t;
 			t.populateNPF(entry.GetObj());
@@ -114,9 +114,9 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 
 }
 
-std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
+std::vector<Post *> Post::generatePosts(const char *json) { // TODO Comments
 
-	std::vector<Post> posts;
+	std::vector<Post *> posts;
 
 	rapidjson::Document document;
 	document.Parse(json);
@@ -128,12 +128,13 @@ std::vector<Post> Post::generatePosts(const char *json) { // TODO Comments
 		// Gets the posts array from the response.
 		if (response.HasMember("posts")) {
 
-			for (JSON_ARRAY_ENTRY &entry : response["posts"].GetArray()) {
+			for (JSON_ARRAY_ENTRY &entry: response["posts"].GetArray()) {
 				if (entry.IsObject()) {
 
 					JSON_OBJECT postjson = entry.GetObj();
 
-					Post post;
+					Post* post = new Post();
+					post->populatePost(postjson);
 
 					posts.push_back(post);
 				}
