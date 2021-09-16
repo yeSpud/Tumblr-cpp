@@ -2,8 +2,8 @@
 // Created by Spud on 7/13/21.
 //
 
-#ifndef TUMBLRAPI_TUMBLRAPI_HPP
-#define TUMBLRAPI_TUMBLRAPI_HPP
+#ifndef TUMBLRAPI_TUMBLRAPI_H
+#define TUMBLRAPI_TUMBLRAPI_H
 
 #include "cpr/cpr.h"
 
@@ -15,18 +15,18 @@ class TumblrAPI {
 private:
 
 	/**
-	 * TODO Documentation
+	 * Your OAuth Consumer Key.
 	 */
-	const std::string token;
+	const std::string APIKey;
 
 	/**
 	 * TODO Documentation
 	 * @param endpoint
-	 * @param authRequired
+	 * @param APIKeyRequired
 	 * @param optionalParams
 	 * @return
 	 */
-	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "");
+	cpr::Response sendGetRequest(const std::string &endpoint, bool APIKeyRequired, const std::string &optionalParams = "");
 
 public:
 
@@ -34,7 +34,7 @@ public:
 	 * TODO TODO Documentation
 	 * @param token
 	 */
-	TumblrAPI(std::string &token):token(std::move(token)){};
+	TumblrAPI(std::string &token): APIKey(std::move(token)){};
 
 	/**
 	 * This method returns general information about the blog, such as the title, number of posts,
@@ -62,7 +62,13 @@ public:
 	cpr::Response getBlogLikesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/likes",
 	                                                                                   true); };
 
-	// TODO Blog following
+	/**
+	 * This method can be used to retrieve the publicly exposed list of blogs that a blog follows, in order from most recently-followed to first.
+	 * @param blogURL
+	 * @return
+	 */
+	cpr::Response getBlogFollowingJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL +"/following",
+																						   true); }
 
 	// TODO Blog followers
 
@@ -123,4 +129,4 @@ public:
 };
 
 
-#endif //TUMBLRAPI_TUMBLRAPI_HPP
+#endif //TUMBLRAPI_TUMBLRAPI_H
