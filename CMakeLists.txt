@@ -19,10 +19,6 @@ message("C++ standard: ${CMAKE_CXX_STANDARD} (should be at least 17)")
 include(ExternalProject)
 include(FetchContent)
 
-# rapidjson
-include("${PROJECT_SOURCE_DIR}/vendor/rapidjson.cmake")
-include_directories(${RAPIDJSON_INCLUDE_DIR})
-
 # cpr
 cmake_policy(SET CMP0079 NEW)
 if (WIN32)
@@ -37,9 +33,6 @@ FetchContent_MakeAvailable(cpr)
 
 # include the src directory
 add_subdirectory(src)
-
-# add external libary dependencies
-add_dependencies(TumblrAPI rapidjson)
 
 # Attempt to add link library "cpr::cpr" to target "TumblrAPI" which is not built in this directory.
 # This is allowed only when policy CMP0079 is set to NEW.
