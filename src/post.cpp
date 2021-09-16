@@ -7,15 +7,6 @@
 Post::~Post() { // TODO Comments
 
 	DELETE_NPF(blog)
-
-	for (Content *c: content) {
-		DELETE_NPF(c)
-	}
-
-	for (Layout *l: layout) {
-		DELETE_NPF(l)
-	}
-
 }
 
 void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
