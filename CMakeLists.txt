@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(
         TumblrAPI
-        VERSION 2021.09.15
+        VERSION 2021.07.1
         DESCRIPTION "Tumblr API client written in C++"
         LANGUAGES CXX)
 
