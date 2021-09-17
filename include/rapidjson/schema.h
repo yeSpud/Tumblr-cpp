@@ -512,9 +512,9 @@ public:
             if (v->IsArray() && v->Size() > 0) {
                 enum_ = static_cast<uint64_t*>(allocator_->Malloc(sizeof(uint64_t) * v->Size()));
                 for (ConstValueIterator itr = v->Begin(); itr != v->End(); ++itr) {
-                    typedef Hasher<EncodingType, avatars<> > EnumHasherType;
+                    typedef Hasher<EncodingType, MemoryPoolAllocator<> > EnumHasherType;
                     char buffer[256u + 24];
-                    avatars<> hasherAllocator(buffer, sizeof(buffer));
+                    MemoryPoolAllocator<> hasherAllocator(buffer, sizeof(buffer));
                     EnumHasherType h(&hasherAllocator, 256);
                     itr->Accept(h);
                     enum_[enumCount_++] = h.GetHashCode();

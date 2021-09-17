@@ -39,7 +39,7 @@ struct Transcoder;
 class CrtAllocator;
 
 template <typename BaseAllocator>
-class avatars;
+class MemoryPoolAllocator;
 
 // stream.h
 
@@ -113,12 +113,12 @@ struct GenericStringRef;
 template <typename Encoding, typename Allocator> 
 class GenericValue;
 
-typedef GenericValue<UTF8<char>, avatars<CrtAllocator> > Value;
+typedef GenericValue<UTF8<char>, MemoryPoolAllocator<CrtAllocator> > Value;
 
 template <typename Encoding, typename Allocator, typename StackAllocator>
 class GenericDocument;
 
-typedef GenericDocument<UTF8<char>, avatars<CrtAllocator>, CrtAllocator> Document;
+typedef GenericDocument<UTF8<char>, MemoryPoolAllocator<CrtAllocator>, CrtAllocator> Document;
 
 // pointer.h
 
