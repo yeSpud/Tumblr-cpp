@@ -10,7 +10,6 @@
 #include "npf/trail.hpp"
 
 // Forward declarations to mitigate circular dependencies issues with attribution.hpp.
-class Blog; // Actual class is located in blog.hpp.
 class Trail; // Forward declaration to mitigate circular dependencies.
 
 
@@ -275,7 +274,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Trail> trail;
+	std::vector<std::shared_ptr<Trail>> trails;
 
 	/**
 	 * TODO Documentation

@@ -240,7 +240,7 @@ TEST_CASE("Populate Post Test", "[Post]") {
 	REQUIRE(populatedPost.layout.empty());
 
 	// Test populated post trail.
-	REQUIRE(populatedPost.trail.empty());
+	REQUIRE(populatedPost.trails.empty());
 
 }
 
@@ -516,7 +516,7 @@ TEST_CASE("Generate Post Test", "[Post]") {
 	                     75, 75, true, true, false);
 
 	// Test generated post trail.
-	REQUIRE(generatedPost.trail.empty());
+	REQUIRE(generatedPost.trails.empty());
 
 }
 

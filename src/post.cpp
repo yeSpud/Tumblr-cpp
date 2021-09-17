@@ -106,9 +106,9 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 	// Trail
 	POPULATE_ARRAY(object, "trail", for (JSON_ARRAY_ENTRY &entry: object["trail"].GetArray()) {
 		if (entry.IsObject()) {
-			Trail t;
-			t.populateNPF(entry.GetObj());
-			trail.push_back(t);
+			std::shared_ptr<Trail> trail = std::shared_ptr<Trail>(new Trail);
+			trail->populateNPF(entry.GetObj());
+			trails.push_back(trail);
 		}
 	})
 

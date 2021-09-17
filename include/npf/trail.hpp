@@ -8,7 +8,6 @@
 #include "post.hpp"
 
 class Post; // Forward declaration to mitigate circular dependencies.
-class Blog; // Forward declaration to mitigate circular dependencies.
 
 /**
  * TODO Documentation
