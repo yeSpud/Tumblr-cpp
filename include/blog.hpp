@@ -15,6 +15,8 @@ class Blog {
 
 public:
 
+	~Blog();
+
 	/**
 	 * Indicates whether the blog allows questions.
 	 */

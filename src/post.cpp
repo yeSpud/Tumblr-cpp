@@ -4,10 +4,7 @@
 
 #include "post.hpp"
 
-Post::~Post() { // TODO Comments
-
-	DELETE_NPF(blog)
-}
+Post::~Post() = default;
 
 void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 
@@ -44,7 +41,7 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 	objectHasValue(object, "blog_name", blog_name);
 
 	// Blog pointer
-	POPULATE_OBJECT(object, "blog", blog = new Blog(); blog->populateBlog(object["blog"].GetObj());)
+	POPULATE_OBJECT(object, "blog", blog = std::shared_ptr<Blog>(new Blog); blog->populateBlog(object["blog"].GetObj());)
 
 	objectHasValue(object, "id", id);
 	objectHasValue(object, "id_string", id_string);
@@ -123,9 +120,9 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 
 }
 
-std::vector<Post *> Post::generatePosts(const char *json) { // TODO Comments
+std::vector<std::shared_ptr<Post>> Post::generatePosts(const char *json) { // TODO Comments
 
-	std::vector<Post *> posts;
+	std::vector<std::shared_ptr<Post>> posts;
 
 	rapidjson::Document document;
 	document.Parse(json);
@@ -142,10 +139,10 @@ std::vector<Post *> Post::generatePosts(const char *json) { // TODO Comments
 
 					JSON_OBJECT postjson = entry.GetObj();
 
-					Post* post = new Post();
-					post->populatePost(postjson);
+					std::shared_ptr<Post> postPointer = std::shared_ptr<Post>(new Post);
+					postPointer->populatePost(postjson);
 
-					posts.push_back(post);
+					posts.push_back(postPointer);
 				}
 			}
 		}

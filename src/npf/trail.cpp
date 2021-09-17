@@ -11,15 +11,7 @@
 #include "npf/layout/condensed.hpp"
 #include "npf/layout/carousel.hpp"
 
-Trail::~Trail() { // TODO Comments
-
-	DELETE_NPF(post)
-	DELETE_NPF(blog)
-
-	for (Layout *l : layout) {
-		DELETE_NPF(l)
-	}
-}
+Trail::~Trail() = default;
 
 void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array) { // TODO Comments
 
@@ -58,7 +50,7 @@ void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<s
 
 }
 
-void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<Layout *> &array) { // TODO Comments
+void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Layout>> &array) { // TODO Comments
 
 	POPULATE_ARRAY(object, "layout", for (JSON_ARRAY_ENTRY &entry : object["layout"].GetArray()) {
 		if (entry.IsObject()) { // TODO Might need fixing...
@@ -69,17 +61,16 @@ void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<La
 					if (type == "ask") {
 						Ask ask;
 						ask.populateNPF(entry.GetObj());
-						array.push_back(&ask);
+						array.push_back(std::shared_ptr<Ask>(&ask));
 					} else if (type == "condensed") {
 						Condensed condensed;
 						condensed.populateNPF(entry.GetObj());
-						array.push_back(&condensed);
+						array.push_back(std::shared_ptr<Condensed>(&condensed));
 					} else if (type == "rows") {
 						// TODO Figure out carousel type specifier.
-
 						Rows rows;
 						rows.populateNPF(entry.GetObj());
-						array.push_back(&rows);
+						array.push_back(std::shared_ptr<Rows>(&rows));
 					}
 				}
 			}
@@ -90,8 +81,8 @@ void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<La
 
 void Trail::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	POPULATE_OBJECT(entry, "post", post = new Post(); post->populatePost(entry["post"].GetObj());)
-	POPULATE_OBJECT(entry, "blog", blog = new Blog(); blog->populateBlog(entry["blog"].GetObj());)
+	POPULATE_OBJECT(entry, "post", post = std::shared_ptr<Post>(new Post); post->populatePost(entry["post"].GetObj());)
+	POPULATE_OBJECT(entry, "blog", blog = std::shared_ptr<Blog>(new Blog); blog->populateBlog(entry["blog"].GetObj());)
 
 	populateContentPointerArray(entry, content);
 	populateLayoutPointerArray(entry, layout);

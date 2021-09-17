@@ -32,3 +32,7 @@ Theme Theme::generateTheme(const JSON_OBJECT &entry) { // TODO Comments
 	return theme;
 
 }
+
+Theme::~Theme() {
+
+}

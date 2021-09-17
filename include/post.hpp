@@ -21,9 +21,6 @@ class Post {
 
 public:
 
-	/**
-	 * TODO Documentation
-	 */
 	~Post();
 
 	/**
@@ -123,7 +120,7 @@ public:
 	/**
 	 * The type of post.
 	 */
-	postType type;
+	postType type = text;
 
 	/**
 	 * TODO Documentation
@@ -138,7 +135,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Blog *blog; // Blog pointer to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	std::shared_ptr<Blog> blog;
 
 	/**
 	 * The post's unique ID.
@@ -183,7 +180,7 @@ public:
 	/**
 	 * Indicates the current state of the post.
 	 */
-	postState state;
+	postState state = published;
 
 	/**
 	 * The key used to reblog this post.
@@ -273,7 +270,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Layout *> layout;
+	std::vector<std::shared_ptr<Layout>> layout;
 
 	/**
 	 * TODO Documentation
@@ -319,7 +316,7 @@ public:
 	 * @param json
 	 * @return
 	 */
-	static std::vector<Post *> generatePosts(const char *json);
+	static std::vector<std::shared_ptr<Post>> generatePosts(const char *json);
 
 };
 

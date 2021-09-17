@@ -17,9 +17,6 @@ class Trail : public NPF {
 
 public:
 
-	/**
-	 * TODO Documentation
-	 */
 	~Trail() override;
 
 	/**
@@ -30,12 +27,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Post *post = nullptr;
+	std::shared_ptr<Post> post;
 
 	/**
 	 * TODO Documentation
 	 */
-	Blog *blog = nullptr;
+	std::shared_ptr<Blog> blog;
 
 	/**
 	 * TODO Documentation
@@ -45,7 +42,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Layout *> layout;
+	std::vector<std::shared_ptr<Layout>> layout;
 
 	/**
 	 * TODO Documentation
@@ -64,7 +61,7 @@ public:
 	 * @param object
 	 * @param array
 	 */
-	static void populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<Layout *> &array);
+	static void populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Layout>> &array);
 
 	/**
 	 * TODO Documentation

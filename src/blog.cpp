@@ -4,6 +4,8 @@
 
 #include "blog.hpp"
 
+Blog::~Blog() = default;
+
 void Blog::populateBlog(const JSON_OBJECT &object) { // TODO Comments
 
 	objectHasValue(object, "ask", ask);
