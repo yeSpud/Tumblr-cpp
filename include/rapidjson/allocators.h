@@ -126,7 +126,7 @@ public:
     \note implements Allocator concept
 */
 template <typename BaseAllocator = CrtAllocator>
-class MemoryPoolAllocator {
+class avatars {
     //! Chunk header for perpending to each chunk.
     /*! Chunks are stored as a singly linked list.
     */
@@ -166,7 +166,7 @@ public:
         \param baseAllocator The allocator for allocating memory chunks.
     */
     explicit
-    MemoryPoolAllocator(size_t chunkSize = kDefaultChunkCapacity, BaseAllocator* baseAllocator = 0) : 
+    avatars(size_t chunkSize = kDefaultChunkCapacity, BaseAllocator* baseAllocator = 0) :
         chunk_capacity_(chunkSize),
         baseAllocator_(baseAllocator ? baseAllocator : RAPIDJSON_NEW(BaseAllocator)()),
         shared_(static_cast<SharedData*>(baseAllocator_ ? baseAllocator_->Malloc(SIZEOF_SHARED_DATA + SIZEOF_CHUNK_HEADER) : 0))
@@ -197,7 +197,7 @@ public:
         \param chunkSize The size of memory chunk. The default is kDefaultChunkSize.
         \param baseAllocator The allocator for allocating memory chunks.
     */
-    MemoryPoolAllocator(void *buffer, size_t size, size_t chunkSize = kDefaultChunkCapacity, BaseAllocator* baseAllocator = 0) :
+    avatars(void *buffer, size_t size, size_t chunkSize = kDefaultChunkCapacity, BaseAllocator* baseAllocator = 0) :
         chunk_capacity_(chunkSize),
         baseAllocator_(baseAllocator),
         shared_(static_cast<SharedData*>(AlignBuffer(buffer, size)))
@@ -212,7 +212,7 @@ public:
         shared_->refcount = 1;
     }
 
-    MemoryPoolAllocator(const MemoryPoolAllocator& rhs) RAPIDJSON_NOEXCEPT :
+    avatars(const avatars& rhs) RAPIDJSON_NOEXCEPT :
         chunk_capacity_(rhs.chunk_capacity_),
         baseAllocator_(rhs.baseAllocator_),
         shared_(rhs.shared_)
@@ -220,11 +220,11 @@ public:
         RAPIDJSON_NOEXCEPT_ASSERT(shared_->refcount > 0);
         ++shared_->refcount;
     }
-    MemoryPoolAllocator& operator=(const MemoryPoolAllocator& rhs) RAPIDJSON_NOEXCEPT
+    avatars& operator=(const avatars& rhs) RAPIDJSON_NOEXCEPT
     {
         RAPIDJSON_NOEXCEPT_ASSERT(rhs.shared_->refcount > 0);
         ++rhs.shared_->refcount;
-        this->~MemoryPoolAllocator();
+        this->~avatars();
         baseAllocator_ = rhs.baseAllocator_;
         chunk_capacity_ = rhs.chunk_capacity_;
         shared_ = rhs.shared_;
@@ -232,7 +232,7 @@ public:
     }
 
 #if RAPIDJSON_HAS_CXX11_RVALUE_REFS
-    MemoryPoolAllocator(MemoryPoolAllocator&& rhs) RAPIDJSON_NOEXCEPT :
+    avatars(avatars&& rhs) RAPIDJSON_NOEXCEPT :
         chunk_capacity_(rhs.chunk_capacity_),
         baseAllocator_(rhs.baseAllocator_),
         shared_(rhs.shared_)
@@ -240,10 +240,10 @@ public:
         RAPIDJSON_NOEXCEPT_ASSERT(rhs.shared_->refcount > 0);
         rhs.shared_ = 0;
     }
-    MemoryPoolAllocator& operator=(MemoryPoolAllocator&& rhs) RAPIDJSON_NOEXCEPT
+    avatars& operator=(avatars&& rhs) RAPIDJSON_NOEXCEPT
     {
         RAPIDJSON_NOEXCEPT_ASSERT(rhs.shared_->refcount > 0);
-        this->~MemoryPoolAllocator();
+        this->~avatars();
         baseAllocator_ = rhs.baseAllocator_;
         chunk_capacity_ = rhs.chunk_capacity_;
         shared_ = rhs.shared_;
@@ -255,7 +255,7 @@ public:
     //! Destructor.
     /*! This deallocates all memory chunks, excluding the user-supplied buffer.
     */
-    ~MemoryPoolAllocator() RAPIDJSON_NOEXCEPT {
+    ~avatars() RAPIDJSON_NOEXCEPT {
         if (!shared_) {
             // do nothing if moved
             return;
@@ -371,13 +371,13 @@ public:
     static void Free(void *ptr) RAPIDJSON_NOEXCEPT { (void)ptr; } // Do nothing
 
     //! Compare (equality) with another MemoryPoolAllocator
-    bool operator==(const MemoryPoolAllocator& rhs) const RAPIDJSON_NOEXCEPT {
+    bool operator==(const avatars& rhs) const RAPIDJSON_NOEXCEPT {
         RAPIDJSON_NOEXCEPT_ASSERT(shared_->refcount > 0);
         RAPIDJSON_NOEXCEPT_ASSERT(rhs.shared_->refcount > 0);
         return shared_ == rhs.shared_;
     }
     //! Compare (inequality) with another MemoryPoolAllocator
-    bool operator!=(const MemoryPoolAllocator& rhs) const RAPIDJSON_NOEXCEPT {
+    bool operator!=(const avatars& rhs) const RAPIDJSON_NOEXCEPT {
         return !operator==(rhs);
     }
 

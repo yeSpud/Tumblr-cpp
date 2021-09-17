@@ -4,6 +4,9 @@
 
 #include "catch2/catch.hpp"
 #include "postTest.hpp"
+#include "blogTest.hpp"
+#include "mediaTest.hpp"
+#include "themeTest.hpp"
 #include <iostream>
 
 void
@@ -392,12 +395,53 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 
 	REQUIRE(singlePostDocument.IsObject());
 
-	Post generatedPost = *Post::generatePosts(blogAndPostString.c_str())[0]; // FIXME Error here
+	Post generatedPost = *Post::generatePosts(blogAndPostString.c_str())[0];
 
 	Post populatedPost;
 	populatedPost.populatePost(singlePostDocument.GetObj());
 
-	// TODO Test blog in generated post.
+	// Test blog in generated post.
+	Blog generatedPostBlog = Blog::generateBlog(blogAndPostString.c_str());
+	BlogTest::testBlog(&generatedPostBlog, false, false, "Ask me anything", true,
+					   true, false, "", false, "foxes-in-love", 483,
+					   0, false, false, "Foxes in Love", 483, 1631767427,
+					   "", "","https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
+					   false, true);
+
+	// TODO Test blog avatars.
+	//MediaTest::testMedia(generatedPostBlog.avatars[0]);
+	/*
+	 "avatar": [
+		{
+			"width": 512,
+			"height": 512,
+			"url": "https://64.media.tumblr.com/avatar_a95095bda931_512.png"
+		},
+		{
+			"width": 128,
+			"height": 128,
+			"url": "https://64.media.tumblr.com/avatar_a95095bda931_128.png"
+		},
+		{
+			"width": 96,
+			"height": 96,
+			"url": "https://64.media.tumblr.com/avatar_a95095bda931_96.png"
+		},
+		{
+			"width": 64,
+			"height": 64,
+			"url": "https://64.media.tumblr.com/avatar_a95095bda931_64.png"
+		}
+	],
+	 */
+
+	// Test blog themes.
+	ThemeTest::testTheme(generatedPostBlog.theme, "circle", "#FAFAFA", "Helvetica Neue",
+						 "https://static.tumblr.com/7e320b6d491ee3e42460543609b11bb4/rf83rif/Bx4plw0mr/tumblr_static_7wggfrzs5vcwwcso8cwk0kk0o.jpg",
+						 "https://static.tumblr.com/7e320b6d491ee3e42460543609b11bb4/rf83rif/VSyplw0ms/tumblr_static_tumblr_static_7wggfrzs5vcwwcso8cwk0kk0o_focused_v3.jpg",
+						 "", "https://static.tumblr.com/7e320b6d491ee3e42460543609b11bb4/rf83rif/Bx4plw0mr/tumblr_static_7wggfrzs5vcwwcso8cwk0kk0o_2048_v2.jpg",
+						 true, "#529ECC", true, true, true,
+						 true, "#444444", "Gibson", "bold");
 
 	PostTest::testPost(generatedPost, Post::photo, "regular", "foxes-in-love", 662456162462154752,
 					   "662456162462154752","", "https://foxes-in-love.tumblr.com/post/662456162462154752",
@@ -408,7 +452,12 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 							   false, 4973, false, false,true,
 							   false,true);
 
-	// TODO Test blog pointer for generated post.
+	// Test blog pointer for generated post.
+	BlogTest::testBlog(generatedPost.blog, false, false, "", false, false,
+					   false, "", false, "foxes-in-love", 0, 0,
+					   false,false, "Foxes in Love", 0, 1631767427, "",
+					   "", "https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
+					   false, false);
 
 	// TODO Test generated post content.
 
@@ -425,7 +474,12 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 							   false, 4973, false, false, true,
 							   false,true);
 
-	// TODO Test blog pointer for populated post.
+	// Test blog pointer for populated post.
+	BlogTest::testBlog(populatedPost.blog, false, false, "", false, false,
+	                   false, "", false, "foxes-in-love", 0, 0,
+	                   false,false, "Foxes in Love", 0, 1631767427, "",
+	                   "", "https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
+	                   false, false);
 
 	// TODO Test populated post content.
 
