@@ -444,30 +444,32 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 					   false, false);
 
 	// Test generated post content.
-	Image* generatedPostImage = dynamic_cast<Image *>(generatedPost.content[0]);
-	ImageTest::testImage(*generatedPostImage, "", "");
-	MediaTest::testMedia(generatedPostImage->media[0], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
-	                     1600, 1600, false, false, true);
-	MediaTest::testMedia(generatedPostImage->media[1], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
-	                     1280, 1280, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[2], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
-	                     640, 640, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[3], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
-	                     540, 540, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[4], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
-	                     500, 500, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[5], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
-	                     400, 400, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[6], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
-	                     250, 250, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[7], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
-	                     100, 100, false, false, false);
-	MediaTest::testMedia(generatedPostImage->media[8], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
-	                     75, 75, false, true, false);
+	Image* generatedPostImage = dynamic_cast<Image*>(generatedPost.content[0].get());
+	ImageTest::testImage(generatedPostImage, "", "");
+	MediaTest::testMedia(generatedPostImage->media[0], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
+	                     1600, 1600, true, false, true);
+	MediaTest::testMedia(generatedPostImage->media[1], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
+	                     1280, 1280, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[2], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
+	                     640, 640, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[3], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
+	                     540, 540, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[4], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
+	                     500, 500, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[5], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
+	                     400, 400, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[6], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
+	                     250, 250, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[7], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
+	                     100, 100, true, false, false);
+	MediaTest::testMedia(generatedPostImage->media[8], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
+	                     75, 75, true, true, false);
 
-	// TODO Test generated post layout.
+	// Test generated post layout.
+	REQUIRE(populatedPost.layout.empty());
 
-	// TODO Test generated post trail.
+	// Test generated post trail.
+	REQUIRE(generatedPost.trail.empty());
 
 	PostTest::testPost(populatedPost, Post::photo, "regular", "foxes-in-love", 662456162462154752,
 					   "662456162462154752","", "https://foxes-in-love.tumblr.com/post/662456162462154752",
@@ -486,29 +488,31 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 	                   false, false);
 
 	// Test populated post content.
-	Image* populatedPostImage = dynamic_cast<Image *>(populatedPost.content[0]);
-	ImageTest::testImage(*populatedPostImage, "", "");
-	MediaTest::testMedia(populatedPostImage->media[0], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
-	                     1600, 1600, false, false, true);
-	MediaTest::testMedia(populatedPostImage->media[1], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
-	                     1280, 1280, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[2], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
-	                     640, 640, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[3], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
-	                     540, 540, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[4], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
-	                     500, 500, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[5], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
-	                     400, 400, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[6], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
-	                     250, 250, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[7], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
-	                     100, 100, false, false, false);
-	MediaTest::testMedia(populatedPostImage->media[8], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
-	                     75, 75, false, true, false);
+	Image* populatedPostImage = dynamic_cast<Image*>(populatedPost.content[0].get());
+	ImageTest::testImage(populatedPostImage, "", "");
+	MediaTest::testMedia(populatedPostImage->media[0], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
+	                     1600, 1600, true, false, true);
+	MediaTest::testMedia(populatedPostImage->media[1], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
+	                     1280, 1280, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[2], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
+	                     640, 640, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[3], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
+	                     540, 540, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[4], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
+	                     500, 500, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[5], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
+	                     400, 400, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[6], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
+	                     250, 250, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[7], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
+	                     100, 100, true, false, false);
+	MediaTest::testMedia(populatedPostImage->media[8], "image/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
+	                     75, 75, true, true, false);
 
-	// TODO Test populated post layout.
+	// Test populated post layout.
+	REQUIRE(populatedPost.layout.empty());
 
-	// TODO Test populated post trail.
+	// Test populated post trail.
+	REQUIRE(populatedPost.trail.empty());
 
 }

@@ -21,7 +21,7 @@ public:
 	 * @param feedback_token
 	 * @param alt_text
 	 */
-	static void testImage(const Image &image, const std::string &feedback_token, const std::string &alt_text);
+	static void testImage(const Image *image, const std::string &feedback_token, const std::string &alt_text);
 
 };
 

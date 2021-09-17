@@ -16,17 +16,12 @@ Trail::~Trail() { // TODO Comments
 	DELETE_NPF(post)
 	DELETE_NPF(blog)
 
-	for (Content *c : content) {
-		DELETE_NPF(c)
-	}
-
 	for (Layout *l : layout) {
 		DELETE_NPF(l)
 	}
-
 }
 
-void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<Content *> &array) { // TODO Comments
+void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array) { // TODO Comments
 
 	POPULATE_ARRAY(object, "content", for (JSON_ARRAY_ENTRY &entry : object["content"].GetArray()) {
 
@@ -38,23 +33,23 @@ void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<C
 					if (type == "audio") {
 						Audio audio;
 						audio.populateNPF(entry.GetObj());
-						array.push_back(&audio);
+						array.push_back(std::make_unique<Audio>(audio));
 					} else if (type == "image") {
 						Image image;
 						image.populateNPF(entry.GetObj());
-						array.push_back(&image);
+						array.push_back(std::make_unique<Image>(image));
 					} else if (type == "link") {
 						Link link;
 						link.populateNPF(entry.GetObj());
-						array.push_back(&link);
+						array.push_back(std::make_unique<Link>(link));
 					} else if (type == "text") {
 						Text text;
 						text.populateNPF(entry.GetObj());
-						array.push_back(&text);
+						array.push_back(std::make_unique<Text>(text));
 					} else if (type == "video") {
 						Video video;
 						video.populateNPF(entry.GetObj());
-						array.push_back(&video);
+						array.push_back(std::make_unique<Video>(video));
 					}
 				}
 			}

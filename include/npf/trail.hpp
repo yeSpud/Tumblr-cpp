@@ -40,7 +40,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Content *> content;
+	std::vector<std::shared_ptr<Content>> content;
 
 	/**
 	 * TODO Documentation
@@ -57,7 +57,7 @@ public:
 	 * @param object
 	 * @param vector
 	 */
-	static void populateContentPointerArray(const JSON_OBJECT &object, std::vector<Content *> &array);
+	static void populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array);
 
 	/**
 	 * TODO Documentation

@@ -268,7 +268,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	std::vector<Content *> content;
+	std::vector<std::shared_ptr<Content>> content;
 
 	/**
 	 * TODO Documentation
