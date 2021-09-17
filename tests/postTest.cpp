@@ -7,6 +7,7 @@
 #include "blogTest.hpp"
 #include "mediaTest.hpp"
 #include "themeTest.hpp"
+#include "imageTest.hpp"
 #include <iostream>
 
 void
@@ -442,7 +443,27 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 					   "", "https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
 					   false, false);
 
-	// TODO Test generated post content.
+	// Test generated post content.
+	Image* generatedPostImage = dynamic_cast<Image *>(generatedPost.content[0]);
+	ImageTest::testImage(*generatedPostImage, "", "");
+	MediaTest::testMedia(generatedPostImage->media[0], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
+	                     1600, 1600, false, false, true);
+	MediaTest::testMedia(generatedPostImage->media[1], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
+	                     1280, 1280, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[2], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
+	                     640, 640, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[3], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
+	                     540, 540, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[4], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
+	                     500, 500, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[5], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
+	                     400, 400, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[6], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
+	                     250, 250, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[7], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
+	                     100, 100, false, false, false);
+	MediaTest::testMedia(generatedPostImage->media[8], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
+	                     75, 75, false, true, false);
 
 	// TODO Test generated post layout.
 
@@ -464,7 +485,27 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 	                   "", "https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
 	                   false, false);
 
-	// TODO Test populated post content.
+	// Test populated post content.
+	Image* populatedPostImage = dynamic_cast<Image *>(populatedPost.content[0]);
+	ImageTest::testImage(*populatedPostImage, "", "");
+	MediaTest::testMedia(populatedPostImage->media[0], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s2048x3072/fc4e3a881144ab9514936342187773381f9e87bb.jpg",
+	                     1600, 1600, false, false, true);
+	MediaTest::testMedia(populatedPostImage->media[1], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s1280x1920/6edfedea7b49384416c99828a97d0b52ef288d73.jpg",
+	                     1280, 1280, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[2], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s640x960/082cb3411fe2de9181aab754124c64b56ae60883.jpg",
+	                     640, 640, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[3], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s540x810/4223bb511a9435e79f03ecbee14050978c0d7edf.jpg",
+	                     540, 540, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[4], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s500x750/6379a93ce8d5acd37254f184558c70e4ad99cabb.jpg",
+	                     500, 500, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[5], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s400x600/7e96093ad6e2e9d293ac3ddcf1845e2fd6816da9.jpg",
+	                     400, 400, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[6], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s250x400/01cac1bb8e4253537885edbeaabd9fa5266c53f0.jpg",
+	                     250, 250, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[7], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s100x200/024aead13f5ef961e8247cbebb0f4667c905d738.jpg",
+	                     100, 100, false, false, false);
+	MediaTest::testMedia(populatedPostImage->media[8], "generatedPostImage/jpeg", "https://64.media.tumblr.com/cd7cb9636b5d1ed62a4e2c262b3f27b8/14bdf768bba10f86-29/s75x75_c1/bb0d435b3ddb22b3ccb4d913d24af3d6dc3eae36.jpg",
+	                     75, 75, false, true, false);
 
 	// TODO Test populated post layout.
 

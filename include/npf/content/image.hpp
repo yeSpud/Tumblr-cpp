@@ -23,12 +23,6 @@ public:
 	Image() : Content("image") {};
 
 	/**
-	 * TODO Documentation
-	 * Undocumented?
-	 */
-	std::string media_key;
-
-	/**
 	 * An array of Media objects which represent different available sizes of this image asset.
 	 */
 	std::vector<Media> media;

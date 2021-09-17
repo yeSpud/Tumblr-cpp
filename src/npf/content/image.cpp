@@ -6,8 +6,6 @@
 
 void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	objectHasValue(entry, "media_key", media_key);
-
 	// Iterate to get media.
 	populateVectorObject(entry, "media", media);
 
