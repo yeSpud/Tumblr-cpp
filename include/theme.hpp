@@ -111,7 +111,7 @@ public:
 	 * @param entry
 	 * @return
 	 */
-	static Theme generateTheme(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::avatars<rapidjson::CrtAllocator>>> &entry);
+	static Theme generateTheme(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &entry);
 
 };
 
