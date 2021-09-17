@@ -19,7 +19,12 @@ class Trail; // Forward declaration to mitigate circular dependencies.
  */
 class Post {
 
-protected:
+public:
+
+	/**
+	 * TODO Documentation
+	 */
+	~Post();
 
 	/**
 	 * TODO Documentation
@@ -80,7 +85,12 @@ protected:
 		/**
 		 * TODO Documentation
 		 */
-		markdown
+		markdown,
+
+		/**
+		 * Used if there is no post format provided.
+		 */
+		none
 
 	};
 
@@ -109,13 +119,6 @@ protected:
 		 */
 		privat
 	};
-
-public:
-
-	/**
-	 * TODO Documentation
-	 */
-	~Post();
 
 	/**
 	 * The type of post.
@@ -175,7 +178,7 @@ public:
 	/**
 	 * The post format: html or markdown
 	 */
-	postFormat format;
+	postFormat format = none;
 
 	/**
 	 * Indicates the current state of the post.
@@ -215,12 +218,12 @@ public:
 	/**
 	 * Indicates if a user has already liked a post or not. Requires OAuth.
 	 */
-	bool liked;
+	bool liked = false;
 
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	uint64_t total_posts;
+	uint64_t total_posts = 0;
 
 	/**
 	 * Short url for the post.
@@ -235,7 +238,7 @@ public:
 	/**
 	 * Indicates post is a submission.
 	 */
-	bool is_submission;
+	bool is_submission = false;
 
 	/**
 	 * Name on an anonymous submission.
@@ -255,7 +258,7 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	bool should_open_in_legacy;
+	bool should_open_in_legacy = false;
 
 	/**
 	 * TODO Documentation
@@ -280,27 +283,27 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	bool can_like;
+	bool can_like = false;
 
 	/**
 	 * TODO Documentation
 	 */
-	bool can_reblog;
+	bool can_reblog = false;
 
 	/**
 	 * TODO Documentation
 	 */
-	bool can_send_in_message;
+	bool can_send_in_message = false;
 
 	/**
 	 * TODO Documentation
 	 */
-	bool can_reply;
+	bool can_reply = false;
 
 	/**
 	 * TODO Documentation
 	 */
-	bool display_avatar;
+	bool display_avatar = false;
 
 	// TODO Add post comparison (== and !=)
 

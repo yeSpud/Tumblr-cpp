@@ -14,10 +14,28 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 	// Post type
 	if (object.HasMember("type")) {
 		if (object["type"].IsString()) {
-			std::vector<std::string> strings{"text", "quote", "link", "answer", "video", "audio", "photo", "chat"};
+
+			std::string stringType = object["type"].GetString();
+
+			// Check if the type is a npf (will have a type of "blocks"
+			if (stringType == "blocks") {
+
+				// Try finding the content block.
+				if (object.HasMember("content")) {
+
+					JSON_ARRAY blockContent = object["content"].GetArray();
+
+					// Check if we can get the type of the block content.
+					if (blockContent[0].HasMember("type")) {
+						stringType = blockContent[0]["type"].GetString();
+					}
+				}
+			}
+
+			std::vector<std::string> strings{"text", "text", "text", "text", "video", "audio", "image", "text"};
 			std::vector<postType> types{text, quote, link, answer, video, audio, photo, chat};
 
-			type = stringToEnum(object["type"].GetString(), strings, types);
+			type = stringToEnum(stringType, strings, types, text);
 		}
 	}
 
@@ -42,7 +60,7 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 			std::vector<std::string> strings{"html", "markdown"};
 			std::vector<postFormat> formats{html, markdown};
 
-			format = stringToEnum(object["format"].GetString(), strings, formats);
+			format = stringToEnum(object["format"].GetString(), strings, formats, none);
 		}
 	}
 
@@ -53,7 +71,7 @@ void Post::populatePost(const JSON_OBJECT &object) { // TODO Comments
 			std::vector<std::string> strings{"published", "queued", "draft", "private"};
 			std::vector<postState> states{published, queued, draft, privat};
 
-			state = stringToEnum(object["state"].GetString(), strings, states);
+			state = stringToEnum(object["state"].GetString(), strings, states, published);
 		}
 	}
 
@@ -119,7 +137,7 @@ std::vector<Post *> Post::generatePosts(const char *json) { // TODO Comments
 		// Gets the posts array from the response.
 		if (response.HasMember("posts")) {
 
-			for (JSON_ARRAY_ENTRY &entry: response["posts"].GetArray()) {
+			for (JSON_ARRAY_ENTRY &entry : response["posts"].GetArray()) {
 				if (entry.IsObject()) {
 
 					JSON_OBJECT postjson = entry.GetObj();
