@@ -9,9 +9,7 @@
 #include "npf/layout/layout.hpp"
 #include "npf/trail.hpp"
 
-// Forward declarations to mitigate circular dependencies issues with attribution.hpp.
 class Trail; // Forward declaration to mitigate circular dependencies.
-
 
 /**
  * TODO Documentation

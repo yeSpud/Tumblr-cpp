@@ -4,6 +4,8 @@
 
 #include "npf/content/image.hpp"
 
+Image::~Image() = default;
+
 void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	// Iterate to get media.
@@ -18,9 +20,8 @@ void Image::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	// Get attribution.
 	POPULATE_OBJECT(entry, "attribution", Attribution attr;
-			attr.populateNPF(entry["attribution"].GetObj());
-			attribution = new Attribution;
-			*attribution = attr;)
+			attribution = std::shared_ptr<Attribution>(new Attribution);
+			attribution->populateNPF(entry["attribution"].GetObj());)
 
 	objectHasValue(entry, "alt_text", alt_text);
 
