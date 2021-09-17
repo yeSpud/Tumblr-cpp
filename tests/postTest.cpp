@@ -408,32 +408,15 @@ TEST_CASE("Parsing Post Test", "[Post]") {
 					   "", "","https://foxes-in-love.tumblr.com/", "t:bF2JMCXfv_Agp-5ZfJQ75A",
 					   false, true);
 
-	// TODO Test blog avatars.
-	//MediaTest::testMedia(generatedPostBlog.avatars[0]);
-	/*
-	 "avatar": [
-		{
-			"width": 512,
-			"height": 512,
-			"url": "https://64.media.tumblr.com/avatar_a95095bda931_512.png"
-		},
-		{
-			"width": 128,
-			"height": 128,
-			"url": "https://64.media.tumblr.com/avatar_a95095bda931_128.png"
-		},
-		{
-			"width": 96,
-			"height": 96,
-			"url": "https://64.media.tumblr.com/avatar_a95095bda931_96.png"
-		},
-		{
-			"width": 64,
-			"height": 64,
-			"url": "https://64.media.tumblr.com/avatar_a95095bda931_64.png"
-		}
-	],
-	 */
+	// Test blog avatars.
+	MediaTest::testMedia(generatedPostBlog.avatars[0], "", "https://64.media.tumblr.com/avatar_a95095bda931_512.png",
+						 512, 512, true, false, false);
+	MediaTest::testMedia(generatedPostBlog.avatars[1], "", "https://64.media.tumblr.com/avatar_a95095bda931_128.png",
+	                     128, 128, true, false, false);
+	MediaTest::testMedia(generatedPostBlog.avatars[2], "", "https://64.media.tumblr.com/avatar_a95095bda931_96.png",
+	                     96, 96, true, false, false);
+	MediaTest::testMedia(generatedPostBlog.avatars[3], "", "https://64.media.tumblr.com/avatar_a95095bda931_64.png",
+	                     64, 64, true, false, false);
 
 	// Test blog themes.
 	ThemeTest::testTheme(generatedPostBlog.theme, "circle", "#FAFAFA", "Helvetica Neue",
