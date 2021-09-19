@@ -30,6 +30,8 @@ jobs:
       - name: List Files
         run: echo "Local directory" && ls && echo "Build directory" && ls build/ && echo "Test directory" && ls build/tests/
 
+      - name: Make Tests executable
+        run: chmod +x ${{github.workspace}}/build/tests/testlib
+
       - name: Test
-        working-directory: ${{github.workspace}}/build/tests
-        run: testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
+        run: ${{github.workspace}}/build/tests/testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
