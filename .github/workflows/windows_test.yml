@@ -28,7 +28,7 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
       - name: List files
-        run: dir build\tests
+        run: dir build\tests\Release
 
       - name: Test
         run: ${{github.workspace}}\build\tests\testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
