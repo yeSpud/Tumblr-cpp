@@ -27,8 +27,5 @@ jobs:
         # Build your program with the given configuration
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
-      - name: Make Tests executable
-        run: chmod +x ${{github.workspace}}/build/tests/testlib
-
       - name: Test
         run: ${{github.workspace}}/build/tests/testlib -k ${{secrets.API_KEY}} -d yes --order lex

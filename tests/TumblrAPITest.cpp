@@ -43,6 +43,14 @@ TEST_CASE("Test Blog Json", "[TumblrAPI]") {
 		// TODO Test blog
 	}
 
+	SECTION("Blog Avatar") {
+		cpr::Response response = api->getBlogAvatarJson("david.tumblr.com");
+		REQUIRE(response.status_code == 200);
+		REQUIRE(!response.text.empty());
+		// It returns an image...
+		// TODO Test blog avatar
+	}
+
 }
 
 //#endif //TUMBLRAPI_TEST_CPP
