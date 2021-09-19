@@ -28,8 +28,8 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
       - name: List Files
-        run: echo "Local directory\n" && ls && echo "Build directory\n" && ls build/ && echo "Test directory\n" && ls tests/
+        run: echo "Local directory" && ls && echo "Build directory" && ls build/ && echo "Test directory" && ls build/tests/
 
       - name: Test
-        working-directory: ${{github.workspace}}/tests
+        working-directory: ${{github.workspace}}/build/tests
         run: testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
