@@ -27,6 +27,9 @@ jobs:
         # Build your program with the given configuration
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
+      - name: List Files
+        run: ls && ls build/ && ls tests/
+        
       - name: Test
         working-directory: ${{github.workspace}}/tests
         run: testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
