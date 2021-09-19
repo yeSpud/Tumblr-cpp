@@ -31,4 +31,4 @@ jobs:
         run: dir build\tests\Release
 
       - name: Test
-        run: ${{github.workspace}}\build\tests\testlib -k ${{secrets.API_KEY}} -r xml -d yes --order lex
+        run: ${{github.workspace}}\build\tests\Release\testlib.exe -k ${{secrets.API_KEY}} -r xml -d yes --order lex
