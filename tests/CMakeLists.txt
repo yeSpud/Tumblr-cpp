@@ -12,5 +12,3 @@ add_executable(testlib ${TEST_HEADERS} ${TEST_SOURCE})
 target_compile_features(testlib PRIVATE cxx_std_17)
 
 target_link_libraries(testlib PRIVATE TumblrAPI cpr::cpr Catch2::Catch2)
-
-add_test(NAME testlibtest COMMAND testlib)
