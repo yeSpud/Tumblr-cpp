@@ -16,6 +16,8 @@ class Theme {
 
 public:
 
+	~Theme();
+
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
 	 */

@@ -6,10 +6,7 @@
 #define TUMBLRAPI_BLOG_HPP
 
 #include "theme.hpp"
-#include "npf/content/image.hpp"
-
-// Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
-class Image; // Actual image class is located in image.hpp.
+#include "npf/content/media.hpp"
 
 /**
  * TODO Documentation
@@ -17,6 +14,8 @@ class Image; // Actual image class is located in image.hpp.
 class Blog {
 
 public:
+
+	~Blog();
 
 	/**
 	 * Indicates whether the blog allows questions.
@@ -43,7 +42,7 @@ public:
 	/**
 	 * An array of avatar images, each a different size, which should each have a width, height, and URL.
 	 */
-	std::vector<Image*> avatar; // Pointer array to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	std::vector<Media> avatars;
 
 	/**
 	 * TODO Documentation

@@ -11,22 +11,9 @@
 #include "npf/layout/condensed.hpp"
 #include "npf/layout/carousel.hpp"
 
-Trail::~Trail() { // TODO Comments
+Trail::~Trail() = default;
 
-	DELETE_NPF(post)
-	DELETE_NPF(blog)
-
-	for (Content *c : content) {
-		DELETE_NPF(c)
-	}
-
-	for (Layout *l : layout) {
-		DELETE_NPF(l)
-	}
-
-}
-
-void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<Content *> &array) { // TODO Comments
+void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array) { // TODO Comments
 
 	POPULATE_ARRAY(object, "content", for (JSON_ARRAY_ENTRY &entry : object["content"].GetArray()) {
 
@@ -38,23 +25,23 @@ void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<C
 					if (type == "audio") {
 						Audio audio;
 						audio.populateNPF(entry.GetObj());
-						array.push_back(&audio);
+						array.push_back(std::make_unique<Audio>(audio));
 					} else if (type == "image") {
 						Image image;
 						image.populateNPF(entry.GetObj());
-						array.push_back(&image);
+						array.push_back(std::make_unique<Image>(image));
 					} else if (type == "link") {
 						Link link;
 						link.populateNPF(entry.GetObj());
-						array.push_back(&link);
+						array.push_back(std::make_unique<Link>(link));
 					} else if (type == "text") {
 						Text text;
 						text.populateNPF(entry.GetObj());
-						array.push_back(&text);
+						array.push_back(std::make_unique<Text>(text));
 					} else if (type == "video") {
 						Video video;
 						video.populateNPF(entry.GetObj());
-						array.push_back(&video);
+						array.push_back(std::make_unique<Video>(video));
 					}
 				}
 			}
@@ -63,7 +50,7 @@ void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<C
 
 }
 
-void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<Layout *> &array) { // TODO Comments
+void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Layout>> &array) { // TODO Comments
 
 	POPULATE_ARRAY(object, "layout", for (JSON_ARRAY_ENTRY &entry : object["layout"].GetArray()) {
 		if (entry.IsObject()) { // TODO Might need fixing...
@@ -74,17 +61,16 @@ void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<La
 					if (type == "ask") {
 						Ask ask;
 						ask.populateNPF(entry.GetObj());
-						array.push_back(&ask);
+						array.push_back(std::shared_ptr<Ask>(&ask));
 					} else if (type == "condensed") {
 						Condensed condensed;
 						condensed.populateNPF(entry.GetObj());
-						array.push_back(&condensed);
+						array.push_back(std::shared_ptr<Condensed>(&condensed));
 					} else if (type == "rows") {
 						// TODO Figure out carousel type specifier.
-
 						Rows rows;
 						rows.populateNPF(entry.GetObj());
-						array.push_back(&rows);
+						array.push_back(std::shared_ptr<Rows>(&rows));
 					}
 				}
 			}
@@ -95,8 +81,8 @@ void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<La
 
 void Trail::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
-	POPULATE_OBJECT(entry, "post", post = new Post(); post->populatePost(entry["post"].GetObj());)
-	POPULATE_OBJECT(entry, "blog", blog = new Blog(); blog->populateBlog(entry["blog"].GetObj());)
+	POPULATE_OBJECT(entry, "post", post = std::shared_ptr<Post>(new Post); post->populatePost(entry["post"].GetObj());)
+	POPULATE_OBJECT(entry, "blog", blog = std::shared_ptr<Blog>(new Blog); blog->populateBlog(entry["blog"].GetObj());)
 
 	populateContentPointerArray(entry, content);
 	populateLayoutPointerArray(entry, layout);

@@ -4,6 +4,8 @@
 
 #include "blog.hpp"
 
+Blog::~Blog() = default;
+
 void Blog::populateBlog(const JSON_OBJECT &object) { // TODO Comments
 
 	objectHasValue(object, "ask", ask);
@@ -14,9 +16,9 @@ void Blog::populateBlog(const JSON_OBJECT &object) { // TODO Comments
 	// Avatars
 	POPULATE_ARRAY(object, "avatar", for (JSON_ARRAY_ENTRY &entry : object["avatar"].GetArray()) {
 		if (entry.IsObject()) {
-			Image image;
-			image.populateNPF(entry.GetObj());
-			avatar.push_back(&image);
+			Media avatar;
+			avatar.populateNPF(entry.GetObj());
+			avatars.push_back(avatar);
 		}
 	})
 

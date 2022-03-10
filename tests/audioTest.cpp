@@ -45,8 +45,8 @@ TEST_CASE("Blank Audio Test", "[Audio]") {
 	AttributionTest::testAttribution(audio.attribution, attribution_post, "", "", "");
 
 	// TODO Create own tests for these in separate files.
-	REQUIRE(audio.attribution.postObject == nullptr);
-	REQUIRE(audio.attribution.blogObject == nullptr);
+	REQUIRE(audio.attribution.post == nullptr);
+	REQUIRE(audio.attribution.blog == nullptr);
 
 	// Test the attribution logo.
 	MediaTest::testMedia(audio.attribution.logo, "", "", 0, 0, true, false, false);
@@ -152,9 +152,9 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	AttributionTest::testAttribution(tumblrAudio.attribution, attribution_post, "", "", "");
 
 	// TODO Move this to its own separate file.
-	REQUIRE(tumblrAudio.attribution.postObject == nullptr);
+	REQUIRE(tumblrAudio.attribution.post == nullptr);
 
-	BlogTest::testBlog(tumblrAudio.attribution.blogObject, false, false, "", false, false, false, "", false, "", 0, 0,
+	BlogTest::testBlog(tumblrAudio.attribution.blog.get(), false, false, "", false, false, false, "", false, "", 0, 0,
 	                   false, false, "", 0, 0, "", "", "", "", false, false);
 	MediaTest::testMedia(tumblrAudio.attribution.logo, "", "", 0, 0, true, false, false);
 
@@ -173,9 +173,9 @@ TEST_CASE("Parsing Audio Test", "[Audio]") { // TODO Comments
 	AttributionTest::testAttribution(soundcloudAudio.attribution, attribution_post, "", "", "");
 
 	// TODO Move this to its own separate file.
-	REQUIRE(soundcloudAudio.attribution.postObject == nullptr);
+	REQUIRE(soundcloudAudio.attribution.post == nullptr);
 
-	BlogTest::testBlog(soundcloudAudio.attribution.blogObject, false, false, "", false, false, false, "", false, "", 0,
+	BlogTest::testBlog(soundcloudAudio.attribution.blog.get(), false, false, "", false, false, false, "", false, "", 0,
 	                   0, false, false, "", 0, 0, "", "", "", "", false, false);
 	MediaTest::testMedia(soundcloudAudio.attribution.logo, "", "", 0, 0, true, false, false);
 }

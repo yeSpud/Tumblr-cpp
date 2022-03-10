@@ -19,8 +19,6 @@
 #define POPULATE_OBJECT(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsObject()) {code}}
 #define POPULATE_ARRAY(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsArray()) {code}}
 
-#define DELETE_NPF(NPF) if (NPF != nullptr) { delete NPF; NPF = nullptr; }
-
 class NPF {
 
 public:
@@ -110,15 +108,19 @@ static bool populateVectorObject(const JSON_OBJECT &object, const char *value, s
  * @param inputString
  * @param strings
  * @param enums
+ * @param defaultEnum
  * @return
  */
 template <typename E>
-static E stringToEnum(const std::string& inputString, const std::vector<std::string>& strings, const std::vector<E>& enums) {
+static E stringToEnum(const std::string& inputString, const std::vector<std::string>& strings, const std::vector<E>& enums,
+					  const E &defaultEnum) {
 	for (int i = 0; i < strings.size(); i++) {
 		if (inputString == strings[i]) {
 			return enums[i];
 		}
 	}
+
+	return defaultEnum;
 }
 
 #endif //TUMBLRAPI_NPF_HPP

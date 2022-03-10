@@ -5,13 +5,7 @@
 #ifndef TUMBLRAPI_IMAGE_HPP
 #define TUMBLRAPI_IMAGE_HPP
 
-#include "media.hpp"
-
-// This is where we run into circular dependencies issues. Especially with attribution.hpp.
-#include "npf/attribution.hpp" // Maybe use this as a pointer or reference instead?
-
-// Forward declaration to mitigate circular dependencies issues with attribution.hpp and image.hpp.
-class Attribution; // Actual class is located in attribution.hpp.
+#include "npf/attribution.hpp"
 
 /**
  * TODO Documentation
@@ -20,13 +14,9 @@ class Image : public Content {
 
 public:
 
-	Image() : Content("image") {};
+	~Image() override;
 
-	/**
-	 * TODO Documentation
-	 * Undocumented?
-	 */
-	std::string media_key;
+	Image() : Content("image") {};
 
 	/**
 	 * An array of Media objects which represent different available sizes of this image asset.
@@ -49,17 +39,12 @@ public:
 	/**
 	 * TODO Documentation
 	 */
-	Attribution *attribution = nullptr; // Attribution reference to mitigate circular dependencies issues with attribution.hpp and image.hpp.
+	std::shared_ptr<Attribution> attribution;
 
 	/**
 	 * Text used to describe the image, for screen readers. 200 character maximum.
 	 */
 	std::string alt_text;
-
-	/**
-	 * TODO Documentation
-	 */
-	~Image() override { DELETE_NPF(attribution)};
 
 	/**
 	 * TODO Documentation

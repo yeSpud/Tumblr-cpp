@@ -31,10 +31,10 @@ private:
 public:
 
 	/**
-	 * TODO TODO Documentation
+	 * TODO Documentation
 	 * @param token
 	 */
-	TumblrAPI(std::string &token): APIKey(std::move(token)){};
+	explicit TumblrAPI(std::string token): APIKey(std::move(token)){};
 
 	/**
 	 * This method returns general information about the blog, such as the title, number of posts,

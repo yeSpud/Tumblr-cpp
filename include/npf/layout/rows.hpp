@@ -19,6 +19,9 @@ public:
 	 */
 	Rows() : Layout(rows) {};
 
+	/**
+	 * TODO Documentation
+	 */
 	std::vector<std::vector<int>> display;
 
 	/**

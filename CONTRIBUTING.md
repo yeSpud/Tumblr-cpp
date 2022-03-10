@@ -86,8 +86,6 @@
 * imageTest.cpp
 * imageTest.hpp
 * mediaTest.cpp
-* postTest.cpp
-* postTest.hpp
 * rowsTest.cpp
 * rowsTest.hpp
 * textTest.cpp
@@ -98,7 +96,7 @@
 * videoTest.cpp
 * videoTest.hpp
 
-10/34 (29%) done
+12/34 (35%) done
 
 ### Test documentation / comments
 
