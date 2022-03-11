@@ -47,11 +47,13 @@ public:
 template<typename T>
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].Get<T>();
-		return true;
-	} else {
-		return false;
+		if (dynamic_cast<T *>(object[value].GetType())) {
+			buffer = object[value].Get<T>();
+			return true;
+		}
 	}
+
+	return false;
 }
 
 /**
