@@ -38,19 +38,63 @@ public:
 
 /**
  * TODO Documentation & comments
- * @tparam T
- * @param json
+ * @param object
  * @param value
  * @param buffer
  * @return
  */
-template<typename T>
-static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buffer) {
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, bool &buffer) {
 	if (object.HasMember(value)) {
-		if (dynamic_cast<T *>(object[value].GetType())) {
-			buffer = object[value].Get<T>();
-			return true;
-		}
+		buffer = object[value].GetBool();
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, int &buffer) {
+	if (object.HasMember(value)) {
+		buffer = object[value].GetInt();
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned long long &buffer) {
+	if (object.HasMember(value)) {
+		buffer = object[value].GetUint64();
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned int &buffer) {
+	if (object.HasMember(value)) {
+		buffer = object[value].GetUint();
+		return true;
 	}
 
 	return false;
