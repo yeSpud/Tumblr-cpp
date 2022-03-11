@@ -38,20 +38,74 @@ public:
 
 /**
  * TODO Documentation & comments
- * @tparam T
- * @param json
+ * @param object
  * @param value
  * @param buffer
  * @return
  */
-template<typename T>
-static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buffer) {
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, bool &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].Get<T>();
-		return true;
-	} else {
-		return false;
+		if (object[value].GetType() == rapidjson::kTrueType || object[value].GetType() == rapidjson::kTrueType) {
+			buffer = object[value].GetBool();
+			return true;
+		}
 	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, int &buffer) {
+	if (object.HasMember(value)) {
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetInt();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned long long &buffer) {
+	if (object.HasMember(value)) {
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetUint64();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * TODO Documentation & comments
+ * @param object
+ * @param value
+ * @param buffer
+ * @return
+ */
+static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned int &buffer) {
+	if (object.HasMember(value)) {
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetUint();
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**
@@ -63,9 +117,11 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, T &buff
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::string &buffer) {
 	if (object.HasMember(value)) {
-		const char *str = object[value].GetString();
-		buffer = std::string(str);
-		return true;
+		if (object[value].GetType() == rapidjson::kStringType) {
+			const char *str = object[value].GetString();
+			buffer = std::string(str);
+			return true;
+		}
 	}
 	return false;
 }
