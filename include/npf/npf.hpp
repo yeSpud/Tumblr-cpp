@@ -45,8 +45,10 @@ public:
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, bool &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].GetBool();
-		return true;
+		if (object[value].GetType() == rapidjson::kTrueType || object[value].GetType() == rapidjson::kTrueType) {
+			buffer = object[value].GetBool();
+			return true;
+		}
 	}
 
 	return false;
@@ -61,8 +63,10 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, bool &b
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, int &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].GetInt();
-		return true;
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetInt();
+			return true;
+		}
 	}
 
 	return false;
@@ -77,8 +81,10 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, int &bu
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned long long &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].GetUint64();
-		return true;
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetUint64();
+			return true;
+		}
 	}
 
 	return false;
@@ -93,8 +99,10 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigne
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigned int &buffer) {
 	if (object.HasMember(value)) {
-		buffer = object[value].GetUint();
-		return true;
+		if (object[value].GetType() == rapidjson::kNumberType) {
+			buffer = object[value].GetUint();
+			return true;
+		}
 	}
 
 	return false;
@@ -109,9 +117,11 @@ static bool objectHasValue(const JSON_OBJECT &object, const char *value, unsigne
  */
 static bool objectHasValue(const JSON_OBJECT &object, const char *value, std::string &buffer) {
 	if (object.HasMember(value)) {
-		const char *str = object[value].GetString();
-		buffer = std::string(str);
-		return true;
+		if (object[value].GetType() == rapidjson::kStringType) {
+			const char *str = object[value].GetString();
+			buffer = std::string(str);
+			return true;
+		}
 	}
 	return false;
 }
