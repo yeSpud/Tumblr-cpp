@@ -28,7 +28,8 @@ if (WIN32)
 endif (WIN32)
 set(CPR_BUILD_TESTS OFF)
 set(CPR_BUILD_TESTS_SSL OFF)
-FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG origin/master)
+#FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG origin/master)
+FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG db351ffbbadc6c4e9239daaa26e9aefa9f0ec82d)
 FetchContent_MakeAvailable(cpr)
 
 # include the src directory
