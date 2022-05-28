@@ -299,7 +299,19 @@ public:
 	 */
 	bool display_avatar = false;
 
-	// TODO Add post comparison (== and !=)
+	/**
+	 * TODO Documentation
+	 * @param post
+	 * @return
+	 */
+	bool operator==(const Post& post) const;
+
+	/**
+	 * TODO Documentation
+	 * @param post
+	 * @return
+	 */
+	bool operator!=(const Post& post) const;
 
 	/**
 	 * TODO Documentation
