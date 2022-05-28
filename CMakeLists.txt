@@ -19,6 +19,10 @@ message("C++ standard: ${CMAKE_CXX_STANDARD} (should be at least 17)")
 include(ExternalProject)
 include(FetchContent)
 
+# spdlog
+FetchContent_Declare(spdlog GIT_REPOSITORY https://github.com/gabime/spdlog.git GIT_TAG v1.10.0)
+FetchContent_MakeAvailable(spdlog)
+
 # cpr
 cmake_policy(SET CMP0079 NEW)
 if (WIN32)
@@ -35,9 +39,9 @@ FetchContent_MakeAvailable(cpr)
 # include the src directory
 add_subdirectory(src)
 
-# Attempt to add link library "cpr::cpr" to target "TumblrAPI" which is not built in this directory.
+# Attempt to add link library "cpr::cpr" and "spdlog::spdlog" to target "TumblrAPI" which is not built in this directory.
 # This is allowed only when policy CMP0079 is set to NEW.
-target_link_libraries(TumblrAPI PRIVATE cpr::cpr)
+target_link_libraries(TumblrAPI PRIVATE cpr::cpr spdlog::spdlog)
 
 message("Checking tests need to be included")
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
