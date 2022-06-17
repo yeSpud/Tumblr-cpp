@@ -76,7 +76,24 @@ void BlogTest::testGetLikes() {
 
     std::cout << "\nTesting retrieving blog likes..." << std::endl;
 
-    // TODO
+    REQUIRE(this->blog != nullptr);
+
+    if (!this->blog->shared_likes) {
+        std::cout << "Cannot test blog likes on a blog that does not share its likes," << std::endl;
+        return;
+    }
+
+    REQUIRE_THROWS(this->blog->getLikes(-1));
+    REQUIRE_THROWS(this->blog->getLikes(0));
+
+    // TODO Test offset, before, and after.
+    std::cout << "Reminder to test offset, before, and after parameters." << std::endl;
+
+    Blog::blogLikes blogLikes;
+    REQUIRE_NOTHROW(blogLikes = this->blog->getLikes(1));
+    REQUIRE(blogLikes.liked_posts.size() == blogLikes.liked_count);
+
+    // TODO Test other limits.
 
     std::cout << "Tested retrieving blog likes successfully!" << std::endl;
 }

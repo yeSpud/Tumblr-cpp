@@ -162,7 +162,9 @@ public:
 	unsigned long long likes = 0;
 
 	/**
-	 * TODO Documentation
+	 * Undocumented.
+	 * Indicates if the blog's likes are shared publicly.
+	 * If this is false then getting likes from the blog will return an error (which should be caught and return 0 likes).
 	 */
 	bool shared_likes = false;
 

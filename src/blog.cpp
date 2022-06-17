@@ -28,7 +28,7 @@ std::string Blog::getAvatar(unsigned short int size) {
 			this->api.logger->error(errorString);
 			throw std::runtime_error(errorString);*/
 		} else {
-			std::string errorString = "Response from API returned an error: " + response.error.message + "\n" + response.reason;
+			std::string errorString = "Response from API returned an error: " + response.error.message + '\n' + response.reason;
 			this->api.logger->error(errorString);
 			throw std::runtime_error(errorString);
 		}
@@ -43,6 +43,15 @@ std::string Blog::getAvatar(unsigned short int size) {
 
 Blog::blogLikes Blog::getLikes(unsigned short int limit, unsigned short int offset, long long before, long long after) {
 
+    // Make sure that the blog allows for retrieving likes (shared_likes must be true).
+    if (!this->shared_likes) {
+        this->api.logger->warn("Blog likes are not shared publicly. Returning 0 likes");
+        Blog::blogLikes emptyBlogLikes;
+        emptyBlogLikes.liked_count = 0;
+        emptyBlogLikes.liked_posts = std::vector<std::shared_ptr<Post>>(0);
+        return emptyBlogLikes;
+    }
+
 	// Make sure limit and offset are valid.
 	if (limit >= 1 && limit <= 20) {
 		short int offsetMath = limit - offset;
@@ -51,7 +60,18 @@ Blog::blogLikes Blog::getLikes(unsigned short int limit, unsigned short int offs
 			cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/likes", true); // TODO Implement options
 			if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 || response.status_code == 307 || response.status_code == 308) {
 				JSON_OBJECT jsonResponse = this->api.parseJsonResponse(response.text);
-			}
+			} else {
+
+                std::string errorString = "Response from API returned an error: " + response.error.message + '\n' + response.reason;
+                this->api.logger->error(errorString);
+                throw std::runtime_error(errorString);
+            }
 		}
-	}
+	} else {
+
+        // Throw an error since the limit in invalid.
+        std::string errorString = "Limit provided is not a valid limit: " + std::to_string(limit);
+        this->api.logger->error(errorString);
+        throw std::invalid_argument(errorString);
+    }
 }
