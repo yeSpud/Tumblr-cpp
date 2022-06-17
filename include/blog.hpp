@@ -8,10 +8,8 @@
 #include <utility>
 #include "theme.hpp"
 #include "npf/content/media.hpp"
+#include "npf/abstract_post.hpp"
 #include "TumblrAPI.hpp"
-#include "post.hpp"
-
-class Post; // Forward declaration for post.hpp to mitigate circular dependencies.
 
 /**
  * TODO Documentation
@@ -268,6 +266,9 @@ public:
 	// TODO Blog followers
 
 	// TODO Blog followed by
+
+
+    Post getPosts(Post::postType type, long long id, std::string tag, unsigned short int limit = 20, unsigned long long offset = 0, bool reblog_info = false, bool notes_info = false, std::string filter, long long before);
 
 };
 

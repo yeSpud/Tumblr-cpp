@@ -1,8 +1,7 @@
 message("CMake version: ${CMAKE_VERSION} (should be at least 3.5)")
 cmake_minimum_required(VERSION 3.5)
 
-project(
-        TumblrAPI
+project(TumblrAPI
         VERSION 2021.09.15
         DESCRIPTION "Tumblr API client written in C++"
         LANGUAGES CXX)

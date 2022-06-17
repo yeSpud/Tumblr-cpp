@@ -66,6 +66,7 @@ public:
 	 * @param number
 	 * @return
 	 */
+    [[deprecated("Use the blog to get posts")]]
 	cpr::Response getPostsJson(const std::string& blogURL, const unsigned int number) {return sendGetRequest(
 				"blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));};
 

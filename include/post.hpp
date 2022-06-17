@@ -14,7 +14,7 @@ class Trail; // Forward declaration to mitigate circular dependencies.
 /**
  * TODO Documentation
  */
-class Post {
+class [[deppcreated("Old class / methods for getting posts. This is going to be removed.")]] Post {
 
 public:
 
