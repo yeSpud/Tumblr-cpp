@@ -5,7 +5,10 @@
 #ifndef TUMBLRAPI_TUMBLRAPI_HPP
 #define TUMBLRAPI_TUMBLRAPI_HPP
 
-#include "cpr/cpr.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <cpr/cpr.h>
+#include "npf/npf.hpp"
 
 /**
  * TODO Documentation
@@ -19,6 +22,27 @@ private:
 	 */
 	const std::string APIKey;
 
+	//const auto oAuth; TODO
+
+public:
+
+	/**
+	 * Logger for the TumblrAPI.
+	 */
+	std::shared_ptr <spdlog::logger> logger;
+
+	/**
+	 * TODO Documentation
+	 * @param token
+	 */
+	explicit TumblrAPI(std::string token): APIKey(std::move(token)) {
+
+		// Setup the logger for fetching TumblrAPI stuff.
+		this->logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
+		this->logger->flush_on(spdlog::level::info);
+		this->logger->info("Finished setting up logger for Tumblr API");
+	};
+
 	/**
 	 * TODO Documentation
 	 * @param endpoint
@@ -26,47 +50,15 @@ private:
 	 * @param optionalParams
 	 * @return
 	 */
-	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "");
+	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "") const;
 
-public:
 
 	/**
 	 * TODO Documentation
-	 * @param token
-	 */
-	explicit TumblrAPI(std::string token): APIKey(std::move(token)){};
-
-	/**
-	 * This method returns general information about the blog, such as the title, number of posts,
-	 * and other high-level data as a JSON object.
-	 * @param blogURL
+	 * @param jsonString
 	 * @return
 	 */
-	cpr::Response getBlogInfoJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/info", true); };
-
-	/**
-	 * You can get a blog's avatar in 9 different sizes. The default size is 64x64.
-	 * @param blogURL
-	 * @return
-	 */
-	cpr::Response getBlogAvatarJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/avatar",
-	                                                                                    false); };
-
-	// TODO Blog blocks (both get, post, and delete)
-
-	/**
-	 * This method can be used to retrieve the publicly exposed likes from a blog.
-	 * @param blogURL
-	 * @return
-	 */
-	cpr::Response getBlogLikesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/likes",
-	                                                                                   true); };
-
-	// TODO Blog following
-
-	// TODO Blog followers
-
-	// TODO Blog followed by
+	JSON_OBJECT parseJsonResponse(const std::string& jsonString) const;
 
 	/**
 	 * TODO Documentation

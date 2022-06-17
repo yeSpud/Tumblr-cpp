@@ -5,17 +5,96 @@
 #ifndef TUMBLRAPI_BLOG_HPP
 #define TUMBLRAPI_BLOG_HPP
 
+#include <utility>
 #include "theme.hpp"
 #include "npf/content/media.hpp"
+#include "TumblrAPI.hpp"
+#include "post.hpp"
+
+class Post; // Forward declaration for post.hpp to mitigate circular dependencies.
 
 /**
  * TODO Documentation
  */
 class Blog {
 
+private:
+
+	/**
+	 * TODO Documentation
+	 */
+	const std::string blogIdentifier;
+
+	/**
+	 * TODO Documentation
+	 */
+	const TumblrAPI& api;
+
 public:
 
-	~Blog();
+	Blog(std::string blogIdentifier, const TumblrAPI& api): blogIdentifier(std::move(blogIdentifier)), api(api) {
+
+		cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/info", true);
+
+		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 || response.status_code == 307 || response.status_code == 308) {
+
+			JSON_OBJECT object = this->api.parseJsonResponse(response.text);
+
+			if (object.HasMember("blog")) {
+				if (object["blog"].IsObject()) {
+					object = object["blog"].GetObj();
+				}
+			}
+
+			objectHasValue(object, "ask", this->ask);
+			objectHasValue(object, "ask_anon", this->ask_anon);
+			objectHasValue(object, "ask_page_title", this->ask_page_title);
+			objectHasValue(object, "asks_allow_media", this->asks_allow_media);
+
+			// Avatars
+			POPULATE_ARRAY(object, "avatar", for (JSON_ARRAY_ENTRY &entry: object["avatar"].GetArray()) {
+				if (entry.IsObject()) {
+					Media avatar;
+					avatar.populateNPF(entry.GetObj());
+					avatars.push_back(avatar);
+				}
+			})
+
+			objectHasValue(object, "can_chat", this->can_chat);
+			objectHasValue(object, "can_subscribe", this->can_subscribe);
+			objectHasValue(object, "description", this->description);
+			objectHasValue(object, "is_nsfw", this->is_nsfw);
+			objectHasValue(object, "name", this->name);
+			objectHasValue(object, "posts", this->posts);
+			objectHasValue(object, "likes", this->likes);
+			objectHasValue(object, "shared_likes", this->shared_likes);
+			objectHasValue(object, "subscribed", this->subscribed);
+
+			// Theme
+			POPULATE_OBJECT(object, "theme", theme = Theme::generateTheme(object["theme"].GetObj());)
+
+			objectHasValue(object, "title", this->title);
+			objectHasValue(object, "total_posts", this->total_posts);
+			objectHasValue(object, "updated", this->updated);
+			objectHasValue(object, "timezone", this->timezone);
+			objectHasValue(object, "timezone_offset", this->timezone_offset);
+
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+			objectHasValue(object, "url", this->url);
+			#pragma clang diagnostic pop
+
+			objectHasValue(object, "uuid", this->uuid);
+			objectHasValue(object, "is_blocked_from_primary", this->is_blocked_from_primary);
+			objectHasValue(object, "is_optout_ads", this->is_optout_ads);
+		} else  {
+			std::string errorString = "Response from API returned an error: " + response.error.message + "\n" + response.reason;
+			this->api.logger->error(errorString);
+			throw std::runtime_error(errorString);
+		}
+	};
+
+	~Blog() = default;
 
 	/**
 	 * Indicates whether the blog allows questions.
@@ -29,13 +108,13 @@ public:
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
 	 */
 	std::string ask_page_title;
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
 	 */
 	bool asks_allow_media = false;
 
@@ -46,13 +125,13 @@ public:
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
 	 */
 	bool can_chat = false;
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
 	 */
 	bool can_subscribe = false;
 
@@ -62,8 +141,8 @@ public:
 	std::string description;
 
 	/**
-	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
+	 * Assumed to mark whether the blog is NSFW (18+).
 	 */
 	bool is_nsfw = false;
 
@@ -78,19 +157,18 @@ public:
 	unsigned long long posts = 0;
 
 	/**
-	 * Number of likes for this user.
+	 * Number of likes for this user, returned only if this is the user's primary blog and sharing of likes is enabled
 	 */
 	unsigned long long likes = 0;
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
 	 */
 	bool shared_likes = false;
 
 	/**
 	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
 	 */
 	bool subscribed = false;
 
@@ -107,7 +185,7 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
-	unsigned long long total_posts = 0; // TODO Only in posts?
+	unsigned long long total_posts = 0;
 
 	/**
 	 * The time of the most recent post, in seconds since the epoch.
@@ -126,12 +204,8 @@ public:
 	std::string timezone_offset;
 
 	/**
-	 * TODO Documentation
-	 */
-	std::string url;
-
-	/**
-	 * TODO Documentation
+	 * Each blog also has a unique identifier that you can retrieve from any API response that includes a blog,
+	 * in the uuid field (example: t:DvRFDGL05g8KB0gwiBJv1A).
 	 */
 	std::string uuid;
 
@@ -141,24 +215,57 @@ public:
 	bool is_blocked_from_primary = false;
 
 	/**
-	 * TODO Documentation
-	 * Undocumented?
+	 * Undocumented.
+	 * Assumed to mark whether the blog has opted out of advertisements,
 	 */
 	bool is_optout_ads = false;
 
 	/**
-	 * TODO Documentation
-	 * @param object
-	 * @return
+	 * Undocumented.
+	 * The url of the blog. This is usually the blog identifier. Use the blog identifier.
 	 */
-	void populateBlog(const JSON_OBJECT &object);
+	[[deprecated("Use the blog identifier")]]
+	std::string url;
 
 	/**
-	 * TODO Documentation
-	 * @param json
-	 * @return
+	 * Retrieve a Blog Avatar in the form of a URL.
+	 * You can get a blog's avatar in 9 different sizes. The default size is 64x64.
+	 * @param size The size of the avatar (square, one value for both length and width). Must be one of the values: 16, 24, 30, 40, 48, 64, 96, 128, 512.
+	 * @return The URL of the avatar image. This is also returned in the Location HTTP header field.
+	 * An <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30">HTTP Location</a> header field is returned — the response points to the avatar image. That means you can embed this method in an img tag in HTML.
 	 */
-	static Blog generateBlog(const char *json);
+	std::string getAvatar(unsigned short int size = 64);
+
+	// TODO Blog blocks (both get, post, and delete)
+
+	struct blogLikes {
+
+		/**
+		 * An array of post objects (posts liked by the user).
+		 */
+		std::vector<std::shared_ptr<Post>> liked_posts;
+
+		/**
+		 * Total number of liked posts.
+		 */
+		long long liked_count = 0;
+	};
+
+	/**
+	 * This method can be used to retrieve the publicly exposed likes from a blog.
+	 * @param limit The number of results to return: 1–20, inclusive. Optional, and defaults to 20.
+	 * @param offset Liked post number to start at. Optional, and defaults to 0 (first post).
+	 * @param before Retrieve posts liked before the specified timestamp. Optional.
+	 * @param after Retrieve posts liked after the specified timestamp. Optional.
+	 * @return blogLikes - contains an array of post objects, and liked posts.
+	 */
+	blogLikes getLikes(unsigned short int limit = 20, unsigned short int offset = 0, long long before = 0, long long after = 0);
+
+	// TODO Blog following
+
+	// TODO Blog followers
+
+	// TODO Blog followed by
 
 };
 
