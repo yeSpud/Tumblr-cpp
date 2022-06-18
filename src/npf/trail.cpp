@@ -3,16 +3,17 @@
 //
 
 #include "npf/trail.hpp"
-#include "npf/content/audio.hpp"
-#include "npf/content/link.hpp"
-#include "npf/content/text.hpp"
-#include "npf/content/video.hpp"
+#include "npf/posts/audio_post.hpp"
+#include "npf/posts/link_post.hpp"
+#include "npf/posts/text_post.hpp"
+#include "npf/posts/video_post.hpp"
 #include "npf/layout/ask.hpp"
 #include "npf/layout/condensed.hpp"
 #include "npf/layout/carousel.hpp"
 
 Trail::~Trail() = default;
 
+/*
 void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array) { // TODO Comments
 
 	POPULATE_ARRAY(object, "content", for (JSON_ARRAY_ENTRY &entry : object["content"].GetArray()) {
@@ -82,11 +83,11 @@ void Trail::populateLayoutPointerArray(const JSON_OBJECT &object, std::vector<st
 void Trail::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
 	POPULATE_OBJECT(entry, "post", post = std::shared_ptr<Post>(new Post); post->populatePost(entry["post"].GetObj());)
-	POPULATE_OBJECT(entry, "blog", blog = std::shared_ptr<Blog>(new Blog); blog->populateBlog(entry["blog"].GetObj());)
+	//POPULATE_OBJECT(entry, "blog", blog = std::shared_ptr<Blog>(new Blog); blog->populateBlog(entry["blog"].GetObj());) FIXME
 
 	populateContentPointerArray(entry, content);
 	populateLayoutPointerArray(entry, layout);
 
 	objectHasValue(entry, "broken_blog_name", broken_blog_name);
 
-}
+}*/

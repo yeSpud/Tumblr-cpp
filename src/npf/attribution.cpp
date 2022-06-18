@@ -4,7 +4,7 @@
 
 #include "npf/attribution.hpp"
 
-Attribution::~Attribution() = default;
+//Attribution::~Attribution() = default;
 
 void Attribution::populateNPF(JSON_OBJECT entry) { // TODO Comments
 
@@ -24,14 +24,14 @@ void Attribution::populateNPF(JSON_OBJECT entry) { // TODO Comments
 	objectHasValue(entry, "url", url);
 
 	// Post pointer
-	POPULATE_OBJECT(entry, "post", post = std::shared_ptr<Post>(new Post);post->populatePost(entry["post"].GetObj());)
+	//POPULATE_OBJECT(entry, "post", post = std::shared_ptr<Post>(new Post);post->populatePost(entry["post"].GetObj());)
 
-	// Blog pointer
-	POPULATE_OBJECT(entry, "blog", blog = std::shared_ptr<Blog>(new Blog);blog->populateBlog(entry["blog"].GetObj());)
+	// Blog
+	// POPULATE_OBJECT(entry, "blog", blog = Blog();blog->populateBlog(entry["blog"].GetObj());) FIXME
 
 	objectHasValue(entry, "app_name", app_name);
 	objectHasValue(entry, "display_text", display_text);
 
 	// Logo
-	POPULATE_OBJECT(entry, "logo", Media media; media.populateNPF(entry["logo"].GetObj()); logo = media;)
+	//POPULATE_OBJECT(entry, "logo", Media media; media.populateNPF(entry["logo"].GetObj()); logo = media;)
 }

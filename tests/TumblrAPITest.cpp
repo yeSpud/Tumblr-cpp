@@ -74,6 +74,9 @@ TEST_CASE("Blog Tests", "[TumblrAPI]") {
     // Test get likes.
     blogTest.testGetLikes();
 
+    // Test getting blog posts.
+    blogTest.testGetPost();
+
     // TODO Test other blog functions
 }
 

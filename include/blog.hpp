@@ -234,7 +234,7 @@ public:
 	 * @return The URL of the avatar image. This is also returned in the Location HTTP header field.
 	 * An <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30">HTTP Location</a> header field is returned — the response points to the avatar image. That means you can embed this method in an img tag in HTML.
 	 */
-	std::string getAvatar(unsigned short int size = 64);
+	std::string getAvatar(const unsigned short int &size = 64);
 
 	// TODO Blog blocks (both get, post, and delete)
 
@@ -259,7 +259,7 @@ public:
 	 * @param after Retrieve posts liked after the specified timestamp. Optional.
 	 * @return blogLikes - contains an array of post objects, and liked posts.
 	 */
-	blogLikes getLikes(unsigned short int limit = 20, unsigned short int offset = 0, long long before = 0, long long after = 0);
+	blogLikes getLikes(const unsigned short int &limit = 20, const unsigned short int &offset = 0, const long long &before = 0, const long long &after = 0);
 
 	// TODO Blog following
 
@@ -268,7 +268,23 @@ public:
 	// TODO Blog followed by
 
 
-    Post getPosts(Post::postType type, long long id, std::string tag, unsigned short int limit = 20, unsigned long long offset = 0, bool reblog_info = false, bool notes_info = false, std::string filter, long long before);
+    /**
+     * Retrieve Published Posts.
+     * @param type The type of post to return. Specify one of the following: text, quote, link, answer, video, audio,
+     * photo, or chat.
+     * @param id A specific post ID. Returns the single post specified or (if not found) a 404 error.
+     * @param tag Limits the response to posts with the specified tag(s), see note below.
+     * @param limit The number of posts to return: 1–20, inclusive.
+     * @param offset Post number to start at.
+     * @param reblog_info Indicates whether to return reblog information (specify true or false). Returns the various reblogged_ fields.
+     * @param notes_info Indicates whether to return notes information (specify true or false). Returns note count and note metadata.
+     * @param filter Specifies the post format to return, other than HTML: text – Plain text, no HTML;
+     * raw – As entered by the user (no post-processing); if the user writes in Markdown,
+     * the Markdown will be returned rather than HTML
+     * @param before Returns posts published earlier than a specified Unix timestamp, in seconds.
+     * @return
+     */
+    std::vector<Post> getPosts(const Post::postType &type = Post::postType::all, const unsigned long long &id = 0, const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0, const bool &reblog_info = false, const bool &notes_info = false, const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0);
 
 };
 

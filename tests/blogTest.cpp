@@ -98,4 +98,17 @@ void BlogTest::testGetLikes() {
     std::cout << "Tested retrieving blog likes successfully!" << std::endl;
 }
 
+void BlogTest::testGetPost() {
+
+    std::cout << "\nTesting retrieving blog posts..." << std::endl;
+
+    REQUIRE(this->blog != nullptr);
+
+    std::vector<Post> posts = this->blog->getPosts();
+	REQUIRE(posts.size() == 20);
+    // TODO Tests
+
+    std::cout << "Tested retrieving blog posts successfully!" << std::endl;
+}
+
 // TODO Rest of tests

@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_ATTRIBUTION_HPP
 #define TUMBLRAPI_ATTRIBUTION_HPP
 
-#include "post.hpp"
+#include "npf.hpp"
 
 /**
  * TODO Documentation
@@ -40,7 +40,7 @@ class Attribution : NPF {
 
 public:
 
-	~Attribution() override;
+	//~Attribution() override;
 
 	/**
 	 * The type of the attribution.
@@ -56,12 +56,12 @@ public:
 	/**
 	 * A post pointer with at least the id field.
 	 */
-	std::shared_ptr<Post> post;
+	//std::shared_ptr<Post> post;
 
 	/**
 	 * A Blog pointer with at least the uuid field.
 	 */
-	std::shared_ptr<Blog> blog;
+	//std::shared_ptr<Blog> blog;
 
 	/**
 	 * The name of the application to be attributed.
@@ -76,7 +76,7 @@ public:
 	/**
 	 * A specific logo that the client should use with the third-party app attribution.
 	 */
-	Media logo;
+	//Media logo;
 
 	/**
 	 * TODO Documentation
