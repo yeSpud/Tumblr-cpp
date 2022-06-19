@@ -22,13 +22,13 @@ cpr::Response TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRe
 	response = cpr::Get(cpr::Url{url});
 
 	// Log the returned json.
-	this->logger->debug("Returned json: " + response.text);
+	TumblrAPI::logger->debug("Returned json: " + response.text);
 
 	// Return the response.
 	return response;
 }
 
-JSON_OBJECT TumblrAPI::parseJsonResponse(const std::string &jsonString) const {
+rapidjson::GenericObject<false, rapidjson::Value> TumblrAPI::parseJsonResponse(const std::string &jsonString) const {
 
 	rapidjson::Document document;
 	document.Parse(jsonString.c_str());
@@ -37,9 +37,7 @@ JSON_OBJECT TumblrAPI::parseJsonResponse(const std::string &jsonString) const {
 		return document["response"].GetObj();
 	} else {
 		std::string errorString = "Unable to find response object in json '"+ jsonString +"' object";
-		this->logger->error(errorString);
+		TumblrAPI::logger->error(errorString);
 		throw std::runtime_error(errorString);
 	}
 }
-
-

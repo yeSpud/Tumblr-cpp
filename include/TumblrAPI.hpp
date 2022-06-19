@@ -29,7 +29,7 @@ public:
 	/**
 	 * Logger for the TumblrAPI.
 	 */
-	std::shared_ptr <spdlog::logger> logger;
+	static std::shared_ptr<spdlog::logger> logger;
 
 	/**
 	 * TODO Documentation
@@ -38,9 +38,9 @@ public:
 	explicit TumblrAPI(std::string token): APIKey(std::move(token)) {
 
 		// Setup the logger for fetching TumblrAPI stuff.
-		this->logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
-		this->logger->flush_on(spdlog::level::info);
-		this->logger->info("Finished setting up logger for Tumblr API");
+		TumblrAPI::logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
+		TumblrAPI::logger->flush_on(spdlog::level::info);
+		TumblrAPI::logger->info("Finished setting up logger for Tumblr API");
 	};
 
 	/**
@@ -58,7 +58,7 @@ public:
 	 * @param jsonString
 	 * @return
 	 */
-	JSON_OBJECT parseJsonResponse(const std::string& jsonString) const;
+	rapidjson::GenericObject<false, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
 
 	/**
 	 * TODO Documentation

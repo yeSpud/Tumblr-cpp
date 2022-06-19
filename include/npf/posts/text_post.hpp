@@ -62,30 +62,42 @@ public:
 
 	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson) : Post(postType::text, postJson) {
 
-		POPULATE_OBJECT(contentJson, "text", this->text = contentJson["text"].GetString();)
-		POPULATE_OBJECT(contentJson, "subtype",
-		                std::string subtypeString = contentJson["subtype"].GetString(); if (subtypeString ==
-		                                                                                    "heading1") {
-			                this->subtype = Text::subtype::heading1;
-		                } else if (subtypeString == "heading2") {
-			                this->subtype = Text::subtype::heading2;
-		                } else if (subtypeString == "quriky") {
-			                this->subtype = Text::subtype::quirky;
-		                } else if (subtypeString == "quote") {
-			                this->subtype = Text::subtype::quote;
-		                } else if (subtypeString == "indented") {
-			                this->subtype = Text::subtype::indented;
-		                } else if (subtypeString == "chat") {
-			                this->subtype = Text::subtype::chat;
-		                } else if (subtypeString == "ordered_list_item") {
-			                this->subtype = Text::subtype::ordered_list_item;
-		                } else if (subtypeString == "unordered_list_item") {
-			                this->subtype = Text::subtype::unordered_list_item;
-		                } else {
-			                // TODO Log this as a warning.
-			                this->subtype = Text::subtype::quote;
-		                })
-		POPULATE_OBJECT(contentJson, "indent_level", this->indent_level = contentJson["indent_level"].GetUint();)
+		Post::setStringFromJson(contentJson, "text", this->text);
+
+		if (contentJson.HasMember("subtype")) {
+			const rapidjson::Value &contentJsonValue = contentJson["subtype"];
+			if (contentJsonValue.IsString()) {
+				std::string subtypeString = contentJsonValue.GetString();
+
+				if (subtypeString == "heading1") {
+					this->subtype = Text::subtype::heading1;
+				} else if (subtypeString == "heading2") {
+					this->subtype = Text::subtype::heading2;
+				} else if (subtypeString == "quriky") {
+					this->subtype = Text::subtype::quirky;
+				} else if (subtypeString == "quote") {
+					this->subtype = Text::subtype::quote;
+				} else if (subtypeString == "indented") {
+					this->subtype = Text::subtype::indented;
+				} else if (subtypeString == "chat") {
+					this->subtype = Text::subtype::chat;
+				} else if (subtypeString == "ordered_list_item") {
+					this->subtype = Text::subtype::ordered_list_item;
+				} else if (subtypeString == "unordered_list_item") {
+					this->subtype = Text::subtype::unordered_list_item;
+				} else {
+					// TODO Log this as a warning.
+					this->subtype = Text::subtype::quote;
+				}
+			}
+		}
+
+		if (contentJson.HasMember("indent_level")) {
+			const rapidjson::Value &contentJsonValue = contentJson["indent_level"];
+			if (contentJsonValue.IsUint()) {
+				this->indent_level = contentJsonValue.GetUint();
+			}
+		}
 
 		// FIXME Add formatting
 

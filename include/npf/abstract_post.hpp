@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_ABSTRACT_POST_HPP
 #define TUMBLRAPI_ABSTRACT_POST_HPP
 
-#include "npf.hpp"
+#include "TumblrAPI.hpp"
 
 class Post {
 
@@ -111,6 +111,12 @@ public:
 	};
 
 	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	std::string original_type;
+
+	/**
 	 * The short name used to uniquely identify a blog.
 	 */
 	std::string blog_name;
@@ -143,6 +149,12 @@ public:
 	std::string post_url;
 
 	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	std::string slug;
+
+	/**
 	 * The type of post.
 	 */
 	const postType type;
@@ -160,7 +172,7 @@ public:
 	/**
 	 * The post format: html or markdown.
 	 */
-	postFormat format;
+	Post::postFormat format;
 
 	/**
 	 * The key used to reblog this post.
@@ -207,6 +219,60 @@ public:
 	 */
 	unsigned long long total_posts;
 
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	std::string short_url;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	std::string summary;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool should_open_in_legacy;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation.
+	 */
+	unsigned long long note_count;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool can_like;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool can_reblog;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool can_send_in_message;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool can_reply;
+
+	/**
+	 * Undocumented.
+	 * TODO Documentation
+	 */
+	bool display_avatar;
+
 	// auto content; FIXME
 
 	// auto layout; FIXME
@@ -229,43 +295,121 @@ public:
 
 protected:
 
+
+
 	Post(postType postType, const rapidjson::Value &jsonObject) : type(postType) {
 
+		Post::setStringFromJson(jsonObject, "original_type", this->original_type);
+		Post::setStringFromJson(jsonObject, "blog_name", this->blog_name);
 
-		POPULATE_OBJECT(jsonObject, "blog_name", this->blog_name = jsonObject["blog_name"].GetString();)
-		POPULATE_OBJECT(jsonObject, "id", this->id = jsonObject["id"].GetInt64();)
-		POPULATE_OBJECT(jsonObject, "id_string", this->id_string = jsonObject["id_string"].GetString();)
-		POPULATE_OBJECT(jsonObject, "post_url", this->post_url = jsonObject["post_url"].GetString();)
-		POPULATE_OBJECT(jsonObject, "timestamp", this->timestamp = jsonObject["timestamp"].GetInt64();)
-		POPULATE_OBJECT(jsonObject, "date", this->date = jsonObject["date"].GetString();)
-		POPULATE_OBJECT(jsonObject, "format",
-		                std::string formatString = jsonObject["format"].GetString(); if (formatString == "html") {
-			                this->format = postFormat::html;
-		                } else if (formatString == "markdown") {
-			                this->format = postFormat::markdown;
-		                } else {
-			                this->format = postFormat::none;
-		                })
-		POPULATE_OBJECT(jsonObject, "reblog_key", this->reblog_key = jsonObject["reblog_key"].GetString();)
-		POPULATE_OBJECT(jsonObject, "tags", this->tags = jsonObject["tags"].GetString();)
-		POPULATE_OBJECT(jsonObject, "bookmarklet", this->bookmarklet = jsonObject["bookmarklet"].GetBool();)
-		POPULATE_OBJECT(jsonObject, "mobile", this->mobile = jsonObject["mobile"].GetBool();)
-		POPULATE_OBJECT(jsonObject, "source_url", this->source_url = jsonObject["source_url"].GetString();)
-		POPULATE_OBJECT(jsonObject, "source_title", this->source_title = jsonObject["source_title"].GetString();)
-		POPULATE_OBJECT(jsonObject, "liked", this->liked = jsonObject["liked"].GetBool();)
-		POPULATE_OBJECT(jsonObject, "state",
-		                std::string stateString = jsonObject["state"].GetString(); if (stateString == "queued") {
-			                this->state = postState::queued;
-		                } else if (stateString == "draft") {
-			                this->state = postState::draft;
-		                } else if (stateString == "private") {
-			                this->state = postState::privat;
-		                } else {
-			                this->state = postState::published;
-		                })
-		POPULATE_OBJECT(jsonObject, "total_posts", this->total_posts = jsonObject["total_posts"].GetUint64();)
 
+		if (jsonObject.HasMember("id")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["id"];
+			if (jsonObjectValue.IsUint64()) {
+				this->id = jsonObjectValue.GetInt64();
+			}
+		}
+
+		Post::setStringFromJson(jsonObject, "id_string", this->id_string);
+		Post::setStringFromJson(jsonObject, "genesis_post_id", this->genesis_post_id);
+		Post::setStringFromJson(jsonObject, "post_url", this->post_url);
+
+		if (jsonObject.HasMember("timestamp")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["timestamp"];
+			if (jsonObjectValue.IsInt64()) {
+				this->timestamp = jsonObjectValue.GetInt64();
+			}
+		}
+
+		Post::setStringFromJson(jsonObject, "slug", this->slug);
+		Post::setStringFromJson(jsonObject, "date", this->date);
+
+		if (jsonObject.HasMember("format")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["format"];
+			if (jsonObjectValue.IsString()) {
+				std::string formatString = jsonObjectValue.GetString();
+				if (formatString == "html") {
+					this->format = postFormat::html;
+				} else if (formatString == "markdown") {
+					this->format = postFormat::markdown;
+				} else {
+					this->format = postFormat::none;
+				}
+			}
+		}
+
+		Post::setStringFromJson(jsonObject, "reblog_key", this->reblog_key);
+		Post::setStringFromJson(jsonObject, "tags", this->tags);
+		Post::setStringFromJson(jsonObject, "short_url", this->short_url);
+		Post::setStringFromJson(jsonObject, "summary", this->summary);
+
+		Post::setBooleanFromJson(jsonObject, "should_open_in_legacy", this->should_open_in_legacy);
+		Post::setBooleanFromJson(jsonObject, "bookmarklet", this->bookmarklet);
+		Post::setBooleanFromJson(jsonObject, "mobile", this->mobile);
+
+		Post::setStringFromJson(jsonObject, "source_url", this->source_url);
+		Post::setStringFromJson(jsonObject, "source_title", this->source_title);
+
+		Post::setBooleanFromJson(jsonObject, "liked", this->liked);
+
+		if (jsonObject.HasMember("state")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["state"];
+			std::string stateString = jsonObjectValue.GetString();
+			if (stateString == "queued") {
+				this->state = postState::queued;
+			} else if (stateString == "draft") {
+				this->state = postState::draft;
+			} else if (stateString == "private") {
+				this->state = postState::privat;
+			} else {
+				this->state = postState::published;
+			}
+		}
+
+		if (jsonObject.HasMember("total_posts")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["total_posts"];
+			if (jsonObjectValue.IsUint64()) {
+				this->total_posts = jsonObjectValue.GetUint64();
+			}
+		}
+
+		if (jsonObject.HasMember("note_count")) {
+			const rapidjson::Value &jsonObjectValue = jsonObject["note_count"];
+			if (jsonObjectValue.IsUint64()) {
+				this->note_count = jsonObjectValue.GetUint64();
+			}
+		}
+
+		Post::setBooleanFromJson(jsonObject, "can_like", this->can_like);
+		Post::setBooleanFromJson(jsonObject, "can_reblog", this->can_reblog);
+		Post::setBooleanFromJson(jsonObject, "can_send_in_message", this->can_send_in_message);
+		Post::setBooleanFromJson(jsonObject, "can_reply", this->can_reply);
+		Post::setBooleanFromJson(jsonObject, "display_avatar", this->display_avatar);
 	};
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @return
+	 */
+	static const rapidjson::Value* setValueFromJson(const rapidjson::Value &jsonObject, const char *key);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param stringBuffer
+	 */
+	static void setStringFromJson(const rapidjson::Value &jsonObject, const char* key, std::string &stringBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param booleanBuffer
+	 */
+	static void setBooleanFromJson(const rapidjson::Value &jsonObject, const char* key, bool &booleanBuffer);
 
 };
 

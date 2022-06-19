@@ -4,6 +4,7 @@
 
 #include "blog.hpp"
 #include "npf/posts/text_post.hpp"
+#include "npf/posts/image_post.hpp"
 
 std::string Blog::getAvatar(const unsigned short int &size) {
 
@@ -12,7 +13,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 	    size == 512) {
 
 		cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/avatar/",
-		                                                  false, std::to_string(size));
+														  false, std::to_string(size));
 
 		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 		    response.status_code == 307 || response.status_code == 308) {
@@ -31,8 +32,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 			this->api.logger->error(errorString);
 			throw std::runtime_error(errorString);*/
 		} else {
-			std::string errorString =
-					"Response from API returned an error: " + response.error.message + '\n' + response.reason;
+			std::string errorString ="Response from API returned an error: " + response.error.message + '\n' + response.reason;
 			this->api.logger->error(errorString);
 			throw std::runtime_error(errorString);
 		}
@@ -45,8 +45,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 	}
 };
 
-Blog::blogLikes
-Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset, const long long &before,
+Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset, const long long &before,
                const long long &after) {
 
 	// Make sure that the blog allows for retrieving likes (shared_likes must be true).
@@ -64,10 +63,10 @@ Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset
 		if (offsetMath > 0 && offset <= 20) {
 
 			cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/likes",
-			                                                  true); // TODO Implement options
+															  true); // TODO Implement options
 			if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 			    response.status_code == 307 || response.status_code == 308) {
-				JSON_OBJECT jsonResponse = this->api.parseJsonResponse(response.text);
+				rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
 
 				// TODO Format.
 
@@ -88,8 +87,7 @@ Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset
 	}
 }
 
-std::vector<Post>
-Blog::getPosts(const Post::postType &type, const unsigned long long &id, const std::string &tag, unsigned short limit,
+std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long long &id, const std::string &tag, unsigned short limit,
                const unsigned long long &offset, const bool &reblog_info, const bool &notes_info,
                const Post::postFormat &filter,
                const long long int &before) {
@@ -166,7 +164,7 @@ Blog::getPosts(const Post::postType &type, const unsigned long long &id, const s
 	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 	    response.status_code == 307 || response.status_code == 308) {
 
-		JSON_OBJECT jsonResponse = this->api.parseJsonResponse(response.text);
+		rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
 
 		jsonResponse.HasMember("posts");
 
@@ -199,24 +197,19 @@ Blog::getPosts(const Post::postType &type, const unsigned long long &id, const s
 
 										std::string stringType = contentEntry["type"].GetString();
 
-										if (stringType == "text") {
-											returnedPosts.push_back(Text(postJsonArrayEntry, contentEntry));
-										} else if (stringType == "quote") {
-											// FIXME
+										if (stringType == "text" || stringType == "answer" || stringType == "chat" || stringType == "quote") {
+											Text textPost = Text(postJsonArrayEntry, contentEntry); // TODO Change each of the post class types.
+											returnedPosts.push_back(textPost);
 										} else if (stringType == "link") {
-											// FIXME
-										} else if (stringType == "answer") {
 											// FIXME
 										} else if (stringType == "video") {
 											// FIXME
 										} else if (stringType == "audio") {
 											// FIXME
-										} else if (stringType == "photo") {
-											// FIXME
-										} else if (stringType == "chat") {
-											// FIXME
-										}
-
+										} else if (stringType == "image") {
+											Image imagePost = Image(postJsonArrayEntry);
+											returnedPosts.push_back(imagePost);
+										} // FIXME Add paywall post
 										postIndex++;
 									}
 								}
