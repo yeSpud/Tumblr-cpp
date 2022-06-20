@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_TEXT_POST_HPP
 #define TUMBLRAPI_TEXT_POST_HPP
 
+#include <utility>
+
 #include "content.hpp"
 #include "npf/content/formatting.hpp"
 
@@ -61,7 +63,7 @@ public:
 
 	};
 
-	Text(const rapidjson::Value &contentJson, std::string  text) : Content(postType::text), text(std::move(text)) {
+	Text(const rapidjson::Value &contentJson, std::string text) : Content(postType::text), text(std::move(text)) {
 
 		if (contentJson.HasMember("subtype")) {
 			const rapidjson::Value &contentJsonValue = contentJson["subtype"];
@@ -113,7 +115,8 @@ public:
 	Text::subtype subtype;
 
 	/**
-	 * The default indent_level is 0 for all cases. An indent_level of 1 with a list item subtype means the list item is nested; an indent_level of 2 means it is doubly nested, etc. up to the maximum of 7.
+	 * The default indent_level is 0 for all cases. An indent_level of 1 with a list item subtype means the list item is nested;
+	 * An indent_level of 2 means it is doubly nested, etc. up to the maximum of 7.
 	 */
 	unsigned short indent_level = 0;
 

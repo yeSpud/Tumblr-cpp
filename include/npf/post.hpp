@@ -9,6 +9,8 @@
 #include "npf/posts_types/content.hpp"
 #include "npf/posts_types/text_post.hpp"
 #include "npf/posts_types/image_post.hpp"
+#include "npf/posts_types/link_post.hpp"
+#include "npf/posts_types/video_post.hpp"
 
 class Post {
 
@@ -156,7 +158,12 @@ public:
 							Text textPost = Text(postContentEntryObject, text);
 							this->content.push_back(std::make_shared<Text>(textPost));
 						} else if (contentTypeString == "link") {
-							// FIXME
+
+							std::string urlString;
+							TumblrAPI::setStringFromJson(postContentEntryObject, "url", urlString);
+
+							Link linkPost = Link(postContentEntryObject, urlString);
+							this->content.push_back(std::make_shared<Link>(linkPost));
 						} else if (contentTypeString == "video") {
 							// FIXME
 						} else if (contentTypeString == "audio") {

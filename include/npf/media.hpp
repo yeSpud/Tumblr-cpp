@@ -32,7 +32,6 @@ public:
 		TumblrAPI::setBooleanFromJson(jsonObject, "original_dimensions_missing", this->original_dimensions_missing);
 		TumblrAPI::setBooleanFromJson(jsonObject, "cropped", this->cropped);
 		TumblrAPI::setBooleanFromJson(jsonObject, "has_original_dimensions", this->has_original_dimensions);
-
 	}
 
 	/**

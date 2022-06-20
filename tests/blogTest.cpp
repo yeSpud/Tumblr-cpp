@@ -101,15 +101,7 @@ void BlogTest::testGetLikes() {
     std::cout << "Tested retrieving blog likes successfully!" << std::endl;
 }
 
-void BlogTest::testGetPost() {
-
-    std::cout << "\nTesting retrieving blog posts_types..." << std::endl;
-
-    REQUIRE(this->blog != nullptr);
-
-    std::vector<Post> posts = this->blog->getPosts();
-	REQUIRE(posts.size() == 20);
-
+void testPosts(const std::vector<Post> &posts) {
 	for (const Post& post : posts) {
 
 		for (const auto& c : post.content) {
@@ -117,18 +109,42 @@ void BlogTest::testGetPost() {
 			switch (c->type) {
 				case Content::text: {
 					std::shared_ptr<Text> textPointer = std::static_pointer_cast<Text>(c);
+					REQUIRE(!textPointer->text.empty());
 					break;
 				}
 				case Content::photo: {
 					std::shared_ptr<Image> imagePointer = std::static_pointer_cast<Image>(c);
+					for (const Media& media : imagePointer->media) {
+						REQUIRE(!media.url.empty());
+					}
+					break;
+				}
+				case Content::link: {
+					std::shared_ptr<Link> linkPointer = std::static_pointer_cast<Link>(c);
+					REQUIRE(!linkPointer->url.empty());
 					break;
 				}
 				default:
-					// TODO
+					FAIL("Unhandled content type");
 					break;
 			}
 		}
 	}
+}
+
+void BlogTest::testGetPost() {
+
+    std::cout << "\nTesting retrieving blog posts_types..." << std::endl;
+
+    REQUIRE(this->blog != nullptr);
+
+    std::vector<Post> defaultPosts = this->blog->getPosts();
+	REQUIRE(defaultPosts.size() == 20);
+	testPosts(defaultPosts);
+
+	std::vector<Post> linkPosts = this->blog->getPosts(Content::postType::link, 0, "", 5);
+	REQUIRE(linkPosts.size() == 5);
+	testPosts(linkPosts);
 
     std::cout << "Tested retrieving blog posts_types successfully!" << std::endl;
 }
