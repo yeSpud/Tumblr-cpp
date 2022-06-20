@@ -5,16 +5,16 @@
 #ifndef TUMBLRAPI_IMAGE_POST_HPP
 #define TUMBLRAPI_IMAGE_POST_HPP
 
-#include "npf/abstract_post.hpp"
 #include "npf/media.hpp"
+#include "content.hpp"
 
-class Image : public Post {
+class Image : public Content {
 
 public:
 
-	Image(const rapidjson::Value &postJsonArrayEntry, const rapidjson::Value &contentArrayEntry): Post(Post::postType::photo, postJsonArrayEntry) {
+	Image(const rapidjson::Value &contentArrayEntry): Content(postType::photo) {
 
-		const rapidjson::Value* mediaValuePointer = TumblrAPI::setValueFromJson(contentArrayEntry, "media");
+		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentArrayEntry, "media");
 		if (mediaValuePointer != nullptr) {
 			if (mediaValuePointer->IsArray()) {
 				for (const rapidjson::Value &mediaArrayEntry: mediaValuePointer->GetArray()) {

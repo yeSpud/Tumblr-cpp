@@ -5,10 +5,10 @@
 #ifndef TUMBLRAPI_LINK_POSTS_HPP
 #define TUMBLRAPI_LINK_POSTS_HPP
 
-#include "npf/abstract_post.hpp"
+#include "content.hpp"
 #include <string>
 
-class Link : Post {
+class Link : public Content {
 
 public:
 

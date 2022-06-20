@@ -35,7 +35,10 @@ void BlogTest::testBlog(const std::string& blogIdentifier, const bool &ask, cons
 	REQUIRE(localBlog->updated == updated);
 	REQUIRE(localBlog->timezone == tz);
 	REQUIRE(localBlog->timezone_offset == timezone_offset);
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	REQUIRE(localBlog->url == url);
+	#pragma clang diagnostic pop
 	REQUIRE(localBlog->uuid == uuid);
 	REQUIRE(localBlog->is_blocked_from_primary == is_blocked_from_primary);
 	REQUIRE(localBlog->is_optout_ads == is_optout_ads);
@@ -100,15 +103,34 @@ void BlogTest::testGetLikes() {
 
 void BlogTest::testGetPost() {
 
-    std::cout << "\nTesting retrieving blog posts..." << std::endl;
+    std::cout << "\nTesting retrieving blog posts_types..." << std::endl;
 
     REQUIRE(this->blog != nullptr);
 
     std::vector<Post> posts = this->blog->getPosts();
 	REQUIRE(posts.size() == 20);
-    // TODO Tests
 
-    std::cout << "Tested retrieving blog posts successfully!" << std::endl;
+	for (const Post& post : posts) {
+
+		for (const auto& c : post.content) {
+
+			switch (c->type) {
+				case Content::text: {
+					std::shared_ptr<Text> textPointer = std::static_pointer_cast<Text>(c);
+					break;
+				}
+				case Content::photo: {
+					std::shared_ptr<Image> imagePointer = std::static_pointer_cast<Image>(c);
+					break;
+				}
+				default:
+					// TODO
+					break;
+			}
+		}
+	}
+
+    std::cout << "Tested retrieving blog posts_types successfully!" << std::endl;
 }
 
 // TODO Rest of tests

@@ -5,10 +5,10 @@
 #ifndef TUMBLRAPI_VIDEO_POST_HPP
 #define TUMBLRAPI_VIDEO_POST_HPP
 
-#include "npf/abstract_post.hpp"
+#include "content.hpp"
 #include "npf/attribution.hpp"
 
-class Video : Post {
+class Video : public Content {
 
 public:
 

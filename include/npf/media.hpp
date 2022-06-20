@@ -15,14 +15,14 @@ public:
 
 		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
 
-		const rapidjson::Value* widthJsonPointer = TumblrAPI::setValueFromJson(jsonObject, "width");
+		const rapidjson::Value* widthJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "width");
 		if (widthJsonPointer != nullptr) {
 			if (widthJsonPointer->IsUint()) {
 				this->width = widthJsonPointer->GetUint();
 			}
 		}
 
-		const rapidjson::Value* heightJsonPointer = TumblrAPI::setValueFromJson(jsonObject, "height");
+		const rapidjson::Value* heightJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "height");
 		if (heightJsonPointer != nullptr) {
 			if (heightJsonPointer->IsUint()) {
 				this->height = heightJsonPointer->GetUint();

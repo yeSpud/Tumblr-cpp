@@ -5,9 +5,10 @@
 #ifndef TUMBLRAPI_TEXT_POST_HPP
 #define TUMBLRAPI_TEXT_POST_HPP
 
+#include "content.hpp"
 #include "npf/content/formatting.hpp"
 
-class Text : public Post {
+class Text : public Content {
 
 public:
 
@@ -60,7 +61,7 @@ public:
 
 	};
 
-	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson, std::string  text) : Post(postType::text, postJson), text(std::move(text)) {
+	Text(const rapidjson::Value &contentJson, std::string  text) : Content(postType::text), text(std::move(text)) {
 
 		if (contentJson.HasMember("subtype")) {
 			const rapidjson::Value &contentJsonValue = contentJson["subtype"];

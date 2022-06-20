@@ -5,10 +5,10 @@
 #ifndef TUMBLRAPI_AUDIO_POST_HPP
 #define TUMBLRAPI_AUDIO_POST_HPP
 
-#include "npf/abstract_post.hpp"
+#include "content.hpp"
 #include "npf/attribution.hpp"
 
-class Audio : Post {
+class Audio : Content {
 
 public:
 

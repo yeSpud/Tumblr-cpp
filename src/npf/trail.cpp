@@ -3,13 +3,6 @@
 //
 
 #include "npf/trail.hpp"
-#include "npf/posts/audio_post.hpp"
-#include "npf/posts/link_post.hpp"
-#include "npf/posts/text_post.hpp"
-#include "npf/posts/video_post.hpp"
-#include "npf/layout/ask.hpp"
-#include "npf/layout/condensed.hpp"
-#include "npf/layout/carousel.hpp"
 
 Trail::~Trail() = default;
 

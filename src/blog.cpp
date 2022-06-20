@@ -3,8 +3,6 @@
 //
 
 #include "blog.hpp"
-#include "npf/posts/text_post.hpp"
-#include "npf/posts/image_post.hpp"
 
 std::string Blog::getAvatar(const unsigned short int &size) {
 
@@ -74,38 +72,38 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 	}
 }
 
-std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long long &id, const std::string &tag, unsigned short limit,
+std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned long long &id, const std::string &tag, unsigned short limit,
                const unsigned long long &offset, const bool &reblog_info, const bool &notes_info,
                const Post::postFormat &filter,
                const long long int &before) {
 
 	std::string additionalOptions = "&npf=true";
 	switch (type) {
-		case Post::postType::text:
+		case Content::postType::text:
 			additionalOptions += "&type=text";
 			break;
-		case Post::postType::quote:
+		case Content::postType::quote:
 			additionalOptions += "&type=quote";
 			break;
-		case Post::postType::link:
+		case Content::postType::link:
 			additionalOptions += "&type=link";
 			break;
-		case Post::postType::answer:
+		case Content::postType::answer:
 			additionalOptions += "&type=answer";
 			break;
-		case Post::postType::video:
+		case Content::postType::video:
 			additionalOptions += "&type=video";
 			break;
-		case Post::postType::audio:
+		case Content::postType::audio:
 			additionalOptions += "&type=audio";
 			break;
-		case Post::postType::photo:
+		case Content::postType::photo:
 			additionalOptions += "&type=photo";
 			break;
-		case Post::postType::chat:
+		case Content::postType::chat:
 			additionalOptions += "&type=chat";
 			break;
-		case Post::postType::all:
+		case Content::postType::all:
 			this->api.logger->debug("Getting all post types");
 			break;
 	}
@@ -145,15 +143,15 @@ std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long 
 		additionalOptions += "&before=" + std::to_string(before);
 	}
 
-	cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/posts", true,
-	                                                  additionalOptions);
+	cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/posts",
+													  true,additionalOptions);
 
-	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
-	    response.status_code == 307 || response.status_code == 308) {
+	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||response.status_code == 307
+	|| response.status_code == 308) {
 
 		const rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
 
-		const rapidjson::Value* postsJsonPointer = TumblrAPI::setValueFromJson(jsonResponse, "posts");
+		const rapidjson::Value* postsJsonPointer = TumblrAPI::getValuePointerFromJson(jsonResponse, "posts");
 
 		// Make sure the posts' pointer isn't null.
 		if (postsJsonPointer == nullptr) {
@@ -180,50 +178,8 @@ std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long 
 
 			const rapidjson::GenericObject postJsonArrayEntryObject = postsJsonArrayEntry.GetObj();
 
-			// Make sure the post has a content array.
-			const rapidjson::Value* postContentJsonPointer = TumblrAPI::setValueFromJson(postJsonArrayEntryObject, "content");
-			if (postContentJsonPointer == nullptr) {
-				this->api.logger->warn("Post is missing content array.");
-				continue;
-			}
-			if (!postContentJsonPointer->IsArray()) {
-				this->api.logger->warn("Post content isn't an array.");
-				continue;
-			}
-
-			rapidjson::GenericArray postContentJsonArray = postContentJsonPointer->GetArray();
-			for (const rapidjson::Value &postContentJsonEntry : postContentJsonArray) {
-
-				if (!postContentJsonEntry.IsObject()) {
-					this->api.logger->warn("Post content entry isn't an object");
-					continue;
-				}
-
-				rapidjson::GenericObject postContentEntryObject = postContentJsonEntry.GetObj();
-
-				std::string contentTypeString;
-				TumblrAPI::setStringFromJson(postContentEntryObject, "type", contentTypeString);
-
-				if (contentTypeString == "text" || contentTypeString == "answer" || contentTypeString == "chat" || contentTypeString == "quote") { // TODO Change each of the post class types.
-
-					std::string text;
-					TumblrAPI::setStringFromJson(postContentEntryObject, "text", text);
-
-					Text textPost = Text(postJsonArrayEntryObject, postContentEntryObject, text);
-					returnedPosts.push_back(textPost);
-				} else if (contentTypeString == "link") {
-					// FIXME
-				} else if (contentTypeString == "video") {
-					// FIXME
-				} else if (contentTypeString == "audio") {
-					// FIXME
-				} else if (contentTypeString == "image") {
-					Image imagePost = Image(postJsonArrayEntryObject, postContentEntryObject);
-					returnedPosts.push_back(imagePost);
-				} else { // TODO Add paywall post
-					this->api.logger->warn("Post content type unaccounted for: {}", contentTypeString);
-				}
-			}
+			Post post = Post(postJsonArrayEntryObject);
+			returnedPosts.push_back(post);
 		}
 
 		return returnedPosts;

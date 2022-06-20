@@ -2,7 +2,7 @@
 // Created by Spud on 6/17/22.
 //
 
-#include "npf/abstract_post.hpp"
+#include "npf/post.hpp"
 
 bool Post::operator==(const Post &post) const {
 

@@ -49,7 +49,7 @@ public:
 	 * @param key
 	 * @return
 	 */
-	static const rapidjson::Value* setValueFromJson(const rapidjson::Value &jsonObject, const char *key);
+	static const rapidjson::Value* getValuePointerFromJson(const rapidjson::Value &jsonObject, const char *key);
 
 	/**
 	 * TODO Documentation
@@ -115,7 +115,7 @@ public:
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getNotesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/notes", true); };
+	cpr::Response getNotesJson(const std::string& blogURL) const { return sendGetRequest("blog/" + blogURL + "/notes", true); };
 
 	// TODO User info
 

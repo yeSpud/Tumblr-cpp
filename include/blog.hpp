@@ -5,9 +5,8 @@
 #ifndef TUMBLRAPI_BLOG_HPP
 #define TUMBLRAPI_BLOG_HPP
 
-#include <utility>
 #include "theme.hpp"
-#include "npf/abstract_post.hpp"
+#include "npf/post.hpp"
 #include "npf/media.hpp"
 
 /**
@@ -35,78 +34,81 @@ public:
 
 		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 || response.status_code == 307 || response.status_code == 308) {
 
-			rapidjson::GenericObject<false, rapidjson::Value> object = this->api.parseJsonResponse(response.text);
+			rapidjson::GenericObject responseJsonObject = this->api.parseJsonResponse(response.text);
 
-			if (object.HasMember("blog")) {
-				if (object["blog"].IsObject()) {
-					object = object["blog"].GetObj();
-				}
-			}
+			const rapidjson::Value* blogJsonPointer = TumblrAPI::getValuePointerFromJson(responseJsonObject, "blog");
 
-			TumblrAPI::setBooleanFromJson(object, "ask", this->ask);
-			TumblrAPI::setBooleanFromJson(object, "ask_anon", this->ask_anon);
+			if (blogJsonPointer != nullptr) {
 
-			TumblrAPI::setStringFromJson(object, "ask_page_title", this->ask_page_title);
+				if (blogJsonPointer->IsObject()) {
+					const rapidjson::GenericObject blogObject = blogJsonPointer->GetObj();
 
-			TumblrAPI::setBooleanFromJson(object, "asks_allow_media", this->asks_allow_media);
+					TumblrAPI::setBooleanFromJson(blogObject, "ask", this->ask);
+					TumblrAPI::setBooleanFromJson(blogObject, "ask_anon", this->ask_anon);
 
-			// Avatars
-			const rapidjson::Value* avatarJsonArrayPointer = TumblrAPI::setValueFromJson(object, "avatar");
-			if (avatarJsonArrayPointer != nullptr) {
-				if (avatarJsonArrayPointer->IsArray()) {
-					rapidjson::GenericArray avatarArray = avatarJsonArrayPointer->GetArray();
-					for (const rapidjson::Value &avatarEntry: avatarArray) {
-						if (avatarEntry.IsObject()) {
-							const rapidjson::Value &avatarEntryObject = avatarEntry.GetObj();
-							std::string avatarUrl;
-							TumblrAPI::setStringFromJson(avatarEntryObject, "url", avatarUrl);
-							Media avatar = Media(avatarUrl, avatarEntryObject);
-							this->avatars.push_back(avatar);
+					TumblrAPI::setStringFromJson(blogObject, "ask_page_title", this->ask_page_title);
+
+					TumblrAPI::setBooleanFromJson(blogObject, "asks_allow_media", this->asks_allow_media);
+
+					// Avatars
+					const rapidjson::Value* avatarJsonArrayPointer = TumblrAPI::getValuePointerFromJson(blogObject, "avatar");
+					if (avatarJsonArrayPointer != nullptr) {
+						if (avatarJsonArrayPointer->IsArray()) {
+							rapidjson::GenericArray avatarArray = avatarJsonArrayPointer->GetArray();
+							for (const rapidjson::Value &avatarEntry: avatarArray) {
+								if (avatarEntry.IsObject()) {
+									const rapidjson::Value &avatarEntryObject = avatarEntry.GetObj();
+									std::string avatarUrl;
+									TumblrAPI::setStringFromJson(avatarEntryObject, "url", avatarUrl);
+									Media avatar = Media(avatarUrl, avatarEntryObject);
+									this->avatars.push_back(avatar);
+								}
+							}
 						}
 					}
+
+					TumblrAPI::setBooleanFromJson(blogObject, "can_chat", this->can_chat);
+					TumblrAPI::setBooleanFromJson(blogObject, "can_subscribe", this->can_subscribe);
+
+					TumblrAPI::setStringFromJson(blogObject, "description", this->description);
+
+					TumblrAPI::setBooleanFromJson(blogObject, "is_nsfw", this->is_nsfw);
+
+					TumblrAPI::setStringFromJson(blogObject, "name", this->name);
+
+					TumblrAPI::setUInt64FromJson(blogObject, "posts", this->posts);
+					TumblrAPI::setUInt64FromJson(blogObject, "likes", this->likes);
+
+					TumblrAPI::setBooleanFromJson(blogObject, "shared_likes", this->shared_likes);
+					TumblrAPI::setBooleanFromJson(blogObject, "subscribed", this->subscribed);
+
+					// Theme
+					const rapidjson::Value* themeJsonPointer = TumblrAPI::getValuePointerFromJson(blogObject, "theme");
+					if (themeJsonPointer != nullptr) {
+						if (themeJsonPointer->IsObject()) {
+							this->theme = std::make_unique<Theme>(Theme(themeJsonPointer->GetObj()));
+						}
+					}
+
+					TumblrAPI::setStringFromJson(blogObject, "title", this->title);
+
+					TumblrAPI::setUInt64FromJson(blogObject, "total_posts", this->total_posts);
+					TumblrAPI::setUInt64FromJson(blogObject, "updated", this->updated);
+
+					TumblrAPI::setStringFromJson(blogObject, "timezone", this->timezone);
+					TumblrAPI::setStringFromJson(blogObject, "timezone_offset", this->timezone_offset);
+
+					#pragma clang diagnostic push
+					#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+					TumblrAPI::setStringFromJson(blogObject, "url", this->url);
+					#pragma clang diagnostic pop
+
+					TumblrAPI::setStringFromJson(blogObject, "uuid", this->uuid);
+
+					TumblrAPI::setBooleanFromJson(blogObject, "is_blocked_from_primary", this->is_blocked_from_primary);
+					TumblrAPI::setBooleanFromJson(blogObject, "is_optout_ads", this->is_optout_ads);
 				}
 			}
-
-			TumblrAPI::setBooleanFromJson(object, "can_chat", this->can_chat);
-			TumblrAPI::setBooleanFromJson(object, "can_subscribe", this->can_subscribe);
-
-			TumblrAPI::setStringFromJson(object, "description", this->description);
-
-			TumblrAPI::setBooleanFromJson(object, "is_nsfw", this->is_nsfw);
-
-			TumblrAPI::setStringFromJson(object, "name", this->name);
-
-			TumblrAPI::setUInt64FromJson(object, "posts", this->posts);
-			TumblrAPI::setUInt64FromJson(object, "likes", this->likes);
-
-			TumblrAPI::setBooleanFromJson(object, "shared_likes", this->shared_likes);
-			TumblrAPI::setBooleanFromJson(object, "subscribed", this->subscribed);
-
-			// Theme
-			const rapidjson::Value* themeJsonPointer = TumblrAPI::setValueFromJson(object, "theme");
-			if (themeJsonPointer != nullptr) {
-				if (themeJsonPointer->IsObject()) {
-					this->theme = std::make_unique<Theme>(Theme(themeJsonPointer->GetObj()));
-				}
-			}
-
-			TumblrAPI::setStringFromJson(object, "title", this->title);
-
-			TumblrAPI::setUInt64FromJson(object, "total_posts", this->total_posts);
-			TumblrAPI::setUInt64FromJson(object, "updated", this->updated);
-
-			TumblrAPI::setStringFromJson(object, "timezone", this->timezone);
-			TumblrAPI::setStringFromJson(object, "timezone_offset", this->timezone_offset);
-
-			#pragma clang diagnostic push
-			#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-			TumblrAPI::setStringFromJson(object, "url", this->url);
-			#pragma clang diagnostic pop
-
-			TumblrAPI::setStringFromJson(object, "uuid", this->uuid);
-
-			TumblrAPI::setBooleanFromJson(object, "is_blocked_from_primary", this->is_blocked_from_primary);
-			TumblrAPI::setBooleanFromJson(object, "is_optout_ads", this->is_optout_ads);
 		} else  {
 			std::string errorString = "Response from API returned an error: " + response.error.message + "\n" + response.reason;
 			this->api.logger->error(errorString);
@@ -306,7 +308,7 @@ public:
      * @param before Returns posts published earlier than a specified Unix timestamp, in seconds.
      * @return
      */
-    std::vector<Post> getPosts(const Post::postType &type = Post::postType::all, const unsigned long long &id = 0, const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0, const bool &reblog_info = false, const bool &notes_info = false, const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0);
+    std::vector<Post> getPosts(const Content::postType &type = Content::postType::all, const unsigned long long &id = 0, const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0, const bool &reblog_info = false, const bool &notes_info = false, const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0);
 
 };
 
