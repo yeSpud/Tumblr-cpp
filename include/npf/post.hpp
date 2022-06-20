@@ -165,7 +165,9 @@ public:
 							Link linkPost = Link(postContentEntryObject, urlString);
 							this->content.push_back(std::make_shared<Link>(linkPost));
 						} else if (contentTypeString == "video") {
-							// FIXME
+
+							Video videoPost = Video(postContentEntryObject);
+							this->content.push_back(std::make_shared<Video>(videoPost));
 						} else if (contentTypeString == "audio") {
 							// FIXME
 						} else if (contentTypeString == "image") {
@@ -177,15 +179,12 @@ public:
 			}
 		}
 
-
 		TumblrAPI::setBooleanFromJson(jsonObject, "can_like", this->can_like);
 		TumblrAPI::setBooleanFromJson(jsonObject, "can_reblog", this->can_reblog);
 		TumblrAPI::setBooleanFromJson(jsonObject, "can_send_in_message", this->can_send_in_message);
 		TumblrAPI::setBooleanFromJson(jsonObject, "can_reply", this->can_reply);
 		TumblrAPI::setBooleanFromJson(jsonObject, "display_avatar", this->display_avatar);
 	};
-
-	//~Post()= default;
 
 	/**
 	 * Undocumented.
@@ -358,8 +357,6 @@ public:
 	 * TODO Documentation
 	 */
 	bool display_avatar = false;
-
-	// auto content; FIXME
 
 	// auto layout; FIXME
 

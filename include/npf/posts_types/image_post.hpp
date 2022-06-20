@@ -12,16 +12,33 @@ class Image : public Content {
 
 public:
 
-	Image(const rapidjson::Value &contentArrayEntry): Content(postType::photo) {
+	explicit Image(const rapidjson::Value &contentArrayEntry): Content(postType::photo) {
 
 		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentArrayEntry, "media");
 		if (mediaValuePointer != nullptr) {
 			if (mediaValuePointer->IsArray()) {
 				for (const rapidjson::Value &mediaArrayEntry: mediaValuePointer->GetArray()) {
-					std::string mediaUrl;
-					TumblrAPI::setStringFromJson(mediaArrayEntry, "url", mediaUrl);
-					Media mediaObject = Media(mediaUrl, mediaArrayEntry);
-					this->media.push_back(mediaObject);
+					if (mediaArrayEntry.IsObject()) {
+						rapidjson::GenericObject mediaJsonObject = mediaArrayEntry.GetObj();
+
+						std::string mediaUrl;
+						TumblrAPI::setStringFromJson(mediaJsonObject, "url", mediaUrl);
+						Media mediaObject = Media(mediaUrl, mediaJsonObject);
+						this->media.push_back(mediaObject);
+
+						// Sometimes the poster is in the media object.
+						const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(mediaJsonObject, "poster");
+						if (posterValuePointer != nullptr) {
+							if (posterValuePointer->IsObject()) {
+								rapidjson::GenericObject posterJsonObject = posterValuePointer->GetObj();
+
+								std::string posterUrl;
+								TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
+								Media posterObject = Media(posterUrl, posterJsonObject);
+								this->poster = std::make_shared<Media>(posterObject);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -30,7 +47,18 @@ public:
 
 		TumblrAPI::setStringFromJson(contentArrayEntry, "feedback_token", this->feedback_token);
 
-		// TODO Image poster
+		// Image poster.
+		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentArrayEntry, "poster");
+		if (posterValuePointer != nullptr) {
+			if (posterValuePointer->IsObject()) {
+				rapidjson::GenericObject posterJsonObject = posterValuePointer->GetObj();
+
+				std::string posterUrl;
+				TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
+				Media posterObject = Media(posterUrl, posterJsonObject);
+				this->poster = std::make_shared<Media>(posterObject);
+			}
+		}
 
 		// TODO Image attribution
 
@@ -45,6 +73,7 @@ public:
 				break;
 			}
 		}
+
 		// We set the last known character to null as well as the final character in the array to null to signal the end of the string is either before or at the 4096th place.
 		this->alt_text[altTextInputIndex] = '\0';
 		this->alt_text[4096] = '\0';
@@ -73,7 +102,10 @@ public:
      */
     std::string feedback_token;
 
-    // poster; FIXME
+	/**
+	 * For GIFs, this is a single-frame "poster".
+	 */
+    std::shared_ptr<Media> poster;
 
     /*
      * TODO Documentation
@@ -84,13 +116,13 @@ public:
      * Text used to describe the image, for screen readers. 4096 character maximum.
      */
     //std::string alt_text;
-    char alt_text[4097];
+    char alt_text[4097] {};
 
     /**
      * A caption typically shown under the image. 4096 character maximum.
      */
     //std::string caption;
-    char caption[4097];
+    char caption[4097] {};
 
 };
 

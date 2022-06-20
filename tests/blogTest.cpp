@@ -124,6 +124,12 @@ void testPosts(const std::vector<Post> &posts) {
 					REQUIRE(!linkPointer->url.empty());
 					break;
 				}
+				case Content::video: {
+					std::shared_ptr<Video> videoPointer = std::static_pointer_cast<Video>(c);
+					// TODO Figure out more tests to make for video objects
+					//REQUIRE(!videoPointer->url.empty());
+					break;
+				}
 				default:
 					FAIL("Unhandled content type");
 					break;
@@ -145,6 +151,10 @@ void BlogTest::testGetPost() {
 	std::vector<Post> linkPosts = this->blog->getPosts(Content::postType::link, 0, "", 5);
 	REQUIRE(linkPosts.size() == 5);
 	testPosts(linkPosts);
+
+	std::vector<Post> videoPosts = this->blog->getPosts(Content::postType::video, 0, "", 3);
+	REQUIRE(videoPosts.size() == 3);
+	testPosts(videoPosts);
 
     std::cout << "Tested retrieving blog posts_types successfully!" << std::endl;
 }

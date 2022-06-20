@@ -19,7 +19,7 @@
 #define POPULATE_OBJECT(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsObject()) {code}}
 #define POPULATE_ARRAY(entry, value, code) if (entry.HasMember(value)) {if (entry[value].IsArray()) {code}}
 
-class NPF {
+class [[deprecated("To be removed")]] NPF {
 
 public:
 
