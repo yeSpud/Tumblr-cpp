@@ -105,34 +105,3 @@ bool Post::operator!=(const Post &post) const {
 	       && mobileCheck && sourceUrlCheck && sourceTitleCheck && totalPostsCheck && shortUrlCheck && summaryCheck &&
 		   shouldOpenInLegacyCheck;
 }
-
-const rapidjson::Value* Post::setValueFromJson(const rapidjson::Value &jsonObject, const char *key) {
-	if (jsonObject.HasMember(key)) {
-		return &jsonObject[key];
-	} else {
-		TumblrAPI::logger->warn("JsonObject is missing value for key {}", key);
-		return nullptr;
-	}
-}
-
-void Post::setStringFromJson(const rapidjson::Value &jsonObject, const char *key, std::string &stringBuffer) {
-	const rapidjson::Value* jsonObjectValuePointer = Post::setValueFromJson(jsonObject, key);
-	if (jsonObjectValuePointer != nullptr) {
-		if (jsonObjectValuePointer->IsString()) {
-			stringBuffer = jsonObjectValuePointer->GetString();
-		} else {
-			TumblrAPI::logger->warn("JsonObject has value for key {}, but that value is not a string!", key);
-		}
-	}
-}
-
-void Post::setBooleanFromJson(const rapidjson::Value &jsonObject, const char *key, bool &booleanBuffer) {
-	const rapidjson::Value* jsonObjectValuePointer = Post::setValueFromJson(jsonObject, key);
-	if (jsonObjectValuePointer != nullptr) {
-		if (jsonObjectValuePointer->IsBool()) {
-			booleanBuffer = jsonObjectValuePointer->GetBool();
-		} else {
-			TumblrAPI::logger->warn("JsonObject has value for key {}, but that value is not a boolean!", key);
-		}
-	}
-}

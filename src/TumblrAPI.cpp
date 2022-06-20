@@ -4,6 +4,48 @@
 
 #include "TumblrAPI.hpp"
 
+const rapidjson::Value* TumblrAPI::setValueFromJson(const rapidjson::Value &jsonObject, const char *key) {
+	if (jsonObject.HasMember(key)) {
+		return &jsonObject[key];
+	} else {
+		spdlog::get("TumblrAPI Logger")->warn("JsonObject is missing value for key {}", key);
+		return nullptr;
+	}
+}
+
+void TumblrAPI::setStringFromJson(const rapidjson::Value &jsonObject, const char *key, std::string &stringBuffer) {
+	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::setValueFromJson(jsonObject, key);
+	if (jsonObjectValuePointer != nullptr) {
+		if (jsonObjectValuePointer->IsString()) {
+			stringBuffer = jsonObjectValuePointer->GetString();
+		} else {
+			spdlog::get("TumblrAPI Logger")->warn("JsonObject has value for key {}, but that value is not a string!", key);
+		}
+	}
+}
+
+void TumblrAPI::setBooleanFromJson(const rapidjson::Value &jsonObject, const char *key, bool &booleanBuffer) {
+	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::setValueFromJson(jsonObject, key);
+	if (jsonObjectValuePointer != nullptr) {
+		if (jsonObjectValuePointer->IsBool()) {
+			booleanBuffer = jsonObjectValuePointer->GetBool();
+		} else {
+			spdlog::get("TumblrAPI Logger")->warn("JsonObject has value for key {}, but that value is not a boolean!", key);
+		}
+	}
+}
+
+void TumblrAPI::setUInt64FromJson(const rapidjson::Value &jsonObject, const char *key, unsigned long long &numberBuffer) {
+	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::setValueFromJson(jsonObject, key);
+	if (jsonObjectValuePointer != nullptr) {
+		if (jsonObjectValuePointer->IsUint64()) {
+			numberBuffer = jsonObjectValuePointer->GetUint64();
+		} else {
+			spdlog::get("TumblrAPI Logger")->warn("JsonObject has value for key {}, but that value is not an unsigned 64-bit integer!", key);
+		}
+	}
+}
+
 cpr::Response TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) const { // TODO Comments
 
 	// Format the URL to go to for retrieving data.

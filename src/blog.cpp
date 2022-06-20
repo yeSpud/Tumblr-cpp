@@ -29,7 +29,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 
 			// At this point since we missed the primary return throw an error.
 			std::string errorString = "Unable to find avatar url parameter in returned json";
-			this->api.logger->error(errorString);
+			TumblrAPI::logger->error(errorString);
 			throw std::runtime_error(errorString);*/
 		} else {
 			std::string errorString ="Response from API returned an error: " + response.error.message + '\n' + response.reason;
@@ -68,7 +68,7 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 			    response.status_code == 307 || response.status_code == 308) {
 				rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
 
-				// TODO Format.
+				// FIXME Format.
 
 			} else {
 
@@ -198,8 +198,14 @@ std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long 
 										std::string stringType = contentEntry["type"].GetString();
 
 										if (stringType == "text" || stringType == "answer" || stringType == "chat" || stringType == "quote") {
-											Text textPost = Text(postJsonArrayEntry, contentEntry); // TODO Change each of the post class types.
+
+											std::string text;
+											TumblrAPI::setStringFromJson(contentEntry, "text", text);
+
+											// TODO Change each of the post class types.
+											Text textPost = Text(postJsonArrayEntry, contentEntry, text);
 											returnedPosts.push_back(textPost);
+
 										} else if (stringType == "link") {
 											// FIXME
 										} else if (stringType == "video") {

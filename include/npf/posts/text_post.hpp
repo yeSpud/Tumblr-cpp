@@ -60,9 +60,7 @@ public:
 
 	};
 
-	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson) : Post(postType::text, postJson) {
-
-		Post::setStringFromJson(contentJson, "text", this->text);
+	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson, const std::string& text) : Post(postType::text, postJson), text(text) {
 
 		if (contentJson.HasMember("subtype")) {
 			const rapidjson::Value &contentJsonValue = contentJson["subtype"];
@@ -86,7 +84,7 @@ public:
 				} else if (subtypeString == "unordered_list_item") {
 					this->subtype = Text::subtype::unordered_list_item;
 				} else {
-					// TODO Log this as a warning.
+					spdlog::get("TumblrAPI Logger")->warn("Unable to assign subtype for type {}.\nDefaulting to quote.", subtypeString);
 					this->subtype = Text::subtype::quote;
 				}
 			}
@@ -106,7 +104,7 @@ public:
 	/**
 	 * The text to use inside this block.
 	 */
-	std::string text;
+	const std::string& text;
 
 	/**
 	 * 	The subtype of text block.

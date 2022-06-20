@@ -6,13 +6,20 @@
 #define TUMBLRAPI_IMAGE_POST_HPP
 
 #include "npf/abstract_post.hpp"
-#include "npf/attribution.hpp"
+#include "npf/media.hpp"
 
-class Image : Post {
+class Image : public Post {
 
 public:
 
-    // media; FIXME
+	Image(const rapidjson::Value &jsonObject): Post(Post::postType::photo, jsonObject) {
+
+
+		// FIXME
+
+	};
+
+    std::vector<Media> media;
 
     // colors; FIXME
 
@@ -23,10 +30,10 @@ public:
 
     // poster; FIXME
 
-    /**
+    /*
      * TODO Documentation
      */
-    Attribution attribution;
+    //Attribution attribution; FIXME
 
     /**
      * Text used to describe the image, for screen readers. 4096 character maximum.

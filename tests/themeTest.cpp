@@ -41,7 +41,7 @@ void ThemeTest::testTheme(const Theme &theme, const std::string &avatar_shape, c
 TEST_CASE("Blank Theme Test", "[Theme]") {
 
 	// Test empty theme
-	Theme theme;
+	Theme theme = Theme(rapidjson::Value());
 
 	ThemeTest::testTheme(theme, "", "", "", "", "", "", "", false, "", false, false, false, false, "", "", "");
 

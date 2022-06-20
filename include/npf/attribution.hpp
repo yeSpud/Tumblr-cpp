@@ -36,7 +36,7 @@ enum attributionType {
 /**
  * TODO Documentation
  */
-class Attribution : NPF {
+class [[deprecated("Make attribution an abstract class with various child classes")]] Attribution : NPF {
 
 public:
 

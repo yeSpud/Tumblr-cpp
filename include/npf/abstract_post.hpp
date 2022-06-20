@@ -124,7 +124,7 @@ public:
 	/**
 	 * The post's unique ID.
 	 */
-	long long id;
+	long long id = 0;
 
 	/**
 	 * The post's unique ID as a string.
@@ -162,7 +162,7 @@ public:
 	/**
 	 * The time of the post, in seconds since the epoch.
 	 */
-	long long timestamp;
+	long long timestamp = 0;
 
 	/**
 	 * The GMT date and time of the post, as a string.
@@ -217,7 +217,7 @@ public:
 	/**
 	 * The total number of post available for this request, useful for paginating though results.
 	 */
-	unsigned long long total_posts;
+	unsigned long long total_posts = 0;
 
 	/**
 	 * Undocumented.
@@ -235,43 +235,43 @@ public:
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool should_open_in_legacy;
+	bool should_open_in_legacy = false;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation.
 	 */
-	unsigned long long note_count;
+	unsigned long long note_count = 0;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool can_like;
+	bool can_like = false;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool can_reblog;
+	bool can_reblog = false;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool can_send_in_message;
+	bool can_send_in_message = false;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool can_reply;
+	bool can_reply = false;
 
 	/**
 	 * Undocumented.
 	 * TODO Documentation
 	 */
-	bool display_avatar;
+	bool display_avatar = false;
 
 	// auto content; FIXME
 
@@ -295,24 +295,22 @@ public:
 
 protected:
 
-
-
 	Post(postType postType, const rapidjson::Value &jsonObject) : type(postType) {
 
-		Post::setStringFromJson(jsonObject, "original_type", this->original_type);
-		Post::setStringFromJson(jsonObject, "blog_name", this->blog_name);
+		TumblrAPI::setStringFromJson(jsonObject, "original_type", this->original_type);
+		TumblrAPI::setStringFromJson(jsonObject, "blog_name", this->blog_name);
 
 
 		if (jsonObject.HasMember("id")) {
 			const rapidjson::Value &jsonObjectValue = jsonObject["id"];
-			if (jsonObjectValue.IsUint64()) {
+			if (jsonObjectValue.IsInt64()) {
 				this->id = jsonObjectValue.GetInt64();
 			}
 		}
 
-		Post::setStringFromJson(jsonObject, "id_string", this->id_string);
-		Post::setStringFromJson(jsonObject, "genesis_post_id", this->genesis_post_id);
-		Post::setStringFromJson(jsonObject, "post_url", this->post_url);
+		TumblrAPI::setStringFromJson(jsonObject, "id_string", this->id_string);
+		TumblrAPI::setStringFromJson(jsonObject, "genesis_post_id", this->genesis_post_id);
+		TumblrAPI::setStringFromJson(jsonObject, "post_url", this->post_url);
 
 		if (jsonObject.HasMember("timestamp")) {
 			const rapidjson::Value &jsonObjectValue = jsonObject["timestamp"];
@@ -321,8 +319,8 @@ protected:
 			}
 		}
 
-		Post::setStringFromJson(jsonObject, "slug", this->slug);
-		Post::setStringFromJson(jsonObject, "date", this->date);
+		TumblrAPI::setStringFromJson(jsonObject, "slug", this->slug);
+		TumblrAPI::setStringFromJson(jsonObject, "date", this->date);
 
 		if (jsonObject.HasMember("format")) {
 			const rapidjson::Value &jsonObjectValue = jsonObject["format"];
@@ -338,19 +336,19 @@ protected:
 			}
 		}
 
-		Post::setStringFromJson(jsonObject, "reblog_key", this->reblog_key);
-		Post::setStringFromJson(jsonObject, "tags", this->tags);
-		Post::setStringFromJson(jsonObject, "short_url", this->short_url);
-		Post::setStringFromJson(jsonObject, "summary", this->summary);
+		TumblrAPI::setStringFromJson(jsonObject, "reblog_key", this->reblog_key);
+		TumblrAPI::setStringFromJson(jsonObject, "tags", this->tags);
+		TumblrAPI::setStringFromJson(jsonObject, "short_url", this->short_url);
+		TumblrAPI::setStringFromJson(jsonObject, "summary", this->summary);
 
-		Post::setBooleanFromJson(jsonObject, "should_open_in_legacy", this->should_open_in_legacy);
-		Post::setBooleanFromJson(jsonObject, "bookmarklet", this->bookmarklet);
-		Post::setBooleanFromJson(jsonObject, "mobile", this->mobile);
+		TumblrAPI::setBooleanFromJson(jsonObject, "should_open_in_legacy", this->should_open_in_legacy);
+		TumblrAPI::setBooleanFromJson(jsonObject, "bookmarklet", this->bookmarklet);
+		TumblrAPI::setBooleanFromJson(jsonObject, "mobile", this->mobile);
 
-		Post::setStringFromJson(jsonObject, "source_url", this->source_url);
-		Post::setStringFromJson(jsonObject, "source_title", this->source_title);
+		TumblrAPI::setStringFromJson(jsonObject, "source_url", this->source_url);
+		TumblrAPI::setStringFromJson(jsonObject, "source_title", this->source_title);
 
-		Post::setBooleanFromJson(jsonObject, "liked", this->liked);
+		TumblrAPI::setBooleanFromJson(jsonObject, "liked", this->liked);
 
 		if (jsonObject.HasMember("state")) {
 			const rapidjson::Value &jsonObjectValue = jsonObject["state"];
@@ -366,50 +364,15 @@ protected:
 			}
 		}
 
-		if (jsonObject.HasMember("total_posts")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["total_posts"];
-			if (jsonObjectValue.IsUint64()) {
-				this->total_posts = jsonObjectValue.GetUint64();
-			}
-		}
+		TumblrAPI::setUInt64FromJson(jsonObject, "total_posts", this->total_posts);
+		TumblrAPI::setUInt64FromJson(jsonObject, "note_count", this->note_count);
 
-		if (jsonObject.HasMember("note_count")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["note_count"];
-			if (jsonObjectValue.IsUint64()) {
-				this->note_count = jsonObjectValue.GetUint64();
-			}
-		}
-
-		Post::setBooleanFromJson(jsonObject, "can_like", this->can_like);
-		Post::setBooleanFromJson(jsonObject, "can_reblog", this->can_reblog);
-		Post::setBooleanFromJson(jsonObject, "can_send_in_message", this->can_send_in_message);
-		Post::setBooleanFromJson(jsonObject, "can_reply", this->can_reply);
-		Post::setBooleanFromJson(jsonObject, "display_avatar", this->display_avatar);
+		TumblrAPI::setBooleanFromJson(jsonObject, "can_like", this->can_like);
+		TumblrAPI::setBooleanFromJson(jsonObject, "can_reblog", this->can_reblog);
+		TumblrAPI::setBooleanFromJson(jsonObject, "can_send_in_message", this->can_send_in_message);
+		TumblrAPI::setBooleanFromJson(jsonObject, "can_reply", this->can_reply);
+		TumblrAPI::setBooleanFromJson(jsonObject, "display_avatar", this->display_avatar);
 	};
-
-	/**
-	 * TODO Documentation
-	 * @param jsonObject
-	 * @param key
-	 * @return
-	 */
-	static const rapidjson::Value* setValueFromJson(const rapidjson::Value &jsonObject, const char *key);
-
-	/**
-	 * TODO Documentation
-	 * @param jsonObject
-	 * @param key
-	 * @param stringBuffer
-	 */
-	static void setStringFromJson(const rapidjson::Value &jsonObject, const char* key, std::string &stringBuffer);
-
-	/**
-	 * TODO Documentation
-	 * @param jsonObject
-	 * @param key
-	 * @param booleanBuffer
-	 */
-	static void setBooleanFromJson(const rapidjson::Value &jsonObject, const char* key, bool &booleanBuffer);
 
 };
 

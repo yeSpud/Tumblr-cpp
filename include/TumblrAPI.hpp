@@ -8,7 +8,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <cpr/cpr.h>
-#include "npf/npf.hpp"
+#include <rapidjson/document.h>
 
 /**
  * TODO Documentation
@@ -29,7 +29,7 @@ public:
 	/**
 	 * Logger for the TumblrAPI.
 	 */
-	static std::shared_ptr<spdlog::logger> logger;
+	std::shared_ptr<spdlog::logger> logger;
 
 	/**
 	 * TODO Documentation
@@ -38,10 +38,42 @@ public:
 	explicit TumblrAPI(std::string token): APIKey(std::move(token)) {
 
 		// Setup the logger for fetching TumblrAPI stuff.
-		TumblrAPI::logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
-		TumblrAPI::logger->flush_on(spdlog::level::info);
-		TumblrAPI::logger->info("Finished setting up logger for Tumblr API");
+		this->logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
+		this->logger->flush_on(spdlog::level::info);
+		this->logger->info("Finished setting up logger for Tumblr API");
 	};
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @return
+	 */
+	static const rapidjson::Value* setValueFromJson(const rapidjson::Value &jsonObject, const char *key);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param stringBuffer
+	 */
+	static void setStringFromJson(const rapidjson::Value &jsonObject, const char* key, std::string &stringBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param booleanBuffer
+	 */
+	static void setBooleanFromJson(const rapidjson::Value &jsonObject, const char* key, bool &booleanBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param numberBuffer
+	 */
+	static void setUInt64FromJson(const rapidjson::Value &jsonObject, const char* key, unsigned long long &numberBuffer);
 
 	/**
 	 * TODO Documentation
@@ -59,16 +91,6 @@ public:
 	 * @return
 	 */
 	rapidjson::GenericObject<false, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
-
-	/**
-	 * TODO Documentation
-	 * @param blogURL
-	 * @param number
-	 * @return
-	 */
-    [[deprecated("Use the blog to get posts")]]
-	cpr::Response getPostsJson(const std::string& blogURL, const unsigned int number) {return sendGetRequest(
-				"blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));};
 
 	// TODO Post queue
 
