@@ -30,7 +30,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 		this->api.logger->error(errorString);
 		throw std::invalid_argument(errorString);
 	}
-};
+}
 
 Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset, const long long &before,
                const long long &after) {
@@ -151,68 +151,86 @@ std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long 
 	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 	    response.status_code == 307 || response.status_code == 308) {
 
-		rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
+		const rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
 
-		jsonResponse.HasMember("posts");
+		const rapidjson::Value* postsJsonPointer = TumblrAPI::setValueFromJson(jsonResponse, "posts");
 
-		if (jsonResponse["posts"].IsArray()) {
+		// Make sure the posts' pointer isn't null.
+		if (postsJsonPointer == nullptr) {
+			this->api.logger->warn("No posts were returned.");
+			return {};
+		}
 
-			std::vector<Post> returnedPosts;
-			unsigned short postIndex = 0;
-			const rapidjson::GenericArray postsJsonArray = jsonResponse["posts"].GetArray();
+		// Make sure the posts' pointer is an array.
+		if (!postsJsonPointer->IsArray()) {
+			this->api.logger->error("Posts json is no an array type!");
+			return {};
+		}
 
-			// https://github.com/Tencent/rapidjson/issues/459
-			for (rapidjson::SizeType i = 0; i < postsJsonArray.Size(); i++) {
+		rapidjson::GenericArray postsJsonArray = postsJsonPointer->GetArray();
+		std::vector<Post> returnedPosts;
 
-				if (postsJsonArray[i].IsObject()) {
+		for (const rapidjson::Value &postsJsonArrayEntry : postsJsonArray) {
 
-					const rapidjson::GenericObject postJsonArrayEntry = postsJsonArray[i].GetObj();
-
-					if (postJsonArrayEntry.HasMember("content")) {
-
-						if (postJsonArrayEntry["content"].IsArray()) {
-
-							rapidjson::GenericArray contentArray = postJsonArrayEntry["content"].GetArray();
-
-							for (rapidjson::SizeType j = 0; j < contentArray.Size(); j++) {
-
-								if (contentArray[j].IsObject()) {
-
-									const rapidjson::GenericObject contentEntry = contentArray[j].GetObj();
-
-									if (contentEntry.HasMember("type")) {
-
-										std::string stringType = contentEntry["type"].GetString();
-
-										if (stringType == "text" || stringType == "answer" || stringType == "chat" || stringType == "quote") {
-
-											std::string text;
-											TumblrAPI::setStringFromJson(contentEntry, "text", text);
-
-											// TODO Change each of the post class types.
-											Text textPost = Text(postJsonArrayEntry, contentEntry, text);
-											returnedPosts.push_back(textPost);
-
-										} else if (stringType == "link") {
-											// FIXME
-										} else if (stringType == "video") {
-											// FIXME
-										} else if (stringType == "audio") {
-											// FIXME
-										} else if (stringType == "image") {
-											Image imagePost = Image(postJsonArrayEntry, contentEntry);
-											returnedPosts.push_back(imagePost);
-										} // FIXME Add paywall post
-										postIndex++;
-									}
-								}
-							}
-						}
-					}
-				}
+			// Make sure the entry is an object.
+			if (!postsJsonArrayEntry.IsObject()) {
+				this->api.logger->warn("Post entry isn't an object.");
+				continue;
 			}
 
-			return returnedPosts;
+			const rapidjson::GenericObject postJsonArrayEntryObject = postsJsonArrayEntry.GetObj();
+
+			// Make sure the post has a content array.
+			const rapidjson::Value* postContentJsonPointer = TumblrAPI::setValueFromJson(postJsonArrayEntryObject, "content");
+			if (postContentJsonPointer == nullptr) {
+				this->api.logger->warn("Post is missing content array.");
+				continue;
+			}
+			if (!postContentJsonPointer->IsArray()) {
+				this->api.logger->warn("Post content isn't an array.");
+				continue;
+			}
+
+			rapidjson::GenericArray postContentJsonArray = postContentJsonPointer->GetArray();
+			for (const rapidjson::Value &postContentJsonEntry : postContentJsonArray) {
+
+				if (!postContentJsonEntry.IsObject()) {
+					this->api.logger->warn("Post content entry isn't an object");
+					continue;
+				}
+
+				rapidjson::GenericObject postContentEntryObject = postContentJsonEntry.GetObj();
+
+				std::string contentTypeString;
+				TumblrAPI::setStringFromJson(postContentEntryObject, "type", contentTypeString);
+
+				if (contentTypeString == "text" || contentTypeString == "answer" || contentTypeString == "chat" || contentTypeString == "quote") { // TODO Change each of the post class types.
+
+					std::string text;
+					TumblrAPI::setStringFromJson(postContentEntryObject, "text", text);
+
+					Text textPost = Text(postJsonArrayEntryObject, postContentEntryObject, text);
+					returnedPosts.push_back(textPost);
+				} else if (contentTypeString == "link") {
+					// FIXME
+				} else if (contentTypeString == "video") {
+					// FIXME
+				} else if (contentTypeString == "audio") {
+					// FIXME
+				} else if (contentTypeString == "image") {
+					Image imagePost = Image(postJsonArrayEntryObject, postContentEntryObject);
+					returnedPosts.push_back(imagePost);
+				} else { // TODO Add paywall post
+					this->api.logger->warn("Post content type unaccounted for: {}", contentTypeString);
+				}
+			}
 		}
+
+		return returnedPosts;
+
+	} else {
+
+		this->api.logger->warn("Unable to get posts from blog ({0}): {1}", response.status_code, response.reason);
+		return {};
 	}
 }
