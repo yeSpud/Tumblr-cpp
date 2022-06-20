@@ -18,19 +18,6 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 		    response.status_code == 307 || response.status_code == 308) {
 			return response.url.str();
-			/*
-			JSON_OBJECT jsonResponse = this->api.parseJsonResponse(response.text);
-			const char* jsonKey = "avatar_url";
-			if (jsonResponse.HasMember(jsonKey)) {
-				if (jsonResponse[jsonKey].IsString()) {
-					return jsonResponse[jsonKey].GetString();
-				}
-			}
-
-			// At this point since we missed the primary return throw an error.
-			std::string errorString = "Unable to find avatar url parameter in returned json";
-			TumblrAPI::logger->error(errorString);
-			throw std::runtime_error(errorString);*/
 		} else {
 			std::string errorString ="Response from API returned an error: " + response.error.message + '\n' + response.reason;
 			this->api.logger->error(errorString);
@@ -213,7 +200,7 @@ std::vector<Post>Blog::getPosts(const Post::postType &type, const unsigned long 
 										} else if (stringType == "audio") {
 											// FIXME
 										} else if (stringType == "image") {
-											Image imagePost = Image(postJsonArrayEntry);
+											Image imagePost = Image(postJsonArrayEntry, contentEntry);
 											returnedPosts.push_back(imagePost);
 										} // FIXME Add paywall post
 										postIndex++;

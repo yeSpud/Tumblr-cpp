@@ -60,7 +60,7 @@ public:
 
 	};
 
-	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson, const std::string& text) : Post(postType::text, postJson), text(text) {
+	Text(const rapidjson::Value &postJson, const rapidjson::Value &contentJson, std::string  text) : Post(postType::text, postJson), text(std::move(text)) {
 
 		if (contentJson.HasMember("subtype")) {
 			const rapidjson::Value &contentJsonValue = contentJson["subtype"];
@@ -104,7 +104,7 @@ public:
 	/**
 	 * The text to use inside this block.
 	 */
-	const std::string& text;
+	const std::string text;
 
 	/**
 	 * 	The subtype of text block.

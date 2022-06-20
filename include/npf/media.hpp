@@ -11,16 +11,34 @@ class Media {
 
 public:
 
-	Media(const std::string& url, const rapidjson::Value &jsonObject):url(url) {
+	Media(std::string url, const rapidjson::Value &jsonObject):url(std::move(url)) {
 
-		// TODO
+		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
+
+		const rapidjson::Value* widthJsonPointer = TumblrAPI::setValueFromJson(jsonObject, "width");
+		if (widthJsonPointer != nullptr) {
+			if (widthJsonPointer->IsUint()) {
+				this->width = widthJsonPointer->GetUint();
+			}
+		}
+
+		const rapidjson::Value* heightJsonPointer = TumblrAPI::setValueFromJson(jsonObject, "height");
+		if (heightJsonPointer != nullptr) {
+			if (heightJsonPointer->IsUint()) {
+				this->height = heightJsonPointer->GetUint();
+			}
+		}
+
+		TumblrAPI::setBooleanFromJson(jsonObject, "original_dimensions_missing", this->original_dimensions_missing);
+		TumblrAPI::setBooleanFromJson(jsonObject, "cropped", this->cropped);
+		TumblrAPI::setBooleanFromJson(jsonObject, "has_original_dimensions", this->has_original_dimensions);
 
 	}
 
 	/**
 	 * The canonical URL of the media asset
 	 */
-	const std::string& url;
+	const std::string url;
 
 	/**
 	 * The MIME type of the media asset, or a best approximation will be made based on the given URL
