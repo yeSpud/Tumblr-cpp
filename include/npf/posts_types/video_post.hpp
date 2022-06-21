@@ -6,7 +6,6 @@
 #define TUMBLRAPI_VIDEO_POST_HPP
 
 #include "content.hpp"
-#include "npf/attribution.hpp"
 #include "npf/media.hpp"
 
 class Video : public Content {

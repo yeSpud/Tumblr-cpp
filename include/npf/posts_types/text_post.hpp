@@ -5,10 +5,105 @@
 #ifndef TUMBLRAPI_TEXT_POST_HPP
 #define TUMBLRAPI_TEXT_POST_HPP
 
-#include <utility>
-
+#include "TumblrAPI.hpp"
 #include "content.hpp"
-#include "npf/formatting.hpp"
+
+class Formatting {
+
+public:
+
+	explicit Formatting(const rapidjson::Value& formattingJson) {
+
+		// Start.
+		if (formattingJson.HasMember("start")) {
+			const rapidjson::Value &startJson = formattingJson["start"];
+
+			if (startJson.IsInt()) {
+				this->start = startJson.GetInt();
+			}
+		}
+
+		// End.
+		if (formattingJson.HasMember("end")) {
+			const rapidjson::Value &endJson = formattingJson["end"];
+
+			if (endJson.IsInt()) {
+				this->end = endJson.GetInt();
+			}
+		}
+
+		TumblrAPI::setStringFromJson(formattingJson, "type", this->type);
+		TumblrAPI::setStringFromJson(formattingJson, "url", this->url);
+
+		// Blog.
+		if (formattingJson.HasMember("blog")) {
+			if (formattingJson["blog"].IsObject()) {
+				rapidjson::GenericObject blogJson = formattingJson["blog"].GetObj();
+
+				Blog b;
+				TumblrAPI::setStringFromJson(blogJson, "uuid", b.uuid);
+				TumblrAPI::setStringFromJson(blogJson, "name", b.name);
+				TumblrAPI::setStringFromJson(blogJson, "url", b.url);
+				this->blog = b;
+			}
+		}
+
+		TumblrAPI::setStringFromJson(formattingJson, "hex", this->hex);
+
+	}
+
+	/**
+	 * The starting index of the formatting range (inclusive).
+	 */
+	int start = 0;
+
+	/**
+	 * The ending index of the formatting range (exclusive).
+	 */
+	int end = 0;
+
+	/**
+	 * TODO Documentation
+	 */
+	std::string type;
+
+	/**
+	 * The link's URL!
+	 */
+	std::string url;
+
+	struct Blog {
+
+		/**
+		 * Each blog also has a unique identifier that you can retrieve from any API response that includes a blog,
+		 * in the uuid field (example: t:DvRFDGL05g8KB0gwiBJv1A).
+		 */
+		std::string uuid;
+
+		/**
+		 * The short blog name that appears before tumblr.com in a standard blog hostname
+		 */
+		std::string name;
+
+		/**
+		 * Undocumented.
+		 * The url of the blog. This is usually the blog identifier.
+		 */
+		std::string url;
+
+	};
+
+	/**
+	 * A blog with the uuid field.
+	 */
+	Blog blog;
+
+	/**
+	 * The color to use, in standard hex format, with leading #.
+	 */
+	std::string hex;
+
+};
 
 class Text : public Content {
 
@@ -100,8 +195,17 @@ public:
 			}
 		}
 
-		// FIXME Add formatting
+		if (contentJson.HasMember("formatting")) {
+			rapidjson::GenericArray formattingArray = contentJson["formatting"].GetArray();
 
+			for (const rapidjson::Value &formattingEntry : formattingArray) {
+				if (formattingEntry.IsObject()) {
+
+					Formatting format = Formatting(formattingEntry.GetObj());
+					this->formatting.push_back(format);
+				}
+			}
+		}
 	};
 
 	/**
@@ -124,7 +228,6 @@ public:
 	 * TODO Documentation
 	 */
 	std::vector<Formatting> formatting;
-
 
 };
 

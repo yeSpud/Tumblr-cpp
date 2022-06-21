@@ -9,9 +9,6 @@
 #include "npf/post.hpp"
 #include "npf/media.hpp"
 
-/**
- * TODO Documentation
- */
 class Blog {
 
 private:
