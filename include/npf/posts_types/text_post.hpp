@@ -8,7 +8,7 @@
 #include <utility>
 
 #include "content.hpp"
-#include "npf/content/formatting.hpp"
+#include "npf/formatting.hpp"
 
 class Text : public Content {
 

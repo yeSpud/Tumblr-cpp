@@ -11,6 +11,7 @@
 #include "npf/posts_types/image_post.hpp"
 #include "npf/posts_types/link_post.hpp"
 #include "npf/posts_types/video_post.hpp"
+#include "npf/posts_types/audio_post.hpp"
 
 class Post {
 
@@ -169,7 +170,9 @@ public:
 							Video videoPost = Video(postContentEntryObject);
 							this->content.push_back(std::make_shared<Video>(videoPost));
 						} else if (contentTypeString == "audio") {
-							// FIXME
+
+							Audio audioPost = Audio(postContentEntryObject);
+							this->content.push_back(std::make_shared<Audio>(audioPost));
 						} else if (contentTypeString == "image") {
 							Image imagePost = Image(postContentEntryObject);
 							this->content.push_back(std::make_shared<Image>(imagePost));

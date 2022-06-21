@@ -126,8 +126,24 @@ void testPosts(const std::vector<Post> &posts) {
 				}
 				case Content::video: {
 					std::shared_ptr<Video> videoPointer = std::static_pointer_cast<Video>(c);
-					// TODO Figure out more tests to make for video objects
-					//REQUIRE(!videoPointer->url.empty());
+					if (videoPointer->url.empty()) {
+						REQUIRE(videoPointer->media != nullptr);
+					} else if (videoPointer->media == nullptr) {
+						REQUIRE(!videoPointer->url.empty());
+					} else if (videoPointer->url.empty() && videoPointer->media == nullptr) {
+						FAIL("Either the video url or the media object needs to exist!");
+					}
+					break;
+				}
+				case Content::audio: {
+					std::shared_ptr<Audio> audioPointer = std::static_pointer_cast<Audio>(c);
+					if (audioPointer->url.empty()) {
+						REQUIRE(audioPointer->media != nullptr);
+					} else if (audioPointer->media == nullptr) {
+						REQUIRE(!audioPointer->url.empty());
+					} else if (audioPointer->url.empty() && audioPointer->media == nullptr) {
+						FAIL("Either the audio url or the media object needs to exist!");
+					}
 					break;
 				}
 				default:
@@ -155,6 +171,10 @@ void BlogTest::testGetPost() {
 	std::vector<Post> videoPosts = this->blog->getPosts(Content::postType::video, 0, "", 3);
 	REQUIRE(videoPosts.size() == 3);
 	testPosts(videoPosts);
+
+	std::vector<Post> audioPost = this->blog->getPosts(Content::postType::audio, 0, "", 2);
+	REQUIRE(audioPost.size() == 2);
+	testPosts(audioPost);
 
     std::cout << "Tested retrieving blog posts_types successfully!" << std::endl;
 }

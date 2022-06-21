@@ -6,18 +6,71 @@
 #define TUMBLRAPI_AUDIO_POST_HPP
 
 #include "content.hpp"
-#include "npf/attribution.hpp"
+#include "npf/media.hpp"
 
-class Audio : Content {
+class Audio : public Content {
 
 public:
+
+	explicit Audio(const rapidjson::Value &contentJson): Content(postType::audio) {
+
+		TumblrAPI::setStringFromJson(contentJson, "url", this->url);
+
+		// Media.
+		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "media");
+		if (mediaValuePointer != nullptr) {
+			if (mediaValuePointer->IsObject()) {
+				rapidjson::GenericObject mediaJsonObject = mediaValuePointer->GetObj();
+
+				std::string mediaUrl;
+				TumblrAPI::setStringFromJson(mediaJsonObject, "url", mediaUrl);
+				Media mediaObject = Media(mediaUrl, mediaJsonObject);
+				this->media = std::make_shared<Media>(mediaObject);
+			}
+		}
+
+		TumblrAPI::setStringFromJson(contentJson, "provider", this->provider);
+		TumblrAPI::setStringFromJson(contentJson, "title", this->title);
+		TumblrAPI::setStringFromJson(contentJson, "artist", this->artist);
+		TumblrAPI::setStringFromJson(contentJson, "album", this->album);
+
+		// Poster.
+		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "poster");
+		if (posterValuePointer != nullptr) {
+			if (posterValuePointer->IsArray()) {
+				rapidjson::GenericArray posterJsonArray = posterValuePointer->GetArray();
+
+				for (const rapidjson::Value &posterJsonEntry : posterJsonArray) {
+
+					if (posterJsonEntry.IsObject()) {
+						rapidjson::GenericObject posterJsonObject = posterJsonEntry.GetObj();
+
+						std::string posterUrl;
+						TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
+						Media posterObject = Media(posterUrl, posterJsonObject);
+						this->poster = std::make_shared<Media>(posterObject);
+					}
+				}
+			}
+		}
+
+		TumblrAPI::setStringFromJson(contentJson, "embed_html", this->embed_html);
+		TumblrAPI::setStringFromJson(contentJson, "embed_url", this->embed_url);
+
+		// TODO Metadata
+
+		// FIXME Attribution
+	}
 
     /**
      * The URL to use for the audio block, if no media is present.
      */
     std::string url;
 
-    // media; FIXME
+	/**
+	 * The Media Object to use for the audio block, if no url is present.
+	 */
+    std::shared_ptr<Media> media;
 
     /**
      * The provider of the audio source, whether it's tumblr or native audio or a trusted third party.
@@ -39,7 +92,10 @@ public:
      */
     std::string album;
 
-    // poster; FIXME
+	/**
+	 * An image media object to use as a "poster" for the audio track, usually album art.
+	 */
+    std::shared_ptr<Media> poster;
 
     /**
      * HTML code that could be used to embed this audio track into a webpage.
@@ -53,7 +109,10 @@ public:
 
     // metadata; FIXME
 
-    Attribution attribution;
+	/*
+	 * TODO Documentation
+	 */
+    // Attribution attribution;
 
 };
 
