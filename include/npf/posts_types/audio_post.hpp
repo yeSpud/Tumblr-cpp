@@ -17,17 +17,7 @@ public:
 		TumblrAPI::setStringFromJson(contentJson, "url", this->url);
 
 		// Media.
-		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "media");
-		if (mediaValuePointer != nullptr) {
-			if (mediaValuePointer->IsObject()) {
-				rapidjson::GenericObject mediaJsonObject = mediaValuePointer->GetObj();
-
-				std::string mediaUrl;
-				TumblrAPI::setStringFromJson(mediaJsonObject, "url", mediaUrl);
-				Media mediaObject = Media(mediaUrl, mediaJsonObject);
-				this->media = std::make_shared<Media>(mediaObject);
-			}
-		}
+		Media::setMediaPointer(contentJson, this->media);
 
 		TumblrAPI::setStringFromJson(contentJson, "provider", this->provider);
 		TumblrAPI::setStringFromJson(contentJson, "title", this->title);
@@ -35,24 +25,7 @@ public:
 		TumblrAPI::setStringFromJson(contentJson, "album", this->album);
 
 		// Poster.
-		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "poster");
-		if (posterValuePointer != nullptr) {
-			if (posterValuePointer->IsArray()) {
-				rapidjson::GenericArray posterJsonArray = posterValuePointer->GetArray();
-
-				for (const rapidjson::Value &posterJsonEntry : posterJsonArray) {
-
-					if (posterJsonEntry.IsObject()) {
-						rapidjson::GenericObject posterJsonObject = posterJsonEntry.GetObj();
-
-						std::string posterUrl;
-						TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
-						Media posterObject = Media(posterUrl, posterJsonObject);
-						this->poster = std::make_shared<Media>(posterObject);
-					}
-				}
-			}
-		}
+		Media::setPosterPointer(contentJson, this->poster);
 
 		TumblrAPI::setStringFromJson(contentJson, "embed_html", this->embed_html);
 		TumblrAPI::setStringFromJson(contentJson, "embed_url", this->embed_url);

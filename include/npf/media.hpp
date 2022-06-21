@@ -69,6 +69,20 @@ public:
 	 */
 	bool has_original_dimensions = false;
 
+	/**
+	 * TODO Documentation
+	 * @param contentJson
+	 * @param mediaBuffer
+	 */
+	static void setMediaPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &mediaBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param contentJson
+	 * @param posterBuffer
+	 */
+	static void setPosterPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &posterBuffer);
+
 };
 
 #endif //TUMBLRAPI_MEDIA_HPP
