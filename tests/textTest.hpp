@@ -1,8 +1,0 @@
-//
-// Created by Spud on 7/24/21.
-//
-
-#ifndef TUMBLRAPI_TEXTTEST_HPP
-#define TUMBLRAPI_TEXTTEST_HPP
-
-#endif //TUMBLRAPI_TEXTTEST_HPP

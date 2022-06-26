@@ -6,7 +6,7 @@
 #define TUMBLRAPI_VIDEO_POST_HPP
 
 #include "content.hpp"
-#include "npf/media.hpp"
+#include "media.hpp"
 
 class Video : public Content {
 
@@ -34,17 +34,6 @@ public:
 
 				TumblrAPI::setIntFromJson(iFrameJsonObject, "width", iframeObject.width);
 				TumblrAPI::setIntFromJson(iFrameJsonObject, "height", iframeObject.height);
-				/*
-				if (iFrameJsonObject.HasMember("width")) {
-					if (iFrameJsonObject["width"].IsInt()) {
-						iframeObject.width = iFrameJsonObject["width"].GetInt();
-					}
-				}
-				if (iFrameJsonObject.HasMember("height")) {
-					if (iFrameJsonObject["height"].IsInt()) {
-						iframeObject.height = iFrameJsonObject["height"].GetInt();
-					}
-				}*/
 
 				this->iframe = iframeObject;
 			}
@@ -92,12 +81,12 @@ public:
 		/**
 		 * The width of the video iframe. Default is 540.
 		 */
-		int width = 540;
+		int width = 540; // TODO Change to unsigned int
 
 		/**
 		 * The height of the video iframe. Default is 405.
 		 */
-		int height = 405;
+		int height = 405; // TODO Change to unsigned int
 
 	};
 

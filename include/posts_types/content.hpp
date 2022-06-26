@@ -5,6 +5,8 @@
 #ifndef TUMBLRAPI_CONTENT_HPP
 #define TUMBLRAPI_CONTENT_HPP
 
+#include <rapidjson/document.h>
+
 /**
  * TODO Documentation
  */
@@ -73,6 +75,21 @@ public:
 	 * TODO Documentation
 	 */
 	const Content::postType type;
+
+	/**
+	 * TODO Documentation
+	 * @param contentJsonArray
+	 * @return
+	 */
+	static std::shared_ptr<Content> getContentFromJsonObject(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param vectorBuffer
+	 */
+	static void setContentVectorFromJsonObject(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject,
+											   std::vector<std::shared_ptr<Content>>& vectorBuffer);
 
 };
 

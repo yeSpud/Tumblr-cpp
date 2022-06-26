@@ -6,7 +6,7 @@
 #define TUMBLRAPI_LINK_POSTS_HPP
 
 #include "content.hpp"
-#include "npf/media.hpp"
+#include "media.hpp"
 
 class Link : public Content {
 

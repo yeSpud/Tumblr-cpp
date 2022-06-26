@@ -2,10 +2,8 @@
 // Created by Spud on 6/17/22.
 //
 
-#include "npf/post.hpp"
-#include "npf/layout/condensed.hpp"
-#include "npf/layout/ask.hpp"
-#include "npf/layout/carousel.hpp"
+#include "post.hpp"
+#include "layout/ask.hpp"
 
 bool Post::operator==(const Post &post) const {
 
@@ -109,79 +107,19 @@ bool Post::operator!=(const Post &post) const {
 		   shouldOpenInLegacyCheck;
 }
 
-void Post::populateContent(const rapidjson::GenericArray<true, rapidjson::Value>& contentJsonArray) {
+void Post::populateTrail(const rapidjson::GenericArray<true, rapidjson::Value> &trailJsonArray) {
 
-	for (const rapidjson::Value &contentEntry : contentJsonArray) {
+	for (const rapidjson::Value& trailEntry : trailJsonArray) {
 
-		if (contentEntry.IsObject()) {
-			rapidjson::GenericObject entryObject = contentEntry.GetObj();
+		if (trailEntry.IsObject()) {
+			rapidjson::GenericObject entryObject = trailEntry.GetObj();
 
-			std::string contentTypeString;
-			TumblrAPI::setStringFromJson(entryObject, "type", contentTypeString);
+			std::vector<std::shared_ptr<Content>> contentVector;
+			Content::setContentVectorFromJsonObject(entryObject, contentVector);
 
-			// TODO Change each of the post class types.
-			if (contentTypeString == "text" || contentTypeString == "answer" || contentTypeString == "chat" || contentTypeString == "quote") {
-
-				std::string text;
-				TumblrAPI::setStringFromJson(entryObject, "text", text);
-
-				Text textPost = Text(entryObject, text);
-				this->content.push_back(std::make_shared<Text>(textPost));
-			} else if (contentTypeString == "link") {
-
-				std::string urlString;
-				TumblrAPI::setStringFromJson(entryObject, "url", urlString);
-
-				Link linkPost = Link(entryObject, urlString);
-				this->content.push_back(std::make_shared<Link>(linkPost));
-			} else if (contentTypeString == "video") {
-
-				Video videoPost = Video(entryObject);
-				this->content.push_back(std::make_shared<Video>(videoPost));
-			} else if (contentTypeString == "audio") {
-
-				Audio audioPost = Audio(entryObject);
-				this->content.push_back(std::make_shared<Audio>(audioPost));
-			} else if (contentTypeString == "image") {
-				Image imagePost = Image(entryObject);
-				this->content.push_back(std::make_shared<Image>(imagePost));
-			} else { // TODO Add paywall post
-				spdlog::get("TumblrAPI Logger")->warn("Unable to recognize content type {}", contentTypeString);
-			}
-		}
-	}
-}
-
-void Post::populateLayout(const rapidjson::GenericArray<true, rapidjson::Value> &layoutJsonArray) {
-
-	for (const rapidjson::Value& layoutEntry : layoutJsonArray) {
-
-		if (layoutEntry.IsObject()) {
-			rapidjson::GenericObject entryObject = layoutEntry.GetObj();
-
-			std::string layoutTypeString;
-			TumblrAPI::setStringFromJson(entryObject, "type", layoutTypeString);
-
-			if (layoutTypeString == "rows") {
-
-				// Having "truncate_after" signifies a carousel layout.
-				// TODO Also check for mode of carousel
-				if (entryObject.HasMember("truncate_after")) {
-					Carousel carouselLayout = Carousel(entryObject);
-					this->layout.push_back(std::make_shared<Carousel>(carouselLayout));
-				} else {
-					Rows rowsLayout = Rows(entryObject);
-					this->layout.push_back(std::make_shared<Rows>(rowsLayout));
-				}
-			} else if (layoutTypeString == "condensed") {
-				Condensed contentLayout = Condensed(entryObject);
-				this->layout.push_back(std::make_shared<Condensed>(contentLayout));
-			} else if (layoutTypeString == "ask") {
-				Ask askLayout = Ask(entryObject);
-				this->layout.push_back(std::make_shared<Ask>(askLayout));
-			} else {
-				spdlog::get("TumblrAPI Logger")->warn("Unable to recognize layout type {}", layoutTypeString);
-			}
+			std::vector<std::shared_ptr<Layout>> layoutVector;
+			Trail trailObject = Trail(entryObject, contentVector, layoutVector);
+			this->trail.push_back(trailObject);
 		}
 	}
 }

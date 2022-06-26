@@ -5,12 +5,13 @@
 #ifndef TUMBLRAPI_POST_HPP
 #define TUMBLRAPI_POST_HPP
 
-#include "npf/posts_types/text_post.hpp"
-#include "npf/posts_types/image_post.hpp"
-#include "npf/posts_types/link_post.hpp"
-#include "npf/posts_types/video_post.hpp"
-#include "npf/posts_types/audio_post.hpp"
-#include "npf/layout/layout.hpp"
+#include "posts_types/text_post.hpp"
+#include "posts_types/image_post.hpp"
+#include "posts_types/link_post.hpp"
+#include "posts_types/video_post.hpp"
+#include "posts_types/audio_post.hpp"
+#include "minimal_blog.hpp"
+#include "trail.hpp"
 
 class Post {
 
@@ -65,6 +66,13 @@ public:
 		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
 		TumblrAPI::setStringFromJson(jsonObject, "original_type", this->original_type);
 		TumblrAPI::setStringFromJson(jsonObject, "blog_name", this->blog_name);
+
+		// Blog
+		if (jsonObject.HasMember("blog")) {
+			if (jsonObject["blog"].IsObject()) {
+				this->blog = MinimalBlog(jsonObject["blog"].GetObj());
+			}
+		}
 
 		if (jsonObject.HasMember("id")) {
 			const rapidjson::Value &jsonObjectValue = jsonObject["id"];
@@ -134,23 +142,44 @@ public:
 
 		// Content
 		// Make sure the post has a content array.
+		Content::setContentVectorFromJsonObject(jsonObject, this->content);
+		/*
 		const rapidjson::Value* postContentJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "content");
 		if (postContentJsonPointer != nullptr) {
 			if (postContentJsonPointer->IsArray()) {
 				rapidjson::GenericArray postContentArray = postContentJsonPointer->GetArray();
 				if (!postContentArray.Empty()) {
-					this->populateContent(postContentArray);
+					for (const rapidjson::Value &contentEntry : postContentArray) {
+						if (contentEntry.IsObject()) {
+							rapidjson::GenericObject entryObject = contentEntry.GetObj();
+							auto c = Content::getContentFromJsonObject(entryObject);
+							this->content.push_back(c);
+						}
+					}
 				}
 			}
-		}
+		}*/
 
 		// Layout
+		Layout::setLayoutVectorFromJsonObject(jsonObject, this->layout);
+		/*
 		const rapidjson::Value* postLayoutJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "layout");
 		if (postLayoutJsonPointer != nullptr) {
 			if (postLayoutJsonPointer->IsArray()) {
 				rapidjson::GenericArray postLayoutArray = postLayoutJsonPointer->GetArray();
 				if (!postLayoutArray.Empty()) {
-					this->populateLayout(postLayoutJsonPointer->GetArray());
+					this->populateLayout(postLayoutArray);
+				}
+			}
+		}*/
+
+		// Trail
+		const rapidjson::Value* postTrailJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "trail");
+		if (postTrailJsonPointer != nullptr) {
+			if (postTrailJsonPointer->IsArray()) {
+				rapidjson::GenericArray postTrailArray = postTrailJsonPointer->GetArray();
+				if (!postTrailArray.Empty()) {
+					this->populateTrail(postTrailArray);
 				}
 			}
 		}
@@ -172,6 +201,11 @@ public:
 	 * The short name used to uniquely identify a blog.
 	 */
 	std::string blog_name;
+
+	/**
+	 * Blog object that is the equivalent of an info response.
+	 */
+	MinimalBlog blog;
 
 	/**
 	 * The post's unique ID.
@@ -305,7 +339,10 @@ public:
 	 */
 	std::vector<std::shared_ptr<Layout>> layout;
 
-	// TODO Trail
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<Trail> trail;
 
 	/**
 	 * Undocumented.
@@ -337,8 +374,6 @@ public:
 	 */
 	bool display_avatar = false;
 
-	// auto trail; FIXME
-
 	/**
 	 * TODO Documentation
 	 * @param post
@@ -355,9 +390,7 @@ public:
 
 private:
 
-	void populateContent(const rapidjson::GenericArray<true, rapidjson::Value>& contentJsonArray);
-
-	void populateLayout(const rapidjson::GenericArray<true, rapidjson::Value>& layoutJsonArray);
+	void populateTrail(const rapidjson::GenericArray<true, rapidjson::Value>& trailJsonArray);
 
 };
 

@@ -1,7 +1,7 @@
 //
 // Created by Spud on 6/20/22.
 //
-#include "npf/media.hpp"
+#include "media.hpp"
 
 void setPointer(const rapidjson::Value &json, std::shared_ptr<Media> &buffer) {
 	if (json.IsObject()) {

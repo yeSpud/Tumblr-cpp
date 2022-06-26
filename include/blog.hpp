@@ -5,11 +5,12 @@
 #ifndef TUMBLRAPI_BLOG_HPP
 #define TUMBLRAPI_BLOG_HPP
 
+#include "minimal_blog.hpp"
 #include "theme.hpp"
-#include "npf/post.hpp"
-#include "npf/media.hpp"
+#include "post.hpp"
+#include "media.hpp"
 
-class Blog {
+class Blog : public MinimalBlog {
 
 private:
 
@@ -97,10 +98,10 @@ public:
 					TumblrAPI::setStringFromJson(blogObject, "timezone", this->timezone);
 					TumblrAPI::setStringFromJson(blogObject, "timezone_offset", this->timezone_offset);
 
-					#pragma clang diagnostic push
-					#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 					TumblrAPI::setStringFromJson(blogObject, "url", this->url);
-					#pragma clang diagnostic pop
+#pragma clang diagnostic pop
 
 					TumblrAPI::setStringFromJson(blogObject, "uuid", this->uuid);
 
@@ -157,20 +158,10 @@ public:
 	bool can_subscribe = false;
 
 	/**
-	 * The blog's description.
-	 */
-	std::string description;
-
-	/**
 	 * Undocumented.
 	 * Assumed to mark whether the blog is NSFW (18+).
 	 */
 	bool is_nsfw = false;
-
-	/**
-	 * The short blog name that appears before tumblr.com in a standard blog hostname
-	 */
-	std::string name;
 
 	/**
 	 * The total number of posts to this blog.
@@ -201,19 +192,9 @@ public:
 	std::unique_ptr<Theme> theme;
 
 	/**
-	 * The display title of the blog.
-	 */
-	std::string title;
-
-	/**
 	 * The total number of post available for this request, useful for paginating through results.
 	 */
 	unsigned long long total_posts = 0;
-
-	/**
-	 * The time of the most recent post, in seconds since the epoch.
-	 */
-	unsigned long long updated = 0;
 
 	/**
 	 * The blog's configured timezone, such as "US/Eastern". Only viewable by blog member. Partial response field ONLY.
@@ -227,12 +208,6 @@ public:
 	std::string timezone_offset;
 
 	/**
-	 * Each blog also has a unique identifier that you can retrieve from any API response that includes a blog,
-	 * in the uuid field (example: t:DvRFDGL05g8KB0gwiBJv1A).
-	 */
-	std::string uuid;
-
-	/**
 	 * Indicates whether this blog has been blocked by the calling user's primary blog
 	 */
 	bool is_blocked_from_primary = false;
@@ -242,13 +217,6 @@ public:
 	 * Assumed to mark whether the blog has opted out of advertisements,
 	 */
 	bool is_optout_ads = false;
-
-	/**
-	 * Undocumented.
-	 * The url of the blog. This is usually the blog identifier. Use the blog identifier.
-	 */
-	[[deprecated("Use the blog identifier")]]
-	std::string url;
 
 	/**
 	 * Retrieve a Blog Avatar in the form of a URL.

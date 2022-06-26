@@ -6,7 +6,7 @@
 #define TUMBLRAPI_AUDIO_POST_HPP
 
 #include "content.hpp"
-#include "npf/media.hpp"
+#include "media.hpp"
 
 class Audio : public Content {
 

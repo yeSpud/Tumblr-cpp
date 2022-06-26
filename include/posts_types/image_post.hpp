@@ -5,7 +5,7 @@
 #ifndef TUMBLRAPI_IMAGE_POST_HPP
 #define TUMBLRAPI_IMAGE_POST_HPP
 
-#include "npf/media.hpp"
+#include "media.hpp"
 #include "content.hpp"
 
 class Image : public Content {

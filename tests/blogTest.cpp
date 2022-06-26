@@ -3,7 +3,8 @@
 //
 
 #include "blogTest.hpp"
-#include "catch2/catch.hpp"
+#include <catch2/catch.hpp>
+#include "contentTest.hpp"
 #include <iostream>
 
 void BlogTest::testBlog(const std::string& blogIdentifier, const bool &ask, const bool &ask_anon, const std::string& ask_page_title,
@@ -104,52 +105,12 @@ void BlogTest::testGetLikes() {
 void testPosts(const std::vector<Post> &posts) {
 	for (const Post& post : posts) {
 
-		for (const auto& c : post.content) {
+		ContentTest::testContent(post.content);
 
-			switch (c->type) {
-				case Content::text: {
-					std::shared_ptr<Text> textPointer = std::static_pointer_cast<Text>(c);
-					REQUIRE(!textPointer->text.empty());
-					break;
-				}
-				case Content::photo: {
-					std::shared_ptr<Image> imagePointer = std::static_pointer_cast<Image>(c);
-					for (const Media& media : imagePointer->media) {
-						REQUIRE(!media.url.empty());
-					}
-					break;
-				}
-				case Content::link: {
-					std::shared_ptr<Link> linkPointer = std::static_pointer_cast<Link>(c);
-					REQUIRE(!linkPointer->url.empty());
-					break;
-				}
-				case Content::video: {
-					std::shared_ptr<Video> videoPointer = std::static_pointer_cast<Video>(c);
-					if (videoPointer->url.empty()) {
-						REQUIRE(videoPointer->media != nullptr);
-					} else if (videoPointer->media == nullptr) {
-						REQUIRE(!videoPointer->url.empty());
-					} else if (videoPointer->url.empty() && videoPointer->media == nullptr) {
-						FAIL("Either the video url or the media object needs to exist!");
-					}
-					break;
-				}
-				case Content::audio: {
-					std::shared_ptr<Audio> audioPointer = std::static_pointer_cast<Audio>(c);
-					if (audioPointer->url.empty()) {
-						REQUIRE(audioPointer->media != nullptr);
-					} else if (audioPointer->media == nullptr) {
-						REQUIRE(!audioPointer->url.empty());
-					} else if (audioPointer->url.empty() && audioPointer->media == nullptr) {
-						FAIL("Either the audio url or the media object needs to exist!");
-					}
-					break;
-				}
-				default:
-					FAIL("Unhandled content type");
-					break;
-			}
+		for (const Trail& trail : post.trail) {
+
+			ContentTest::testContent(trail.content);
+
 		}
 	}
 }
