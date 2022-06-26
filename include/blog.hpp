@@ -54,9 +54,11 @@ public:
 							rapidjson::GenericArray avatarArray = avatarJsonArrayPointer->GetArray();
 							for (const rapidjson::Value &avatarEntry: avatarArray) {
 								if (avatarEntry.IsObject()) {
-									const rapidjson::Value &avatarEntryObject = avatarEntry.GetObj();
+									const rapidjson::GenericObject<true, rapidjson::Value>& avatarEntryObject = avatarEntry.GetObj();
+
 									std::string avatarUrl;
 									TumblrAPI::setStringFromJson(avatarEntryObject, "url", avatarUrl);
+
 									Media avatar = Media(avatarUrl, avatarEntryObject);
 									this->avatars.push_back(avatar);
 								}

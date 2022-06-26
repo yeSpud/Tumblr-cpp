@@ -49,7 +49,7 @@ public:
 	 * @param key
 	 * @return
 	 */
-	static const rapidjson::Value* getValuePointerFromJson(const rapidjson::Value &jsonObject, const char *key);
+	static const rapidjson::Value* getValuePointerFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key);
 
 	/**
 	 * TODO Documentation
@@ -57,7 +57,7 @@ public:
 	 * @param key
 	 * @param stringBuffer
 	 */
-	static void setStringFromJson(const rapidjson::Value &jsonObject, const char* key, std::string &stringBuffer);
+	static void setStringFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, std::string &stringBuffer);
 
 	/**
 	 * TODO Documentation
@@ -65,7 +65,15 @@ public:
 	 * @param key
 	 * @param booleanBuffer
 	 */
-	static void setBooleanFromJson(const rapidjson::Value &jsonObject, const char* key, bool &booleanBuffer);
+	static void setBooleanFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, bool &booleanBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param intBuffer
+	 */
+	static void setIntFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, int &intBuffer);
 
 	/**
 	 * TODO Documentation
@@ -73,7 +81,7 @@ public:
 	 * @param key
 	 * @param numberBuffer
 	 */
-	static void setUInt64FromJson(const rapidjson::Value &jsonObject, const char* key, unsigned long long &numberBuffer);
+	static void setUInt64FromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, unsigned long long &numberBuffer);
 
 	/**
 	 * TODO Documentation
@@ -90,7 +98,7 @@ public:
 	 * @param jsonString
 	 * @return
 	 */
-	rapidjson::GenericObject<false, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
+	rapidjson::GenericObject<true, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
 
 	// TODO Post queue
 

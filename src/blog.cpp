@@ -51,14 +51,13 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 															  true); // TODO Implement options
 			if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
 			    response.status_code == 307 || response.status_code == 308) {
-				rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
+				rapidjson::GenericObject jsonResponse = this->api.parseJsonResponse(response.text);
 
-				// FIXME Format.
+				// FIXME parse likes.
 
 			} else {
 
-				std::string errorString =
-						"Response from API returned an error: " + response.error.message + '\n' + response.reason;
+				std::string errorString = "Response from API returned an error: " + response.error.message + '\n' + response.reason;
 				this->api.logger->error(errorString);
 				throw std::runtime_error(errorString);
 			}
@@ -72,10 +71,9 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 	}
 }
 
-std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned long long &id, const std::string &tag, unsigned short limit,
-               const unsigned long long &offset, const bool &reblog_info, const bool &notes_info,
-               const Post::postFormat &filter,
-               const long long int &before) {
+std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned long long &id, const std::string &tag,
+								unsigned short limit, const unsigned long long &offset, const bool &reblog_info,
+								const bool &notes_info, const Post::postFormat &filter, const long long int &before) {
 
 	std::string additionalOptions = "&npf=true";
 	switch (type) {
@@ -149,7 +147,7 @@ std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned lo
 	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||response.status_code == 307
 	|| response.status_code == 308) {
 
-		const rapidjson::GenericObject<false, rapidjson::Value> jsonResponse = this->api.parseJsonResponse(response.text);
+		const rapidjson::GenericObject jsonResponse = this->api.parseJsonResponse(response.text);
 
 		const rapidjson::Value* postsJsonPointer = TumblrAPI::getValuePointerFromJson(jsonResponse, "posts");
 

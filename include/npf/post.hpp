@@ -5,43 +5,17 @@
 #ifndef TUMBLRAPI_POST_HPP
 #define TUMBLRAPI_POST_HPP
 
-#include "TumblrAPI.hpp"
-#include "npf/posts_types/content.hpp"
 #include "npf/posts_types/text_post.hpp"
 #include "npf/posts_types/image_post.hpp"
 #include "npf/posts_types/link_post.hpp"
 #include "npf/posts_types/video_post.hpp"
 #include "npf/posts_types/audio_post.hpp"
+#include "npf/layout/layout.hpp"
 
 class Post {
 
-public:
+protected:
 
-	/**
-	 * TODO Documentation
-	 */
-	enum postFormat {
-
-		/**
-		 * TODO Documentation
-		 */
-		html,
-
-		/**
-		 * TODO Documentation
-		 */
-		markdown,
-
-		/**
-		 * Used if there is no post format provided.
-		 */
-		none
-
-	};
-
-	/**
-	 * TODO Documentation
-	 */
 	enum postState {
 
 		/**
@@ -65,7 +39,28 @@ public:
 		privat
 	};
 
-	explicit Post(const rapidjson::Value &jsonObject) {
+public:
+
+	enum postFormat {
+
+		/**
+		 * TODO Documentation
+		 */
+		html,
+
+		/**
+		 * TODO Documentation
+		 */
+		markdown,
+
+		/**
+		 * Used if there is no post format provided.
+		 */
+		none
+
+	};
+
+	explicit Post(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject) {
 
 		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
 		TumblrAPI::setStringFromJson(jsonObject, "original_type", this->original_type);
@@ -142,42 +137,20 @@ public:
 		const rapidjson::Value* postContentJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "content");
 		if (postContentJsonPointer != nullptr) {
 			if (postContentJsonPointer->IsArray()) {
-				rapidjson::GenericArray postContentJsonArray = postContentJsonPointer->GetArray();
-				for (const rapidjson::Value &postContentJsonEntry : postContentJsonArray) {
+				rapidjson::GenericArray postContentArray = postContentJsonPointer->GetArray();
+				if (!postContentArray.Empty()) {
+					this->populateContent(postContentArray);
+				}
+			}
+		}
 
-					if (postContentJsonEntry.IsObject()) {
-						rapidjson::GenericObject postContentEntryObject = postContentJsonEntry.GetObj();
-
-						std::string contentTypeString;
-						TumblrAPI::setStringFromJson(postContentEntryObject, "type", contentTypeString);
-
-						if (contentTypeString == "text" || contentTypeString == "answer" || contentTypeString == "chat" || contentTypeString == "quote") { // TODO Change each of the post class types.
-
-							std::string text;
-							TumblrAPI::setStringFromJson(postContentEntryObject, "text", text);
-
-							Text textPost = Text(postContentEntryObject, text);
-							this->content.push_back(std::make_shared<Text>(textPost));
-						} else if (contentTypeString == "link") {
-
-							std::string urlString;
-							TumblrAPI::setStringFromJson(postContentEntryObject, "url", urlString);
-
-							Link linkPost = Link(postContentEntryObject, urlString);
-							this->content.push_back(std::make_shared<Link>(linkPost));
-						} else if (contentTypeString == "video") {
-
-							Video videoPost = Video(postContentEntryObject);
-							this->content.push_back(std::make_shared<Video>(videoPost));
-						} else if (contentTypeString == "audio") {
-
-							Audio audioPost = Audio(postContentEntryObject);
-							this->content.push_back(std::make_shared<Audio>(audioPost));
-						} else if (contentTypeString == "image") {
-							Image imagePost = Image(postContentEntryObject);
-							this->content.push_back(std::make_shared<Image>(imagePost));
-						} // TODO Add paywall post
-					}
+		// Layout
+		const rapidjson::Value* postLayoutJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "layout");
+		if (postLayoutJsonPointer != nullptr) {
+			if (postLayoutJsonPointer->IsArray()) {
+				rapidjson::GenericArray postLayoutArray = postLayoutJsonPointer->GetArray();
+				if (!postLayoutArray.Empty()) {
+					this->populateLayout(postLayoutJsonPointer->GetArray());
 				}
 			}
 		}
@@ -327,7 +300,10 @@ public:
 	 */
 	std::vector<std::shared_ptr<Content>> content;
 
-	// TODO Layout
+	/**
+	 * TODO Documentation
+	 */
+	std::vector<std::shared_ptr<Layout>> layout;
 
 	// TODO Trail
 
@@ -361,8 +337,6 @@ public:
 	 */
 	bool display_avatar = false;
 
-	// auto layout; FIXME
-
 	// auto trail; FIXME
 
 	/**
@@ -378,6 +352,12 @@ public:
 	 * @return
 	 */
 	bool operator!=(const Post &post) const;
+
+private:
+
+	void populateContent(const rapidjson::GenericArray<true, rapidjson::Value>& contentJsonArray);
+
+	void populateLayout(const rapidjson::GenericArray<true, rapidjson::Value>& layoutJsonArray);
 
 };
 

@@ -11,7 +11,7 @@ class Media {
 
 public:
 
-	Media(std::string url, const rapidjson::Value &jsonObject):url(std::move(url)) {
+	Media(std::string url, const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject):url(std::move(url)) {
 
 		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
 
@@ -71,17 +71,17 @@ public:
 
 	/**
 	 * TODO Documentation
-	 * @param contentJson
+	 * @param contentJsonObject
 	 * @param mediaBuffer
 	 */
-	static void setMediaPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &mediaBuffer);
+	static void setMediaPointer(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::shared_ptr<Media> &mediaBuffer);
 
 	/**
 	 * TODO Documentation
-	 * @param contentJson
+	 * @param contentJsonObject
 	 * @param posterBuffer
 	 */
-	static void setPosterPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &posterBuffer);
+	static void setPosterPointer(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::shared_ptr<Media> &posterBuffer);
 
 };
 

@@ -15,9 +15,9 @@ void setPointer(const rapidjson::Value &json, std::shared_ptr<Media> &buffer) {
 	}
 }
 
-void Media::setMediaPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &mediaBuffer) {
+void Media::setMediaPointer(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::shared_ptr<Media> &mediaBuffer) {
 
-	const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "media");
+	const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentJsonObject, "media");
 	if (mediaValuePointer != nullptr) {
 		setPointer(*mediaValuePointer, mediaBuffer);
 		return;
@@ -25,9 +25,9 @@ void Media::setMediaPointer(const rapidjson::Value &contentJson, std::shared_ptr
 	// TODO Log warning
 }
 
-void Media::setPosterPointer(const rapidjson::Value &contentJson, std::shared_ptr<Media> &posterBuffer) {
+void Media::setPosterPointer(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::shared_ptr<Media> &posterBuffer) {
 
-	const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentJson, "poster");
+	const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentJsonObject, "poster");
 	if (posterValuePointer != nullptr) {
 		if (posterValuePointer->IsArray()) {
 			rapidjson::GenericArray posterJsonArray = posterValuePointer->GetArray();

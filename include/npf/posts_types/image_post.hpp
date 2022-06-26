@@ -12,9 +12,9 @@ class Image : public Content {
 
 public:
 
-	explicit Image(const rapidjson::Value &contentArrayEntry): Content(postType::photo) {
+	explicit Image(const rapidjson::GenericObject<true, rapidjson::Value>& contentEntryJson): Content(postType::photo) {
 
-		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentArrayEntry, "media");
+		const rapidjson::Value* mediaValuePointer = TumblrAPI::getValuePointerFromJson(contentEntryJson, "media");
 		if (mediaValuePointer != nullptr) {
 			if (mediaValuePointer->IsArray()) {
 				for (const rapidjson::Value &mediaArrayEntry: mediaValuePointer->GetArray()) {
@@ -45,10 +45,10 @@ public:
 
 		// TODO Colors
 
-		TumblrAPI::setStringFromJson(contentArrayEntry, "feedback_token", this->feedback_token);
+		TumblrAPI::setStringFromJson(contentEntryJson, "feedback_token", this->feedback_token);
 
 		// Image poster.
-		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentArrayEntry, "poster");
+		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentEntryJson, "poster");
 		if (posterValuePointer != nullptr) {
 			if (posterValuePointer->IsObject()) {
 				rapidjson::GenericObject posterJsonObject = posterValuePointer->GetObj();
@@ -63,7 +63,7 @@ public:
 		// TODO Image attribution
 
 		std::string altTextInput;
-		TumblrAPI::setStringFromJson(contentArrayEntry, "alt_text", altTextInput);
+		TumblrAPI::setStringFromJson(contentEntryJson, "alt_text", altTextInput);
 		int altTextInputIndex = 0;
 		for (char c : altTextInput) {
 			this->alt_text[altTextInputIndex] = c;
@@ -79,7 +79,7 @@ public:
 		this->alt_text[4096] = '\0';
 
 		std::string captionInput;
-		TumblrAPI::setStringFromJson(contentArrayEntry, "caption", captionInput);
+		TumblrAPI::setStringFromJson(contentEntryJson, "caption", captionInput);
 		int captionInputIndex = 0;
 		for (char c : captionInput) {
 			this->caption[captionInputIndex] = c;

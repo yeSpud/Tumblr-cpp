@@ -12,23 +12,23 @@ class Audio : public Content {
 
 public:
 
-	explicit Audio(const rapidjson::Value &contentJson): Content(postType::audio) {
+	explicit Audio(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject): Content(postType::audio) {
 
-		TumblrAPI::setStringFromJson(contentJson, "url", this->url);
+		TumblrAPI::setStringFromJson(contentJsonObject, "url", this->url);
 
 		// Media.
-		Media::setMediaPointer(contentJson, this->media);
+		Media::setMediaPointer(contentJsonObject, this->media);
 
-		TumblrAPI::setStringFromJson(contentJson, "provider", this->provider);
-		TumblrAPI::setStringFromJson(contentJson, "title", this->title);
-		TumblrAPI::setStringFromJson(contentJson, "artist", this->artist);
-		TumblrAPI::setStringFromJson(contentJson, "album", this->album);
+		TumblrAPI::setStringFromJson(contentJsonObject, "provider", this->provider);
+		TumblrAPI::setStringFromJson(contentJsonObject, "title", this->title);
+		TumblrAPI::setStringFromJson(contentJsonObject, "artist", this->artist);
+		TumblrAPI::setStringFromJson(contentJsonObject, "album", this->album);
 
 		// Poster.
-		Media::setPosterPointer(contentJson, this->poster);
+		Media::setPosterPointer(contentJsonObject, this->poster);
 
-		TumblrAPI::setStringFromJson(contentJson, "embed_html", this->embed_html);
-		TumblrAPI::setStringFromJson(contentJson, "embed_url", this->embed_url);
+		TumblrAPI::setStringFromJson(contentJsonObject, "embed_html", this->embed_html);
+		TumblrAPI::setStringFromJson(contentJsonObject, "embed_url", this->embed_url);
 
 		// TODO Metadata
 

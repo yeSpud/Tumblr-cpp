@@ -12,25 +12,29 @@ class Formatting {
 
 public:
 
-	explicit Formatting(const rapidjson::Value& formattingJson) {
+	explicit Formatting(const rapidjson::GenericObject<true, rapidjson::Value>& formattingJson) {
 
 		// Start.
+		TumblrAPI::setIntFromJson(formattingJson, "start", this->start);
+		/*
 		if (formattingJson.HasMember("start")) {
 			const rapidjson::Value &startJson = formattingJson["start"];
 
 			if (startJson.IsInt()) {
 				this->start = startJson.GetInt();
 			}
-		}
+		}*/
 
 		// End.
+		TumblrAPI::setIntFromJson(formattingJson, "end", this->end);
+		/*
 		if (formattingJson.HasMember("end")) {
 			const rapidjson::Value &endJson = formattingJson["end"];
 
 			if (endJson.IsInt()) {
 				this->end = endJson.GetInt();
 			}
-		}
+		}*/
 
 		TumblrAPI::setStringFromJson(formattingJson, "type", this->type);
 		TumblrAPI::setStringFromJson(formattingJson, "url", this->url);

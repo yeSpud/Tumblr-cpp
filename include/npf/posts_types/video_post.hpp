@@ -12,24 +12,29 @@ class Video : public Content {
 
 public:
 
-	explicit Video(const rapidjson::Value &contentJson): Content(postType::video) {
+	explicit Video(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject): Content(postType::video) {
 
-		TumblrAPI::setStringFromJson(contentJson, "url", this->url);
+		TumblrAPI::setStringFromJson(contentJsonObject, "url", this->url);
 
 		// Media.
-		Media::setMediaPointer(contentJson, this->media);
+		Media::setMediaPointer(contentJsonObject, this->media);
 
-		TumblrAPI::setStringFromJson(contentJson, "provider", this->provider);
-		TumblrAPI::setStringFromJson(contentJson, "embed_html", this->embed_html);
+		TumblrAPI::setStringFromJson(contentJsonObject, "provider", this->provider);
+		TumblrAPI::setStringFromJson(contentJsonObject, "embed_html", this->embed_html);
 
 		// iFrame.
-		const rapidjson::Value* iFrameJsonPointer = TumblrAPI::getValuePointerFromJson(contentJson, "embed_iframe");
+		const rapidjson::Value* iFrameJsonPointer = TumblrAPI::getValuePointerFromJson(contentJsonObject, "embed_iframe");
 		if (iFrameJsonPointer != nullptr) {
 			if (iFrameJsonPointer->IsObject()) {
 				rapidjson::GenericObject iFrameJsonObject = iFrameJsonPointer->GetObj();
 
 				iFrame iframeObject;
+
 				TumblrAPI::setStringFromJson(iFrameJsonObject, "url", iframeObject.url);
+
+				TumblrAPI::setIntFromJson(iFrameJsonObject, "width", iframeObject.width);
+				TumblrAPI::setIntFromJson(iFrameJsonObject, "height", iframeObject.height);
+				/*
 				if (iFrameJsonObject.HasMember("width")) {
 					if (iFrameJsonObject["width"].IsInt()) {
 						iframeObject.width = iFrameJsonObject["width"].GetInt();
@@ -39,22 +44,22 @@ public:
 					if (iFrameJsonObject["height"].IsInt()) {
 						iframeObject.height = iFrameJsonObject["height"].GetInt();
 					}
-				}
+				}*/
 
 				this->iframe = iframeObject;
 			}
 		}
 
-		TumblrAPI::setStringFromJson(contentJson, "embed_url", this->embed_url);
+		TumblrAPI::setStringFromJson(contentJsonObject, "embed_url", this->embed_url);
 
 		// Poster.
-		Media::setPosterPointer(contentJson, this->poster);
+		Media::setPosterPointer(contentJsonObject, this->poster);
 
 		// TODO Metadata
 
 		// FIXME Attribution
 
-		TumblrAPI::setBooleanFromJson(contentJson, "can_autoplay_on_cellular", this->can_autoplay_on_cellular);
+		TumblrAPI::setBooleanFromJson(contentJsonObject, "can_autoplay_on_cellular", this->can_autoplay_on_cellular);
 	}
 
     /**

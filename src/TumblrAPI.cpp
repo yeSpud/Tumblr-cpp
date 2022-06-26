@@ -4,7 +4,7 @@
 
 #include "TumblrAPI.hpp"
 
-const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::Value &jsonObject, const char *key) {
+const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key) {
 	if (jsonObject.HasMember(key)) {
 		return &jsonObject[key];
 	} else {
@@ -13,7 +13,7 @@ const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::Valu
 	}
 }
 
-void TumblrAPI::setStringFromJson(const rapidjson::Value &jsonObject, const char *key, std::string &stringBuffer) {
+void TumblrAPI::setStringFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key, std::string &stringBuffer) {
 	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
 	if (jsonObjectValuePointer != nullptr) {
 		if (jsonObjectValuePointer->IsString()) {
@@ -24,7 +24,7 @@ void TumblrAPI::setStringFromJson(const rapidjson::Value &jsonObject, const char
 	}
 }
 
-void TumblrAPI::setBooleanFromJson(const rapidjson::Value &jsonObject, const char *key, bool &booleanBuffer) {
+void TumblrAPI::setBooleanFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key, bool &booleanBuffer) {
 	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
 	if (jsonObjectValuePointer != nullptr) {
 		if (jsonObjectValuePointer->IsBool()) {
@@ -35,7 +35,18 @@ void TumblrAPI::setBooleanFromJson(const rapidjson::Value &jsonObject, const cha
 	}
 }
 
-void TumblrAPI::setUInt64FromJson(const rapidjson::Value &jsonObject, const char *key, unsigned long long &numberBuffer) {
+void TumblrAPI::setIntFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key, int &intBuffer) {
+	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
+	if (jsonObjectValuePointer != nullptr) {
+		if (jsonObjectValuePointer->IsInt()) {
+			intBuffer = jsonObjectValuePointer->GetInt();
+		} else {
+			spdlog::get("TumblrAPI Logger")->warn("JsonObject has value for key {}, but that value is not an int!", key);
+		}
+	}
+}
+
+void TumblrAPI::setUInt64FromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key, unsigned long long &numberBuffer) {
 	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
 	if (jsonObjectValuePointer != nullptr) {
 		if (jsonObjectValuePointer->IsUint64()) {
@@ -70,13 +81,21 @@ cpr::Response TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRe
 	return response;
 }
 
-rapidjson::GenericObject<false, rapidjson::Value> TumblrAPI::parseJsonResponse(const std::string &jsonString) const {
+rapidjson::GenericObject<true, rapidjson::Value> TumblrAPI::parseJsonResponse(const std::string &jsonString) const {
 
 	rapidjson::Document document;
 	document.Parse(jsonString.c_str());
 
 	if (document.HasMember("response")) {
-		return document["response"].GetObj();
+		const rapidjson::Value& responseValue = document["response"];
+
+		if (responseValue.IsObject()) {
+			return responseValue.GetObj();
+		} else {
+			std::string errorString = "Response is not a json object!";
+			TumblrAPI::logger->error(errorString);
+			throw std::runtime_error(errorString);
+		}
 	} else {
 		std::string errorString = "Unable to find response object in json '"+ jsonString +"' object";
 		TumblrAPI::logger->error(errorString);

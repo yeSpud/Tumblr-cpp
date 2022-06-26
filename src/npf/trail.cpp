@@ -4,8 +4,6 @@
 
 #include "npf/trail.hpp"
 
-Trail::~Trail() = default;
-
 /*
 void Trail::populateContentPointerArray(const JSON_OBJECT &object, std::vector<std::shared_ptr<Content>> &array) { // TODO Comments
 

@@ -5,12 +5,10 @@
 #ifndef TUMBLRAPI_LAYOUT_HPP
 #define TUMBLRAPI_LAYOUT_HPP
 
-#include "npf/npf.hpp"
-
 /**
  * TODO Documentation
  */
-class Layout : public NPF {
+class Layout {
 
 protected:
 
@@ -41,23 +39,12 @@ public:
 	 * TODO Documentation
 	 * @param type
 	 */
-	explicit Layout(layoutType type) : type(type), NPF() {};
+	explicit Layout(layoutType type) : type(type) {};
 
 	/**
 	 * TODO Documentation
 	 */
 	const layoutType type;
-
-	/**
-	 * TODO Documentation
-	 */
-	std::vector<int> blocks;
-
-	/**
-	 * TODO Documentation
-	 * @param array
-	 */
-	virtual void populateBlocks(const JSON_ARRAY &array) = 0;
 
 };
 

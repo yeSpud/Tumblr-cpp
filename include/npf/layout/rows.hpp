@@ -6,43 +6,53 @@
 #define TUMBLRAPI_ROWS_HPP
 
 #include "layout.hpp"
+#include "TumblrAPI.hpp"
 
-/**
- * TODO Documentation
- */
 class Rows : public Layout {
 
 public:
 
-	/**
-	 * TODO Documentation
-	 */
-	Rows() : Layout(rows) {};
+	explicit Rows(const rapidjson::GenericObject<true, rapidjson::Value> &layoutJsonObject) : Layout(layoutType::rows) {
+
+		if (layoutJsonObject.HasMember("display")) {
+			if (layoutJsonObject["display"].IsArray()) {
+				rapidjson::GenericArray displayJsonArray = layoutJsonObject["display"].GetArray();
+
+				for (const rapidjson::Value &displayEntry : displayJsonArray) {
+					if (displayEntry.IsObject()) {
+
+						rapidjson::GenericObject displayEntryObject = displayEntry.GetObj();
+						if (displayEntryObject.HasMember("blocks")) {
+							if (displayEntryObject["blocks"].IsArray()) {
+								std::vector<int> blockVector;
+								rapidjson::GenericArray blockJsonArray = displayEntryObject["blocks"].GetArray();
+
+								for (const rapidjson::Value &blockEntry : blockJsonArray) {
+									if (blockEntry.IsInt()) {
+										blockVector.push_back(blockEntry.GetInt());
+									}
+								}
+
+								this->blocks.push_back(blockVector);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// TODO Mode
+	};
 
 	/**
-	 * TODO Documentation
+	 * This is an array of block indices to use in this row.
 	 */
-	std::vector<std::vector<int>> display;
+	std::vector<std::vector<int>> blocks;
 
 	/**
-	 * The last block to display before the Read More signifier. Required if blocks is not supplied.
+	 * To specify a display mode other than weighted, add an object here with a type.
 	 */
-	int truncate_after = 0;
-
-	// TODO
-	// auto mode;
-
-	/**
-	 * TODO Documentation
-	 * @param array
-	 */
-	void populateBlocks(const JSON_ARRAY &array) override;
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 */
-	void populateNPF(JSON_OBJECT entry) override;
+	//auto mode; TODO
 
 };
 

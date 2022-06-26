@@ -12,16 +12,16 @@ class Link : public Content {
 
 public:
 
-	Link(const rapidjson::Value &contentJson, std::string url): Content(postType::link), url(std::move(url)) {
+	Link(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::string url): Content(postType::link), url(std::move(url)) {
 
-		TumblrAPI::setStringFromJson(contentJson, "title", this->title);
-		TumblrAPI::setStringFromJson(contentJson, "description", this->description);
-		TumblrAPI::setStringFromJson(contentJson, "author", this->author);
-		TumblrAPI::setStringFromJson(contentJson, "site_name", this->site_name);
-		TumblrAPI::setStringFromJson(contentJson, "display_name", this->display_name);
+		TumblrAPI::setStringFromJson(contentJsonObject, "title", this->title);
+		TumblrAPI::setStringFromJson(contentJsonObject, "description", this->description);
+		TumblrAPI::setStringFromJson(contentJsonObject, "author", this->author);
+		TumblrAPI::setStringFromJson(contentJsonObject, "site_name", this->site_name);
+		TumblrAPI::setStringFromJson(contentJsonObject, "display_name", this->display_name);
 
 		// Poster.
-		Media::setPosterPointer(contentJson, this->poster);
+		Media::setPosterPointer(contentJsonObject, this->poster);
 	};
 
     /**

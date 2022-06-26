@@ -17,7 +17,7 @@ public:
 
 	//~Theme()= default;
 
-	explicit Theme(const rapidjson::Value &jsonObject) {
+	explicit Theme(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject) {
 
 		TumblrAPI::setStringFromJson(jsonObject, "avatar_shape", this->avatar_shape);
 		TumblrAPI::setStringFromJson(jsonObject, "background_color", this->background_color);
