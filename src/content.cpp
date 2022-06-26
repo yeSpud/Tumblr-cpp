@@ -2,11 +2,11 @@
 // Created by Spud on 6/25/22.
 //
 
-#include "posts_types/text_post.hpp"
-#include "posts_types/link_post.hpp"
-#include "posts_types/video_post.hpp"
-#include "posts_types/audio_post.hpp"
-#include "posts_types/image_post.hpp"
+#include "posts/text_post.hpp"
+#include "posts/link_post.hpp"
+#include "posts/video_post.hpp"
+#include "posts/audio_post.hpp"
+#include "posts/image_post.hpp"
 
 std::shared_ptr<Content> Content::getContentFromJsonObject(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject) {
 

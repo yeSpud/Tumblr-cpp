@@ -7,6 +7,7 @@
 
 #include "content.hpp"
 #include "media.hpp"
+#include "attributes/base_attribution.hpp"
 
 class Audio : public Content {
 
@@ -32,7 +33,12 @@ public:
 
 		// TODO Metadata
 
-		// FIXME Attribution
+		// Attribution
+		if (contentJsonObject.HasMember("attribution")) {
+			if (contentJsonObject["attribution"].IsObject()) {
+				this->attribution = BaseAttribution::getAttribution(contentJsonObject["attribution"].GetObj());
+			}
+		}
 	}
 
     /**
@@ -82,10 +88,10 @@ public:
 
     // metadata; FIXME
 
-	/*
-	 * TODO Documentation
+	/**
+	 * Optional attribution information about where the audio track came from.
 	 */
-    // Attribution attribution;
+    std::shared_ptr<BaseAttribution> attribution;
 
 };
 

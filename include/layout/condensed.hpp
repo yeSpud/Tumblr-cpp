@@ -12,9 +12,6 @@
  * The condensed layout is deprecated and replaced by the truncate_after property in the rows layout.
  * Please use the rows layout to get or set a recommended truncation index. If a post is created with a condensed layout,
  * it will be ignored by the backend. In other words, a read-more will not show up in the post.
- *
- * TODO Documentation
- *
  */
 class [[deprecated("The condensed layout is deprecated and replaced by the truncate_after property in the rows layout. "
 "Please use the rows layout to get or set a recommended truncation index.")]] Condensed : public Layout {

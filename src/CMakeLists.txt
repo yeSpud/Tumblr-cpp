@@ -1,6 +1,6 @@
 file(GLOB HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.hpp")
 file(GLOB ATTRIBUTE_HEADERS CONFIGURE_DEPENDS "../include/attributes/*.hpp")
-file(GLOB POST_HEADERS CONFIGURE_DEPENDS "../include/posts_types/*.hpp")
+file(GLOB POST_HEADERS CONFIGURE_DEPENDS "../include/posts/*.hpp")
 file(GLOB LAYOUT_HEADERS CONFIGURE_DEPENDS "../include/layout/*.hpp")
 
 file(GLOB RAPIDJSON_HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/rapidjson/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/error/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/internal/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/msinttypes/*.h")

@@ -45,6 +45,13 @@ public:
 
 	/**
 	 * TODO Documentation
+	 * @param json
+	 */
+	[[deprecated("For debugging only")]]
+	static void printJson(const rapidjson::Value& json);
+
+	/**
+	 * TODO Documentation
 	 * @param jsonObject
 	 * @param key
 	 * @return

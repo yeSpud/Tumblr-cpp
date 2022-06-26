@@ -23,15 +23,22 @@ public:
 
 				Post postEntry;
 
-				if (postJsonObject.HasMember("id")) {
-					if (postJsonObject["id"].IsInt64()) {
-						postEntry.id = postJsonObject["id"].GetInt64();
+				const rapidjson::Value* idJsonPointer = TumblrAPI::getValuePointerFromJson(postJsonObject, "id");
+				if (idJsonPointer != nullptr) {
+
+					if (idJsonPointer->IsInt64()) {
+						postEntry.id = idJsonPointer->GetInt64();
+					} else if (idJsonPointer->IsString()) {
+						postEntry.id = std::stoll(idJsonPointer->GetString());
 					}
 				}
 
-				if (postJsonObject.HasMember("timestamp")) {
-					if (postJsonObject["timestamp"].IsInt64()) {
+				const rapidjson::Value* timestampJsonPointer = TumblrAPI::getValuePointerFromJson(postJsonObject, "timestamp");
+				if (timestampJsonPointer != nullptr) {
+					if (timestampJsonPointer->IsInt64()) {
 						postEntry.timestamp = postJsonObject["timestamp"].GetInt64();
+					} else if (timestampJsonPointer->IsString()) {
+						postEntry.timestamp = std::stoll(timestampJsonPointer->GetString());
 					}
 				}
 

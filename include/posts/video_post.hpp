@@ -7,6 +7,7 @@
 
 #include "content.hpp"
 #include "media.hpp"
+#include "attributes/base_attribution.hpp"
 
 class Video : public Content {
 
@@ -46,7 +47,12 @@ public:
 
 		// TODO Metadata
 
-		// FIXME Attribution
+		// Attribution
+		if (contentJsonObject.HasMember("attribution")) {
+			if (contentJsonObject["attribution"].IsObject()) {
+				this->attribution = BaseAttribution::getAttribution(contentJsonObject["attribution"].GetObj());
+			}
+		}
 
 		TumblrAPI::setBooleanFromJson(contentJsonObject, "can_autoplay_on_cellular", this->can_autoplay_on_cellular);
 	}
@@ -107,10 +113,10 @@ public:
 
     // metadata; FIXME
 
-	/*
-	 * TODO Documentation
+	/**
+	 * Optional attribution information about where the video came from.
 	 */
-    // Attribution attribution;
+    std::shared_ptr<BaseAttribution> attribution;
 
     bool can_autoplay_on_cellular = false;
 

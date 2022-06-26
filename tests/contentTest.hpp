@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <memory>
-#include "posts_types/content.hpp"
+#include "posts/content.hpp"
 
 class ContentTest {
 

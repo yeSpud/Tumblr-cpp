@@ -3,6 +3,17 @@
 //
 
 #include "TumblrAPI.hpp"
+#include <rapidjson/writer.h>
+#include <iostream>
+
+void TumblrAPI::printJson(const rapidjson::Value& json) {
+
+	rapidjson::StringBuffer stringBuffer;
+	rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+	json.Accept(writer);
+
+	std::cout << "Json: " << stringBuffer.GetString() << std::endl;
+}
 
 const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key) {
 	if (jsonObject.HasMember(key)) {

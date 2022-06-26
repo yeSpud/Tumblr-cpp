@@ -7,6 +7,7 @@
 
 #include "media.hpp"
 #include "content.hpp"
+#include "attributes/base_attribution.hpp"
 
 class Image : public Content {
 
@@ -60,7 +61,12 @@ public:
 			}
 		}
 
-		// TODO Image attribution
+		// Image attribution
+		if (contentEntryJson.HasMember("attribution")) {
+			if (contentEntryJson["attribution"].IsObject()) {
+				this->attribution = BaseAttribution::getAttribution(contentEntryJson["attribution"].GetObj());
+			}
+		}
 
 		std::string altTextInput;
 		TumblrAPI::setStringFromJson(contentEntryJson, "alt_text", altTextInput);
@@ -107,10 +113,11 @@ public:
 	 */
     std::shared_ptr<Media> poster;
 
-    /*
-     * TODO Documentation
+    /**
+     * In the case of GIF search results and individual images with a content source,
+     * the content block may include an attribution object with more fields for those cases.
      */
-    //Attribution attribution; FIXME
+    std::shared_ptr<BaseAttribution> attribution;
 
     /**
      * Text used to describe the image, for screen readers. 4096 character maximum.

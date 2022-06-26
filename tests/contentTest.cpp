@@ -3,12 +3,12 @@
 //
 
 #include "contentTest.hpp"
-#include "posts_types/text_post.hpp"
+#include "posts/text_post.hpp"
 #include <catch2/catch.hpp>
-#include "posts_types/image_post.hpp"
-#include "posts_types/link_post.hpp"
-#include "posts_types/video_post.hpp"
-#include "posts_types/audio_post.hpp"
+#include "posts/image_post.hpp"
+#include "posts/link_post.hpp"
+#include "posts/video_post.hpp"
+#include "posts/audio_post.hpp"
 
 void ContentTest::testContent(const std::vector<std::shared_ptr<Content>>& content) {
 

@@ -18,10 +18,7 @@ public:
 		TumblrAPI::setStringFromJson(jsonObject, "name", this->name);
 		TumblrAPI::setStringFromJson(jsonObject, "title", this->title);
 		TumblrAPI::setStringFromJson(jsonObject, "description", this->description);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 		TumblrAPI::setStringFromJson(jsonObject, "url", this->url);
-#pragma clang diagnostic pop
 		TumblrAPI::setStringFromJson(jsonObject, "uuid", this->uuid);
 
 		TumblrAPI::setUInt64FromJson(jsonObject, "updated", this->updated);
@@ -47,7 +44,6 @@ public:
 	 * Undocumented.
 	 * The url of the blog. This is usually the blog identifier. Use the blog identifier.
 	 */
-	[[deprecated("Use the blog identifier")]]
 	std::string url;
 
 	/**

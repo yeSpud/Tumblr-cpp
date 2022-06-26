@@ -6,8 +6,7 @@
 #define TUMBLRAPI_ASK_HPP
 
 #include "layout.hpp"
-#include "rapidjson/document.h"
-#include <vector>
+#include "attributes/blog_attribution.hpp"
 
 
 class Ask : public Layout {
@@ -31,9 +30,18 @@ public:
 			}
 		}
 
-		// TODO Attribution
+		// Attribution
+		if (layoutJsonObject.HasMember("attribution")) {
+			if (layoutJsonObject["attribution"].IsObject()) {
+				const rapidjson::GenericObject attributionObject = layoutJsonObject["attribution"].GetObj();
 
-	};
+				MinimalBlog blog = MinimalBlog(attributionObject);
+				BlogAttribution blogAttribution = BlogAttribution(attributionObject, blog);
+				this->attribution = std::make_shared<BlogAttribution>(blogAttribution);
+			}
+		}
+
+	}
 
 	/**
 	 * This is an array of block indices that are a part of the ask content of the Post.
@@ -43,7 +51,7 @@ public:
 	/**
 	 * If the ask is not anonymous, this will include information about the blog that submitted the ask.
 	 */
-	//Attribution attribution; // FIXME Blog attribute
+	std::shared_ptr<BlogAttribution> attribution;
 
 };
 

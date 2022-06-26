@@ -117,7 +117,7 @@ void testPosts(const std::vector<Post> &posts) {
 
 void BlogTest::testGetPost() {
 
-    std::cout << "\nTesting retrieving blog posts_types..." << std::endl;
+    std::cout << "\nTesting retrieving blog posts..." << std::endl;
 
     REQUIRE(this->blog != nullptr);
 
@@ -137,7 +137,7 @@ void BlogTest::testGetPost() {
 	REQUIRE(audioPost.size() == 2);
 	testPosts(audioPost);
 
-    std::cout << "Tested retrieving blog posts_types successfully!" << std::endl;
+    std::cout << "Tested retrieving blog posts successfully!" << std::endl;
 }
 
 // TODO Rest of tests
