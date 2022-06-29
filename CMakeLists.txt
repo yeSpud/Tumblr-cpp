@@ -21,6 +21,11 @@ include(FetchContent)
 # spdlog
 FetchContent_Declare(spdlog GIT_REPOSITORY https://github.com/gabime/spdlog.git GIT_TAG v1.10.0)
 FetchContent_MakeAvailable(spdlog)
+set(SPDLOG_BUILD_TESTS OFF)
+set(SPDLOG_BUILD_TESTS_HO OFF)
+set(SPDLOG_BUILD_ALL OFF)
+set(SPDLOG_BUILD_EXAMPLE OFF)
+set(SPDLOG_BUILD_EXAMPLE_HO OFF)
 
 # cpr
 cmake_policy(SET CMP0079 NEW)
@@ -31,9 +36,12 @@ if (WIN32)
 endif (WIN32)
 set(CPR_BUILD_TESTS OFF)
 set(CPR_BUILD_TESTS_SSL OFF)
-#FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG origin/master)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG db351ffbbadc6c4e9239daaa26e9aefa9f0ec82d)
 FetchContent_MakeAvailable(cpr)
+
+# RapidJSON
+include("${CMAKE_SOURCE_DIR}/rapidjson.cmake")
+include_directories(${RAPIDJSON_INCLUDE_DIR})
 
 # include the src directory
 add_subdirectory(src)
