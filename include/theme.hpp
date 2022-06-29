@@ -15,8 +15,6 @@ class Theme {
 
 public:
 
-	//~Theme()= default;
-
 	explicit Theme(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject) {
 
 		TumblrAPI::setStringFromJson(jsonObject, "avatar_shape", this->avatar_shape);

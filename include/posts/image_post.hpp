@@ -37,18 +37,6 @@ public:
 
 						// Sometimes the poster is in the media object.
 						this->setPoster(mediaJsonObject);
-						/*
-						const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(mediaJsonObject, "poster");
-						if (posterValuePointer != nullptr) {
-							if (posterValuePointer->IsObject()) {
-								rapidjson::GenericObject posterJsonObject = posterValuePointer->GetObj();
-
-								std::string posterUrl;
-								TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
-								Media posterObject = Media(posterUrl, posterJsonObject);
-								this->poster = std::make_shared<Media>(posterObject);
-							}
-						}*/
 					}
 				}
 			}
@@ -60,18 +48,6 @@ public:
 
 		// Image poster.
 		this->setPoster(contentEntryJson);
-		/*
-		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentEntryJson, "poster");
-		if (posterValuePointer != nullptr) {
-			if (posterValuePointer->IsObject()) {
-				rapidjson::GenericObject posterJsonObject = posterValuePointer->GetObj();
-
-				std::string posterUrl;
-				TumblrAPI::setStringFromJson(posterJsonObject, "url", posterUrl);
-				Media posterObject = Media(posterUrl, posterJsonObject);
-				this->poster = std::make_shared<Media>(posterObject);
-			}
-		}*/
 
 		// Image attribution
 		if (contentEntryJson.HasMember("attribution")) {
