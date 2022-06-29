@@ -15,17 +15,14 @@ public:
 				   std::vector<std::shared_ptr<Content>> content, std::vector<std::shared_ptr<Layout>> layout):
 				   content(std::move(content)), layout(std::move(layout)) {
 
-		const rapidjson::Value* postJsonPointer = TumblrAPI::getValuePointerFromJson(trailJsonObject, "post");
-		if (postJsonPointer != nullptr) {
-
-			if (postJsonPointer->IsObject()) {
-				const rapidjson::GenericObject postJsonObject = postJsonPointer->GetObj();
+		if (trailJsonObject.HasMember("post")) {
+			if (trailJsonObject["post"].IsObject()) {
+				const rapidjson::GenericObject<true, rapidjson::Value> postJsonObject = trailJsonObject["post"].GetObj();
 
 				Post postEntry;
 
 				const rapidjson::Value* idJsonPointer = TumblrAPI::getValuePointerFromJson(postJsonObject, "id");
 				if (idJsonPointer != nullptr) {
-
 					if (idJsonPointer->IsInt64()) {
 						postEntry.id = idJsonPointer->GetInt64();
 					} else if (idJsonPointer->IsString()) {
@@ -36,7 +33,7 @@ public:
 				const rapidjson::Value* timestampJsonPointer = TumblrAPI::getValuePointerFromJson(postJsonObject, "timestamp");
 				if (timestampJsonPointer != nullptr) {
 					if (timestampJsonPointer->IsInt64()) {
-						postEntry.timestamp = postJsonObject["timestamp"].GetInt64();
+						postEntry.timestamp = timestampJsonPointer->GetInt64();
 					} else if (timestampJsonPointer->IsString()) {
 						postEntry.timestamp = std::stoll(timestampJsonPointer->GetString());
 					}
@@ -46,10 +43,9 @@ public:
 			}
 		}
 
-		const rapidjson::Value* blogJsonKey = TumblrAPI::getValuePointerFromJson(trailJsonObject, "blog");
-		if (blogJsonKey != nullptr) {
-			if (blogJsonKey->IsObject()) {
-				this->blog = MinimalBlog(blogJsonKey->GetObj());
+		if (trailJsonObject.HasMember("blog")) {
+			if (trailJsonObject["blog"].IsObject()) {
+				this->blog = MinimalBlog(trailJsonObject["blog"].GetObj());
 			}
 		}
 

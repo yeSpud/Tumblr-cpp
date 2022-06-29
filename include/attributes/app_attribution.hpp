@@ -19,7 +19,7 @@ public:
 
 		if (jsonObject.HasMember("logo")) {
 			if (jsonObject["logo"].IsObject()) {
-				const rapidjson::GenericObject logoJsonObject = jsonObject["logo"].GetObj();
+				const rapidjson::GenericObject<true, rapidjson::Value> logoJsonObject = jsonObject["logo"].GetObj();
 
 				std::string urlString;
 				TumblrAPI::setStringFromJson(logoJsonObject, "url", urlString);

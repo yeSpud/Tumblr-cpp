@@ -8,7 +8,19 @@
 #include "attributes/blog_attribution.hpp"
 #include "attributes/app_attribution.hpp"
 
-std::shared_ptr<BaseAttribution> BaseAttribution::getAttribution(const rapidjson::GenericObject<true, rapidjson::Value> attributionJsonObject) {
+MinimalBlog getBlog(const rapidjson::GenericObject<true, rapidjson::Value>& attributionJsonObject) {
+	if (attributionJsonObject.HasMember("blog")) {
+		if (attributionJsonObject["blog"].IsObject()) {
+			const rapidjson::GenericObject<true, rapidjson::Value> blogJsonObjectPointer = attributionJsonObject["blog"].GetObj();
+			return MinimalBlog(blogJsonObjectPointer);
+		}
+	}
+
+	// TODO Log
+	return {};
+}
+
+std::shared_ptr<BaseAttribution> BaseAttribution::getAttribution(const rapidjson::GenericObject<true, rapidjson::Value>& attributionJsonObject) {
 
 	std::string typeString;
 	TumblrAPI::setStringFromJson(attributionJsonObject, "type", typeString);
@@ -19,22 +31,14 @@ std::shared_ptr<BaseAttribution> BaseAttribution::getAttribution(const rapidjson
 		TumblrAPI::setStringFromJson(attributionJsonObject, "url", urlString);
 
 		PostAttribution::Post miniPost;
-		if (attributionJsonObject["post"].IsObject()) {
-			const rapidjson::GenericObject postJsonObject = attributionJsonObject["post"].GetObj();
-			if (postJsonObject.HasMember("id")) {
-				if (postJsonObject["id"].IsInt64()) {
-					miniPost.id = postJsonObject["id"].GetInt64();
-				}
+		if (attributionJsonObject.HasMember("post")) {
+			if (attributionJsonObject["post"].IsObject()) {
+				const rapidjson::GenericObject<true, rapidjson::Value> postJsonObjectPointer = attributionJsonObject["post"].GetObj();
+				TumblrAPI::setInt64FromJson(postJsonObjectPointer, "id", miniPost.id);
 			}
 		}
 
-		MinimalBlog blog;
-		if (attributionJsonObject.HasMember("blog")) {
-			if (attributionJsonObject["blog"].IsObject()) {
-				blog = MinimalBlog(attributionJsonObject["blog"].GetObj());
-			}
-		}
-
+		MinimalBlog blog = getBlog(attributionJsonObject);
 		PostAttribution postAttribution = PostAttribution(urlString, miniPost, blog);
 		return std::make_shared<PostAttribution>(postAttribution);
 	} else if (typeString == "link") {
@@ -46,14 +50,7 @@ std::shared_ptr<BaseAttribution> BaseAttribution::getAttribution(const rapidjson
 		return std::make_shared<LinkAttribution>(linkAttribution);
 	} else if (typeString == "blog") {
 
-		MinimalBlog blog;
-		if (attributionJsonObject.HasMember("blog")) {
-			if (attributionJsonObject["blog"].IsObject()) {
-				blog = MinimalBlog(attributionJsonObject["blog"].GetObj());
-			}
-		}
-
-
+		MinimalBlog blog = getBlog(attributionJsonObject);
 		BlogAttribution blogAttribution = BlogAttribution(attributionJsonObject, blog);
 		return std::make_shared<BlogAttribution>(blogAttribution);
 	} else if (typeString == "app") {

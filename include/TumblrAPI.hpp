@@ -62,14 +62,6 @@ public:
 	 * TODO Documentation
 	 * @param jsonObject
 	 * @param key
-	 * @return
-	 */
-	static const rapidjson::GenericObject<true, rapidjson::Value>* getObjectFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key);
-
-	/**
-	 * TODO Documentation
-	 * @param jsonObject
-	 * @param key
 	 * @param stringBuffer
 	 */
 	static void setStringFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, std::string &stringBuffer);

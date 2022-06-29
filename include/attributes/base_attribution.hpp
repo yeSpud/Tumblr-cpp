@@ -46,7 +46,7 @@ public:
 	 * @param attributionJsonObject
 	 * @return
 	 */
-	static std::shared_ptr<BaseAttribution> getAttribution(const rapidjson::GenericObject<true, rapidjson::Value> attributionJsonObject);
+	static std::shared_ptr<BaseAttribution> getAttribution(const rapidjson::GenericObject<true, rapidjson::Value>& attributionJsonObject);
 
 };
 

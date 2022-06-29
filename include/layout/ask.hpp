@@ -30,17 +30,16 @@ public:
 			}
 		}
 
-		// Attribution
+		// Attribution.
 		if (layoutJsonObject.HasMember("attribution")) {
 			if (layoutJsonObject["attribution"].IsObject()) {
-				const rapidjson::GenericObject attributionObject = layoutJsonObject["attribution"].GetObj();
+				const rapidjson::GenericObject<true, rapidjson::Value> attributionObject = layoutJsonObject["attribution"].GetObj();
 
 				MinimalBlog blog = MinimalBlog(attributionObject);
 				BlogAttribution blogAttribution = BlogAttribution(attributionObject, blog);
 				this->attribution = std::make_shared<BlogAttribution>(blogAttribution);
 			}
 		}
-
 	}
 
 	/**

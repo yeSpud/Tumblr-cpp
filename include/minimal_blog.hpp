@@ -22,7 +22,6 @@ public:
 		TumblrAPI::setStringFromJson(jsonObject, "uuid", this->uuid);
 
 		TumblrAPI::setUInt64FromJson(jsonObject, "updated", this->updated);
-
 	}
 
 	/**

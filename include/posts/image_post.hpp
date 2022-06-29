@@ -11,6 +11,14 @@
 
 class Image : public Content {
 
+private:
+
+	/**
+	 * TODO Documentation
+	 * @param mediaJsonObject
+	 */
+	void setPoster(const rapidjson::GenericObject<true, rapidjson::Value>& mediaJsonObject);
+
 public:
 
 	explicit Image(const rapidjson::GenericObject<true, rapidjson::Value>& contentEntryJson): Content(postType::photo) {
@@ -28,6 +36,8 @@ public:
 						this->media.push_back(mediaObject);
 
 						// Sometimes the poster is in the media object.
+						this->setPoster(mediaJsonObject);
+						/*
 						const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(mediaJsonObject, "poster");
 						if (posterValuePointer != nullptr) {
 							if (posterValuePointer->IsObject()) {
@@ -38,7 +48,7 @@ public:
 								Media posterObject = Media(posterUrl, posterJsonObject);
 								this->poster = std::make_shared<Media>(posterObject);
 							}
-						}
+						}*/
 					}
 				}
 			}
@@ -49,6 +59,8 @@ public:
 		TumblrAPI::setStringFromJson(contentEntryJson, "feedback_token", this->feedback_token);
 
 		// Image poster.
+		this->setPoster(contentEntryJson);
+		/*
 		const rapidjson::Value* posterValuePointer = TumblrAPI::getValuePointerFromJson(contentEntryJson, "poster");
 		if (posterValuePointer != nullptr) {
 			if (posterValuePointer->IsObject()) {
@@ -59,7 +71,7 @@ public:
 				Media posterObject = Media(posterUrl, posterJsonObject);
 				this->poster = std::make_shared<Media>(posterObject);
 			}
-		}
+		}*/
 
 		// Image attribution
 		if (contentEntryJson.HasMember("attribution")) {

@@ -7,16 +7,10 @@
 
 #include <rapidjson/document.h>
 
-/**
- * TODO Documentation
- */
 class Content {
 
 public:
 
-	/**
-	 * TODO Documentation
-	 */
 	enum postType {
 
 		/**
@@ -65,10 +59,6 @@ public:
 		all
 	};
 
-	/**
-	 * TODO Documentation
-	 * @param type
-	 */
 	explicit Content(const Content::postType &type) : type(type){};
 
 	/**

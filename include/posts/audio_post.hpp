@@ -33,7 +33,7 @@ public:
 
 		// TODO Metadata
 
-		// Attribution
+		// Attribution.
 		if (contentJsonObject.HasMember("attribution")) {
 			if (contentJsonObject["attribution"].IsObject()) {
 				this->attribution = BaseAttribution::getAttribution(contentJsonObject["attribution"].GetObj());

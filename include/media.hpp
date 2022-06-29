@@ -15,19 +15,8 @@ public:
 
 		TumblrAPI::setStringFromJson(jsonObject, "type", this->type);
 
-		const rapidjson::Value* widthJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "width");
-		if (widthJsonPointer != nullptr) {
-			if (widthJsonPointer->IsUint()) {
-				this->width = widthJsonPointer->GetUint();
-			}
-		}
-
-		const rapidjson::Value* heightJsonPointer = TumblrAPI::getValuePointerFromJson(jsonObject, "height");
-		if (heightJsonPointer != nullptr) {
-			if (heightJsonPointer->IsUint()) {
-				this->height = heightJsonPointer->GetUint();
-			}
-		}
+		TumblrAPI::setUIntFromJson(jsonObject, "width", this->width);
+		TumblrAPI::setUIntFromJson(jsonObject, "height", this->height);
 
 		TumblrAPI::setBooleanFromJson(jsonObject, "original_dimensions_missing", this->original_dimensions_missing);
 		TumblrAPI::setBooleanFromJson(jsonObject, "cropped", this->cropped);

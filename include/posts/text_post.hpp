@@ -120,7 +120,7 @@ public:
 
 	};
 
-	Text(const rapidjson::Value &contentJson, std::string text) : Content(postType::text), text(std::move(text)) {
+	Text(const rapidjson::GenericObject<true, rapidjson::Value> &contentJson, std::string text) : Content(postType::text), text(std::move(text)) {
 
 		if (contentJson.HasMember("subtype")) {
 			const rapidjson::Value &contentJsonValue = contentJson["subtype"];

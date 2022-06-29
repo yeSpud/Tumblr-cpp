@@ -26,17 +26,6 @@ const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::Gene
 	}
 }
 
-const rapidjson::GenericObject<true, rapidjson::Value>* TumblrAPI::getObjectFromJson(const rapidjson::GenericObject<true, rapidjson::Value> &jsonObject, const char *key) {
-	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
-	if (jsonObjectValuePointer != nullptr) {
-		if (jsonObjectValuePointer->IsObject()) {
-			return reinterpret_cast<const rapidjson::GenericObject<true, rapidjson::Value> *>(jsonObjectValuePointer);
-		}
-	}
-	STATIC_LOGGER->warn("Unable to get JsonObject for key {}", key);
-	return nullptr;
-}
-
 void TumblrAPI::setStringFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key, std::string &stringBuffer) {
 	const rapidjson::Value* jsonObjectValuePointer = TumblrAPI::getValuePointerFromJson(jsonObject, key);
 	if (jsonObjectValuePointer != nullptr) {

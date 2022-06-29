@@ -67,46 +67,32 @@ public:
 		TumblrAPI::setStringFromJson(jsonObject, "original_type", this->original_type);
 		TumblrAPI::setStringFromJson(jsonObject, "blog_name", this->blog_name);
 
-		// Blog
+		// Blog.
 		if (jsonObject.HasMember("blog")) {
 			if (jsonObject["blog"].IsObject()) {
 				this->blog = MinimalBlog(jsonObject["blog"].GetObj());
 			}
 		}
 
-		if (jsonObject.HasMember("id")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["id"];
-			if (jsonObjectValue.IsInt64()) {
-				this->id = jsonObjectValue.GetInt64();
-			}
-		}
+		TumblrAPI::setInt64FromJson(jsonObject, "id", this->id);
 
 		TumblrAPI::setStringFromJson(jsonObject, "id_string", this->id_string);
 		TumblrAPI::setStringFromJson(jsonObject, "genesis_post_id", this->genesis_post_id);
 		TumblrAPI::setStringFromJson(jsonObject, "post_url", this->post_url);
 
-		if (jsonObject.HasMember("timestamp")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["timestamp"];
-			if (jsonObjectValue.IsInt64()) {
-				this->timestamp = jsonObjectValue.GetInt64();
-			}
-		}
+		TumblrAPI::setInt64FromJson(jsonObject, "timestamp", this->timestamp);
 
 		TumblrAPI::setStringFromJson(jsonObject, "slug", this->slug);
 		TumblrAPI::setStringFromJson(jsonObject, "date", this->date);
 
-		if (jsonObject.HasMember("format")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["format"];
-			if (jsonObjectValue.IsString()) {
-				std::string formatString = jsonObjectValue.GetString();
-				if (formatString == "html") {
-					this->format = postFormat::html;
-				} else if (formatString == "markdown") {
-					this->format = postFormat::markdown;
-				} else {
-					this->format = postFormat::none;
-				}
-			}
+		std::string formatString;
+		TumblrAPI::setStringFromJson(jsonObject, "format", formatString);
+		if (formatString == "html") {
+			this->format = postFormat::html;
+		} else if (formatString == "markdown") {
+			this->format = postFormat::markdown;
+		} else {
+			this->format = postFormat::none;
 		}
 
 		TumblrAPI::setStringFromJson(jsonObject, "reblog_key", this->reblog_key);
@@ -123,18 +109,16 @@ public:
 
 		TumblrAPI::setBooleanFromJson(jsonObject, "liked", this->liked);
 
-		if (jsonObject.HasMember("state")) {
-			const rapidjson::Value &jsonObjectValue = jsonObject["state"];
-			std::string stateString = jsonObjectValue.GetString();
-			if (stateString == "queued") {
-				this->state = postState::queued;
-			} else if (stateString == "draft") {
-				this->state = postState::draft;
-			} else if (stateString == "private") {
-				this->state = postState::privat;
-			} else {
-				this->state = postState::published;
-			}
+		std::string stateString;
+		TumblrAPI::setStringFromJson(jsonObject, "state", stateString);
+		if (stateString == "queued") {
+			this->state = postState::queued;
+		} else if (stateString == "draft") {
+			this->state = postState::draft;
+		} else if (stateString == "private") {
+			this->state = postState::privat;
+		} else {
+			this->state = postState::published;
 		}
 
 		TumblrAPI::setUInt64FromJson(jsonObject, "total_posts", this->total_posts);

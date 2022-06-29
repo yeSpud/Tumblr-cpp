@@ -9,8 +9,8 @@ bool Post::operator==(const Post &post) const {
 
     bool postTypeCheck = this->type == post.type;
     bool originalTypeCheck = this->original_type == post.original_type;
-    bool blogNameCheck = this->blog_name == post.blog_name;
-	bool blogCheck;
+    // bool blogNameCheck = this->blog_name == post.blog_name;
+	// bool blogCheck;
     bool idCheck = this->id == post.id;
     bool idStringCheck = this->id_string == post.id_string;
     bool genesisPostIdCheck = this->genesis_post_id == post.genesis_post_id;
@@ -45,15 +45,13 @@ bool Post::operator==(const Post &post) const {
     //bool canReplyCheck;
     //bool displayAvatarCheck;
 
-
 	/*return postTypeCheck && originalTypeCheck && blogNameCheck && idCheck && idStringCheck && genesisPostIdCheck
 	       && postUrlCheck && slugCheck && dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck
 	       && mobileCheck && sourceUrlCheck && sourceTitleCheck && totalPostsCheck && shortUrlCheck && postAuthorCheck &&
 	       isSubmissionCheck && anonymousNameCheck && anonymousEmailCheck && summaryCheck && shouldOpenInLegacyCheck;*/
-    return postTypeCheck && originalTypeCheck && blogNameCheck && idCheck && idStringCheck && genesisPostIdCheck
-           && postUrlCheck && slugCheck && dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck
-           && mobileCheck && sourceUrlCheck && sourceTitleCheck && totalPostsCheck && shortUrlCheck && summaryCheck &&
-		   shouldOpenInLegacyCheck;
+    return postTypeCheck && originalTypeCheck && idCheck && idStringCheck && genesisPostIdCheck && postUrlCheck && slugCheck
+			&& dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck && mobileCheck && sourceUrlCheck
+			&& sourceTitleCheck && totalPostsCheck && shortUrlCheck && summaryCheck && shouldOpenInLegacyCheck;
 
 }
 
@@ -61,8 +59,8 @@ bool Post::operator!=(const Post &post) const {
 
 	bool postTypeCheck = this->type != post.type;
 	bool originalTypeCheck = this->original_type != post.original_type;
-	bool blogNameCheck = this->blog_name != post.blog_name;
-	bool blogCheck;
+	//bool blogNameCheck = this->blog_name != post.blog_name;
+	//bool blogCheck;
 	bool idCheck = this->id != post.id;
 	bool idStringCheck = this->id_string != post.id_string;
 	bool genesisPostIdCheck = this->genesis_post_id != post.genesis_post_id;
@@ -101,10 +99,9 @@ bool Post::operator!=(const Post &post) const {
 		   && postUrlCheck && slugCheck && dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck
 		   && mobileCheck && sourceUrlCheck && sourceTitleCheck && totalPostsCheck && shortUrlCheck && postAuthorCheck &&
 		   isSubmissionCheck && anonymousNameCheck && anonymousEmailCheck && summaryCheck && shouldOpenInLegacyCheck;*/
-	return postTypeCheck && originalTypeCheck && blogNameCheck && idCheck && idStringCheck && genesisPostIdCheck
-	       && postUrlCheck && slugCheck && dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck
-	       && mobileCheck && sourceUrlCheck && sourceTitleCheck && totalPostsCheck && shortUrlCheck && summaryCheck &&
-		   shouldOpenInLegacyCheck;
+	return postTypeCheck && originalTypeCheck && idCheck && idStringCheck && genesisPostIdCheck && postUrlCheck && slugCheck
+			&& dateCheck && timestampCheck && formatCheck && reblogKeyCheck && bookmarkletCheck && mobileCheck && sourceUrlCheck
+			&& sourceTitleCheck && totalPostsCheck && shortUrlCheck && summaryCheck && shouldOpenInLegacyCheck;
 }
 
 void Post::populateTrail(const rapidjson::GenericArray<true, rapidjson::Value> &trailJsonArray) {

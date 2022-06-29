@@ -17,7 +17,7 @@ private:
 
 public:
 
-	explicit BlogTest(TumblrAPI api): tumblrApi(api){};
+	explicit BlogTest(TumblrAPI api): tumblrApi(std::move(api)){};
 
 	~BlogTest() = default;
 

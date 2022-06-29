@@ -32,14 +32,11 @@ public:
 
 		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 || response.status_code == 307 || response.status_code == 308) {
 
-			rapidjson::GenericObject responseJsonObject = this->api.parseJsonResponse(response.text);
+			const rapidjson::GenericObject responseJsonObject = this->api.parseJsonResponse(response.text);
 
-			const rapidjson::Value* blogJsonPointer = TumblrAPI::getValuePointerFromJson(responseJsonObject, "blog");
-
-			if (blogJsonPointer != nullptr) {
-
-				if (blogJsonPointer->IsObject()) {
-					const rapidjson::GenericObject blogObject = blogJsonPointer->GetObj();
+			if (responseJsonObject.HasMember("blog")) {
+				if (responseJsonObject["blog"].IsObject()) {
+					rapidjson::GenericObject<true, rapidjson::Value> blogObject = responseJsonObject["blog"].GetObj();
 
 					TumblrAPI::setBooleanFromJson(blogObject, "ask", this->ask);
 					TumblrAPI::setBooleanFromJson(blogObject, "ask_anon", this->ask_anon);
@@ -83,10 +80,10 @@ public:
 					TumblrAPI::setBooleanFromJson(blogObject, "subscribed", this->subscribed);
 
 					// Theme
-					const rapidjson::Value* themeJsonPointer = TumblrAPI::getValuePointerFromJson(blogObject, "theme");
-					if (themeJsonPointer != nullptr) {
-						if (themeJsonPointer->IsObject()) {
-							this->theme = std::make_unique<Theme>(Theme(themeJsonPointer->GetObj()));
+					if (blogObject.HasMember("theme")) {
+						if (blogObject["theme"].IsObject()) {
+							Theme t = Theme(blogObject["theme"].GetObj());
+							this->theme = std::make_unique<Theme>(t);
 						}
 					}
 
@@ -107,7 +104,11 @@ public:
 
 					TumblrAPI::setBooleanFromJson(blogObject, "is_blocked_from_primary", this->is_blocked_from_primary);
 					TumblrAPI::setBooleanFromJson(blogObject, "is_optout_ads", this->is_optout_ads);
+				} else {
+					// FIXME is not object
 				}
+			} else {
+				// FIXME Missing object
 			}
 		} else  {
 			std::string errorString = "Response from API returned an error: " + response.error.message + "\n" + response.reason;

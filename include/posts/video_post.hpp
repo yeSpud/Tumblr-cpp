@@ -24,10 +24,9 @@ public:
 		TumblrAPI::setStringFromJson(contentJsonObject, "embed_html", this->embed_html);
 
 		// iFrame.
-		const rapidjson::Value* iFrameJsonPointer = TumblrAPI::getValuePointerFromJson(contentJsonObject, "embed_iframe");
-		if (iFrameJsonPointer != nullptr) {
-			if (iFrameJsonPointer->IsObject()) {
-				rapidjson::GenericObject iFrameJsonObject = iFrameJsonPointer->GetObj();
+		if (contentJsonObject.HasMember("embed_iframe")) {
+			if (contentJsonObject["embed_iframe"].IsObject()) {
+				const rapidjson::GenericObject<true, rapidjson::Value> iFrameJsonObject = contentJsonObject["embed_iframe"].GetObj();
 
 				iFrame iframeObject;
 
@@ -47,7 +46,7 @@ public:
 
 		// TODO Metadata
 
-		// Attribution
+		// Attribution.
 		if (contentJsonObject.HasMember("attribution")) {
 			if (contentJsonObject["attribution"].IsObject()) {
 				this->attribution = BaseAttribution::getAttribution(contentJsonObject["attribution"].GetObj());
