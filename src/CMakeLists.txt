@@ -1,18 +1,14 @@
 file(GLOB HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.hpp")
-file(GLOB NPF_HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/npf/*.hpp")
-file(GLOB CONTENT_HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/npf/content/*.hpp")
-file(GLOB LAYOUT_HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/npf/layout/*.hpp")
-
-file(GLOB RAPIDJSON_HEADERS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/rapidjson/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/error/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/internal/*.h" "${PROJECT_SOURCE_DIR}/include/rapidjson/msinttypes/*.h")
+file(GLOB ATTRIBUTE_HEADERS CONFIGURE_DEPENDS "../include/attributes/*.hpp")
+file(GLOB POST_HEADERS CONFIGURE_DEPENDS "../include/posts/*.hpp")
+file(GLOB LAYOUT_HEADERS CONFIGURE_DEPENDS "../include/layout/*.hpp")
 
 file(GLOB SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.cpp")
-file(GLOB NPF_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/npf/*.cpp")
-file(GLOB CONTENT_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/npf/content/*.cpp")
-file(GLOB LAYOUT_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/npf/layout/*.cpp")
 
-add_library(TumblrAPI STATIC ${HEADERS} ${NPF_HEADERS} ${CONTENT_HEADERS} ${LAYOUT_HEADERS} ${SOURCES} ${NPF_SOURCES} ${CONTENT_SOURCES} ${LAYOUT_SOURCES} ${RAPIDJSON_HEADERS})
+add_library(TumblrAPI STATIC ${HEADERS} ${ATTRIBUTE_HEADERS} ${POST_HEADERS} ${CONTENT_HEADERS} ${LAYOUT_HEADERS} ${SOURCES})
 
 add_library(TumblrAPI::TumblrAPI ALIAS TumblrAPI)
+add_dependencies(TumblrAPI rapidjson)
 
 target_include_directories(TumblrAPI PUBLIC ../include)
 

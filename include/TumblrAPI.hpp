@@ -5,7 +5,10 @@
 #ifndef TUMBLRAPI_TUMBLRAPI_HPP
 #define TUMBLRAPI_TUMBLRAPI_HPP
 
-#include "cpr/cpr.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <cpr/cpr.h>
+#include <rapidjson/document.h>
 
 /**
  * TODO Documentation
@@ -19,6 +22,90 @@ private:
 	 */
 	const std::string APIKey;
 
+	//const auto oAuth; TODO
+
+public:
+
+	/**
+	 * Logger for the TumblrAPI.
+	 */
+	std::shared_ptr<spdlog::logger> logger;
+
+	/**
+	 * TODO Documentation
+	 * @param token
+	 */
+	explicit TumblrAPI(std::string token): APIKey(std::move(token)) {
+
+		// Setup the logger for fetching TumblrAPI stuff.
+		this->logger = spdlog::basic_logger_mt("TumblrAPI Logger", "TumblrAPI-log.txt");
+		this->logger->flush_on(spdlog::level::info);
+		this->logger->info("Finished setting up logger for Tumblr API");
+	};
+
+	/**
+	 * TODO Documentation
+	 * @param json
+	 */
+	[[deprecated("For debugging only")]]
+	static void printJson(const rapidjson::Value& json);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @return
+	 */
+	static const rapidjson::Value* getValuePointerFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char *key);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param stringBuffer
+	 */
+	static void setStringFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, std::string &stringBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param booleanBuffer
+	 */
+	static void setBooleanFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, bool &booleanBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param uIntBuffer
+	 */
+	static void setUIntFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, unsigned int &uIntBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param intBuffer
+	 */
+	static void setIntFromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, int &intBuffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param numberBuffer
+	 */
+	static void setUInt64FromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, unsigned long long &uInt64Buffer);
+
+	/**
+	 * TODO Documentation
+	 * @param jsonObject
+	 * @param key
+	 * @param int64Buffer
+	 */
+	static void setInt64FromJson(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject, const char* key, long long &int64Buffer);
+
 	/**
 	 * TODO Documentation
 	 * @param endpoint
@@ -26,56 +113,15 @@ private:
 	 * @param optionalParams
 	 * @return
 	 */
-	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "");
+	cpr::Response sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams = "") const;
 
-public:
-
-	/**
-	 * TODO Documentation
-	 * @param token
-	 */
-	explicit TumblrAPI(std::string token): APIKey(std::move(token)){};
-
-	/**
-	 * This method returns general information about the blog, such as the title, number of posts,
-	 * and other high-level data as a JSON object.
-	 * @param blogURL
-	 * @return
-	 */
-	cpr::Response getBlogInfoJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/info", true); };
-
-	/**
-	 * You can get a blog's avatar in 9 different sizes. The default size is 64x64.
-	 * @param blogURL
-	 * @return
-	 */
-	cpr::Response getBlogAvatarJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/avatar",
-	                                                                                    false); };
-
-	// TODO Blog blocks (both get, post, and delete)
-
-	/**
-	 * This method can be used to retrieve the publicly exposed likes from a blog.
-	 * @param blogURL
-	 * @return
-	 */
-	cpr::Response getBlogLikesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/likes",
-	                                                                                   true); };
-
-	// TODO Blog following
-
-	// TODO Blog followers
-
-	// TODO Blog followed by
 
 	/**
 	 * TODO Documentation
-	 * @param blogURL
-	 * @param number
+	 * @param jsonString
 	 * @return
 	 */
-	cpr::Response getPostsJson(const std::string& blogURL, const unsigned int number) {return sendGetRequest(
-				"blog/" + blogURL + "/posts", true, "&npf=true&limit=" + std::to_string(number));};
+	rapidjson::GenericObject<true, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
 
 	// TODO Post queue
 
@@ -100,7 +146,7 @@ public:
 	 * @param blogURL
 	 * @return
 	 */
-	cpr::Response getNotesJson(const std::string& blogURL) { return sendGetRequest("blog/" + blogURL + "/notes", true); };
+	cpr::Response getNotesJson(const std::string& blogURL) const { return sendGetRequest("blog/" + blogURL + "/notes", true); };
 
 	// TODO User info
 

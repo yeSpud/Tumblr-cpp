@@ -8,7 +8,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch2/catch.hpp>
 #include "TumblrAPI.hpp"
-#include "blog.hpp"
+#include "blogTest.hpp"
 
 std::unique_ptr<TumblrAPI> api;
 
@@ -33,24 +33,51 @@ int main(int argc, char* argv[]) {
 	return session.run();
 }
 
-TEST_CASE("Test Blog Json", "[TumblrAPI]") {
+TEST_CASE("Blog Tests", "[TumblrAPI]") {
 
-	SECTION("Blog Info") {
-		cpr::Response response = api->getBlogInfoJson("david.tumblr.com");
-		REQUIRE(response.status_code == 200);
-		REQUIRE(!response.text.empty());
-		Blog blog = Blog::generateBlog(response.text.c_str());
-		// TODO Test blog
-	}
+    BlogTest blogTest = BlogTest(*api);
 
-	SECTION("Blog Avatar") {
-		cpr::Response response = api->getBlogAvatarJson("david.tumblr.com");
-		REQUIRE(response.status_code == 200);
-		REQUIRE(!response.text.empty());
-		// It returns an image...
-		// TODO Test blog avatar
-	}
+    // Test the blog info.
+    /*
+     {
+        "blog": {
+        "ask": true,
+        "ask_anon": false,
+        "ask_page_title": "Ask me anything",
+        "asks_allow_media": true,
+        "can_chat": false,
+        "can_subscribe": false,
+        "description": "Est. 2006",
+        "is_nsfw": false,
+        "name": "david",
+        "posts": 4955,
+        "share_likes": false,
+        "subscribed": false,
+        "title": "David's Log",
+        "total_posts": 4955,
+        "updated": 1591035760,
+        "url": "https://www.davidslog.com/",
+        "uuid": "t:cCQ0A8KpxS8of3Op9-6PJA",
+        "is_optout_ads": true
+        }
+    }
+     */
+    blogTest.testBlog("david.tumblr.com", true, false, "Ask me anything",
+                      true, false, false, "Est. 2006", false,
+                      "david", 4955, 0, false, false, "David's Log",
+                      4955, 1591035760, "", "", "https://www.davidslog.com/",
+                      "t:cCQ0A8KpxS8of3Op9-6PJA", false, true);
 
+    // Test get avatar.
+    blogTest.testGetAvatar();
+
+    // Test get likes.
+    blogTest.testGetLikes();
+
+    // Test getting blog posts.
+    blogTest.testGetPost();
+
+    // TODO Test other blog functions
 }
 
 //#endif //TUMBLRAPI_TEST_CPP

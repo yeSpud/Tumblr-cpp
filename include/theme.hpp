@@ -5,8 +5,7 @@
 #ifndef TUMBLRAPI_THEME_HPP
 #define TUMBLRAPI_THEME_HPP
 
-#include <string>
-#include "rapidjson/document.h"
+#include "TumblrAPI.hpp"
 
 /**
 * The blog's general theme options, which may not be useful if the blog uses a custom theme.
@@ -16,7 +15,33 @@ class Theme {
 
 public:
 
-	~Theme();
+	explicit Theme(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject) {
+
+		TumblrAPI::setStringFromJson(jsonObject, "avatar_shape", this->avatar_shape);
+		TumblrAPI::setStringFromJson(jsonObject, "background_color", this->background_color);
+		TumblrAPI::setStringFromJson(jsonObject, "body_font", this->body_font);
+
+		// TODO Header bounds
+
+		TumblrAPI::setStringFromJson(jsonObject, "header_image", this->header_image);
+		TumblrAPI::setStringFromJson(jsonObject, "header_image_focused", this->header_image_focused);
+		TumblrAPI::setStringFromJson(jsonObject, "header_image_poster", this->header_image_poster);
+		TumblrAPI::setStringFromJson(jsonObject, "header_image_scaled", this->header_image_scaled);
+
+		TumblrAPI::setBooleanFromJson(jsonObject, "header_stretch", this->header_stretch);
+
+		TumblrAPI::setStringFromJson(jsonObject, "link_color", this->link_color);
+
+		TumblrAPI::setBooleanFromJson(jsonObject, "show_avatar", this->show_avatar);
+		TumblrAPI::setBooleanFromJson(jsonObject, "show_description", this->show_description);
+		TumblrAPI::setBooleanFromJson(jsonObject, "show_header_image", this->show_header_image);
+		TumblrAPI::setBooleanFromJson(jsonObject, "show_title", this->show_title);
+
+		TumblrAPI::setStringFromJson(jsonObject, "title_color", this->title_color);
+		TumblrAPI::setStringFromJson(jsonObject, "title_font", this->title_font);
+		TumblrAPI::setStringFromJson(jsonObject, "title_font_weight", this->title_font_weight);
+
+	}
 
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
@@ -105,13 +130,6 @@ public:
 	 * The intended font weight to use when displaying the blog's title.
 	 */
 	std::string title_font_weight;
-
-	/**
-	 * TODO Documentation
-	 * @param entry
-	 * @return
-	 */
-	static Theme generateTheme(const rapidjson::GenericObject<false, rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> &entry);
 
 };
 
