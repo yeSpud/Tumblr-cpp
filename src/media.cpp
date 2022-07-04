@@ -22,7 +22,8 @@ void Media::setMediaPointer(const rapidjson::GenericObject<true, rapidjson::Valu
 		setPointer(*mediaValuePointer, mediaBuffer);
 		return;
 	}
-	// TODO Log warning
+
+	spdlog::get("TumblrAPI Logger")->warn("Unable to set media pointer.");
 }
 
 void Media::setPosterPointer(const rapidjson::GenericObject<true, rapidjson::Value>& contentJsonObject, std::shared_ptr<Media> &posterBuffer) {
@@ -36,5 +37,6 @@ void Media::setPosterPointer(const rapidjson::GenericObject<true, rapidjson::Val
 			return;
 		}
 	}
-	// TODO Log warning
+
+	spdlog::get("TumblrAPI Logger")->warn("Unable to set poster pointer.");
 }

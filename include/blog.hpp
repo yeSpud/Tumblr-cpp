@@ -105,10 +105,14 @@ public:
 					TumblrAPI::setBooleanFromJson(blogObject, "is_blocked_from_primary", this->is_blocked_from_primary);
 					TumblrAPI::setBooleanFromJson(blogObject, "is_optout_ads", this->is_optout_ads);
 				} else {
-					// FIXME is not object
+					std::string errorString = "Blog section is not a JSON Object!!";
+					this->api.logger->error(errorString);
+					throw std::runtime_error(errorString);
 				}
 			} else {
-				// FIXME Missing object
+				std::string errorString = "Response from API does not contain a blog section!";
+				this->api.logger->error(errorString);
+				throw std::runtime_error(errorString);
 			}
 		} else  {
 			std::string errorString = "Response from API returned an error: " + response.error.message + "\n" + response.reason;

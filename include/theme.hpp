@@ -17,7 +17,16 @@ public:
 
 	explicit Theme(const rapidjson::GenericObject<true, rapidjson::Value>& jsonObject) {
 
-		TumblrAPI::setStringFromJson(jsonObject, "avatar_shape", this->avatar_shape);
+		std::string avatarShapeString;
+		TumblrAPI::setStringFromJson(jsonObject, "avatar_shape", avatarShapeString);
+		if (avatarShapeString == "circle") {
+			this->avatar_shape = Theme::shape::circle;
+		} else if (avatarShapeString == "square") {
+			this->avatar_shape = Theme::shape::square;
+		} else {
+			spdlog::get("TumblrAPI Logger")->warn("Unknown avatar shape: {}", avatarShapeString);
+		}
+
 		TumblrAPI::setStringFromJson(jsonObject, "background_color", this->background_color);
 		TumblrAPI::setStringFromJson(jsonObject, "body_font", this->body_font);
 
@@ -43,10 +52,22 @@ public:
 
 	}
 
+	enum shape {
+		/**
+		 * TODO Documentation
+		 */
+		circle,
+
+		/**
+		 * TODO Documentation
+		 */
+		square
+	};
+
 	/**
 	 * "Circle" or "square", this is the shape of the mask over the user's avatar.
 	 */
-	std::string avatar_shape; // TODO Convert to enum
+	shape avatar_shape;
 
 	/**
 	 * The intended hex color used for the blog's background color.

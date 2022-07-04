@@ -16,7 +16,7 @@ MinimalBlog getBlog(const rapidjson::GenericObject<true, rapidjson::Value>& attr
 		}
 	}
 
-	// TODO Log
+	spdlog::get("TumblrAPI Logger")->warn("Unable to get blog from attribution!");
 	return {};
 }
 

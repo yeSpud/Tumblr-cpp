@@ -32,8 +32,8 @@ public:
 
 				TumblrAPI::setStringFromJson(iFrameJsonObject, "url", iframeObject.url);
 
-				TumblrAPI::setIntFromJson(iFrameJsonObject, "width", iframeObject.width);
-				TumblrAPI::setIntFromJson(iFrameJsonObject, "height", iframeObject.height);
+				TumblrAPI::setUIntFromJson(iFrameJsonObject, "width", iframeObject.width);
+				TumblrAPI::setUIntFromJson(iFrameJsonObject, "height", iframeObject.height);
 
 				this->iframe = iframeObject;
 			}
@@ -86,12 +86,12 @@ public:
 		/**
 		 * The width of the video iframe. Default is 540.
 		 */
-		int width = 540; // TODO Change to unsigned int
+		unsigned int width = 540;
 
 		/**
 		 * The height of the video iframe. Default is 405.
 		 */
-		int height = 405; // TODO Change to unsigned int
+		unsigned int height = 405;
 
 	};
 

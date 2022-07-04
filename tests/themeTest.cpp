@@ -6,7 +6,7 @@
 #include "themeTest.hpp"
 #include <iostream>
 
-void ThemeTest::testTheme(const Theme &theme, const std::string &avatar_shape, const std::string &background_color,
+void ThemeTest::testTheme(const Theme &theme, const Theme::shape &avatar_shape, const std::string &background_color,
                           const std::string &body_font, const std::string &header_image,
                           const std::string &header_image_focused, const std::string &header_image_poster,
                           const std::string &header_image_scaled, const bool &header_stretch,

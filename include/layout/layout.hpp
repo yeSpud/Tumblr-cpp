@@ -8,9 +8,6 @@
 #include "rapidjson/document.h"
 #include <vector>
 
-/**
- * TODO Documentation
- */
 class Layout {
 
 protected:

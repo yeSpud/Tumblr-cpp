@@ -92,7 +92,7 @@ void TumblrAPI::setInt64FromJson(const rapidjson::GenericObject<true, rapidjson:
 	}
 }
 
-cpr::Response TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) const { // TODO Comments
+cpr::Response TumblrAPI::sendGetRequest(const std::string &endpoint, bool authRequired, const std::string &optionalParams) const {
 
 	// Format the URL to go to for retrieving data.
 	std::string url = "https://api.tumblr.com/v2/" + endpoint;
