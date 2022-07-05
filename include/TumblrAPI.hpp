@@ -123,29 +123,12 @@ public:
 	 */
 	rapidjson::GenericObject<true, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
 
-	// TODO Post queue
-
-	// TODO Reorder post queue
-
-	// TODO Shuffle queued posts
-
-	// TODO Draft posts
-
-	// TODO Post submissions
-
-	// TODO Notifications
-
-	// TODO Create new posts
-
-	// TODO Fetching and editing posts
-
-	// TODO Deleting posts
-
 	/**
 	 * Get notes for a specific Post.
 	 * @param blogURL
 	 * @return
 	 */
+	 [[deprecated("Use the get notes method in blog.hpp")]]
 	cpr::Response getNotesJson(const std::string& blogURL) const { return sendGetRequest("blog/" + blogURL + "/notes", true); };
 
 	// TODO User info

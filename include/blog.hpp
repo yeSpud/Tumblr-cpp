@@ -232,7 +232,13 @@ public:
 	 */
 	std::string getAvatar(const unsigned short int &size = 64);
 
-	// TODO Blog blocks (both get, post, and delete)
+	// TODO Get blog blocks - requires oAuth
+
+	// TODO Block a blog - requires oAuth
+
+	// TODO Bulk block blogs - requires oAuth
+
+	// TODO Remove block block
 
 	struct blogLikes {
 
@@ -257,11 +263,11 @@ public:
 	 */
 	blogLikes getLikes(const unsigned short int &limit = 20, const unsigned short int &offset = 0, const long long &before = 0, const long long &after = 0);
 
-	// TODO Blog following
+	// TODO Get blog following - requires oAuth
 
-	// TODO Blog followers
+	// TODO Get blog followers - requires oAuth
 
-	// TODO Blog followed by
+	// TODO Get blog followed by - requires oAuth
 
 
     /**
@@ -281,6 +287,29 @@ public:
      * @return
      */
     std::vector<Post> getPosts(const Content::postType &type = Content::postType::all, const unsigned long long &id = 0, const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0, const bool &reblog_info = false, const bool &notes_info = false, const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0);
+
+	// TODO Get post queue - requires oAuth
+
+	// TODO Reorder post queue - requires oAuth
+
+	// TODO Shuffle queued posts = requires oAuth
+
+	// TODO Draft a post - requires oAuth
+
+	// TODO Get submission post - requires oAuth
+
+	// TODO Get notifications - requires oAuth
+
+	// TODO Create / reblog post - requires oAuth
+
+	// TODO Get post (not to be confused with getPosts) - requires oAuth
+
+	// TODO Edit post - requires oAuth
+
+	// TODO Delete post - requires oAuth
+
+	// TODO Get Notes - requires api key
+
 
 };
 

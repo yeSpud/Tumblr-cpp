@@ -19,25 +19,29 @@
 #### [`theme.hpp`](/include/theme.hpp)
 * Header_bounds field needs to be implemented.
 
+#### [`blog.hpp`](/include/blog.hpp)
+* Getting the post queue needs to be implemented. Requires oAuth.
+* Reordering the post queue needs to be implemented. Requires oAuth.
+* Shuffling the queued posts needs to be implemented. Requires oAuth.
+* Drafting posts needs to be implemented. Requires oAuth.
+* Getting post submissions needs to be implemented. Requires oAuth.
+* Getting notifications needs to be implemented. Requires oAuth.
+* Creating new posts needs to be implemented. Requires oAuth.
+* Fetching posts needs to be implemented. Requires oAuth.
+* Editing posts needs to be implemented. Requires oAuth.
+* Deleting posts needs to be implemented. Requires oAuth.
+* Getting notes needs to be implemented. Requires API key.
+
 #### [`TumblrAPI.hpp`](/include/TumblrAPI.hpp)
 * oAuth needs to be implemented.
-* Getting the post queue needs to be implemented.
-* Reordering the post queue needs to be implemented.
-* Shuffling the queued posts needs to be implemented.
-* Drafting posts needs to be implemented.
-* Getting post submissions needs to be implemented.
-* Getting notifications needs to be implemented.
-* Creating new posts needs to be implemented.
-* Fetching and editing posts needs to be implemented.
-* Deleting posts needs to be implemented.
-* Getting user info needs to be implemented.
-* Getting the user dashboard needs to be implemented.
+* Getting user info needs to be implemented. Requires oAuth.
+* Getting the user dashboard needs to be implemented. Requires oAuth.
 * Getting followers and following needs to be implemented.
-* Unfollowing a user needs to be implemented.
-* Liking a users post needs to be implemented.
-* Unliking a users post needs to be implemented.
-* Filtering content needs to be implemented.
-* Tagged method needs to be implemented.
+* Unfollowing a user needs to be implemented. Requires oAuth.
+* Liking a users post needs to be implemented. Requires oAuth.
+* Unliking a users post needs to be implemented. Requires oAuth.
+* Filtering content needs to be implemented. Requires oAuth.
+* Tagged method needs to be implemented. Can require oAuth.
 
 ### Source files
 
