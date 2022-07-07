@@ -13,8 +13,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 		cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/avatar/",
 														  false, std::to_string(size));
 
-		if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
-		    response.status_code == 307 || response.status_code == 308) {
+		if (TumblrAPI::responseOk(response.status_code)) {
 			return response.url.str();
 		} else {
 			std::string errorString ="Response from API returned an error: " + response.error.message + '\n' + response.reason;
@@ -49,8 +48,7 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 
 			cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/likes",
 															  true); // TODO Implement options
-			if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||
-			    response.status_code == 307 || response.status_code == 308) {
+			if (TumblrAPI::responseOk(response.status_code)) {
 				rapidjson::GenericObject jsonResponse = this->api.parseJsonResponse(response.text);
 
 				// FIXME parse likes.
@@ -141,11 +139,10 @@ std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned lo
 		additionalOptions += "&before=" + std::to_string(before);
 	}
 
-	cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/posts",
-													  true,additionalOptions);
+	cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/posts",true,
+													  additionalOptions);
 
-	if (response.status_code == 200 || response.status_code == 301 || response.status_code == 302 ||response.status_code == 307
-	|| response.status_code == 308) {
+	if (TumblrAPI::responseOk(response.status_code)) {
 
 		const rapidjson::GenericObject jsonResponse = this->api.parseJsonResponse(response.text);
 
@@ -187,4 +184,82 @@ std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned lo
 		this->api.logger->warn("Unable to get posts from blog ({0}): {1}", response.status_code, response.reason);
 		return {};
 	}
+}
+
+NoteResponse Blog::getNotes(long long id, unsigned long long before_timestamp, Note::mode mode) {
+
+	std::string additionalOptions = "&id=" + std::to_string(id);
+
+	if (before_timestamp != 0) {
+		additionalOptions += "&before_timestamp=" + std::to_string(before_timestamp);
+	}
+
+	switch (mode) {
+
+		case Note::all:
+			additionalOptions += "&mode=all";
+			break;
+		case Note::likes:
+			additionalOptions += "&mode=likes";
+			break;
+		case Note::conversation:
+			additionalOptions += "&mode=conversation";
+			break;
+		case Note::rollup:
+			additionalOptions += "&mode=rollup";
+			break;
+		case Note::reblogs_with_tags:
+			additionalOptions += "&mode=reblog_with_tags";
+			break;
+	}
+
+	cpr::Response response = this->api.sendGetRequest("blog/" + this->blogIdentifier + "/notes", true,
+									additionalOptions);
+
+	if (TumblrAPI::responseOk(response.status_code)) {
+
+		const rapidjson::GenericObject jsonResponse = this->api.parseJsonResponse(response.text);
+
+		NoteResponse noteResponse;
+
+		// Populate notes field.
+		if (jsonResponse.HasMember("notes")) {
+			if (jsonResponse["notes"].IsArray()) {
+				for (const rapidjson::Value& arrayEntry : jsonResponse["notes"].GetArray()) {
+					if (arrayEntry.IsObject()) {
+
+						Note note = Note(arrayEntry.GetObj());
+						noteResponse.notes.push_back(note);
+					}
+				}
+			}
+		}
+
+		// Populate rollup notes field.
+		if (jsonResponse.HasMember("rollup_notes")) {
+			if (jsonResponse["rollup_notes"].IsArray()) {
+				for (const rapidjson::Value& arrayEntry : jsonResponse["rollup_notes"].GetArray()) {
+					if (arrayEntry.IsObject()) {
+
+						Note rollupNote = Note(arrayEntry.GetObj());
+						noteResponse.rollup_notes.push_back(rollupNote);
+					}
+				}
+			}
+		}
+
+		TumblrAPI::setUInt64FromJson(jsonResponse, "total_notes", noteResponse.total_notes);
+		TumblrAPI::setUInt64FromJson(jsonResponse, "total_likes", noteResponse.total_likes);
+		TumblrAPI::setUInt64FromJson(jsonResponse, "total_reblogs", noteResponse.total_reblogs);
+
+		// TODO _links
+
+		return noteResponse;
+
+	} else {
+
+		this->api.logger->warn("Unable to get notes from post ({0}): {1}", response.status_code, response.reason);
+		return {};
+	}
+
 }

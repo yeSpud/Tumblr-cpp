@@ -36,10 +36,10 @@ void BlogTest::testBlog(const std::string& blogIdentifier, const bool &ask, cons
 	REQUIRE(localBlog->updated == updated);
 	REQUIRE(localBlog->timezone == tz);
 	REQUIRE(localBlog->timezone_offset == timezone_offset);
-	#pragma clang diagnostic push
-	#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	REQUIRE(localBlog->url == url);
-	#pragma clang diagnostic pop
+#pragma clang diagnostic pop
 	REQUIRE(localBlog->uuid == uuid);
 	REQUIRE(localBlog->is_blocked_from_primary == is_blocked_from_primary);
 	REQUIRE(localBlog->is_optout_ads == is_optout_ads);
@@ -138,6 +138,16 @@ void BlogTest::testGetPost() {
 	testPosts(audioPost);
 
     std::cout << "Tested retrieving blog posts successfully!" << std::endl;
+}
+
+void BlogTest::testGetNotes() {
+
+	std::cout << "\nTesting retrieving blog notes..." << std::endl;
+
+	REQUIRE(this->blog != nullptr);
+
+	NoteResponse noteResponse = this->blog->getNotes();
+
 }
 
 // TODO Rest of tests

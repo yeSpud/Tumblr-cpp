@@ -6,9 +6,9 @@
 #define TUMBLRAPI_BLOG_HPP
 
 #include "minimal_blog.hpp"
-#include "theme.hpp"
 #include "post.hpp"
 #include "media.hpp"
+#include "note.hpp"
 
 class Blog : public MinimalBlog {
 
@@ -309,6 +309,15 @@ public:
 	// TODO Delete post - requires oAuth
 
 	// TODO Get Notes - requires api key
+	/**
+	 * Get notes for a specific Post.
+	 * @param id The ID of the post to fetch notes for.
+	 * @param before_timestamp Fetch notes created before this timestamp, for pagination.
+	 * This is a unix timestamp in seconds precision, but microsecond precision for conversation mode.
+	 * @param mode 	The response formatting mode.
+	 * @return The notes for the Post.
+	 */
+	NoteResponse getNotes(long long id, unsigned long long before_timestamp = 0, Note::mode mode = Note::mode::all);
 
 
 };

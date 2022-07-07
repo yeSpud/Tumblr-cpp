@@ -69,6 +69,11 @@ public:
      */
     void testGetPost();
 
+	/**
+	 * TODO Documentation
+	 */
+	void testGetNotes();
+
 };
 
 #endif //TUMBLRAPI_BLOGTEST_HPP

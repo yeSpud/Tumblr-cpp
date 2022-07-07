@@ -10,6 +10,8 @@
 #include <cpr/cpr.h>
 #include <rapidjson/document.h>
 
+#define TUMBLR_LOGGER spdlog::get("TumblrAPI Logger")
+
 /**
  * TODO Documentation
  */
@@ -124,12 +126,11 @@ public:
 	rapidjson::GenericObject<true, rapidjson::Value> parseJsonResponse(const std::string& jsonString) const;
 
 	/**
-	 * Get notes for a specific Post.
-	 * @param blogURL
+	 * TODO Documentation
+	 * @param responseCode
 	 * @return
 	 */
-	 [[deprecated("Use the get notes method in blog.hpp")]]
-	cpr::Response getNotesJson(const std::string& blogURL) const { return sendGetRequest("blog/" + blogURL + "/notes", true); };
+	static bool responseOk(long responseCode);
 
 	// TODO User info
 

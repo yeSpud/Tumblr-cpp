@@ -6,8 +6,6 @@
 #include <rapidjson/writer.h>
 #include <iostream>
 
-#define STATIC_LOGGER spdlog::get("TumblrAPI Logger")
-
 void TumblrAPI::printJson(const rapidjson::Value& json) {
 
 	rapidjson::StringBuffer stringBuffer;
@@ -21,7 +19,7 @@ const rapidjson::Value* TumblrAPI::getValuePointerFromJson(const rapidjson::Gene
 	if (jsonObject.HasMember(key)) {
 		return &jsonObject[key];
 	} else {
-		STATIC_LOGGER->warn("JsonObject is missing value for key {}", key);
+		TUMBLR_LOGGER->warn("JsonObject is missing value for key {}", key);
 		return nullptr;
 	}
 }
@@ -32,7 +30,7 @@ void TumblrAPI::setStringFromJson(const rapidjson::GenericObject<true, rapidjson
 		if (jsonObjectValuePointer->IsString()) {
 			stringBuffer = jsonObjectValuePointer->GetString();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has value for key {}, but that value is not a string!", key);
+			TUMBLR_LOGGER->warn("JsonObject has value for key {}, but that value is not a string!", key);
 		}
 	}
 }
@@ -43,7 +41,7 @@ void TumblrAPI::setBooleanFromJson(const rapidjson::GenericObject<true, rapidjso
 		if (jsonObjectValuePointer->IsBool()) {
 			booleanBuffer = jsonObjectValuePointer->GetBool();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has value for key {}, but that value is not a boolean!", key);
+			TUMBLR_LOGGER->warn("JsonObject has value for key {}, but that value is not a boolean!", key);
 		}
 	}
 }
@@ -54,7 +52,7 @@ void TumblrAPI::setUIntFromJson(const rapidjson::GenericObject<true, rapidjson::
 		if (jsonValuePointer->IsUint()) {
 			uIntBuffer = jsonValuePointer->GetUint();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has valye for key {}, but that value is not an unsigned int!", key);
+			TUMBLR_LOGGER->warn("JsonObject has valye for key {}, but that value is not an unsigned int!", key);
 		}
 	}
 }
@@ -65,7 +63,7 @@ void TumblrAPI::setIntFromJson(const rapidjson::GenericObject<true, rapidjson::V
 		if (jsonObjectValuePointer->IsInt()) {
 			intBuffer = jsonObjectValuePointer->GetInt();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has value for key {}, but that value is not an int!", key);
+			TUMBLR_LOGGER->warn("JsonObject has value for key {}, but that value is not an int!", key);
 		}
 	}
 }
@@ -76,7 +74,7 @@ void TumblrAPI::setUInt64FromJson(const rapidjson::GenericObject<true, rapidjson
 		if (jsonObjectValuePointer->IsUint64()) {
 			numberBuffer = jsonObjectValuePointer->GetUint64();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has value for key {}, but that value is not an unsigned 64-bit int!", key);
+			TUMBLR_LOGGER->warn("JsonObject has value for key {}, but that value is not an unsigned 64-bit int!", key);
 		}
 	}
 }
@@ -87,7 +85,7 @@ void TumblrAPI::setInt64FromJson(const rapidjson::GenericObject<true, rapidjson:
 		if (jsonValuePointer->IsInt64()) {
 			int64Buffer = jsonValuePointer->GetInt64();
 		} else {
-			STATIC_LOGGER->warn("JsonObject has value for key {}, but that value is not a 64-bit int!", key);
+			TUMBLR_LOGGER->warn("JsonObject has value for key {}, but that value is not a 64-bit int!", key);
 		}
 	}
 }
@@ -136,4 +134,11 @@ rapidjson::GenericObject<true, rapidjson::Value> TumblrAPI::parseJsonResponse(co
 		this->logger->error(errorString);
 		throw std::runtime_error(errorString);
 	}
+}
+
+bool TumblrAPI::responseOk(long responseCode) {
+
+	const std::vector<long> okCodes = {200, 301, 302, 307, 308};
+
+	return std::binary_search(okCodes.begin(), okCodes.end(), responseCode);
 }
