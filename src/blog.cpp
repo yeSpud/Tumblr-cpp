@@ -4,7 +4,11 @@
 
 #include "blog.hpp"
 
-std::string Blog::getAvatar(const unsigned short int &size) {
+#define THROW_ERROR std::string errorString = "Response from API returned an error ( " + std::to_string(response.status_code) + "): " + response.error.message + '\n' + response.reason;\
+	this->api.logger->error(errorString);\
+	throw std::runtime_error(errorString);
+
+std::string Blog::getAvatar(const unsigned short int &size) const {
 
 	// Make sure the sizes are valid.
 	if (size == 16 || size == 24 || size == 30 || size == 40 || size == 48 || size == 64 || size == 96 || size == 128 ||
@@ -16,9 +20,8 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 		if (TumblrAPI::responseOk(response.status_code)) {
 			return response.url.str();
 		} else {
-			std::string errorString ="Response from API returned an error: " + response.error.message + '\n' + response.reason;
-			this->api.logger->error(errorString);
-			throw std::runtime_error(errorString);
+
+			THROW_ERROR
 		}
 	} else {
 
@@ -30,7 +33,7 @@ std::string Blog::getAvatar(const unsigned short int &size) {
 }
 
 Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned short int &offset, const long long &before,
-               const long long &after) {
+               const long long &after) const {
 
 	// Make sure that the blog allows for retrieving likes (shared_likes must be true).
 	if (!this->shared_likes) {
@@ -55,9 +58,7 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 
 			} else {
 
-				std::string errorString = "Response from API returned an error: " + response.error.message + '\n' + response.reason;
-				this->api.logger->error(errorString);
-				throw std::runtime_error(errorString);
+				THROW_ERROR
 			}
 		}
 	} else {
@@ -71,7 +72,7 @@ Blog::blogLikes Blog::getLikes(const unsigned short int &limit, const unsigned s
 
 std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned long long &id, const std::string &tag,
 								unsigned short limit, const unsigned long long &offset, const bool &reblog_info,
-								const bool &notes_info, const Post::postFormat &filter, const long long int &before) {
+								const bool &notes_info, const Post::postFormat &filter, const long long int &before) const {
 
 	std::string additionalOptions = "&npf=true";
 	switch (type) {
@@ -181,12 +182,11 @@ std::vector<Post>Blog::getPosts(const Content::postType &type, const unsigned lo
 
 	} else {
 
-		this->api.logger->warn("Unable to get posts from blog ({0}): {1}", response.status_code, response.reason);
-		return {};
+		THROW_ERROR
 	}
 }
 
-NoteResponse Blog::getNotes(long long id, unsigned long long before_timestamp, Note::mode mode) {
+NoteResponse Blog::getNotes(long long id, unsigned long long before_timestamp, Note::mode mode) const {
 
 	std::string additionalOptions = "&id=" + std::to_string(id);
 
@@ -258,8 +258,6 @@ NoteResponse Blog::getNotes(long long id, unsigned long long before_timestamp, N
 
 	} else {
 
-		this->api.logger->warn("Unable to get notes from post ({0}): {1}", response.status_code, response.reason);
-		return {};
+		THROW_ERROR
 	}
-
 }

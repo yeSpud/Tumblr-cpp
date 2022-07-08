@@ -230,7 +230,7 @@ public:
 	 * @return The URL of the avatar image. This is also returned in the Location HTTP header field.
 	 * An <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30">HTTP Location</a> header field is returned — the response points to the avatar image. That means you can embed this method in an img tag in HTML.
 	 */
-	std::string getAvatar(const unsigned short int &size = 64);
+	std::string getAvatar(const unsigned short int &size = 64) const;
 
 	// TODO Get blog blocks - requires oAuth
 
@@ -261,7 +261,7 @@ public:
 	 * @param after Retrieve posts liked after the specified timestamp. Optional.
 	 * @return blogLikes - contains an array of post objects, and liked posts.
 	 */
-	blogLikes getLikes(const unsigned short int &limit = 20, const unsigned short int &offset = 0, const long long &before = 0, const long long &after = 0);
+	blogLikes getLikes(const unsigned short int &limit = 20, const unsigned short int &offset = 0, const long long &before = 0, const long long &after = 0) const;
 
 	// TODO Get blog following - requires oAuth
 
@@ -286,7 +286,10 @@ public:
      * @param before Returns posts published earlier than a specified Unix timestamp, in seconds.
      * @return
      */
-    std::vector<Post> getPosts(const Content::postType &type = Content::postType::all, const unsigned long long &id = 0, const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0, const bool &reblog_info = false, const bool &notes_info = false, const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0);
+    std::vector<Post> getPosts(const Content::postType &type = Content::postType::all, const unsigned long long &id = 0,
+							   const std::string& tag = "", unsigned short limit = 20, const unsigned long long &offset = 0,
+							   const bool &reblog_info = false, const bool &notes_info = false,
+							   const Post::postFormat &filter = Post::postFormat::html, const long long &before = 0) const;
 
 	// TODO Get post queue - requires oAuth
 
@@ -317,7 +320,7 @@ public:
 	 * @param mode 	The response formatting mode.
 	 * @return The notes for the Post.
 	 */
-	NoteResponse getNotes(long long id, unsigned long long before_timestamp = 0, Note::mode mode = Note::mode::all);
+	NoteResponse getNotes(long long id, unsigned long long before_timestamp = 0, Note::mode mode = Note::mode::all) const;
 
 
 };

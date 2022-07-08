@@ -30,7 +30,6 @@
 * Fetching posts needs to be implemented. Requires oAuth.
 * Editing posts needs to be implemented. Requires oAuth.
 * Deleting posts needs to be implemented. Requires oAuth.
-* Getting notes needs to be implemented. Requires API key.
 
 #### [`TumblrAPI.hpp`](/include/TumblrAPI.hpp)
 * oAuth needs to be implemented.

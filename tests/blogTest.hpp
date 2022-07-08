@@ -9,21 +9,13 @@
 
 class BlogTest {
 
-private:
-
-	TumblrAPI tumblrApi;
-
-	std::unique_ptr<Blog> blog;
-
 public:
-
-	explicit BlogTest(TumblrAPI api): tumblrApi(std::move(api)){};
 
 	~BlogTest() = default;
 
 	/**
 	 * TODO Documentation
-	 * @param blogIdentifier
+	 * @param blog
 	 * @param ask
 	 * @param ask_anon
 	 * @param ask_page_title
@@ -47,32 +39,36 @@ public:
 	 * @param is_blocked_from_primary
 	 * @param is_optout_ads
 	 */
-	void testBlog(const std::string& blogIdentifier, const bool &ask, const bool &ask_anon, const std::string& ask_page_title,
-                  const bool &ask_allow_media, const bool &can_chat, const bool &can_subscribe, const std::string &description,
-                  const bool &is_nsfw, const std::string &name, const unsigned long long &posts, const uint64_t &likes,
-                  const bool &shared_likes, const bool &subscribed, const std::string &title, const unsigned long long &total_posts,
-                  const uint64_t &updated, const std::string &tz, const std::string &timezone_offset, const std::string &url,
-                  const std::string &uuid, const bool &is_blocked_from_primary, const bool &is_optout_ads);
+	static void testBlogInfo(const Blog& blog, const bool &ask, const bool &ask_anon, const std::string& ask_page_title,
+	                  const bool &ask_allow_media, const bool &can_chat, const bool &can_subscribe, const std::string &description,
+	                  const bool &is_nsfw, const std::string &name, const unsigned long long &posts, const uint64_t &likes,
+	                  const bool &shared_likes, const bool &subscribed, const std::string &title, const unsigned long long &total_posts,
+	                  const uint64_t &updated, const std::string &tz, const std::string &timezone_offset, const std::string &url,
+	                  const std::string &uuid, const bool &is_blocked_from_primary, const bool &is_optout_ads);
 
 	/**
 	 * TODO Documentation
+	 * @param blog
 	 */
-	void testGetAvatar();
+	static void testGetAvatar(const Blog& blog);
 
 	/**
 	 * TODO Documentation
+	 * @param blog
 	 */
-	void testGetLikes();
+	static void testGetLikes(const Blog& blog);
 
     /**
      * TODO Documentation
+     * @param blog
      */
-    void testGetPost();
+    static void testGetPost(const Blog& blog);
 
 	/**
 	 * TODO Documentation
+	 * @param blog
 	 */
-	void testGetNotes();
+	static void testGetNotes(const Blog& blog);
 
 };
 
